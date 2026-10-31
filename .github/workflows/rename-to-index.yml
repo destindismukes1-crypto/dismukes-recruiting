@@ -1,0 +1,21 @@
+name: Rename recruiter file to index
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename file
+        run: |
+          mv recruiter-website.html index.html
+          ls -lh index.html
+      - name: Commit rename
+        run: |
+          git config user.name "destindismukes1-crypto"
+          git config user.email "destindismukes1-crypto@users.noreply.github.com"
+          git add index.html recruiter-website.html
+          git commit -m "Update giveaway top, photos, subscriber bar, incentive section" || echo "nothing to commit"
+          git push
