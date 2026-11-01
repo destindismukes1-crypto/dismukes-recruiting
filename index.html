@@ -1051,6 +1051,27 @@
   .club-recorded .rec-text{margin:0 0 10px;font-size:15px;line-height:1.5;color:#e8eff6}
   .club-recorded .rec-status{color:#2dd4bf}
   .mini-walker.recorded-playing .mini-avatar-btn{outline:3px solid var(--teal);outline-offset:2px}
+  /* ===== DD's Spotify pick — a plain link out to Spotify (new tab). NOT a player:
+     no embed, no autoplay, no audio on this site, and it is CARV's track, not Destin's. ===== */
+  .club-spotify{margin:12px 0 4px;border:1px dashed rgba(255,255,255,.45);border-radius:10px;padding:12px 14px}
+  .club-spotify .btn{padding:10px 16px;font-size:15px}
+  .club-spotify p{margin:8px 0 0;font-size:13.5px;color:#b9c9d8;line-height:1.45}
+  /* ===== PHONE DOCK REPAIR — on phones the two fixed buttons (Dismukes Assistant pill
+     and the Truck ride dock) are compact and single-line, capped to the viewport width,
+     and CENTER-docked above the parked truck instead of pinned to the right edge, so
+     neither can run off the side or cut its text on any phone width. Their stack is
+     lifted high enough that it never lands on the career-prop shelf in the clubhouse
+     art at the top view, and the clubhouse gets extra air up top on phones for more
+     clearance. The Assistant panel anchors from the left for the same reason.
+     Desktop and tablet positions are unchanged. ===== */
+  @media (max-width:520px){
+    .assistant-btn{left:50%;right:auto;transform:translateX(-50%);bottom:234px;font-size:13px;padding:9px 13px;white-space:nowrap;max-width:calc(100vw - 20px)}
+    .assistant-panel{left:10px;right:auto;bottom:284px;width:min(370px,calc(100vw - 20px))}
+    .dd-ride-dock{left:50%;right:auto;transform:translateX(-50%);align-items:center;bottom:186px;max-width:calc(100vw - 20px)}
+    .dd-ride-btn{font-size:13px;padding:9px 13px;white-space:nowrap;width:max-content;max-width:calc(100vw - 20px)}
+    .dd-ride-status{max-width:calc(100vw - 20px);text-align:center}
+    .clubhouse-top{padding-top:64px}
+  }
 </style>
 </head>
 <body>
@@ -1214,6 +1235,10 @@
         <p class="rec-text">This is Destin Dismukes talking for real — his own voice, recorded by him for this site. Not a device voice, not a clone, not a song. It only plays when you tap Play, and Stop stops it right away.</p>
         <button type="button" class="rec-btn" id="clubRecordedBtn" aria-pressed="false">▶ Hear DD — Destin’s own voice</button>
         <p class="rec-status" id="clubRecordedStatus" role="status" aria-live="polite"></p>
+      </div>
+      <div class="club-spotify">
+        <a class="btn btn-ghost" href="https://open.spotify.com/track/1PZ9ncnWkilczGmeMG2PJf?si=zSTptMPRTIGhyfCN5BKuLg&utm_source=copy-link" target="_blank" rel="noopener noreferrer">DD's pick — Hell Hole by CARV on Spotify ↗</a>
+        <p>DD's pick is CARV's track “Hell Hole” (2025, 3:05) — CARV's song, not Destin's. The link opens Spotify in a new tab; no music plays on this site.</p>
       </div>
       <div class="clubhouse-stuff">
         <div><b>The clubhouse &amp; ladder</b><span>His home base in the tree — DD'S CLUBHOUSE, sign and all, where he hangs his cap between tours.</span></div>
