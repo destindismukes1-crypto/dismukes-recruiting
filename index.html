@@ -1831,6 +1831,23 @@
   .pay-btn{min-height:54px}
   .pay-btn .pay-amt{font-size:17.5px;font-weight:800}
   @media (max-width:760px){ .funny-tag{font-size:14.5px} .cheap-way{padding:14px} }
+  /* Visitor counter — The Door Counter: counts page loads, labeled honestly */
+  .visitor-counter{margin-top:20px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:16px 18px;max-width:640px}
+  .visitor-counter .vc-label{margin:0 0 6px;font-size:15.5px;color:#dbe5ee}
+  .visitor-counter .vc-label strong{color:#ffb287;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:17px}
+  .visitor-counter .vc-count{margin:0 0 6px;font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:700;color:#fff;line-height:1.1}
+  .visitor-counter .vc-count span{color:#ff8a47}
+  .visitor-counter .vc-note{margin:0;font-size:14px;color:#c3d2df}
+  .visitor-counter .vc-note strong{color:#fff}
+  /* External jobs — a separate board for jobs found in public listings */
+  #external-jobs{order:4 !important}
+  .ext-cards{grid-template-columns:1fr 1fr}
+  @media (max-width:800px){ .ext-cards{grid-template-columns:1fr} }
+  .ext-card .bulletin-tags{margin-bottom:10px}
+  .ext-card .bulletin-loc{margin:0 0 10px}
+  .ext-card p{margin:0 0 10px}
+  .ext-card .btn{margin-top:4px}
+  .ext-note{font-size:14.5px;color:var(--ink2);margin:14px 0 0}
 </style>
 </head>
 <body>
@@ -1861,6 +1878,7 @@
     <a href="#giveaway">Giveaway</a>
     <a href="#clubhouse">Clubhouse</a>
     <a href="#jobs">Jobs</a>
+    <a href="#external-jobs">External Jobs — Public Listings</a>
     <a href="#jobfields">Job Fields — Browse All</a>
     <a href="#more-jobs">More Jobs — More Fields</a>
     <a href="#even-more-jobs">Even More Jobs — Trades &amp; More</a>
@@ -1945,6 +1963,11 @@
       <div class="big-actions" style="margin-top:0">
         <a class="btn btn-orange" href="mailto:dismukesreqag369@gmail.com?subject=Giveaway%20Entry">Enter free — join Hot Jobs</a>
         <a class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.55)" href="#jobs">See jobs</a>
+      </div>
+      <div class="visitor-counter" id="visitorCounter">
+        <p class="vc-label"><strong>DD calls this: The Door Counter</strong> — every swing of the door gets one click.</p>
+        <p class="vc-count">Page loads so far: <span id="visitCount">counting&hellip;</span></p>
+        <p class="vc-note">Straight talk: this counts <strong>page loads</strong> — every time this page is opened or refreshed — <strong>not unique people</strong>, and it is <strong>not a verified count of individual visitors</strong>. One person opening the page twice counts twice. It runs on a free counter service and collects <strong>no personal data</strong> — no names, no bank details, no login details.</p>
       </div>
     </div>
   </section>
@@ -2311,6 +2334,40 @@
 
 
   
+  <!-- EXTERNAL JOBS — found in public listings, NOT posted by employers
+       through Dismukes Recruiting. Facts printed exactly as found on the
+       source page, checked November 2, 2026. Separate from the jobs board
+       above on purpose. -->
+  <section id="external-jobs" style="padding-top:6px">
+    <div class="wrap">
+      <h2>External jobs — spotted on public listings</h2>
+      <p class="lede">These jobs were <strong>not</strong> posted by employers through Dismukes Recruiting. They were found on a public job board, and the facts are printed exactly as they appeared there — nothing added, nothing dressed up. This is a separate board from the employer-posted jobs above.</p>
+      <p class="funny-tag"><strong>DD calls this: The Binocular Board</strong> — jobs spotted out in the wild on other boards. Binoculars not included.</p>
+      <div class="note-box" style="margin:0 0 18px">
+        <p><strong>Before you apply, check the source listing first</strong> — availability can change at any time, and a listing shown here can close without notice. Applying is <strong>always free for workers</strong>. Dismukes Recruiting did not post these jobs and <strong>promises no placement</strong> in them. Source for both listings below: <a href="https://www.ziprecruiter.com/Jobs/Shipyard-Painter" target="_blank" rel="noopener">ZipRecruiter — Shipyard Painter</a>, checked <strong>November 2, 2026</strong>.</p>
+      </div>
+      <div class="cards ext-cards">
+        <div class="card ext-card">
+          <div class="bulletin-tags"><span class="tag tag-ext">External Listing</span><span class="tag tag-field">Shipyard</span></div>
+          <h3>Tidewater Staffing — Shipyard Painters / Sprayers / Blasters</h3>
+          <p class="bulletin-loc">Hampton Roads, VA</p>
+          <p><strong>Work, as listed:</strong> Shipyard Painters / Sprayers / Blasters, listed by Tidewater Staffing.</p>
+          <p><strong>Pay:</strong> see the pay printed on the source listing — check it there before you apply.</p>
+          <a class="btn btn-orange" href="https://www.ziprecruiter.com/Jobs/Shipyard-Painter" target="_blank" rel="noopener">See it &amp; apply free on ZipRecruiter</a>
+        </div>
+        <div class="card ext-card">
+          <div class="bulletin-tags"><span class="tag tag-ext">External Listing</span><span class="tag tag-field">Shipyard</span></div>
+          <h3>CTR Group — Marine Painters for the Shipyard</h3>
+          <p class="bulletin-loc">Newport News, VA &middot; Travelers Welcome</p>
+          <p><strong>Openings, as listed:</strong> 25 Brush &amp; Roll Painters and 10 Spray Painters.</p>
+          <p><strong>Pay, as printed for this Newport News listing:</strong> $18.00&ndash;$27.31/hr.</p>
+          <a class="btn btn-orange" href="https://www.ziprecruiter.com/Jobs/Shipyard-Painter" target="_blank" rel="noopener">See it &amp; apply free on ZipRecruiter</a>
+        </div>
+      </div>
+      <p class="ext-note">Both listings above were found in public listings and checked on November 2, 2026. If a listing has closed or changed since then, the source page is the one that counts — always check it before applying.</p>
+    </div>
+  </section>
+
   <!-- JOB FIELDS — every category you can browse and apply free in.
        Specific listings appear ONLY when employers post them, with pay
        and per diem printed on the listing. No pay, employer, or location
@@ -7881,6 +7938,23 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     walk9();
   }, true);
   setTimeout(function(){ if(!document.hidden) walk9(); }, 5000);
+})();
+</script>
+<script>
+/* The Door Counter — free page-load counter (Abacus by Jason Cameron).
+   One hit = one page load. It counts loads, not unique people, and the
+   label beside the number on the page says exactly that. The request
+   carries no personal data: no name, no bank details, no login details. */
+(function(){
+  var el = document.getElementById("visitCount");
+  if(!el || !window.fetch) { if(el) el.textContent = "not available right now"; return; }
+  fetch("https://abacus.jasoncameron.dev/hit/dismukes-recruiting-251/page-loads")
+    .then(function(r){ if(!r.ok) throw new Error("counter"); return r.json(); })
+    .then(function(d){
+      if(d && typeof d.value === "number"){ el.textContent = d.value.toLocaleString("en-US"); }
+      else { el.textContent = "not available right now"; }
+    })
+    .catch(function(){ el.textContent = "not available right now — the free counter service did not answer"; });
 })();
 </script>
 </body>
