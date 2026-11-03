@@ -8314,6 +8314,40 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     .catch(function(){ el.textContent = "not available right now — the free counter service did not answer"; });
 })();
 </script>
+
+<script>
+/* DD scene voice fix — the scene handlers update the bubble but never played audio because __ddClonePlay was missing. This defines it: exact text match to the joke/talk clips in assets/voice-clone/, played on the user's click. */
+(function(){
+  var MAP = {"DD joke: I told a job board workers apply free. It said that's not how this works. I said that's exactly how this works — watch. Now it's watching.": "assets/voice-clone/joke-01.mp3", "DD joke: My resume is so honest, it listed good at showing up as a skill. Employers called back in five minutes — apparently that's rare now.": "assets/voice-clone/joke-02.mp3", "DD joke: Boss said we're like family here. I said great, family pays up front and prints the per diem. He suddenly wasn't family anymore.": "assets/voice-clone/joke-03.mp3", "DD joke: I asked a job posting for its pay. It said competitive. I said competitive with what — a treasure hunt? Printed pay or it didn't happen.": "assets/voice-clone/joke-04.mp3", "DD joke: A four-wheeler, a moose, and a job board walk into Alaska. The moose got hired first — it showed up on time, didn't ghost the interview, and never asked what's the pay because it was already printed.": "assets/voice-clone/joke-05.mp3", "DD joke: Vegas or Alaska? Either way, I'm driving. If the road ends, I ram it — mama said so. Can't dodge it, ram it.": "assets/voice-clone/joke-06.mp3", "DD joke: A boss offered exposure instead of pay. I said exposure don't pay rent, and my truck don't run on likes.": "assets/voice-clone/joke-07.mp3", "DD joke: The crew heard travel and thought vacation. Then I showed them the blast hose and the printed per diem — vacation over, paycheck on.": "assets/voice-clone/joke-08.mp3", "DD joke: My truck don't need GPS. It just follows the smell of a paycheck and a job that actually pays what it printed.": "assets/voice-clone/joke-09.mp3", "DD joke: I don't chase jobs — I walk right up and introduce myself. Try the Walk button.": "assets/voice-clone/talk-12.mp3", "Hey, I'm DD! The giveaway's right above me — Alaska or Las Vegas at 500 subscribers, we're at 0 of 500. My truck's right here with me, and the jobs are right below us. Scroll down and let's find you work!": "assets/voice-clone/talk-01.mp3", "Can't dodge it, ram it — that's what my mama tell me.": "assets/voice-clone/talk-02.mp3", "Boss said we're like family — I said family prints the pay up front.": "assets/voice-clone/talk-03.mp3", "Workers apply free here. Pay and per diem up front — I checked myself.": "assets/voice-clone/talk-04.mp3", "Blast and paint crew: don't eat the paint chips. Seriously. PPE every time.": "assets/voice-clone/talk-05.mp3", "See me up top? That's DD IN the truck — 2015 pearl Silverado, lights on, me driving. Tap Truck ride up in my clubhouse.": "assets/voice-clone/talk-06.mp3", "500 subscribers, one winner, Alaska or Vegas. Free to enter. That's the tweet.": "assets/voice-clone/talk-07.mp3", "Alaska: mountains and cold. Vegas: lights and buffets. Pick wrong? Can't — both are free.": "assets/voice-clone/talk-08.mp3", "Don't blast the whole thing up — just the part on the print. Words to live by.": "assets/voice-clone/talk-09.mp3", "Per diem up front or it didn't happen. That's official DD policy, I just made it up.": "assets/voice-clone/talk-10.mp3", "Moose got hired first — showed up on time, pay already printed.": "assets/voice-clone/talk-11.mp3", "Hey hey! That's me — DD. Right there in my truck, ready to roll. Tap Ask DD and let's find you work.": "assets/voice-clone/wave-01.mp3"};
+  var audio = new Audio();
+  function norm(t){ return (t||"").replace(/\s+/g," ").trim(); }
+  window.__ddClonePlay = function(text){
+    var f = MAP[norm(text)];
+    if(!f) return false;
+    try{ audio.pause(); }catch(e){}
+    audio.src = f;
+    var pr = audio.play();
+    if(pr && pr.catch) pr.catch(function(){});
+    return true;
+  };
+  window.__ddCloneStop = function(){ try{ audio.pause(); audio.currentTime=0; }catch(e){} };
+  window.__ddCloneReady = true;
+  function speakBubble(){
+    var b = document.getElementById("ddBubble");
+    if(b) window.__ddClonePlay(b.textContent);
+  }
+  document.querySelectorAll("[data-dd-joke]").forEach(function(btn){
+    btn.addEventListener("click", function(){ setTimeout(speakBubble, 120); });
+  });
+  document.querySelectorAll("[data-dd-wave]").forEach(function(btn){
+    btn.addEventListener("click", function(){ setTimeout(speakBubble, 120); });
+  });
+  ["ddStage3d","clubStage3d"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener("click", function(){ setTimeout(speakBubble, 120); });
+  });
+})();
+</script>
 </body>
 </html>
 
