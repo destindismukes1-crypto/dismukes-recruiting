@@ -8348,6 +8348,26 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   });
 })();
 </script>
+
+<script>
+/* Tap-DD direct voice — tap-DD's own talk handler references a missing LINES list, so it never reaches the voice player. This plays the talk clips directly on tap, in order, with its own player that other stop calls cannot pause. */
+(function(){
+  var files = ["assets/voice-clone/talk-01.mp3","assets/voice-clone/talk-02.mp3","assets/voice-clone/talk-03.mp3","assets/voice-clone/talk-04.mp3","assets/voice-clone/talk-05.mp3","assets/voice-clone/talk-06.mp3","assets/voice-clone/talk-07.mp3","assets/voice-clone/talk-08.mp3","assets/voice-clone/talk-09.mp3","assets/voice-clone/talk-10.mp3","assets/voice-clone/talk-11.mp3","assets/voice-clone/talk-12.mp3"];
+  var idx = 0;
+  var player = new Audio();
+  function playTap(){
+    var f = files[idx % files.length]; idx++;
+    try{ player.pause(); }catch(e){}
+    player.src = f;
+    var pr = player.play();
+    if(pr && pr.catch) pr.catch(function(){});
+  }
+  ["ddStage3d","clubStage3d"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener("click", function(){ setTimeout(playTap, 80); });
+  });
+})();
+</script>
 </body>
 </html>
 
