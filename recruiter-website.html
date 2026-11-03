@@ -8433,7 +8433,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   }
   window.__ddWholePage = toggleWhole;
   window.__ddStopWholePage = stopAll;
-  ["readAloudBtn","stickyReadBtn"].forEach(function(id){
+  ["readAloudBtn"].forEach(function(id){ /* stickyReadBtn already clicks readAloudBtn — adding it here double-toggled and cancelled the first play */
     var b = document.getElementById(id);
     if(b) b.addEventListener("click", toggleWhole);
   });
@@ -8475,6 +8475,42 @@ window.__ddPlayWithFallback = function(el, path, onFail){
         }
       }catch(err){}
     }, 950);
+  }, true);
+})();
+</script>
+
+<script>
+/* BOOT SCOOT — direct walk, 2026-11-02. The old walk loop can stall (tour flag, stage width, competing animations), so Walk now directly moves DD's figure across his stage with stepping bob, no matter what the old loop does. */
+(function(){
+  function bootScoot(){
+    var img = document.getElementById("ddDockImg") || document.querySelector("#ddStage3d img");
+    if(!img) return;
+    try{
+      img.animate([
+        {transform:"translateX(0px) translateY(0px)"},
+        {transform:"translateX(36px) translateY(-8px)"},
+        {transform:"translateX(72px) translateY(0px)"},
+        {transform:"translateX(36px) translateY(-8px)"},
+        {transform:"translateX(0px) translateY(0px)"},
+        {transform:"translateX(-36px) translateY(-8px)"},
+        {transform:"translateX(0px) translateY(0px)"}
+      ], {duration:4200, easing:"ease-in-out"});
+    }catch(e){}
+    var stage = document.getElementById("ddStage3d");
+    if(stage){
+      try{
+        stage.animate([
+          {transform:"translateX(0px)"},
+          {transform:"translateX(28px)"},
+          {transform:"translateX(0px)"}
+        ], {duration:4200, easing:"ease-in-out"});
+      }catch(e){}
+    }
+  }
+  window.__ddBootScoot = bootScoot;
+  document.addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest('[data-dd-act="walk"]') : null;
+    if(b) setTimeout(bootScoot, 50);
   }, true);
 })();
 </script>
