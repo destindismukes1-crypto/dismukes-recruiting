@@ -8376,6 +8376,108 @@ window.__ddPlayWithFallback = function(el, path, onFail){
 /* No chat bubble at all — DD just talks out loud, no bubble text shown. */
 .dd-bubble,.scene .dd-bubble,.side-rail .dd-bubble,.corner-dd .dd-bubble,#ddBubble{display:none !important;}
 </style>
+
+<script>
+/* WHOLE-PAGE READ + READ-THIS FALLBACK + JOBS UP TOP — 2026-11-02 fix.
+   Whole-page buttons (top sticky Read, Read It To Me, data-read-all) previously played nothing: their path had no whole-page recording.
+   Now they play 14 AI-voice chunks in order, scrolling DD to each section as it is read. No chat bubble — audio only, status text only.
+   Read This fallback: if a Read This click starts no audio within 900ms, the section's own words are read by the device voice, labeled in the status as device voice, not Destin — so every Read This reads something, its own words, never another section's.
+   Jobs up top: jobs section is ordered before Big DD, and a Jobs button is added to the top bar for one-tap access. */
+(function(){
+  "use strict";
+  var STOPS = [
+    {a:"giveaway", f:"assets/voice-clone/whole-01.mp3"},
+    {a:"jobs", f:"assets/voice-clone/whole-02.mp3"},
+    {a:"jobfields", f:"assets/voice-clone/whole-03.mp3"},
+    {a:"diy", f:"assets/voice-clone/whole-04.mp3"},
+    {a:"survival", f:"assets/voice-clone/whole-05.mp3"},
+    {a:"help", f:"assets/voice-clone/whole-06.mp3"},
+    {a:"housing", f:"assets/voice-clone/whole-07.mp3"},
+    {a:"college", f:"assets/voice-clone/whole-08.mp3"},
+    {a:"flights", f:"assets/voice-clone/whole-09.mp3"},
+    {a:"banks", f:"assets/voice-clone/whole-10.mp3"},
+    {a:"business-partners", f:"assets/voice-clone/whole-11.mp3"},
+    {a:"stocks-401k", f:"assets/voice-clone/whole-12.mp3"},
+    {a:"benefits", f:"assets/voice-clone/whole-13.mp3"},
+    {a:"contact", f:"assets/voice-clone/whole-14.mp3"}
+  ];
+  var player = new Audio();
+  var playing = false, idx = 0;
+  function setStatus(msg){
+    var s = document.getElementById("readAloudStatus");
+    if(s) s.textContent = msg;
+  }
+  function stopAll(){
+    playing = false;
+    try{ player.pause(); }catch(e){}
+    try{ if(window.__ddCloneStop) window.__ddCloneStop(); }catch(e){}
+    try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+    setStatus("Stopped.");
+  }
+  function playNext(){
+    if(!playing) return;
+    if(idx >= STOPS.length){ playing = false; setStatus("Whole page read. Workers apply free."); return; }
+    var stop = STOPS[idx]; idx++;
+    var el = document.getElementById(stop.a);
+    if(el){ try{ el.scrollIntoView({block:"start", behavior:"smooth"}); }catch(e){} }
+    setStatus("DD is reading the whole page — AI voice in Destin's style, section " + idx + " of " + STOPS.length + ".");
+    player.src = stop.f;
+    player.onended = playNext;
+    var pr = player.play();
+    if(pr && pr.catch) pr.catch(function(){ setStatus("Reading stopped — tap Read again."); playing = false; });
+  }
+  function toggleWhole(e){
+    if(e) e.preventDefault();
+    if(playing){ stopAll(); return; }
+    stopAll(); playing = true; idx = 0; playNext();
+  }
+  window.__ddWholePage = toggleWhole;
+  window.__ddStopWholePage = stopAll;
+  ["readAloudBtn","stickyReadBtn"].forEach(function(id){
+    var b = document.getElementById(id);
+    if(b) b.addEventListener("click", toggleWhole);
+  });
+  var stopBtn = document.getElementById("readStopBtn");
+  if(stopBtn) stopBtn.addEventListener("click", stopAll);
+  /* Jobs up top: order jobs before Big DD, and add a top-bar Jobs button. */
+  var st = document.createElement("style");
+  st.textContent = "#jobs{order:3 !important} #bigdd{order:4 !important}";
+  document.head.appendChild(st);
+  var sticky = document.getElementById("stickyReadBtn");
+  if(sticky && !document.getElementById("ddJobsTopBtn")){
+    var jb = document.createElement("a");
+    jb.id = "ddJobsTopBtn"; jb.href = "#jobs"; jb.textContent = "Jobs";
+    jb.style.cssText = "background:#ff6a00;color:#fff;font-weight:700;padding:8px 14px;border-radius:8px;text-decoration:none;margin-left:6px;display:inline-block;";
+    sticky.parentNode.insertBefore(jb, sticky.nextSibling);
+  }
+  /* Read This fallback: track any audio play, then speak own section if none started. */
+  var lastPlay = 0;
+  try{
+    var origPlay = HTMLAudioElement.prototype.play;
+    HTMLAudioElement.prototype.play = function(){ lastPlay = Date.now(); return origPlay.apply(this, arguments); };
+  }catch(e){}
+  document.addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest(".read-this-btn") : null;
+    if(!b) return;
+    var start = Date.now();
+    setTimeout(function(){
+      if(Date.now() - lastPlay < 1200) return;
+      if(playing) return;
+      var scope = b.closest("article,section,li,.card") || document.body;
+      var txt = (scope.innerText || "").replace(/\s+/g, " ").trim().slice(0, 900);
+      if(!txt) return;
+      try{
+        if(window.speechSynthesis){
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(txt);
+          window.speechSynthesis.speak(u);
+          setStatus("Device voice, not Destin, reading this section.");
+        }
+      }catch(err){}
+    }, 950);
+  }, true);
+})();
+</script>
 </body>
 </html>
 
