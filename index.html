@@ -8366,6 +8366,8 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     var el = document.getElementById(id);
     if(el) el.addEventListener("click", function(){ setTimeout(playTap, 80); });
   });
+  /* Overwrite the broken tap handler: the site's own capture listener calls __ddTapTalk() on tap, and that function throws on a missing list. Point it at playTap so tap-DD speaks on the click itself, with no delay. */
+  window.__ddTapTalk = playTap;
 })();
 </script>
 </body>
