@@ -1894,7 +1894,6 @@
     <a href="#stocks-401k">Stocks &amp; 401k</a>
     <a href="#share">Tell Somebody</a>
     <a href="#donations">Donations</a>
-    <a href="#prize-pot">Prize Pot — Million Countdown</a>
     <a href="#donations">Veterans Donations</a>
     <a href="#benefits">Benefits</a>
     <a href="#paperwork">Paperwork</a>
@@ -7057,7 +7056,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
 </script>
 <style>
   /* ===== FINAL pass 6 — MEASURED REFIT · AI VOICE ONLY · WALK MEANS WALK ·
-     ENTICING HOLLER · PRIZE POT PLAN ===== */
+     ENTICING HOLLER ===== */
   /* Enticing holler show: dance + bounce on DD's picture itself */
   #ddDock.dd-entice #ddDockImg{animation:ddEntice 3.6s ease-in-out 1 !important;transform-origin:50% 100%}
   #bigDdWrap.dd-entice #bigDdImg{animation:ddEntice 3.6s ease-in-out 1 !important;transform-origin:50% 100%}
@@ -7075,19 +7074,10 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   @media (prefers-reduced-motion: reduce){
     #ddDock.dd-entice #ddDockImg,#bigDdWrap.dd-entice #bigDdImg{animation:none !important}
   }
-  /* Prize Pot — the million-people countdown plan */
-  #prize-pot{order:23 !important}
-  .pot-counter{background:#10151c;border:2px solid var(--orange);border-radius:14px;padding:22px;text-align:center}
-  .pot-big{font-family:"Barlow Condensed",sans-serif;font-size:clamp(44px,8vw,72px);font-weight:700;line-height:1;color:#ffb287;margin:6px 0 2px}
-  .pot-sub{font-size:16px;color:var(--ink2);margin:0}
-  .pot-idea-tag{display:inline-block;background:var(--orange);color:#fff;font-weight:700;font-size:13px;letter-spacing:.08em;padding:5px 13px;border-radius:999px;text-transform:uppercase}
-  .pot-rules{text-align:left;max-width:640px;margin:16px auto 0;color:var(--ink2);font-size:15.5px}
-  .pot-rules li{margin-bottom:6px}
-  .pot-rules strong{color:#fff}
 </style>
 <script>
 /* ===== FINAL pass 6 — MEASURED REFIT · AI VOICE ONLY · WALK MEANS WALK ·
-   ENTICING HOLLER · PRIZE POT PLAN · MORE PLANS =====
+   ENTICING HOLLER · MORE PLANS =====
    REFIT 4: DD's body was MEASURED on his real photo (421x1000 frame):
    mouth (248,148), 444 pendant (245,262), shoulders (109,215) and
    (273,206), elbows ~(90,424) and ~(310,426), hands (109,575) and
@@ -7320,58 +7310,21 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     hollerShow();
   }, true);
 
-  /* ================= PRIZE POT — the million-people plan ================= */
-  var donations = document.getElementById("donations");
-  if(donations && !document.getElementById("prize-pot")){
-    var pot = document.createElement("section");
-    pot.id = "prize-pot";
-    pot.style.paddingTop = "6px";
-    pot.innerHTML =
-      '<div class="wrap">' +
-      '<h2>The Prize Pot — a million people, one drawing</h2>' +
-      '<p class="lede">DD\u2019s biggest plan yet: a prize pot that counts down as people join — all the way to a million — and at the end, one name gets picked in a drawing. Read the labels close: this is <strong>NOT LIVE YET</strong>, and the joining is free.</p>' +
-      '<div class="pot-counter" data-read-tap title="Tap to hear this read out loud">' +
-      '<span class="pot-idea-tag">NOT LIVE YET</span>' +
-      '<div class="pot-big">1,000,000 to go</div>' +
-      '<p class="pot-sub">Countdown to 1,000,000 people &middot; 0 people counted in so far &middot; the number only moves when real people join free</p>' +
-      '<div class="track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000000" aria-label="People counted toward one million" style="margin-top:14px"><div class="fill" style="width:0%"></div></div>' +
-      '<ul class="pot-rules">' +
-      '<li><strong>The drawing pick at the end is NOT LIVE YET</strong> — a plan for when the countdown reaches 1,000,000 people. It is not running yet, and <strong>no prize amount is promised</strong> and no winner exists.</li>' +
-      '<li><strong>Free entry. No purchase required.</strong> Joining the countdown is free — joining is how a name would be in the drawing.</li>' +
-      '<li><strong>Money put in is donations</strong> — gifts direct to Dismukes Recruiting via Chime to <strong>$DDBABY12</strong>. <strong>NOT a nonprofit, NOT tax-deductible, one-time only.</strong></li>' +
-      '<li><strong>A donation is NOT an entry fee and NOT a lottery ticket.</strong> Donating does not enter you, does not buy a chance, and does not improve any chance. This is not a lottery or a raffle — no pot total is claimed, because no pot total is invented.</li>' +
-      '</ul>' +
-      '<div class="big-actions" style="justify-content:center">' +
-      '<a class="btn btn-orange" href="mailto:dismukesreqag369@gmail.com?subject=Prize%20Pot%20Free%20Entry">Join free — count me in</a>' +
-      '<a class="btn btn-outline" href="#donations">About donations</a>' +
-      '</div>' +
-      '<button type="button" class="read-this-btn" aria-label="Read this out loud">&#9654; Read This</button>' +
-      '</div></div>';
-    donations.parentNode.insertBefore(pot, donations);
-  }
-
   /* ================= KEEP PUTTING PLANS IN ================= */
   var bl = document.getElementById("brainList");
   if(bl){
-    ["DD's prize-pot prompt: If a million people each told one person, what would YOUR one sentence be? Write the sentence you'd want repeated a million times.",
-     "DD's holler prompt: Write the funniest TRUE one-liner about your trade — the one you'd holler for a dollar. Funny travels farther than fancy.",
+    ["DD's holler prompt: Write the funniest TRUE one-liner about your trade — the one you'd holler for a dollar. Funny travels farther than fancy.",
      "DD's first-rung prompt: Name the lowest rung of the ladder you want — the starter version of the job — and the date you'll grab it by. Ladders are climbed from the bottom rung, proudly."].forEach(function(t){
       var li = document.createElement("li"); li.textContent = t; bl.appendChild(li);
     });
   }
   var ideasGrid = document.querySelector("#muse-ideas .cards");
-  if(ideasGrid && !document.getElementById("ideaPotCard")){
-    var c1 = document.createElement("div");
-    c1.className = "card"; c1.id = "ideaPotCard";
-    c1.innerHTML = "<h3>The Prize Pot countdown</h3><p>A counter everybody can watch: people join free, the number to go drops from 1,000,000, and the whole country watches it fall together. The plan is the shared countdown itself — a million people pulling one rope. Labeled a plan, free entry, no prize amount promised, and donations stay donations — never entry fees, never lottery tickets.</p><p class=\"joke-line\"><strong>DD joke:</strong> A million people, one countdown — DD's doing the math on his fingers and he ran out of fingers at ten.</p>";
-    ideasGrid.appendChild(c1);
+  if(ideasGrid && !document.getElementById("ideaHollerCard")){
     var c2 = document.createElement("div");
-    c2.className = "card";
+    c2.className = "card"; c2.id = "ideaHollerCard";
     c2.innerHTML = "<h3>Holler of the Week</h3><p>Every week, one worker's true one-liner gets the holler: DD hollers it out loud in the TV caption box, big as a broadcast. The plan: the funniest true line on the page is the one people repeat at the gas station — and repetition is how a site for everybody gets known by everybody. A plan, not a promise — hearing a holler is always free.</p><p class=\"joke-line\"><strong>DD joke:</strong> Fame, but make it useful: your joke gets hollered, your trade gets respected, your ride gets found.</p>";
     ideasGrid.appendChild(c2);
-    [c1, c2].forEach(function(card){
-      if(window.__ddDudeSpeak) card.setAttribute("data-read-tap", "");
-    });
+    if(window.__ddDudeSpeak) c2.setAttribute("data-read-tap", "");
   }
 })();
 </script>
@@ -7719,7 +7672,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
 
   /* ================= READ THIS — one owner, own area only ================= */
   var MAP8 = {"4b07711c":"r001","40640090":"r002","79ad1423":"r003","e04c632f":"r004","59523f2f":"r005","818938bd":"r006","24c137b8":"r007","c42f4a05":"r008","14296051":"r009","a7d555da":"r010","25aec5b1":"r011","b8bbf82c":"r012","f3c12554":"r013","8b0e474a":"r014","df90c1b1":"r015","c46af7c5":"r016","56aad7f3":"r017","f13bb1b0":"r018","e8661a52":"r019","4c270d9a":"r020","9affc61e":"r021","0d7e3fa8":"r022","6c0cf511":"r023","9f699581":"r024","415c65cf":"r025","3d9dcfe9":"r026","66fa784c":"r027","aa1c82e6":"r028","87dc5eb8":"r029","8e773026":"r030","46fdee07":"r031","e9e28146":"r032","4db25321":"r033","93caf030":"r034","e9ce395b":"r035","6e34a9bc":"r036","0b75a511":"r037","98d86364":"r038","b37256b1":"r039","0aa12944":"r040","e10cb522":"r041","7a32a935":"r042","81896ced":"r043","c3ea58f0":"r044","aaa29f82":"r045","d344c53c":"r046","9293eba9":"r047","f01274b3":"r048","53f984e8":"r049","dc4de744":"r050","5d0af6d7":"r051","d98ea595":"r052","fef9dbff":"r053","94044e9f":"r054","ebdb2d44":"r055","09e6628b":"r056","73523c64":"r057","f9b549d7":"r058","dd64cb31":"r059","9eb4b33c":"r060","dca74d07":"r061","38c20a83":"r062","2567fcdb":"r063","feab39a1":"r064","090d31e2":"r065","7379762e":"r066","6201deb5":"r067","0706c942":"r068","e6ff8ec1":"r069","b37f4a16":"r070","e39df78f":"r071","c678578b":"r072","ffef815a":"r073","832ba8e8":"r074","76eecc64":"r075","d5270a41":"r076","a77c48c0":"r077","33777f56":"r078","3f24dae0":"r079","deb60ac4":"r080","ec4a5d7b":"r081","be803869":"r082","2d628e37":"r083","71265884":"r084","ab4f1a3c":"r085","fe1a20ff":"r086","cbece4a3":"r087","7e215fe0":"r088","19d55f37":"r089","7266c2be":"r090","844c8546":"r091","d9279093":"r092","42d61146":"r093","50e65314":"r094","feb51707":"r095","105c9d4f":"r096","9977c189":"r097","842136d3":"r098","6d6e8deb":"r099","32fa72ac":"r100","08c41f5b":"r101","8f4c128e":"r102","98b5229a":"r103","60e12fe2":"r104","925ff4e6":"r105","bb7d40f2":"r106","b97b48cf":"r107","bf3cf4d4":"r108","2113a2ad":"r109","2f7e496e":"r110","03b7b60a":"r111","7b449fb5":"r112","da121c13":"r113","5802cb61":"r114","baf41b01":"r115","0a0535d0":"r116","b951a5c1":"r117","ac5157db":"r118","42645e0b":"r119","fbb1088f":"r120","9b34405e":"r121","9d13eeab":"r122","e3ab5015":"r123","7fa62b83":"r124","ef9f2026":"r125","6c20477d":"r126","154bca70":"r127","bbc0cb43":"r128","df21ffd1":"r129","8b65d4da":"r130","124fafbe":"r131","f8118047":"r132","2d8d459b":"r133","794b2e96":"r134","e1ff9452":"r135","1d74cbab":"r136","5f851be6":"r137","a97391e6":"r138","e3b3ba19":"r139","0568e872":"r140","227e6fde":"r141","4eed198f":"r142","029b0db3":"r143","db7feef1":"r144","35bf72c7":"r145","f7f2630c":"r146","f8c51d46":"r147","c7e92055":"r148","deea5c62":"r149","949552c6":"r150","949b6556":"r151","067102ec":"r152","52252f09":"r153","079d316e":"r154","38f3d1c9":"r155","0a879bbe":"r156","a5799631":"r157","fa3af481":"r158","ab8ff6a0":"r159","19913baa":"r160","c91fad9f":"r161","8ebac5f6":"r162","0e1787cc":"r163","8e530cf1":"r164","35716907":"r165","3d9a2106":"r166","e640806d":"r167","48c5b6cd":"r168","1fe86d3d":"r169","f07da128":"r170","36be6dfc":"r171","c8eacbde":"r172","9704b0ed":"r173","cbf308e6":"r174","a9e6691a":"r175","cfc0171b":"r176","a27a7182":"r177","7535da4a":"r178","deb31fe3":"r179","f9a77455":"r180","79254d9f":"r181","1154a2c3":"r182","13d1792c":"r183","07ec42ca":"r184","1b7aa1d7":"r185","13085dcb":"r186","36eb9d68":"r187","53733f98":"r188","b0a6447d":"r189","7646c25e":"r190","666f4974":"r191","9150bee3":"r192","e1294cfc":"r193","c244b40d":"r194","7944c55e":"r195","67362663":"r196","c5a32495":"r197","b8a9f218":"r198","dd03a97e":"r199","8f30ddf4":"r200","ab4d0ba0":"r201","5b551524":"r202","6661583f":"r203","200a9749":"r204","23291d87":"r205","6ed1c833":"r206","b553edd0":"r207","ba806c31":"r208","c4cfc997":"r209","3a9bbce3":"r210","3a5db5d2":"r211","9f64f2e9":"r212","d44e4999":"r213","1e83abe1":"r214","79ca60ed":"r215","25252371":"r216","82810dac":"r217","088ca895":"r218","4f2209b8":"r219","b91bfc3e":"r220","c977148f":"r221","dcf69150":"r222","0257d8a0":"r223","7d2683d1":"r224","e0801129":"r225","deef29f6":"r226","d99f8ba5":"r227","fd514fdc":"r228","a85fc2b2":"r229","9fb31129":"r230","152e2042":"r231","069f8544":"r232","f9fde603":"r233","bf37293d":"r234","b7ec9987":"r235","72dc2947":"r236","2353cf3b":"r237","e9fb7d77":"r238","a9cc6f57":"r239","b0f26d56":"r240","d906118f":"r241","e358bae2":"r242","df912098":"r243","375bbc34":"r244","3b0beaa5":"r245","2739f5f9":"r246","f40e4f03":"r247","3c72790d":"r248","e752209b":"r249","87902932":"r250","e1a4fa6e":"r251","3c1ecba4":"r252","397575d2":"r253","c269f73a":"r254","2f111739":"r255","cff6cc9e":"r256","30529697":"r257","e032afca":"r258","d2269a20":"r259","b3c0cb64":"r260","cc1ce92f":"r261","1a1d624f":"r262","1860d60f":"r263","98e92bdf":"r264","6a6a6bee":"r265","201a5b6f":"r266","f61f3737":"r267","df0fe8fb":"r268","50f52e35":"r269","0c680245":"r270","346e11dc":"r271","cf1d959d":"r272","537ba2cb":"r273","74125100":"r274","eb474480":"r275","53ac0a5d":"r276","4f199b67":"r277","46a87795":"r278","8952f095":"r279","59a48c10":"r280","f9265773":"r281","d1450a87":"r282","d818d3fc":"r283","a293eefa":"r284","018cb3ce":"r285","29e4fea5":"r286","2fed3342":"r287","11126ca6":"r288","e82b9bbb":"r289","f7d10d1a":"r290","00bdadd1":"r291","674857d0":"r292","198d0174":"r293","21e64f7c":"r294","a91699b9":"r295"};
-  var CARDSEL = ".card,.help-card,.bulletin,.life-card,.pay-cell,.holler-box,.contact-card,.founder,.voice-card,.hear-box,.catch,.safety,.joke-box,.note-box,.why-panel,.club-house,.pot-counter";
+  var CARDSEL = ".card,.help-card,.bulletin,.life-card,.pay-cell,.holler-box,.contact-card,.founder,.voice-card,.hear-box,.catch,.safety,.joke-box,.note-box,.why-panel,.club-house";
   var BLOCK = {ADDRESS:1,ARTICLE:1,ASIDE:1,BLOCKQUOTE:1,DIV:1,DL:1,DT:1,DD:1,FIELDSET:1,FIGCAPTION:1,FIGURE:1,FOOTER:1,FORM:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,HEADER:1,LI:1,MAIN:1,NAV:1,OL:1,P:1,SECTION:1,TABLE:1,TD:1,TH:1,TR:1,UL:1};
   var SKIP = {SCRIPT:1,STYLE:1,BUTTON:1,TEMPLATE:1,TEXTAREA:1,SELECT:1,INPUT:1};
   function elText(el){
@@ -7782,7 +7735,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     b.setAttribute("aria-label", "Read this starter out loud");
     li.appendChild(b);
   });
-  /* The two plan cards added by pass 6 get their own buttons too */
+  /* The plan card added by pass 6 gets its own button too */
   (function(){
     function mkBtn(){
       var b = document.createElement("button");
@@ -7791,9 +7744,8 @@ window.__ddPlayWithFallback = function(el, path, onFail){
       b.setAttribute("aria-label", "Read this out loud");
       return b;
     }
-    var c = document.getElementById("ideaPotCard");
+    var c = document.getElementById("ideaHollerCard");
     if(c && !c.querySelector(".read-this-btn")) c.appendChild(mkBtn());
-    if(c && c.nextElementSibling && c.nextElementSibling.classList && c.nextElementSibling.classList.contains("card") && !c.nextElementSibling.querySelector(".read-this-btn")) c.nextElementSibling.appendChild(mkBtn());
   })();
 
   var player = new Audio();
