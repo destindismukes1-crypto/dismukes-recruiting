@@ -1,0 +1,17 @@
+name: Rename recruiter site to index
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename recruiter-website.html to index.html
+        run: |
+          git config user.name "destindismukes1-crypto"
+          git config user.email "destindismukes1@gmail.com"
+          git mv recruiter-website.html index.html
+          git commit -m "Rename recruiter-website.html to index.html"
+          git push
