@@ -2023,18 +2023,6 @@
     </div>
   </section>
 
-  <section id="moose-video" style="padding:20px 16px;text-align:center">
-    <h2 style="margin:0 0 8px">Moose ride — Alaska to Vegas — Dismukes Recruiting</h2>
-    <p style="margin:0 0 12px">DD rides a moose from Alaska to Vegas. Can't dodge it, ram it.</p>
-    <div style="max-width:360px;margin:0 auto">
-      <video width="100%" height="640" controls preload="metadata" playsinline title="Moose ride — Alaska to Vegas — Dismukes Recruiting" style="background:#000">
-        <source src="moose-video.mp4" type="video/mp4">
-        Your browser can't play this video here — <a href="https://www.tiktok.com/@d3st1n4gr3atn3s/video/7703709346319863070">watch it on TikTok</a>.
-      </video>
-    </div>
-    <p style="margin:12px 0 0"><a href="https://www.tiktok.com/@d3st1n4gr3atn3s/video/7703709346319863070">Watch it on TikTok</a> · <a href="https://www.youtube.com/shorts/XD8peSm7EZ0">Watch it on YouTube</a></p>
-  </section>
-
   <!-- IMMERSIVE SCENE — in the flow at the top of the page. DD on the LEFT, his truck on the RIGHT, together
        in one 3D scene. It is sticky in its own reserved band — not fixed,
        not a popup, no X — and stays with you through the whole page. -->
@@ -2997,7 +2985,8 @@
       <blockquote>
         <p>Hi, I'm Destin Dismukes. I worked thirteen years in coatings. Blasting and painting. Traveling job to job. I lived on the street. I kept standing. Now I run Dismukes Recruiting. I help workers find real jobs. I was the crew. I know what a crew needs. I hold OSHA 10, C7, and C12. Workers always apply free. Always. Every job shows the pay up front. And the per diem up front. Before you travel anywhere. No games. Tell us your trade. We match you to the job. Employers: post it honest, pay it honest. Want the hot job every morning? Join the Text Club. Text JOIN to 251-422-4242. It's free. Can't dodge it, ram it — that's what my mama tell me. So here I am. Still standing. Still working. I'm Destin Dismukes, with Dismukes Recruiting. Find the jobs at destindismukes1-crypto.github.io/dismukes-recruiting.</p>
       </blockquote>
-      <p><strong>Hear the minute — Destin's own recording, coming soon.</strong></p>
+      <p><audio controls preload="none" src="radio-minute.mp3" style="width:100%;max-width:520px"></audio></p>
+      <p>AI voice in Destin's style — a generated AI voice, not a recording of Destin.</p>
       <p>Sponsor this minute — Featured $50. Email <a href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a>.</p>
     </div>
   </section>
@@ -8399,7 +8388,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
 <script>
 /* WHOLE-PAGE READ + READ-THIS FALLBACK + JOBS UP TOP — 2026-11-02 fix.
    Whole-page buttons (top sticky Read, Read It To Me, data-read-all) previously played nothing: their path had no whole-page recording.
-   Now they play 14 AI-voice chunks in order, scrolling DD to each section as it is read. No chat bubble — audio only, status text only.
+   Now they play 17 AI-voice chunks in order, scrolling DD to each section as it is read. No chat bubble — audio only, status text only.
    Read This fallback: if a Read This click starts no audio within 900ms, the section's own words are read by the device voice, labeled in the status as device voice, not Destin — so every Read This reads something, its own words, never another section's.
    Jobs up top: jobs section is ordered before Big DD, and a Jobs button is added to the top bar for one-tap access. */
 (function(){
@@ -8417,7 +8406,10 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     {a:"business-partners", f:"assets/voice-clone/whole-11.mp3"},
     {a:"stocks-401k", f:"assets/voice-clone/whole-12.mp3"},
     {a:"benefits", f:"assets/voice-clone/whole-13.mp3"},
-    {a:"contact", f:"assets/voice-clone/whole-14.mp3"}
+    {a:"contact", f:"assets/voice-clone/whole-14.mp3"},
+    {a:"text-club", f:"assets/voice-clone/whole-15.mp3"},
+    {a:"referral-board", f:"assets/voice-clone/whole-16.mp3"},
+    {a:"radio-minute", f:"assets/voice-clone/whole-17.mp3"}
   ];
   var player = new Audio();
   var playing = false, idx = 0;
