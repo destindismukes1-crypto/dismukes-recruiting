@@ -1939,12 +1939,13 @@
   <!-- VERSE OF THE DAY — a different real Bible verse every day, changes on its own -->
   <section id="verse-of-the-day" style="padding:18px 16px;text-align:center;background:#fff8e6">
     <h2 style="margin:0 0 6px">Verse of the Day</h2>
-    <p id="dailyVerseText" style="margin:0;font-size:18px;font-style:italic">Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest. &mdash; Joshua 1:9</p>
+    <p id="dailyVerseText" style="margin:0;font-size:18px;font-style:italic">Behold, the kingdom of God is within you. &mdash; Luke 17:21</p>
     <p id="dailyVerseDate" style="margin:6px 0 0;font-size:13px;color:#666"></p>
   </section>
   <script>
   (function(){
     var verses=[
+      ["Behold, the kingdom of God is within you.","Luke 17:21"],
       ["Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.","Joshua 1:9"],
       ["The LORD is my shepherd; I shall not want.","Psalm 23:1"],
       ["Trust in the LORD with all thine heart; and lean not unto thine own understanding.","Proverbs 3:5"],
@@ -1978,8 +1979,8 @@
       ["For by grace are ye saved through faith; and that not of yourselves: it is the gift of God.","Ephesians 2:8"]
     ];
     var now=new Date();
-    var start=new Date(now.getFullYear(),0,0);
-    var day=Math.floor((now-start)/86400000);
+    var launch=new Date(2026,10,11);
+    var day=Math.max(0,Math.floor((now-launch)/86400000));
     var v=verses[day%verses.length];
     var el=document.getElementById('dailyVerseText');
     if(el){el.innerHTML=v[0]+' &mdash; '+v[1];}
