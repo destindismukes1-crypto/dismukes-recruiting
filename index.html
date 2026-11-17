@@ -993,6 +993,8 @@
   .why-joke strong{color:var(--orange-ink)}
   /* Ask DD — always open, in the page, under the stage. No pop-up, no X. */
   .side-rail .dd-panel{position:static !important;display:block !important;top:auto;bottom:auto;left:auto;right:auto;width:100%;max-height:none;overflow:visible;margin-top:16px;box-shadow:none;z-index:auto}
+  /* Walk sheet: only the Walk button adds .walk-open, so the panel becomes a fixed sheet on phones with Step 1 on screen — not buried at the bottom of the page. (Keyed off .walk-open, NOT .open: the panel is given .open at load by design, so .open would pin a fixed sheet over the screen from the start.) Without .walk-open the panel stays in the flow as before. */
+  .side-rail .dd-panel.walk-open{position:fixed !important;top:64px !important;left:12px !important;right:12px !important;bottom:auto !important;width:auto !important;max-height:calc(100vh - 84px) !important;max-height:calc(100dvh - 84px) !important;overflow-y:auto !important;overscroll-behavior:contain;margin-top:0 !important;box-shadow:0 18px 50px rgba(0,0,0,.45) !important;z-index:90}
   /* Brainstorm — always in the page under Ask DD. No slide-in, no X. */
   .side-rail .brain-panel{position:static !important;display:block !important;top:auto;left:auto;height:auto;width:100%;max-height:none;overflow:visible;margin-top:16px;border:1px solid var(--line);border-radius:12px;box-shadow:none;z-index:auto;animation:none}
   .brain-tab{display:none !important}
@@ -4349,12 +4351,13 @@
     panel.classList.toggle("open", open);
     syncPanelAria();
   }
-  if(pill){ pill.addEventListener("click", function(){ togglePanel(); }); }
+  if(pill){ pill.addEventListener("click", function(){ togglePanel(); if(panel) panel.classList.remove("walk-open"); }); }
   if(dockAsk){ dockAsk.addEventListener("click", syncPanelAria); }
 
   /* ---------- Truck ride from the bottom bar ---------- */
   function runTruckRide(){
     togglePanel(false);
+    if(panel) panel.classList.remove("walk-open");
     var box = document.querySelector(".truck-box");
     if(box){ box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); }
     setTimeout(function(){
@@ -4548,8 +4551,10 @@
       selectPick("need", "Browse the jobs");
       steps = buildSteps(); stepIdx = 0;
       togglePanel(true);
+      if(panel) panel.classList.add("walk-open");
       showStep();
-      if(panel){ panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" }); }
+      /* The panel is a fixed sheet while the walk runs (see the .walk-open rule): jump Step 1 itself to the middle of the sheet instantly ("instant" beats the page smooth-scroll rule) — no long glide, no "nearest" stop at the panel's edge. */
+      if(walkOut) walkOut.scrollIntoView({ behavior: "instant", block: "center" });
     });
   }
 })();
@@ -4824,11 +4829,16 @@
     if(fig) demoPulse(fig);
     var line = document.querySelector("[data-demo-line]");
     if(line) line.hidden = false;
-    if(bubble) bubble.textContent = "Demo time \u2014 coatings, DD style: hood on, respirator checked, PPE every time. Then a steady, even sweep \u2014 blast it clean, paint it right. That's the work on this bulletin.";
+    var demoText = "Demo time \u2014 coatings, DD style: hood on, respirator checked, PPE every time. Then a steady, even sweep \u2014 blast it clean, paint it right. That's the work on this bulletin.";
+    if(bubble) bubble.textContent = demoText;
+    if(window.__ddClonePlay){ try { window.__ddClonePlay(demoText); } catch(e){} }
+    /* Show the demo where the user tapped: jump the bulletin card to the top of the screen instantly ("instant" beats the page smooth-scroll rule), no glide for the tap to miss — then nudge just enough to bring the demo line itself into view. */
+    if(card) card.scrollIntoView({ behavior: "instant", block: "start" });
+    if(line) line.scrollIntoView({ behavior: "instant", block: "nearest" });
   }
   window.__ddDemo = runDemo;
-  var demoBtn = document.querySelector("[data-demo-job]");
-  if(demoBtn) demoBtn.addEventListener("click", runDemo);
+  /* ONE handler for every bulletin demo button — the second handler in the fields IIFE is removed, so a tap fires this once. */
+  document.querySelectorAll("[data-demo-job]").forEach(function(b){ b.addEventListener("click", runDemo); });
 
   /* When the job bulletin first scrolls into view, DD dresses for it */
   if(card && "IntersectionObserver" in window){
@@ -5170,13 +5180,17 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     if(window.__ddWave) window.__ddWave();
     if(window.__ddClonePlay) window.__ddClonePlay(line);
   }
-  stage.setAttribute("tabindex", "0");
-  stage.setAttribute("role", "button");
-  stage.setAttribute("aria-label", "Tap DD — he talks to you, tells jokes and walks you through the page, in the AI voice in Destin's style");
-  stage.addEventListener("click", talk);
-  stage.addEventListener("keydown", function(e){
+  /* The bare `stage` name was never defined in this IIFE and threw here, killing it before __ddTapTalk was set. Grab the dock stage directly. */
+  var dockStage = document.getElementById("ddStage3d");
+  if(dockStage){
+  dockStage.setAttribute("tabindex", "0");
+  dockStage.setAttribute("role", "button");
+  dockStage.setAttribute("aria-label", "Tap DD — he talks to you, tells jokes and walks you through the page, in the AI voice in Destin's style");
+  dockStage.addEventListener("click", talk);
+  dockStage.addEventListener("keydown", function(e){
     if(e.key === "Enter" || e.key === " "){ e.preventDefault(); talk(); }
   });
+  }
   window.__ddTapTalk = talk;
 })();
 </script>
@@ -5251,7 +5265,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
       var f = b.getAttribute("data-outfit-field");
       document.querySelectorAll("[data-outfit-field]").forEach(function(x){ x.setAttribute("aria-pressed", x.getAttribute("data-outfit-field") === f ? "true" : "false"); });
       dressAll(f);
-      if(window.__ddWave) window.__ddWave();
+      /* No wave on outfit change: the wave threw DD's arm up on every clothes change. */
       var big = document.getElementById("bigdd");
       if(big && !(b.closest && b.closest("#bigdd"))){
         big.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
@@ -5953,10 +5967,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   });
   var bigBtn = document.getElementById("bigDemoBtn");
   if(bigBtn) bigBtn.addEventListener("click", function(){ runFieldDemo(currentField, { stay:true }); });
-  /* The bulletin demo button demos the printed job — coatings — in place */
-  document.querySelectorAll("[data-demo-job]").forEach(function(b){
-    b.addEventListener("click", function(){ runFieldDemo("coatings", { stay:true }); });
-  });
+  /* The bulletin demo button is handled once, by runDemo above — no second listener here. */
   /* Put the joke + a Demo button into every field card */
   var CARD_KEYS = {
     "Skilled Trades":"coatings", "Doctor":"doctor", "Lawyer":"lawyer", "Judge & Courts":"judge",
@@ -6364,11 +6375,27 @@ window.__ddPlayWithFallback = function(el, path, onFail){
       doing:"Watch DD: clippers gliding smooth — a pass, a check in the mirror, one more pass. Clean enough to frame." }
   };
   var demoTimer2 = null;
-  function runNewDemo(key){
+  function runNewDemo(key, btn){
     var f = NEWFIELDS[key];
     if(!f) return;
     if(window.__ddDressAll) window.__ddDressAll(f.dress);
     setBubble("DD joke — " + f.name + ": " + f.joke);
+    if(window.__ddClonePlay){ try { window.__ddClonePlay(f.joke); } catch(e){} }
+    /* Show the demo where the user tapped: write the doing line into the tapped card itself. */
+    if(btn && btn.closest){
+      var cardEl = btn.closest(".help-card");
+      if(cardEl){
+        var cardLine = cardEl.querySelector("[data-newdemo-line]");
+        if(!cardLine){
+          cardLine = document.createElement("p");
+          cardLine.className = "demo-line";
+          cardLine.setAttribute("data-newdemo-line", "");
+          cardEl.appendChild(cardLine);
+        }
+        cardLine.innerHTML = "<strong>DD demo &mdash; " + f.name + ":</strong> " + f.doing;
+        cardLine.hidden = false;
+      }
+    }
     var readout = document.getElementById("demoReadout");
     if(readout){
       readout.hidden = false;
@@ -6392,11 +6419,12 @@ window.__ddPlayWithFallback = function(el, path, onFail){
       }, 6400);
     }
     var big = document.getElementById("bigdd");
-    if(big) big.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    /* Jump to Big DD instantly ("instant" beats the page smooth-scroll rule) — a smooth glide over 40,000px is what made the tap look dead. */
+    if(big) big.scrollIntoView({ behavior: "instant", block: "center" });
   }
   window.__ddNewFieldDemo = runNewDemo;
   document.querySelectorAll("[data-newdemo]").forEach(function(b){
-    b.addEventListener("click", function(){ runNewDemo(b.getAttribute("data-newdemo")); });
+    b.addEventListener("click", function(){ runNewDemo(b.getAttribute("data-newdemo"), b); });
   });
 
   /* ---------- 4) More brainstorm prompts — funny, for everybody ---------- */
@@ -8871,15 +8899,29 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   function GF(fill, cuff){ return glv(339, 540, 21, 38, 92, fill, cuff, -1); }
   var G16 = {
     coatings:
-      '<path d="M128 200 Q118 40 210 30 Q306 40 322 196" stroke="#d9c8a9" stroke-width="20" fill="none" stroke-linecap="round"/>' +
-      longSl("#e8e4da") +
-      '<path d="' + TORSO + '" fill="#e8e4da"/><path d="' + LEGR + '" fill="#e8e4da"/><path d="' + LEGF + '" fill="#e8e4da"/>' + SHADE +
-      '<rect x="200" y="300" width="6" height="150" fill="#b9b2a2"/>' +
-      '<path d="M138 440 L290 440 L290 455 L138 455 Z" fill="#c23b22" opacity=".92"/>' +
-      '<rect x="250" y="316" width="46" height="34" rx="14" fill="#37414a"/><circle cx="273" cy="333" r="10" fill="#59636c"/><path d="M252 322 L226 300" stroke="#37414a" stroke-width="5" fill="none"/>' +
-      GN("#c23b22", "#8f2a16") + GF("#c23b22", "#8f2a16") +
-      '<rect x="62" y="556" width="68" height="21" rx="6" fill="#c23b22"/><rect x="44" y="563" width="18" height="9" fill="#59636c"/>' +
-      '<path d="M100 582 Q82 688 112 798" fill="none" stroke="#37414a" stroke-width="8"/>',
+      /* Rebuilt blast suit: solid hood with a real viewing window, close-fitting coveralls. Render-checked against the DD figure before this edit. */
+      '<path d="M117 468 L234 468 L228 900 Q226 913 213 915 L181 915 Q168 913 168 900 Q155 860 140 780 Q125 650 117 468 Z" fill="#e8e4da"/>' +
+      '<path d="M222 468 L332 468 L330 900 Q328 913 315 915 L257 915 Q244 913 244 900 L240 468 Z" fill="#e8e4da"/>' +
+      '<rect x="125" y="630" width="40" height="70" rx="5" fill="#dcd6c8" stroke="#b9b2a2" stroke-width="2"/>' +
+      '<path d="M172 892 L228 892 M244 892 L330 892" stroke="#b9b2a2" stroke-width="4" fill="none"/>' +
+      '<path d="M170 200 Q130 210 108 234 Q100 248 100 300 L104 360 Q110 430 130 470 L292 470 Q312 430 318 360 L322 300 Q322 248 314 234 Q292 210 250 200 Q210 194 170 200 Z" fill="#e8e4da"/>' +
+      '<path d="M300 222 L318 360 Q312 430 302 470 L282 470 L290 360 Z" fill="#000000" opacity=".08"/>' +
+      '<path d="M210 245 L210 465" stroke="#b9b2a2" stroke-width="6" fill="none"/>' +
+      '<rect x="206" y="252" width="8" height="14" rx="2" fill="#59636c"/>' +
+      '<rect x="110" y="340" width="202" height="15" fill="#c23b22" opacity=".92"/>' +
+      '<rect x="255" y="288" width="48" height="40" rx="4" fill="#dcd6c8" stroke="#b9b2a2" stroke-width="2"/>' +
+      '<path d="M62 223 L132 195 L136 480 Q136 560 131 595 L64 595 Q58 520 56 400 Q55 310 62 223 Z" fill="#e8e4da"/>' +
+      '<path d="M296 195 L360 223 L363 450 Q363 510 359 548 L298 548 Q294 480 294 380 Q294 290 296 195 Z" fill="#e8e4da"/>' +
+      '<rect x="56" y="568" width="78" height="18" rx="5" fill="#c23b22"/>' +
+      '<rect x="294" y="522" width="66" height="18" rx="5" fill="#c23b22"/>' +
+      '<path d="M150 228 Q116 168 114 95 Q113 40 160 12 Q210 -25 260 12 Q313 40 318 95 Q316 168 306 228 L336 250 Q210 270 86 250 L150 228 Z" fill="#d9c8a9" stroke="#b39b6d" stroke-width="2.5"/>' +
+      '<rect x="170" y="88" width="110" height="55" rx="16" fill="#37414a" stroke="#2a333c" stroke-width="3"/>' +
+      '<rect x="182" y="96" width="86" height="10" rx="5" fill="#59636c" opacity=".65"/>' +
+      '<path d="M305 210 Q335 300 330 470" stroke="#37414a" stroke-width="6" fill="none"/>' +
+      '<rect x="318" y="452" width="24" height="30" rx="5" fill="#59636c"/>' +
+      '<rect x="62" y="592" width="52" height="18" rx="6" fill="#c23b22"/>' +
+      '<rect x="50" y="596" width="13" height="11" rx="3" fill="#59636c"/>' +
+      '<path d="M88 600 Q70 685 95 790" stroke="#37414a" stroke-width="7" fill="none"/>',
     doctor:
       longSl("#eef2f5") +
       '<path d="' + TORSO + '" fill="#f4f6f8"/><path d="M124 446 L290 446 L298 560 Q206 576 118 560 Z" fill="#f4f6f8"/>' + SHADE +
