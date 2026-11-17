@@ -1849,7 +1849,7 @@
   }
   function isVoiceControl(el){
     if(!el || !el.closest) return false;
-    return !!el.closest(".read-this-btn,[data-read-tap],[data-dd-joke],[data-dd-talk],[data-dd-wave],[data-dd-act],#ddStage3d,#clubStage3d,#readStopBtn,#stickyRepeatBtn");
+    return !!el.closest(".read-this-btn,[data-read-tap],[data-dd-joke],[data-laugh-job],[data-dd-talk],[data-dd-wave],[data-dd-act],#ddStage3d,#clubStage3d,#readStopBtn,#stickyRepeatBtn");
   }
   document.addEventListener("click", function(e){
     var t = e.target;
@@ -4625,9 +4625,19 @@
     var b = document.getElementById(id);
     if(b) b.addEventListener("click", wave);
   });
-  /* Panel + bulletin laughs: joke lands in his bubble while he waves */
-  document.querySelectorAll('[data-walk="laugh"], [data-laugh-job]').forEach(function(b){
+  /* Panel laughs: joke lands in his bubble while he waves */
+  document.querySelectorAll('[data-walk="laugh"]').forEach(function(b){
     b.addEventListener("click", tellJoke);
+  });
+  /* Bulletin laugh: the joke shows right on the job card AND is spoken out loud */
+  document.querySelectorAll("[data-laugh-job]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var j = tellJoke();
+      var card = b.closest ? b.closest(".bulletin") : null;
+      var line = card ? card.querySelector("[data-job-joke]") : document.querySelector("[data-job-joke]");
+      if(line){ line.textContent = j; line.hidden = false; }
+      setTimeout(function(){ var bb = document.getElementById("ddBubble"); if(bb && window.__ddClonePlay) window.__ddClonePlay(bb.textContent); }, 120);
+    });
   });
   /* Walk-builder steps: he walks as he walks you through them */
   document.querySelectorAll('[data-walk="build"], [data-walk="next"], [data-walk="full"], [data-walk-job]').forEach(function(b){
@@ -4792,6 +4802,13 @@
   document.querySelectorAll('[data-pick-group="field"]').forEach(function(b){
     b.addEventListener("click", function(){ dress(b.getAttribute("data-pick-value")); });
   });
+  /* "Just looking" in the Ask DD picker: no outfit change, just DD talking */
+  document.querySelectorAll('[data-pick-group="start"]').forEach(function(b){
+    b.addEventListener("click", function(){
+      if(bubble && !window.__ddTourActive) bubble.textContent = "Just looking? No rush — scroll the jobs, tap a field when one catches your eye, and workers always apply free.";
+      if(window.__ddWave) window.__ddWave();
+    });
+  });
 
   function demoPulse(el){
     if(!el) return;
@@ -4808,7 +4825,6 @@
     var line = document.querySelector("[data-demo-line]");
     if(line) line.hidden = false;
     if(bubble) bubble.textContent = "Demo time \u2014 coatings, DD style: hood on, respirator checked, PPE every time. Then a steady, even sweep \u2014 blast it clean, paint it right. That's the work on this bulletin.";
-    if(window.__ddWave) window.__ddWave();
   }
   window.__ddDemo = runDemo;
   var demoBtn = document.querySelector("[data-demo-job]");
@@ -4845,7 +4861,6 @@
     dress("Skilled Trades");
     if(bubble) bubble.textContent = "Got my eye on that one \u2014 lasso out! DD's roping in the Newport News job for a closer look\u2026";
     if(dock) dock.classList.add("throwing");
-    if(window.__ddWave) window.__ddWave();
     card.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     setTimeout(function(){
       var from = (dockStage || dock).getBoundingClientRect();
@@ -5288,7 +5303,24 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   var PROMPTS = {
     job: { li:"DD's job starter prompt: What job could you start this month with the skills already in your hands? Jot it here \u2014 then tap that field on Big DD and watch him dress for it.", bubble:"starter time \u2014 job plans! My prompt's in the list. DD joke: I don't chase jobs, I walk right up and introduce myself. Now you: what's your plan?" },
     career: { li:"DD's career starter prompt: Where do you want to be in two years? Pick the field, then build your walk with DD in Ask DD \u2014 one printed step at a time, no guessing.", bubble:"Career Starter time! Prompt's in the list. Two years from now is coming either way \u2014 might as well dress for it. I do." },
-    business: { li:"DD's business starter prompt: Got a crew, a trade, or a service folks near a job site need? Jot it here \u2014 employers post on this site from $25, with pay and per diem printed up front.", bubble:"Business brains! Prompt's in the list. Crews, services, big plans \u2014 jot it down. DD joke: my first business investment was a good pair of boots; pays back every shift." }
+    business: { li:"DD's business starter prompt: Got a crew, a trade, or a service folks near a job site need? Jot it here \u2014 employers post on this site from $25, with pay and per diem printed up front.", bubble:"Business brains! Prompt's in the list. Crews, services, big plans \u2014 jot it down. DD joke: my first business investment was a good pair of boots; pays back every shift." },
+    life: { li:"DD's life starter prompt: What's one thing you want your life to look like a year from now, and what's the first small step toward it? Jot it here.", bubble:"Life starter time! Dream it, then take the first step." },
+    youth: { li:"DD's youth starter prompt: First job or still in school? What's one skill you want to learn first - and who could teach you? Jot it here.", bubble:"Youth starter time! Everybody starts somewhere - pick your first skill." },
+    money: { li:"DD's money starter prompt: What's one way you could earn a little extra this month with what you already know how to do? Jot it here.", bubble:"Money starter time! Start with what you already know." },
+    funny: { li:"DD's funny starter prompt: Tell me something funny that happened at work - the kind of story you'd tell a friend after a long shift. Jot it here.", bubble:"Funny starter time! A good laugh makes the shift go faster." },
+    crew: { li:"DD's crew starter prompt: Got a crew in mind - painters, blasters, or hands for a job? Who's on it, and what job would you send them to first? Jot it here.", bubble:"Crew starter time! A good crew starts with good people." },
+    dreamjob: { li:"DD's dream job starter prompt: If you could pick any job tomorrow, what would it be - and what would you need to get there? Jot it here.", bubble:"Dream job starter time! Name it, then let's work toward it." },
+    encore: { li:"DD's encore starter prompt: What's something you did once that worked out great - and how would you do it again, even better? Jot it here.", bubble:"Encore starter time! If it worked once, it can work again." },
+    firstweek: { li:"DD's first week starter prompt: New job, first week - what do you want to get right in those first five days? Jot it here.", bubble:"First week starter time! Show up, listen, and learn the ropes." },
+    grow: { li:"DD's grow starter prompt: What's one skill you want to grow this year - and what's one hour a week you could give it? Jot it here.", bubble:"Grow starter time! One hour a week adds up fast." },
+    helper: { li:"DD's helper starter prompt: Who helped you get where you are - and how could you pass that help along to somebody else? Jot it here.", bubble:"Helper starter time! Somebody helped you - now you help somebody." },
+    phonecall: { li:"DD's phone call starter prompt: Who's one person you should call this week about work - and what would you ask them? Jot it here.", bubble:"Phone call starter time! One call can open a door." },
+    ridealong: { li:"DD's ride-along starter prompt: If you could ride along with anybody for a day at work, who would it be - and what would you watch them do? Jot it here.", bubble:"Ride-along starter time! Watch how the pros do it." },
+    secondchance: { li:"DD's second chance starter prompt: What's something you want a second chance at - and what's different this time? Jot it here.", bubble:"Second chance starter time! This time you know more." },
+    sidehustle: { li:"DD's side hustle starter prompt: What's a small side job you could do on weekends with the tools or skills you already have? Jot it here.", bubble:"Side hustle starter time! Weekends can pay too." },
+    skills: { li:"DD's skills starter prompt: What are the three things you're best at with your hands - and which one could earn you the most? Jot it here.", bubble:"Skills starter time! Your hands already know the work." },
+    veterans: { li:"DD's veterans starter prompt: Served your country and looking for what's next? What did the service teach you that a crew boss would want? Jot it here.", bubble:"Veterans starter time! Your service taught you plenty." },
+    weekend: { li:"DD's weekend starter prompt: What's one useful thing you could get done this weekend - for work, for home, or just for you? Jot it here.", bubble:"Weekend starter time! Small wins count." }
   };
   var list = document.getElementById("brainList");
   var bubble = document.getElementById("ddBubble");
