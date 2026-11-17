@@ -23,11 +23,11 @@
         --line: #3d4a57;
         --navy: #8fb4d6;
         --navy-deep: #0d1520;
-        --gold: #c99a2e;
-        --gold-bright: #e3c65c;
-        --gold-soft: #3a3115;
-        --accent: #c99a2e;
-        --on-accent: #171410;
+        --orange: #ff8a47;
+        --orange-bright: #ffb287;
+        --orange-soft: #3a2415;
+        --accent: #ff8a47;
+        --on-accent: #15181d;
         --tab-bg: rgba(21, 24, 29, 0.97);
         --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         color-scheme: dark;
@@ -45,7 +45,7 @@
       }
       .serif { font-family: Georgia, "Times New Roman", Times, serif; }
       a { color: var(--navy); }
-      @media (prefers-color-scheme: dark) { a { color: var(--gold-bright); } }
+      @media (prefers-color-scheme: dark) { a { color: var(--orange-bright); } }
       img { max-width: 100%; display: block; }
 
       /* ---------- app column ---------- */
@@ -73,7 +73,7 @@
       }
       h3 { font-size: 1.12rem; margin: 0; line-height: 1.3; }
       .sec-sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 0.98rem; }
-      .tick { display: block; width: 44px; height: 4px; background: var(--gold-bright); border-radius: 2px; margin-bottom: 12px; }
+      .tick { display: block; width: 44px; height: 4px; background: var(--orange-bright); border-radius: 2px; margin-bottom: 12px; }
 
       /* ---------- logo block ---------- */
       .logoblock { background: #000; padding: 14px 16px 13px; text-align: center; }
@@ -81,21 +81,21 @@
       .logo-verse {
         margin: 9px auto 0;
         max-width: 460px;
-        color: #e9d48a;
+        color: #ffb287;
         font-family: Georgia, "Times New Roman", Times, serif;
         font-style: italic;
         font-size: 1.02rem;
         line-height: 1.45;
       }
-      .logo-verse .ref { display: block; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: #b7a05a; margin-top: 5px; }
+      .logo-verse .ref { display: block; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a47; margin-top: 5px; }
 
       /* ---------- verse of the day ---------- */
       .verse-card {
         margin-top: 22px;
         background: var(--navy-deep);
-        color: #f4ecd4;
+        color: #eef2f5;
         border: 1px solid #2c4258;
-        border-top: 5px solid var(--gold-bright);
+        border-top: 5px solid var(--orange-bright);
         border-radius: 14px;
         padding: 24px 22px 20px;
         box-shadow: var(--shadow);
@@ -104,46 +104,46 @@
         .verse-card { background: #0d1520; border-color: #26313f; }
       }
       .verse-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-      .verse-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-bright); font-weight: 700; }
-      .verse-date { font-size: 0.88rem; color: #c9bfa4; }
+      .verse-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-bright); font-weight: 700; }
+      .verse-date { font-size: 0.88rem; color: #c3d2df; }
       .verse-text {
         font-family: Georgia, "Times New Roman", Times, serif;
         font-size: 1.38rem;
         line-height: 1.5;
         margin: 16px 0 10px;
       }
-      .verse-ref { font-family: Georgia, serif; font-style: italic; color: var(--gold-bright); font-size: 1.02rem; margin: 0 0 18px; }
+      .verse-ref { font-family: Georgia, serif; font-style: italic; color: var(--orange-bright); font-size: 1.02rem; margin: 0 0 18px; }
       .verse-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
       .verse-nav { display: flex; gap: 8px; margin-left: auto; }
       .vbtn {
         min-height: 44px; min-width: 44px;
         display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         border-radius: 10px; border: 1px solid #47617c;
-        background: rgba(255,255,255,0.06); color: #f4ecd4;
+        background: rgba(255,255,255,0.06); color: #eef2f5;
         font: inherit; font-size: 0.95rem; font-weight: 600;
         padding: 8px 14px; cursor: pointer;
       }
       .vbtn:active { background: rgba(255,255,255,0.16); }
       .vbtn svg { width: 18px; height: 18px; flex: none; }
-      .vbtn[aria-pressed="true"] { background: var(--gold-bright); color: #171410; border-color: var(--gold-bright); }
-      .verse-day { font-size: 0.85rem; color: #c9bfa4; margin: 14px 0 0; }
+      .vbtn[aria-pressed="true"] { background: var(--orange-bright); color: #15181d; border-color: var(--orange-bright); }
+      .verse-day { font-size: 0.85rem; color: #c3d2df; margin: 14px 0 0; }
 
       /* ---------- daily job alert (home screen) ---------- */
       .job-alert {
         margin-top: 22px;
         background: var(--surface); border: 1px solid var(--line);
-        border-top: 5px solid var(--gold-bright);
+        border-top: 5px solid var(--orange-bright);
         border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
       }
       .job-alert-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-      .job-alert-head svg { width: 20px; height: 20px; flex: none; color: var(--gold); }
-      .job-alert-kicker { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 800; }
+      .job-alert-head svg { width: 20px; height: 20px; flex: none; color: var(--orange); }
+      .job-alert-kicker { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 800; }
       .job-alert-date { margin-left: auto; font-size: 0.86rem; color: var(--ink-soft); }
       .job-alert-text {
         margin: 12px 0 0; background: var(--surface-2); border: 1px solid var(--line);
         border-radius: 12px; padding: 13px 15px; font-size: 0.97rem; line-height: 1.55;
       }
-      .job-alert-text strong { color: var(--gold); }
+      .job-alert-text strong { color: var(--orange); }
       .job-alert .payrow { margin-top: 12px; }
       .job-alert-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
       .job-alert-note { margin: 12px 0 0; color: var(--ink-soft); font-size: 0.9rem; }
@@ -157,15 +157,15 @@
         color: var(--ink); font-weight: 700; font-size: 0.92rem; box-shadow: var(--shadow);
         min-height: 44px;
       }
-      .quick a svg { width: 24px; height: 24px; color: var(--gold); }
+      .quick a svg { width: 24px; height: 24px; color: var(--orange); }
       .quick a.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-      .quick a.primary svg { color: var(--gold-bright); }
+      .quick a.primary svg { color: var(--orange-bright); }
       .cred-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
       .cred-row span {
         background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
         padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
       }
-      .cred-row b { color: var(--gold); }
+      .cred-row b { color: var(--orange); }
 
       /* ---------- buttons ---------- */
       .btn {
@@ -176,7 +176,7 @@
       }
       .btn svg { width: 18px; height: 18px; flex: none; }
       .btn-accent { background: var(--accent); color: var(--on-accent); }
-      .btn-gold { background: var(--gold-bright); color: #171410; }
+      .btn-orange { background: var(--orange-bright); color: #15181d; }
       .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
       .btn-sm { min-height: 42px; padding: 8px 14px; font-size: 0.92rem; }
 
@@ -201,15 +201,15 @@
         flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
         padding: 5px 9px; border-radius: 6px; margin-top: 2px;
       }
-      .tag-list { background: var(--gold-soft); color: var(--gold-bright); }
-      @media (prefers-color-scheme: dark) { .tag-list { color: var(--gold-bright); } }
+      .tag-list { background: var(--orange-soft); color: var(--orange-bright); }
+      @media (prefers-color-scheme: dark) { .tag-list { color: var(--orange-bright); } }
       .tag-chase { background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--line); }
       .where { display: flex; align-items: center; gap: 7px; color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
       .where svg { width: 15px; height: 15px; flex: none; }
       .payrow { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
       .payrow > div { flex: 1; padding: 10px 8px; background: var(--surface-2); text-align: center; }
       .payrow > div + div { border-left: 1px solid var(--line); }
-      .payrow .amt { display: block; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); line-height: 1.15; }
+      .payrow .amt { display: block; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--orange); line-height: 1.15; }
       .payrow .lbl { display: block; font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; font-weight: 700; }
       .job .note { color: var(--ink-soft); font-size: 0.96rem; margin: 0; flex: 1; }
       .job-actions { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -236,19 +236,19 @@
         border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink);
       }
       .calc-total {
-        grid-column: 1 / -1; background: var(--navy-deep); color: #f4ecd4; border-radius: 12px;
+        grid-column: 1 / -1; background: var(--navy-deep); color: #eef2f5; border-radius: 12px;
         padding: 16px; text-align: center;
       }
       @media (prefers-color-scheme: dark) { .calc-total { background: #0d1520; } }
-      .calc-total .t-lbl { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #c9bfa4; font-weight: 700; }
-      .calc-total .t-amt { display: block; font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--gold-bright); margin-top: 4px; }
+      .calc-total .t-lbl { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #c3d2df; font-weight: 700; }
+      .calc-total .t-amt { display: block; font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--orange-bright); margin-top: 4px; }
 
       /* ---------- steps & lists ---------- */
       .steps { display: grid; gap: 14px; }
       .step { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
       .step .num {
         flex: none; width: 40px; height: 40px; border-radius: 50%;
-        background: var(--gold-bright); color: #171410; font-family: Georgia, serif;
+        background: var(--orange-bright); color: #15181d; font-family: Georgia, serif;
         font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; justify-content: center;
       }
       .step p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
@@ -260,7 +260,7 @@
         padding: 16px; box-shadow: var(--shadow);
       }
       .price .amt {
-        flex: none; font-family: Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold);
+        flex: none; font-family: Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--orange);
         min-width: 74px; text-align: center; background: var(--surface-2);
         border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; line-height: 1.1;
       }
@@ -272,7 +272,7 @@
         background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
       }
       .chime-row .lbl { font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
-      .chime-row .handle { font-family: Georgia, serif; font-weight: 700; font-size: 1.15rem; color: var(--gold); }
+      .chime-row .handle { font-family: Georgia, serif; font-weight: 700; font-size: 1.15rem; color: var(--orange); }
       .copy-btn {
         margin-left: auto; min-height: 40px; padding: 8px 16px; border-radius: 9px; cursor: pointer;
         border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
@@ -286,7 +286,7 @@
         padding: 12px 16px; text-decoration: none; color: var(--ink); font-weight: 600; box-shadow: var(--shadow);
         overflow-wrap: anywhere;
       }
-      .contact-list svg { width: 20px; height: 20px; flex: none; color: var(--gold); }
+      .contact-list svg { width: 20px; height: 20px; flex: none; color: var(--orange); }
       .story-quote { font-family: Georgia, serif; font-size: 1.22rem; line-height: 1.5; margin: 0; }
       .story-body { color: var(--ink-soft); margin-top: 14px; }
       footer { padding: 34px 18px 10px; color: var(--ink-soft); font-size: 0.88rem; }
@@ -301,7 +301,7 @@
       }
       .sign-chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .horoscope-card {
-        background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--gold-bright);
+        background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--orange-bright);
         border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
       }
       .horoscope-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -313,25 +313,25 @@
         background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
         padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
       }
-      .horoscope-row b { color: var(--gold); }
+      .horoscope-row b { color: var(--orange); }
 
       /* ---------- tool giveaway ---------- */
       .prize-banner {
-        background: var(--navy-deep); color: #f4ecd4;
-        border: 1px solid #2c4258; border-top: 5px solid var(--gold-bright);
+        background: var(--navy-deep); color: #eef2f5;
+        border: 1px solid #2c4258; border-top: 5px solid var(--orange-bright);
         border-radius: 14px; padding: 22px; box-shadow: var(--shadow);
       }
       @media (prefers-color-scheme: dark) { .prize-banner { background: #0d1520; border-color: #26313f; } }
-      .prize-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-bright); font-weight: 700; margin: 0; }
+      .prize-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-bright); font-weight: 700; margin: 0; }
       .prize-name { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.6rem; line-height: 1.25; margin: 8px 0 6px; }
-      .prize-sub { color: #c9bfa4; margin: 0; font-size: 0.97rem; }
+      .prize-sub { color: #c3d2df; margin: 0; font-size: 0.97rem; }
       .giveaway-rules { display: grid; gap: 10px; margin-top: 16px; }
       .giveaway-rule {
         display: flex; gap: 12px; align-items: flex-start;
         background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
         padding: 14px 16px; box-shadow: var(--shadow);
       }
-      .giveaway-rule svg { width: 22px; height: 22px; flex: none; color: var(--gold); margin-top: 2px; }
+      .giveaway-rule svg { width: 22px; height: 22px; flex: none; color: var(--orange); margin-top: 2px; }
       .giveaway-rule p { margin: 3px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
       .tip-list { margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.96rem; display: grid; gap: 9px; }
       .tip-list strong { color: var(--ink); }
@@ -351,13 +351,13 @@
         color: var(--ink-soft); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em;
       }
       .tabbar a svg { width: 22px; height: 22px; }
-      .tabbar a.active { color: var(--gold); }
+      .tabbar a.active { color: var(--orange); }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
       }
       /* ---- Add to Home Screen ---- */
       .homescreen-wrap { text-align: center; margin: 2px 0 14px; padding: 0 16px; }
-      .homescreen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 420px; min-height: 52px; padding: 12px 18px; border: 2px solid #ffd24d; border-radius: 10px; background: #0d0d0d; color: #ffd24d; font-size: 17px; font-weight: 800; cursor: pointer; }
+      .homescreen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 420px; min-height: 52px; padding: 12px 18px; border: 2px solid #ffb287; border-radius: 10px; background: #0d0d0d; color: #ffb287; font-size: 17px; font-weight: 800; cursor: pointer; }
       .homescreen-btn:active { background: #232323; }
       .homescreen-note { margin: 8px 0 0; color: var(--ink-soft); font-size: 13.5px; }
       .hs-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 9998; display: none; }
@@ -369,7 +369,7 @@
       .hs-step { background: #37414a; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
       .hs-step h3 { margin: 0 0 6px; font-size: 15px; }
       .hs-step ol { margin: 0; padding-left: 20px; font-size: 14.5px; line-height: 1.55; }
-      .hs-close { width: 100%; margin-top: 12px; min-height: 46px; border: none; border-radius: 8px; background: #0d0d0d; color: #ffd24d; font-size: 16px; font-weight: 700; cursor: pointer; }
+      .hs-close { width: 100%; margin-top: 12px; min-height: 46px; border: none; border-radius: 8px; background: #0d0d0d; color: #ffb287; font-size: 16px; font-weight: 700; cursor: pointer; }
       .hs-fine { margin: 10px 0 0; font-size: 12.5px; color: #c3d2df; text-align: center; }
     </style>
   </head>
@@ -408,7 +408,7 @@
             <div class="job-alert-actions">
               <a class="btn btn-accent btn-sm" href="tel:+12514224242">Call to apply</a>
               <a class="btn btn-ghost btn-sm" href="#jobs">See all jobs</a>
-              <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=JOIN">Get this text daily — free</a>
+              <a class="btn btn-orange btn-sm" href="sms:+12514224242?&amp;body=JOIN">Get this text daily — free</a>
             </div>
             <p class="job-alert-note">Fresh work, pay first — this is the top posting on the Jobs board below.</p>
           </div>
@@ -742,7 +742,7 @@
               <p class="note">Text <strong>JOIN</strong> to <a href="sms:+12514224242?&amp;body=JOIN">(251) 422-4242</a> and we’ll text you the day’s hottest paying job. Workers always free.</p>
               <p class="note">Companies: want your job in tomorrow’s morning text? That’s a Featured post — $50. Email <a href="mailto:dismukesreqag369@gmail.com?subject=Text%20Club%20Featured%20—%20%2450">dismukesreqag369@gmail.com</a> to book it.</p>
               <div class="job-actions">
-                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=JOIN">Text JOIN now</a>
+                <a class="btn btn-orange btn-sm" href="sms:+12514224242?&amp;body=JOIN">Text JOIN now</a>
               </div>
             </article>
 
@@ -813,7 +813,7 @@
               <p class="note"><strong>The winner</strong> gets announced on the Dismukes Recruiting site and in this app — so every worker can see it and trust it. Full details are in the Tool Giveaway section below.</p>
               <p class="note">Shops: sponsor the tool for the $50 Featured price and put your name on the giveaway.</p>
               <div class="job-actions">
-                <a class="btn btn-gold btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
+                <a class="btn btn-orange btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
                 <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway%20sponsor%20—%20Featured%20%2450">Sponsor the tool — $50</a>
               </div>
             </article>
@@ -834,7 +834,7 @@
               </div>
               <p class="note">Got hired, passed a test, got the per diem right, finished a tough job standing tall — that’s a win, and the crew wants to hear it. Keep it to a line or two, and sign it with your first name and trade if you want.</p>
               <div class="job-actions">
-                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=WIN%3A%20">Text a win</a>
+                <a class="btn btn-orange btn-sm" href="sms:+12514224242?&amp;body=WIN%3A%20">Text a win</a>
                 <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20Board%20—%20my%20win">Email a win</a>
               </div>
             </article>
@@ -846,7 +846,7 @@
               </div>
               <p class="note">A better way to mask, mix, hang, blast, or stay safe in the heat — if it worked for you, it can work for the next hand. Short and plain beats long and fancy.</p>
               <div class="job-actions">
-                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=TIP%3A%20">Text a tip</a>
+                <a class="btn btn-orange btn-sm" href="sms:+12514224242?&amp;body=TIP%3A%20">Text a tip</a>
                 <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20Board%20—%20my%20tip">Email a tip</a>
               </div>
             </article>
@@ -895,7 +895,7 @@
           </div>
 
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
-            <a class="btn btn-gold" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
+            <a class="btn btn-orange" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
             <a class="btn btn-ghost" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway%20sponsor%20—%20Featured%20%2450">Sponsor the tool — Featured $50</a>
           </div>
         </section>
