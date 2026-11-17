@@ -1882,10 +1882,6 @@
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <span class="logo-wrap" style="flex:none;text-align:center;line-height:1.15">
-      <img src="media-generation-dismukes-recruiting-logo-black-0-3776ee9f-a657-4691-9f5a-d18162a2ca7e.webp" alt="Dismukes Recruiting logo" style="height:52px;width:auto;display:block;margin:0 auto">
-      <span style="display:block;font-size:10px;color:#d4af37;max-width:170px;margin-top:2px">I can do all things through Christ who strengthens me. &mdash; Philippians 4:13</span>
-    </span>
 <a class="brand" href="#jobs">Dismukes <span>Recruiting</span><small class="brand-tag">Pay printed up front &middot; Workers apply free</small></a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">Menu ▾</button>
     <button class="sticky-read-btn" id="stickyReadBtn" type="button" aria-label="Start — hear the whole page read out loud in the AI voice in Destin's style">&#9654; Start</button>
@@ -1965,6 +1961,12 @@
 
 <div class="page-layout">
 <main>
+  <!-- LOGO — on the page itself, not in the top bar -->
+  <div style="text-align:center;padding:18px 16px 4px">
+    <img src="media-generation-dismukes-recruiting-logo-black-0-3776ee9f-a657-4691-9f5a-d18162a2ca7e.webp" alt="Dismukes Recruiting logo" style="height:110px;max-width:92%;width:auto;display:block;margin:0 auto">
+    <p style="margin:6px 0 0;font-size:13px;color:#d4af37">I can do all things through Christ who strengthens me. &mdash; Philippians 4:13</p>
+  </div>
+
   <!-- DOOR COUNTER — page loads, not subscribers -->
   <section id="doorCounterSection" style="background:var(--navy2);color:#fff;padding:20px 0">
     <div class="wrap">
@@ -2112,6 +2114,7 @@
     <p class="page-start-hint" style="color:#ffd24d;font-weight:700;font-size:15px;margin:0 0 8px">&#10142; Tap Start — it walks you through the whole page</p>
     <div class="read-aloud-btns">
       <button class="ra-main" type="button" id="readAloudBtn">&#9654; Start</button>
+      <a class="ra-main" href="https://muse.ai/s/dismukes-recruiting-app-xei6xmhuirxjse/nL1WichvHygEOf5fFemtoULEiMcujnechkpK4RE8Bd4" target="_blank" rel="noopener" style="background:#ffd24d;color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:8px;min-height:46px;font-weight:700;font-size:16.5px" title="Opens the Dismukes Recruiting app — then tap Add to Home Screen">&#128241; Get the App</a>
       <button type="button" id="readJokeBtn">Tell a joke out loud</button>
       <button type="button" id="readJobBtn">Read the job out loud</button>
       <button type="button" id="readStopBtn">Stop reading</button>
@@ -5524,10 +5527,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     .brand-tag{display:none}
     .menu-btn{font-size:13.5px;padding:6px 10px;min-height:36px}
     .sticky-read-btn,.sticky-repeat-btn{font-size:12.5px;padding:6px 9px;min-height:36px}
-    .logo-wrap img{height:34px !important}
-    .logo-wrap>span{display:none}
     .sticky-repeat-btn{display:none}
-    #ddJobsTopBtn{display:none !important}
     section{scroll-margin-top:60px !important}
     .life-card{scroll-margin-top:60px !important}
   }
