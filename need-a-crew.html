@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Need a Hand? We Got the Hands. — Dismukes Recruiting</title>
+    <meta name="description" content="Need painters, blasters, welders, or another trade? Tell Dismukes Recruiting what you need in 60 seconds." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f4f1;
+        --panel: #ffffff;
+        --ink: #17181a;
+        --ink-soft: #45484d;
+        --line: #d9d9d2;
+        --accent: #e85a08;
+        --accent-ink: #ffffff;
+        --accent-soft: #fdeee2;
+        --stripe-a: #17181a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #101114;
+          --panel: #1a1b1f;
+          --ink: #f2f1ec;
+          --ink-soft: #b9bbb9;
+          --line: #33353b;
+          --accent: #ff7a29;
+          --accent-ink: #1a1206;
+          --accent-soft: #3a2412;
+          --stripe-a: #f2f1ec;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 28px 18px 40px;
+      }
+      .stripe {
+        height: 10px;
+        border-radius: 2px;
+        background: repeating-linear-gradient(
+          -45deg,
+          var(--accent) 0 14px,
+          var(--stripe-a) 14px 28px
+        );
+      }
+      h1 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(2.3rem, 8.5vw, 3.4rem);
+        line-height: 1.02;
+        margin: 22px 0 10px;
+      }
+      h1 .accent { color: var(--accent); }
+      .sub {
+        font-size: 1.13rem;
+        color: var(--ink-soft);
+        margin: 0 0 6px;
+        max-width: 34em;
+      }
+      .sub strong { color: var(--ink); }
+
+      .ask-intro {
+        font-weight: 700;
+        font-size: 1.22rem;
+        margin: 26px 0 4px;
+      }
+      .ask-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .ask-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .ask-list li:last-child { border-bottom: 0; }
+      .qnum {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--accent);
+        min-width: 1.2em;
+        flex: none;
+      }
+      .qlabel {
+        font-weight: 700;
+        font-size: 1.22rem;
+        line-height: 1.25;
+        display: block;
+      }
+      .opt {
+        font-weight: 500;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+      .ask-detail {
+        display: block;
+        color: var(--ink-soft);
+        font-size: 1rem;
+        margin-top: 2px;
+      }
+      .hint {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 4px 0 0;
+      }
+
+      .send {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 72px;
+        margin-top: 26px;
+        padding: 14px 18px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 700;
+        font-size: 1.35rem;
+        line-height: 1.2;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .send:active { transform: translateY(1px); }
+      .send:focus-visible {
+        outline: 3px solid var(--ink);
+        outline-offset: 2px;
+      }
+      a { color: var(--accent); }
+      .taplink {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 4px 2px;
+      }
+
+      footer {
+        margin-top: 38px;
+      }
+      .contact {
+        margin-top: 20px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .contact .biz {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        letter-spacing: 0.02em;
+        margin: 0 0 6px;
+      }
+      .contact p { margin: 0; }
+      .contact a {
+        color: var(--ink);
+        font-weight: 600;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="stripe" aria-hidden="true"></div>
+
+      <h1>Need a hand?<br />We got the <span class="accent">hands</span>.</h1>
+      <p class="sub">Tap the big button below and fill out the short form on Google. Your request goes <strong>straight to Destin at Dismukes Recruiting</strong> — no account, no sign-up.</p>
+
+      <section aria-label="What the form asks">
+        <p class="ask-intro">Here's what it asks — nine quick questions:</p>
+        <ol class="ask-list">
+          <li>
+            <span class="qnum">1</span>
+            <span>
+              <span class="qlabel">Who do you need?</span>
+              <span class="ask-detail">Painters, blasters, welders, or another trade — if it's another trade, write in which one</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">2</span>
+            <span>
+              <span class="qlabel">How many workers?</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">3</span>
+            <span>
+              <span class="qlabel">Where's the job?</span>
+              <span class="ask-detail">City and state — like Newport News, VA</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">4</span>
+            <span>
+              <span class="qlabel">When do they start? <span class="opt">(if you know it)</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">5</span>
+            <span>
+              <span class="qlabel">Pay per hour</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">6</span>
+            <span>
+              <span class="qlabel">Per diem per day <span class="opt">(if any)</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">7</span>
+            <span>
+              <span class="qlabel">Your company or yard name</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">8</span>
+            <span>
+              <span class="qlabel">Your name</span>
+            </span>
+          </li>
+          <li>
+            <span class="qnum">9</span>
+            <span>
+              <span class="qlabel">Your phone or email</span>
+              <span class="hint">Destin replies to this number or email — that's the only thing it's used for.</span>
+            </span>
+          </li>
+        </ol>
+
+        <a class="send" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Open the form — tell me what you need</a>
+      </section>
+
+      <footer>
+        <div class="stripe" aria-hidden="true"></div>
+        <div class="contact">
+          <p class="biz">Dismukes Recruiting</p>
+          <p><a class="taplink" href="tel:+12514224242">(251) 422-4242</a></p>
+          <p><a class="taplink" href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a></p>
+          <p><a class="taplink" href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
