@@ -1843,6 +1843,7 @@
     try{ if(window.__ddStopWholePage) window.__ddStopWholePage(); }catch(e){}
     try{ if(window.__ddCloneStop) window.__ddCloneStop(); }catch(e){}
     try{ if(window.__ddDudeStop) window.__ddDudeStop(); }catch(e){}
+    try{ if(window.__ddReadStop8) window.__ddReadStop8(false); }catch(e){}
     try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
     pauseDomAudio();
   }
@@ -1878,15 +1879,17 @@
        comes from one of them, only the OTHER voices are silenced. A
        DOM <audio> (story, radio, Hear DD) is never one of those three,
        so the stops below still run for it and keep one voice at a time. */
-    var isTour = false, isClone = false, isAi = false;
+    var isTour = false, isClone = false, isAi = false, isR8 = false;
     try{
       isTour = !!(t && window.__ddTourAudio && t === window.__ddTourAudio);
       isClone = !!(t && window.__ddCloneAudio && t === window.__ddCloneAudio);
       isAi = !!(t && window.__ddAiAudio && t === window.__ddAiAudio);
+      isR8 = !!(t && window.__ddR8Audio && t === window.__ddR8Audio);
     }catch(e2){}
     if(!isTour){ try{ if(window.__ddStopWholePage) window.__ddStopWholePage(); }catch(e){} }
     if(!isClone){ try{ if(window.__ddCloneStop) window.__ddCloneStop(); }catch(e){} }
     if(!isAi){ try{ if(window.__ddDudeStop) window.__ddDudeStop(); }catch(e){} }
+    if(!isR8){ try{ if(window.__ddReadStop8) window.__ddReadStop8(false); }catch(e){} }
     try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
   }, true);
 })();
@@ -8121,6 +8124,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
 
   var player = new Audio();
   player.preload = "auto";
+  window.__ddR8Audio = player; /* one-voice guard exemption (2026-11-17): the Read This player */
   var curBtn = null, curEls = null, gen8 = 0;
   function statusEl(){ return document.getElementById("tapReadStatus") || document.getElementById("readAloudStatus"); }
   function sayStatus(msg){
@@ -8140,6 +8144,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     if(window.__ddCloneStop){ try { window.__ddCloneStop(); } catch(e){} }
     if(window.__ddDudeStop){ try { window.__ddDudeStop(); } catch(e){} }
     if(window.__ddStopTapRead){ try { window.__ddStopTapRead(false); } catch(e){} }
+    if(window.__ddStopWholePage){ try { window.__ddStopWholePage(); } catch(e){} }
     clearBtn();
     if(announce) sayStatus("Stopped. Tap any Read This button and DD reads ONLY that area, word for word, in the AI voice in Destin's style.");
   }
