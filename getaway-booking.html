@@ -736,9 +736,9 @@
   <div class="pay-panel" aria-label="One-time payment — not a subscription">
     <span class="pay-type-badge pay-type-badge-once">One-time only · Not a subscription</span>
     <h3>Pay $15 — one-time</h3>
-    <p>This is a <strong>one-time $15 payment</strong> — pay with Chime or Cash App. It is <strong>not a monthly subscription</strong> — it does not repeat monthly and it does not start a subscription. For the monthly option, use the separate teal panel below.</p>
-    <button type="button" class="btn-pay" id="btn-pay-steps" aria-expanded="false" aria-controls="pay-steps">Pay $15 once with Chime or Cash App</button>
-    <p class="fineprint">You pay once. Nothing is charged again next month from this payment.</p>
+    <p>This is a <strong>one-time $15 payment</strong> — pay by card on Stripe's secure page. It is <strong>not a monthly subscription</strong> — it does not repeat monthly and it does not start a subscription. For the monthly option, use the separate teal panel below.</p>
+    <a href="https://buy.stripe.com/3cI00k7TOglMbtA9Iqgfu03" target="_blank" rel="noopener" class="btn-pay" id="btn-pay-steps">Pay $15 once with card</a>
+    <p class="fineprint">You pay once on Stripe's secure page. Nothing is charged again next month from this payment. Or pay with Chime or Cash App instead — send $15 to (251) 422-4242 or $dismukes2.</p>
 
     <div class="chime-box hidden" id="pay-steps" aria-label="How to make the one-time payment with Chime or Cash App">
       <h3>How to pay the one-time $15</h3>
@@ -1345,17 +1345,9 @@
     $("calc-months").addEventListener("change", renderCalc);
   }
 
-  /* ---------- One-time payment steps ---------- */
-  var payBtn = $("btn-pay-steps"), paySteps = $("pay-steps");
-  if(payBtn && paySteps){
-    payBtn.addEventListener("click", function(){
-      var nowHidden = paySteps.classList.toggle("hidden");
-      payBtn.setAttribute("aria-expanded", nowHidden ? "false" : "true");
-      if(!nowHidden) paySteps.scrollIntoView({behavior:"smooth", block:"nearest"});
-    });
-  }
+    /* One-time button is now a Stripe pay link — no toggle needed. */
 
-    /* Monthly button is now a Stripe pay link — no toggle needed. */
+  /* Monthly button is now a Stripe pay link — no toggle needed. */
 
   renderPlan();
 })();
