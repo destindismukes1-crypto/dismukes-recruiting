@@ -759,9 +759,9 @@
   <div class="sub-panel" aria-label="Monthly subscription — $15 per month">
     <span class="pay-type-badge pay-type-badge-monthly">Monthly · $15/month · You send it yourself</span>
     <h3>Subscribe — $15/month</h3>
-    <p>This is the <strong>monthly $15 subscription</strong> — separate from the one-time payment above. <strong>It is a monthly payment you send yourself each month. It is NOT an automatic charge, and no card is charged here.</strong> Nothing is set up to take money from you automatically — you open Chime or Cash App and send $15 each month to stay subscribed.</p>
-    <button type="button" class="btn-subscribe" id="btn-sub-steps" aria-expanded="false" aria-controls="sub-steps">Subscribe — $15/month with Chime or Cash App</button>
-    <p class="fineprint">No card is charged on this page. You send each month's $15 yourself — if you don't send it, there is no automatic charge.</p>
+    <p>This is the <strong>monthly $15 subscription</strong> — separate from the one-time payment above. <strong>Pay by card on Stripe's secure page — $15/month, auto-renews, cancel any time.</strong> Nothing is set up to take money from you automatically — you open Chime or Cash App and send $15 each month to stay subscribed.</p>
+    <a href="https://buy.stripe.com/3cI8wQ1vqfhI2X4cUCgfu00" target="_blank" rel="noopener" class="btn-subscribe" id="btn-sub-steps">Subscribe — $15/month with card</a>
+    <p class="fineprint">You pay on Stripe's secure page. Or pay with Chime or Cash App instead — send $15/month to (251) 422-4242.</p>
 
     <div class="chime-box hidden" id="sub-steps" aria-label="How to subscribe with Chime or Cash App">
       <h3>How to subscribe — send $15/month yourself</h3>
@@ -1355,15 +1355,7 @@
     });
   }
 
-  /* ---------- Monthly subscription steps ---------- */
-  var subBtn = $("btn-sub-steps"), subSteps = $("sub-steps");
-  if(subBtn && subSteps){
-    subBtn.addEventListener("click", function(){
-      var nowHidden = subSteps.classList.toggle("hidden");
-      subBtn.setAttribute("aria-expanded", nowHidden ? "false" : "true");
-      if(!nowHidden) subSteps.scrollIntoView({behavior:"smooth", block:"nearest"});
-    });
-  }
+    /* Monthly button is now a Stripe pay link — no toggle needed. */
 
   renderPlan();
 })();
