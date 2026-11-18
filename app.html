@@ -1253,8 +1253,8 @@
         document.getElementById("prevVerse").addEventListener("click", function () { stopSpeak(); viewIdx--; renderVerse(); });
         document.getElementById("nextVerse").addEventListener("click", function () { stopSpeak(); viewIdx++; renderVerse(); });
 
-        /* ============ Read-aloud (your phone's own voice) ============ */
-        var synth = window.speechSynthesis || null;
+        /* ============ Read-aloud removed 2026-11-17: no device voice — man's voice only ============ */
+        var synth = null; /* REMOVED 2026-11-17: no device voice on this site — man's voice only. Hear buttons hide themselves when synth is null. */
         var speakingBtn = null;
         function setBtn(btn, on, lblEl, onTxt, offTxt) {
           btn.setAttribute("aria-pressed", on ? "true" : "false");
@@ -1268,18 +1268,8 @@
             speakingBtn = null;
           }
         }
-        function speak(text, btn, lblEl, offTxt) {
-          if (!synth) return;
-          if (speakingBtn === btn) { stopSpeak(); return; }
-          stopSpeak();
-          var u = new SpeechSynthesisUtterance(text);
-          u.rate = 0.98;
-          u.onend = function () { if (speakingBtn === btn) { speakingBtn = null; setBtn(btn, false, lblEl, "Stop", offTxt); } };
-          u.onerror = function () { if (speakingBtn === btn) { speakingBtn = null; setBtn(btn, false, lblEl, "Stop", offTxt); } };
-          speakingBtn = btn;
-          setBtn(btn, true, lblEl, "Stop", offTxt);
-          synth.speak(u);
-        }
+        /* REMOVED 2026-11-17: speak() used the device voice (robot lady). Gone — man's voice only. */
+        function speak(text, btn, lblEl, offTxt) { return; }
         var listenBtn = document.getElementById("listenBtn");
         if (!synth) { listenBtn.style.display = "none"; }
         listenBtn.addEventListener("click", function () {

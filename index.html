@@ -373,7 +373,7 @@
   .voice-card h3{color:#ff8a47;font-size:24px;margin-bottom:6px}
   .voice-card p{margin:0 0 12px;color:#dbe5ee;font-size:16px}
   .voice-card p strong{color:#fff}
-  /* Ask DD panel extras: question form, field picker, walk builder, device voice */
+  /* Ask DD panel extras: question form, field picker, walk builder */
   .zone-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;text-transform:uppercase;margin:16px 0 8px}
   .ask-form{display:flex;gap:8px}
   .ask-form input{flex:1;min-width:0;font:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--line);border-radius:8px;background:var(--input);color:var(--ink)}
@@ -4034,7 +4034,7 @@
     <p>The text, design, layout, the Dismukes Recruiting logo (including the compass emblem), interactive avatar guide (DD), the clubhouse, treehouse, vine, and hammock scenes, and all other original content on this site are the property of Dismukes Recruiting. They may not be copied, reproduced, republished, or reused — in whole or in part — without prior written permission from Dismukes Recruiting. Browsing and using this site for your own job search or hiring is welcome; copying its content, design, or interactive guide for another site or business is not. To request permission, email dismukesreqag369@gmail.com.</p>
     <p><strong style="color:#fff">Official Dismukes Recruiting sites — if it isn&rsquo;t one of these, it isn&rsquo;t ours:</strong><br />
     Muse: <a href="https://muse.ai/s/recruiter-website-zxt6xbxgxkixhkq9/_kQi0W78oCiJe3hgvW7LApjUPbR3kAqHZ63YqG9iREE">muse.ai/s/recruiter-website-zxt6xbxgxkixhkq9</a><br />
-    GitHub Pages: <a href="https://dismukesrecruiting.com/">dismukesrecruiting.com</a><br />
+    Our site: <a href="https://dismukesrecruiting.com/">dismukesrecruiting.com</a><br />
     Google Sites: <a href="https://sites.google.com/view/dismukesrecruiting/home">sites.google.com/view/dismukesrecruiting</a></p>
     <p>Contact: <a href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a> · Payments via Chime: <strong style="color:#fff">$DDBABY12</strong></p>
     <p class="owner-mark"><strong style="color:#fff">Ownership fingerprint:</strong> the name Dismukes Recruiting, the guide DD, the line &ldquo;Hiring painters and blasters? Post the pay up front — workers apply free.&rdquo;, the email dismukesreqag369@gmail.com, the Chime handle $DDBABY12, and the official site links above are printed across this site on purpose, so a copied page is easy to spot as ours. Straight talk: this copyright notice and fingerprint are an ownership marker to help spot copies — they are <strong style="color:#fff">not a patent, not a trademark, and not a legal registration or filing</strong>, and no marker can catch every copy. If you believe this site&rsquo;s content was copied, email dismukesreqag369@gmail.com.</p>
@@ -4409,7 +4409,7 @@
     [/truck|silverado|ride/i, "That's DD's 2015 pearl lifted Chevy Silverado \u2014 Alabama A on the back glass, lights on. Tap 'Truck ride \u2014 bring the truck to DD' and it drives over to DD, he gets in, and it parks back on the other side."],
     [/safe|ppe|paint|blast/i, "DD's safety rules for blast and paint: don't eat the paint chips, don't blast the whole thing up, and wear your PPE every time."],
     [/donat/i, "Straight talk: donations go directly to Dismukes Recruiting. It is NOT a nonprofit, and donations are NOT tax-deductible \u2014 no charity is involved. Every donation is a one-time gift you send yourself, only when you choose to."],
-    [/voice|hear|speak|talk/i, "Tap 'Hear DD \u2014 Destin's own voice' in Ask DD on this page to hear Destin's real recording. Other lines can be read by the device-voice fallback lower down \u2014 that one is the device talking, not Destin."],
+    [/voice|hear|speak|talk/i, "Tap 'Hear DD \u2014 Destin's own voice' in Ask DD on this page to hear Destin's real recording. Other lines are read in the AI voice in Destin's style \u2014 a man's voice, never a device voice."],
     [/contact|email|phone|reach/i, "Email dismukesreqag369@gmail.com or call (251) 422-4242. On our email list and want off? Reply to any email from us and ask to opt out."]
   ];
   if(askForm){
@@ -5065,7 +5065,7 @@
   if(!bubble || !("IntersectionObserver" in window)) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var LINES = {
-    "clubhouse": "My clubhouse — hear Destin's own recorded voice right here, labeled as his. And you're hearing me talk in the AI voice in Destin's style — that's my main talking voice, labeled as the AI voice, not a recording. Device voice is only a fallback.",
+    "clubhouse": "My clubhouse — hear Destin's own recorded voice right here, labeled as his. And you're hearing me talk in the AI voice in Destin's style — that's my main talking voice, labeled as the AI voice, not a recording.",
     "jobs": "Jobs! Workers apply free, and look — the Newport News pay is printed on the card: $18.00-$27.31/hr + $140/day per diem for non-local candidates. Ha — printed BEFORE anybody packs a bag!",
     "share": "Tell somebody! DD, honest pay up front, workers apply free — that's worth passing along.",
     "employers": "Employers: $25 standard, $50 featured, $99/month subscription — printed plain, same as the pay rule.",
@@ -7281,6 +7281,8 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     if(!text) return;
     if(btn && btn === activeBtn){ stopTapRead(); return; }
     stopTapRead(false);
+    if(window.__ddDudeStop){ try{ window.__ddDudeStop(); }catch(e){} }
+    if(window.__ddReadStop8){ try{ window.__ddReadStop8(false); }catch(e){} }
     var my = ++readGen;
     if(btn){ activeBtn = btn; btn.classList.add("reading-now"); btn.textContent = "■ Stop"; }
     if(window.__ddClonePlay && window.__ddClonePlay(text)){
@@ -7519,6 +7521,8 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     if(!text) return;
     if(btn && btn === dudeBtn){ dudeStop(); return; }
     dudeStop();
+    if(window.__ddStopTapRead){ try{ window.__ddStopTapRead(false); }catch(e){} }
+    if(window.__ddReadStop8){ try{ window.__ddReadStop8(false); }catch(e){} }
     var my = ++dudeGen;
     if(btn){ dudeBtn = btn; btn.classList.add("reading-now"); btn.textContent = "■ Stop"; }
     var st = readStatusEl();
@@ -8085,20 +8089,12 @@ window.__ddPlayWithFallback = function(el, path, onFail){
      recording file is missing AND the embedded bank does not have it
      either, read the area's own words with the device voice (labeled as
      device voice, never as Destin) instead of leaving the button silent. */
+  /* REMOVED 2026-11-17: no device voice anywhere on this site — man's voice
+     (AI voice in Destin's style / Destin's own recordings) only. If a recording
+     is missing, the button stays silent and says so — the robot lady never speaks. */
   function deviceSpeakArea(txt, myGen){
-    if(!txt) return;
-    var ok = false;
-    try{
-      if(window.speechSynthesis){
-        window.speechSynthesis.cancel();
-        var u = new SpeechSynthesisUtterance(txt.slice(0, 900));
-        u.onend = function(){ if(myGen === gen8){ clearBtn(); sayStatus("Done. Device voice finished reading this area."); } };
-        window.speechSynthesis.speak(u);
-        ok = true;
-      }
-    }catch(e){ ok = false; }
-    if(ok){ sayStatus("Device voice, not Destin, reading this area."); }
-    else { sayStatus("That area's recording could not play here — its own words stay on screen, and no other area's words were played."); clearBtn(); }
+    sayStatus("That area's recording could not play here — its own words stay on screen, and no other area's words were played.");
+    clearBtn();
   }
   function readScope(els, btn){
     if(!els || !els.length) return;
@@ -8661,32 +8657,10 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     jb.style.cssText = "background:#ff6a00;color:#fff;font-weight:700;padding:8px 14px;border-radius:8px;text-decoration:none;margin-left:6px;display:inline-block;";
     sticky.parentNode.insertBefore(jb, sticky.nextSibling);
   }
-  /* Read This fallback: track any audio play, then speak own section if none started. */
-  var lastPlay = 0;
-  try{
-    var origPlay = HTMLAudioElement.prototype.play;
-    HTMLAudioElement.prototype.play = function(){ lastPlay = Date.now(); return origPlay.apply(this, arguments); };
-  }catch(e){}
-  document.addEventListener("click", function(e){
-    var b = e.target && e.target.closest ? e.target.closest(".read-this-btn") : null;
-    if(!b) return;
-    var start = Date.now();
-    setTimeout(function(){
-      if(Date.now() - lastPlay < 1200) return;
-      if(playing) return;
-      var scope = b.closest("article,section,li,.card") || document.body;
-      var txt = (scope.innerText || "").replace(/\s+/g, " ").trim().slice(0, 900);
-      if(!txt) return;
-      try{
-        if(window.speechSynthesis){
-          window.speechSynthesis.cancel();
-          var u = new SpeechSynthesisUtterance(txt);
-          window.speechSynthesis.speak(u);
-          setStatus("Device voice, not Destin, reading this section.");
-        }
-      }catch(err){}
-    }, 950);
-  }, true);
+  /* REMOVED 2026-11-17: the catch-all handler that read sections with the
+     device voice (speechSynthesis) 950ms after a Read This click. That is what
+     made two voices talk at once. Only the AI voice / Destin's recordings speak now. */
+
 })();
 </script>
 
