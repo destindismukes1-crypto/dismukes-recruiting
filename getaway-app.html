@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Getaway Booking" />
+    <meta name="description" content="Getaway Booking — hotels, stays & flight fares in one place. Monthly deals for $15/month." />
+    <title>Getaway Booking App</title>
+    <style>
+      :root {
+        --bg: #15181d;
+        --surface: #232a33;
+        --surface-2: #37414a;
+        --ink: #eef2f5;
+        --ink-soft: #c3d2df;
+        --line: #3d4a57;
+        --navy: #8fb4d6;
+        --navy-deep: #0d1520;
+        --orange: #ff8a47;
+        --orange-bright: #ffb287;
+        --orange-soft: #3a2415;
+        --accent: #ff8a47;
+        --on-accent: #15181d;
+        --tab-bg: rgba(21, 24, 29, 0.97);
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        -webkit-text-size-adjust: 100%;
+      }
+      .serif { font-family: Georgia, "Times New Roman", Times, serif; }
+      a { color: var(--navy); }
+      @media (prefers-color-scheme: dark) { a { color: var(--orange-bright); } }
+      img { max-width: 100%; display: block; }
+
+      /* ---------- app column ---------- */
+      .app {
+        max-width: 560px;
+        margin: 0 auto;
+        padding-bottom: calc(84px + env(safe-area-inset-bottom));
+        min-height: 100vh;
+      }
+      @media (min-width: 900px) {
+        body { background: #0a0f16; }
+        .app {
+          background: var(--bg);
+          box-shadow: 0 0 60px rgba(0, 0, 0, 0.35);
+        }
+      }
+      main { padding: 0 18px; }
+      section { padding-top: 30px; scroll-margin-top: 12px; }
+      h2 {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 1.55rem;
+        line-height: 1.2;
+        margin: 0 0 6px;
+        font-weight: 700;
+      }
+      h3 { font-size: 1.12rem; margin: 0; line-height: 1.3; }
+      .sec-sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 0.98rem; }
+      .tick { display: block; width: 44px; height: 4px; background: var(--orange-bright); border-radius: 2px; margin-bottom: 12px; }
+
+      /* ---------- logo block ---------- */
+      .logoblock { background: #000; padding: 14px 16px 13px; text-align: center; }
+      .logoblock img { width: 100%; max-width: 300px; margin: 0 auto; }
+      .logo-verse {
+        margin: 9px auto 0;
+        max-width: 460px;
+        color: #ffb287;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        line-height: 1.45;
+      }
+      .logo-verse .ref { display: block; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a47; margin-top: 5px; }
+
+      /* ---------- verse of the day ---------- */
+      .verse-card {
+        margin-top: 22px;
+        background: var(--navy-deep);
+        color: #eef2f5;
+        border: 1px solid #2c4258;
+        border-top: 5px solid var(--orange-bright);
+        border-radius: 14px;
+        padding: 24px 22px 20px;
+        box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) {
+        .verse-card { background: #0d1520; border-color: #26313f; }
+      }
+      .verse-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      .verse-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-bright); font-weight: 700; }
+      .verse-date { font-size: 0.88rem; color: #c3d2df; }
+      .verse-text {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 1.38rem;
+        line-height: 1.5;
+        margin: 16px 0 10px;
+      }
+      .verse-ref { font-family: Georgia, serif; font-style: italic; color: var(--orange-bright); font-size: 1.02rem; margin: 0 0 18px; }
+      .verse-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .verse-nav { display: flex; gap: 8px; margin-left: auto; }
+      .vbtn {
+        min-height: 44px; min-width: 44px;
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        border-radius: 10px; border: 1px solid #47617c;
+        background: rgba(255,255,255,0.06); color: #eef2f5;
+        font: inherit; font-size: 0.95rem; font-weight: 600;
+        padding: 8px 14px; cursor: pointer;
+      }
+      .vbtn:active { background: rgba(255,255,255,0.16); }
+      .vbtn svg { width: 18px; height: 18px; flex: none; }
+      .vbtn[aria-pressed="true"] { background: var(--orange-bright); color: #15181d; border-color: var(--orange-bright); }
+      .verse-day { font-size: 0.85rem; color: #c3d2df; margin: 14px 0 0; }
+
+      /* ---------- daily job alert (home screen) ---------- */
+      .job-alert {
+        margin-top: 22px;
+        background: var(--surface); border: 1px solid var(--line);
+        border-top: 5px solid var(--orange-bright);
+        border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
+      }
+      .job-alert-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+      .job-alert-head svg { width: 20px; height: 20px; flex: none; color: var(--orange); }
+      .job-alert-kicker { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 800; }
+      .job-alert-date { margin-left: auto; font-size: 0.86rem; color: var(--ink-soft); }
+      .job-alert-text {
+        margin: 12px 0 0; background: var(--surface-2); border: 1px solid var(--line);
+        border-radius: 12px; padding: 13px 15px; font-size: 0.97rem; line-height: 1.55;
+      }
+      .job-alert-text strong { color: var(--orange); }
+      .job-alert .payrow { margin-top: 12px; }
+      .job-alert-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+      .job-alert-note { margin: 12px 0 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+      /* ---------- quick actions ---------- */
+      .quick { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 16px; }
+      .quick a {
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        padding: 14px 6px 12px; border-radius: 12px; text-decoration: none;
+        background: var(--surface); border: 1px solid var(--line);
+        color: var(--ink); font-weight: 700; font-size: 0.92rem; box-shadow: var(--shadow);
+        min-height: 44px;
+      }
+      .quick a svg { width: 24px; height: 24px; color: var(--orange); }
+      .quick a.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .quick a.primary svg { color: var(--orange-bright); }
+      .cred-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+      .cred-row span {
+        background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+        padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
+      }
+      .cred-row b { color: var(--orange); }
+
+      /* ---------- buttons ---------- */
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        min-height: 46px; padding: 10px 18px; border-radius: 11px;
+        font-weight: 700; font-size: 0.98rem; text-decoration: none; cursor: pointer;
+        border: 1px solid transparent; font-family: inherit;
+      }
+      .btn svg { width: 18px; height: 18px; flex: none; }
+      .btn-accent { background: var(--accent); color: var(--on-accent); }
+      .btn-orange { background: var(--orange-bright); color: #15181d; }
+      .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+      .btn-sm { min-height: 42px; padding: 8px 14px; font-size: 0.92rem; }
+
+      /* ---------- job cards ---------- */
+      .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+      .chip {
+        min-height: 40px; padding: 8px 16px; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+        font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      }
+      .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .job-count { color: var(--ink-soft); font-size: 0.9rem; margin: 6px 0 14px; }
+      .jobs { display: grid; gap: 16px; }
+      .job {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px;
+      }
+      .job[hidden] { display: none; }
+      .job-top { display: flex; align-items: flex-start; gap: 10px; }
+      .job-top h3 { flex: 1; font-size: 1.18rem; }
+      .tag {
+        flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 5px 9px; border-radius: 6px; margin-top: 2px;
+      }
+      .tag-list { background: var(--orange-soft); color: var(--orange-bright); }
+      @media (prefers-color-scheme: dark) { .tag-list { color: var(--orange-bright); } }
+      .tag-chase { background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--line); }
+      .where { display: flex; align-items: center; gap: 7px; color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
+      .where svg { width: 15px; height: 15px; flex: none; }
+      .payrow { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .payrow > div { flex: 1; padding: 10px 8px; background: var(--surface-2); text-align: center; }
+      .payrow > div + div { border-left: 1px solid var(--line); }
+      .payrow .amt { display: block; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--orange); line-height: 1.15; }
+      .payrow .lbl { display: block; font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; font-weight: 700; }
+      .job .note { color: var(--ink-soft); font-size: 0.96rem; margin: 0; flex: 1; }
+      .job-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .empty-note {
+        border: 1px dashed var(--line); border-radius: 12px; padding: 16px;
+        color: var(--ink-soft); background: var(--surface);
+      }
+
+      /* ---------- photo band ---------- */
+      .photo { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); margin-top: 20px; }
+      .photo img { width: 100%; height: 210px; object-fit: cover; }
+      .photo figcaption { background: var(--surface); padding: 12px 16px; font-size: 0.9rem; color: var(--ink-soft); }
+
+      /* ---------- calculator ---------- */
+      .calc {
+        margin-top: 20px; background: var(--surface); border: 1px solid var(--line);
+        border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+      }
+      .calc p { color: var(--ink-soft); font-size: 0.95rem; margin: 6px 0 16px; }
+      .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .calc-grid label { display: block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+      .calc-grid input {
+        width: 100%; min-height: 48px; padding: 10px 12px; font: inherit; font-size: 1.1rem;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink);
+      }
+      .calc-total {
+        grid-column: 1 / -1; background: var(--navy-deep); color: #eef2f5; border-radius: 12px;
+        padding: 16px; text-align: center;
+      }
+      @media (prefers-color-scheme: dark) { .calc-total { background: #0d1520; } }
+      .calc-total .t-lbl { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #c3d2df; font-weight: 700; }
+      .calc-total .t-amt { display: block; font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--orange-bright); margin-top: 4px; }
+
+      /* ---------- steps & lists ---------- */
+      .steps { display: grid; gap: 14px; }
+      .step { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+      .step .num {
+        flex: none; width: 40px; height: 40px; border-radius: 50%;
+        background: var(--orange-bright); color: #15181d; font-family: Georgia, serif;
+        font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; justify-content: center;
+      }
+      .step p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
+
+      .price-list { display: grid; gap: 12px; }
+      .price {
+        display: flex; gap: 14px; align-items: flex-start;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        padding: 16px; box-shadow: var(--shadow);
+      }
+      .price .amt {
+        flex: none; font-family: Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--orange);
+        min-width: 74px; text-align: center; background: var(--surface-2);
+        border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; line-height: 1.1;
+      }
+      .price .amt small { display: block; font-family: inherit; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; margin-top: 3px; }
+      .price p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+      .chime-row {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
+      }
+      .chime-row .lbl { font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
+      .chime-row .handle { font-family: Georgia, serif; font-weight: 700; font-size: 1.15rem; color: var(--orange); }
+      .copy-btn {
+        margin-left: auto; min-height: 40px; padding: 8px 16px; border-radius: 9px; cursor: pointer;
+        border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+        font: inherit; font-size: 0.9rem; font-weight: 700;
+      }
+
+      .contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      .contact-list a {
+        display: flex; align-items: center; gap: 12px; min-height: 52px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+        padding: 12px 16px; text-decoration: none; color: var(--ink); font-weight: 600; box-shadow: var(--shadow);
+        overflow-wrap: anywhere;
+      }
+      .contact-list svg { width: 20px; height: 20px; flex: none; color: var(--orange); }
+      .story-quote { font-family: Georgia, serif; font-size: 1.22rem; line-height: 1.5; margin: 0; }
+      .story-body { color: var(--ink-soft); margin-top: 14px; }
+      footer { padding: 34px 18px 10px; color: var(--ink-soft); font-size: 0.88rem; }
+      footer .fine { border-top: 1px solid var(--line); padding-top: 16px; }
+
+      /* ---------- daily horoscope ---------- */
+      .sign-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+      .sign-chip {
+        min-height: 40px; padding: 8px 14px; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+        font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      }
+      .sign-chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .horoscope-card {
+        background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--orange-bright);
+        border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+      }
+      .horoscope-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      .horoscope-sign { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.4rem; font-weight: 700; margin: 0; }
+      .horoscope-dates { color: var(--ink-soft); font-size: 0.9rem; }
+      .horoscope-text { margin: 12px 0 0; font-size: 1.02rem; line-height: 1.6; }
+      .horoscope-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+      .horoscope-row span {
+        background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+        padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
+      }
+      .horoscope-row b { color: var(--orange); }
+
+      /* ---------- tool giveaway ---------- */
+      .prize-banner {
+        background: var(--navy-deep); color: #eef2f5;
+        border: 1px solid #2c4258; border-top: 5px solid var(--orange-bright);
+        border-radius: 14px; padding: 22px; box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) { .prize-banner { background: #0d1520; border-color: #26313f; } }
+      .prize-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-bright); font-weight: 700; margin: 0; }
+      .prize-name { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.6rem; line-height: 1.25; margin: 8px 0 6px; }
+      .prize-sub { color: #c3d2df; margin: 0; font-size: 0.97rem; }
+      .giveaway-rules { display: grid; gap: 10px; margin-top: 16px; }
+      .giveaway-rule {
+        display: flex; gap: 12px; align-items: flex-start;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+        padding: 14px 16px; box-shadow: var(--shadow);
+      }
+      .giveaway-rule svg { width: 22px; height: 22px; flex: none; color: var(--orange); margin-top: 2px; }
+      .giveaway-rule p { margin: 3px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
+      .tip-list { margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.96rem; display: grid; gap: 9px; }
+      .tip-list strong { color: var(--ink); }
+
+      /* ---------- bottom tab bar ---------- */
+      .tabbar {
+        position: fixed; left: 50%; transform: translateX(-50%); bottom: 0;
+        width: min(560px, 100%); z-index: 50;
+        background: var(--tab-bg); border-top: 1px solid var(--line);
+        display: grid; grid-template-columns: repeat(5, 1fr);
+        padding-bottom: env(safe-area-inset-bottom);
+        backdrop-filter: blur(8px);
+      }
+      .tabbar a {
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+        min-height: 62px; padding: 8px 2px 6px; text-decoration: none;
+        color: var(--ink-soft); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em;
+      }
+      .tabbar a svg { width: 22px; height: 22px; }
+      .tabbar a.active { color: var(--orange); }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+      /* ---- Add to Home Screen ---- */
+      .homescreen-wrap { text-align: center; margin: 2px 0 14px; padding: 0 16px; }
+      .homescreen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 420px; min-height: 52px; padding: 12px 18px; border: 2px solid #ffb287; border-radius: 10px; background: #0d0d0d; color: #ffb287; font-size: 17px; font-weight: 800; cursor: pointer; }
+      .homescreen-btn:active { background: #232323; }
+      .homescreen-note { margin: 8px 0 0; color: var(--ink-soft); font-size: 13.5px; }
+      .hs-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 9998; display: none; }
+      .hs-overlay.open { display: block; }
+      .hs-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 9999; display: none; background: #232a33; color: #eef2f5; border-radius: 16px 16px 0 0; padding: 18px 20px 28px; max-width: 560px; margin: 0 auto; box-shadow: 0 -6px 30px rgba(0,0,0,.35); }
+      .hs-sheet.open { display: block; }
+      .hs-sheet h2 { margin: 0 0 4px; font-size: 19px; }
+      .hs-sheet .hs-sub { margin: 0 0 12px; color: #c3d2df; font-size: 14px; }
+      .hs-step { background: #37414a; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
+      .hs-step h3 { margin: 0 0 6px; font-size: 15px; }
+      .hs-step ol { margin: 0; padding-left: 20px; font-size: 14.5px; line-height: 1.55; }
+      .hs-close { width: 100%; margin-top: 12px; min-height: 46px; border: none; border-radius: 8px; background: #0d0d0d; color: #ffb287; font-size: 16px; font-weight: 700; cursor: pointer; }
+      .hs-fine { margin: 10px 0 0; font-size: 12.5px; color: #c3d2df; text-align: center; }
+    
+
+      /* ---- Getaway app extras ---- */
+      .app-title { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.7rem; margin: 0; color: #fff; }
+      .app-tag { color: #ffb287; font-style: italic; margin: 4px 0 0; font-size: 1.02rem; }
+      .sub-hero { background: #232a33; border: 2px solid #ff8a47; border-radius: 14px; padding: 18px 16px; margin: 0 0 18px; text-align: center; }
+      .sub-hero h2 { color: #ffb287; margin: 0 0 6px; }
+      .price-big { font-size: 2rem; font-weight: 800; color: #fff; margin: 6px 0 2px; }
+      .price-big span { font-size: 1rem; font-weight: 400; color: #c3d2df; }
+      .btn-stripe { display: inline-block; background: #ff8a47; color: #15181d; font-weight: 800; padding: 14px 22px; border-radius: 10px; text-decoration: none; font-size: 17px; margin: 10px 0 6px; }
+      .btn-stripe:active { background: #ffb287; }
+      .fineprint { color: #c3d2df; font-size: 13.5px; margin: 8px 0 0; }
+      .deal-card { background: #232a33; border: 1px solid #3d4a57; border-radius: 12px; padding: 16px; margin: 0 0 14px; }
+      .deal-card h3 { margin: 0 0 6px; }
+      .deal-tag { color: #ffb287; font-weight: 700; font-size: 0.92rem; margin: 0 0 6px; }
+      .deal-meta { color: #c3d2df; font-size: 0.95rem; margin: 4px 0; }
+      .deal-actions { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+      .points-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+      .points-cell { background: #37414a; border-radius: 10px; padding: 12px; text-align: center; }
+      .points-cell .num { font-size: 1.5rem; font-weight: 800; color: #ffb287; }
+      .points-cell p { margin: 4px 0 0; font-size: 0.9rem; color: #c3d2df; }
+      .pay-steps { text-align: left; background: #37414a; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
+      .pay-steps ol { margin: 0; padding-left: 20px; font-size: 14.5px; line-height: 1.55; }
+      .link-list a { display: block; padding: 12px 14px; background: #232a33; border: 1px solid #3d4a57; border-radius: 10px; margin: 0 0 10px; text-decoration: none; color: #eef2f5; font-weight: 700; }
+      .steps-list { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+      .steps-list li { counter-increment: step; padding: 10px 0 10px 44px; position: relative; border-bottom: 1px solid #3d4a57; }
+      .steps-list li::before { content: counter(step); position: absolute; left: 0; top: 10px; width: 30px; height: 30px; border-radius: 50%; background: #ff8a47; color: #15181d; font-weight: 800; text-align: center; line-height: 30px; }
+
+    </style>
+  </head>
+  <body>
+    <div class="app">
+
+      <!-- HEADER -->
+      <div class="logoblock">
+        <p class="app-title">&#9992;&#65039; Getaway Booking</p>
+        <p class="app-tag">Hotels, stays &amp; flight fares in one place</p>
+      </div>
+
+      <!-- ADD TO HOME SCREEN -->
+      <div class="homescreen-wrap">
+        <button class="homescreen-btn" type="button" id="addHomeBtn">&#128241; Add to Home Screen</button>
+        <p class="homescreen-note">Put Getaway Booking on your phone like an app &mdash; one tap, free.</p>
+      </div>
+
+      <main>
+        <!-- SUBSCRIBE -->
+        <section id="subscribe" style="padding-top: 4px;">
+          <div class="sub-hero" aria-label="Monthly getaway deals subscription">
+            <span class="tick"></span>
+            <h2>Monthly Getaway Deals &mdash; $15/month</h2>
+            <p class="sec-sub">A monthly round-up of getaway deals worth checking &mdash; beach, mountain, and city trips, fare drops, and hotel price checks matched to the kinds of trips you like.</p>
+            <p class="price-big">$15 <span>per month &middot; billed monthly &middot; auto-renews &middot; cancel any time</span></p>
+            <a class="btn-stripe" href="https://buy.stripe.com/3cI8wQ1vqfhI2X4cUCgfu00" target="_blank" rel="noopener">Subscribe &mdash; $15/month</a>
+            <p class="fineprint">Pay by card on Stripe&rsquo;s secure page. Or pay with Chime or Cash App instead &mdash; send $15/month to (251) 422-4242.</p>
+            <p class="fineprint">Subscribers earn Getaway Points &mdash; 100 welcome points plus 50 points per paid month &mdash; and turn points into Getaway Giveaway entries at 50 points = 1 entry.</p>
+          </div>
+        </section>
+
+        <!-- DEALS -->
+        <section id="deals">
+          <span class="tick"></span>
+          <h2>Getaways people love</h2>
+          <p class="sec-sub">Six easy trips &mdash; two beach, one mountain, and three city breaks &mdash; all reachable from the Southeast by a short flight or a drive. Pick one to start your plan. Live prices are always the ones shown on the booking site before you pay.</p>
+        <div class="deal-card">
+          <p class="deal-tag">🏖️ Beach &middot; Florida Panhandle</p>
+          <h3>Destin, Florida</h3>
+          <p>Emerald-green water, sugar-white sand, dolphin cruises, and deep-sea fishing out of Destin Harbor. Big condo towers and beach houses make it easy for groups.</p>
+          <p class="deal-meta"><strong>Stay:</strong> Beach condos · Beach houses · Resorts</p>
+          <p class="deal-meta"><strong>Best for:</strong> beach days, fishing, family trips</p>
+          <p class="deal-meta"><strong>Getting there:</strong> fly into VPS or PNS, or drive the Gulf Coast</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=Destin%2C+Florida" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+Destin+Florida+VPS" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <p class="deal-tag">🏖️ Beach &middot; Alabama Gulf Coast</p>
+          <h3>Gulf Shores, Alabama</h3>
+          <p>Laid-back Alabama beach town with 32 miles of shoreline, Gulf State Park trails and pier, fresh shrimp everywhere, and Orange Beach right next door.</p>
+          <p class="deal-meta"><strong>Stay:</strong> Gulf-front condos · Beach motels · Vacation rentals</p>
+          <p class="deal-meta"><strong>Best for:</strong> relaxed beach weeks, couples, families</p>
+          <p class="deal-meta"><strong>Getting there:</strong> fly into Pensacola (PNS) or Mobile (MOB), or drive</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=Gulf+Shores%2C+Alabama" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+Pensacola+PNS" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <p class="deal-tag">⛰️ Mountains &middot; Great Smoky Mountains · Tennessee</p>
+          <h3>Gatlinburg, Tennessee</h3>
+          <p>Gateway to Great Smoky Mountains National Park — the most visited national park in the U.S. Cabins with hot tubs, the Parkway strip, and Pigeon Forge attractions nearby.</p>
+          <p class="deal-meta"><strong>Stay:</strong> Cabins · Mountain lodges · Downtown hotels</p>
+          <p class="deal-meta"><strong>Best for:</strong> cabin weekends, hiking, fall leaves</p>
+          <p class="deal-meta"><strong>Getting there:</strong> mostly a drive trip; nearest airport is Knoxville (TYS)</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=Gatlinburg%2C+Tennessee" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+Knoxville+TYS" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <p class="deal-tag">🌆 City &middot; Music City · Tennessee</p>
+          <h3>Nashville, Tennessee</h3>
+          <p>Live music on Broadway every night, the Grand Ole Opry, hot chicken, and the Country Music Hall of Fame. An easy weekend city with hotels at every budget.</p>
+          <p class="deal-meta"><strong>Stay:</strong> Downtown hotels · Boutique stays · Budget motels</p>
+          <p class="deal-meta"><strong>Best for:</strong> music weekends, birthdays, bachelor/ette trips</p>
+          <p class="deal-meta"><strong>Getting there:</strong> fly into Nashville (BNA) from most major cities</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=Nashville%2C+Tennessee" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+Nashville+BNA" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <p class="deal-tag">🌆 City &middot; The Big Easy · Louisiana</p>
+          <h3>New Orleans, Louisiana</h3>
+          <p>French Quarter balconies, jazz on Frenchmen Street, beignets at Café du Monde, and streetcar rides past Garden District mansions. Food alone is worth the trip.</p>
+          <p class="deal-meta"><strong>Stay:</strong> French Quarter hotels · Courtyard inns · Garden District B&Bs</p>
+          <p class="deal-meta"><strong>Best for:</strong> food trips, music, history, festivals</p>
+          <p class="deal-meta"><strong>Getting there:</strong> fly into New Orleans (MSY), or drive I-10</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=New+Orleans%2C+Louisiana" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+New+Orleans+MSY" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <p class="deal-tag">🌆 City &middot; Central Florida</p>
+          <h3>Orlando, Florida</h3>
+          <p>Theme-park capital — Walt Disney World, Universal Orlando, and SeaWorld — plus Lake Eola downtown and day trips to Cocoa Beach and Kennedy Space Center.</p>
+          <p class="deal-meta"><strong>Stay:</strong> Resorts · Family suites · Vacation homes</p>
+          <p class="deal-meta"><strong>Best for:</strong> theme parks, family vacations, winter sun</p>
+          <p class="deal-meta"><strong>Getting there:</strong> fly into Orlando (MCO) — one of the busiest leisure airports in the U.S.</p>
+          <div class="deal-actions">
+            <a class="btn btn-accent btn-sm" href="https://www.booking.com/searchresults.html?ss=Orlando%2C+Florida" target="_blank" rel="noopener">Hotels &#8599;</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.google.com/travel/flights?q=Flights+to+Orlando+MCO" target="_blank" rel="noopener">Flights &#8599;</a>
+          </div>
+        </div>
+
+        </section>
+
+        <!-- FLIGHT FARES & HOTEL PRICES -->
+        <section id="prices">
+          <span class="tick"></span>
+          <h2>Flight fares &amp; hotel prices &mdash; checked live</h2>
+          <p class="sec-sub">Fares and room rates change by the hour, so this app doesn&rsquo;t guess them. Open a link, compare the total price (fare + taxes + bag fees), then book with the site you trust.</p>
+          <div class="link-list">
+            <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener">&#9992;&#65039; Google Flights &#8599;</a>
+            <a href="https://www.expedia.com/Flights" target="_blank" rel="noopener">&#9992;&#65039; Expedia Flights &#8599;</a>
+            <a href="https://www.skyscanner.com/transport/flights/" target="_blank" rel="noopener">&#9992;&#65039; Skyscanner &#8599;</a>
+            <a href="https://www.booking.com" target="_blank" rel="noopener">&#128719; Booking.com &#8599;</a>
+            <a href="https://www.expedia.com/Hotels" target="_blank" rel="noopener">&#128719; Expedia Hotels &#8599;</a>
+            <a href="https://www.google.com/travel/hotels" target="_blank" rel="noopener">&#128719; Google Hotels &#8599;</a>
+          </div>
+          <p class="fineprint">Be flexible by a day or two &mdash; midweek flights are often cheaper than Friday/Sunday. Compare the total, not the headline fare: bags and seat fees add up.</p>
+        </section>
+
+        <!-- POINTS & GIVEAWAY -->
+        <section id="points">
+          <span class="tick"></span>
+          <h2>&#127873; Getaway Points &amp; the Getaway Giveaway</h2>
+          <p class="sec-sub">Your $15/month does more than bring you deals. Subscribing earns you Getaway Points, staying subscribed earns you more every month, and your points become entries in the Getaway Giveaway.</p>
+          <div class="points-grid">
+            <div class="points-cell"><div class="num">100</div><p>Welcome points for subscribing &mdash; credited once, when your first $15 payment clears</p></div>
+            <div class="points-cell"><div class="num">50 / mo</div><p>Points for staying subscribed &mdash; 50 points for every paid month</p></div>
+            <div class="points-cell"><div class="num">+100</div><p>Loyalty bonus at 6 consecutive paid months</p></div>
+            <div class="points-cell"><div class="num">+250</div><p>Loyalty bonus at 12 consecutive paid months</p></div>
+          </div>
+          <p><strong>&#127915; Points become giveaway entries:</strong> every <strong>50 points = 1 entry</strong> in the Getaway Giveaway. Points you put in are deducted; points you don&rsquo;t put in stay in your balance while your subscription stays active.</p>
+          <p class="fineprint">Example: 6 months = 500 points (100 welcome + 300 monthly + 100 milestone bonus) = 10 giveaway entries if you put them all in. All giveaway prizes and point rewards are provided by the owner of Getaway Booking. The hotels, airlines, and travel sites linked from this page do not sponsor, provide, or guarantee the giveaway, the prizes, or the points. Points start only after a paid subscription is active.</p>
+        </section>
+
+        <!-- ONE-TIME $15 -->
+        <section id="onetime">
+          <span class="tick"></span>
+          <h2>Pay $15 &mdash; one-time</h2>
+          <p class="sec-sub">A <strong>one-time $15 payment</strong> &mdash; pay by card on Stripe's secure page. It is <strong>not a monthly subscription</strong> &mdash; it does not repeat monthly and it does not start a subscription. You pay once. Nothing is charged again next month from this payment.</p>
+          <p style="margin:12px 0 0"><a href="https://buy.stripe.com/3cI00k7TOglMbtA9Iqgfu03" target="_blank" rel="noopener" class="btn-stripe">Pay $15 once with card</a></p>
+          <p class="fineprint">Or pay with Chime or Cash App instead &mdash; steps below.</p>
+          <div class="pay-steps">
+            <h3>With Chime:</h3>
+            <ol>
+              <li>Open <strong>Chime</strong>.</li>
+              <li>Tap <strong>Pay Anyone</strong>.</li>
+              <li>Send <strong>$15</strong> to <strong>(251) 422-4242</strong>.</li>
+            </ol>
+          </div>
+          <div class="pay-steps">
+            <h3>Or with Cash App:</h3>
+            <ol>
+              <li>Open <strong>Cash App</strong>.</li>
+              <li>Send <strong>$15</strong> to <strong>$dismukes2</strong>.</li>
+            </ol>
+          </div>
+          <p class="fineprint">This is a single payment only &mdash; it does not sign you up for the monthly subscription.</p>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how">
+          <span class="tick"></span>
+          <h2>How subscribing works</h2>
+          <ol class="steps-list">
+            <li><strong>Tap Subscribe above</strong> &mdash; review the $15/month price, billing date, and terms on Stripe&rsquo;s secure page, then pay there. No card details are entered on this page.</li>
+            <li><strong>Deals and points arrive monthly</strong> &mdash; your round-up is emailed to you, and your points (100 welcome + 50 per paid month) are credited from your payment record, for as long as your subscription stays active.</li>
+            <li><strong>Enter the giveaway</strong> &mdash; when the owner announces a drawing, put your points in at 50 points = 1 entry, following the entry deadline and prize details in that announcement.</li>
+          </ol>
+          <p class="fineprint">If the price on the payment page shows anything different from $15/month, don&rsquo;t subscribe until the owner confirms it in writing.</p>
+          <h3>What you get each month</h3>
+          <p>&bull; One monthly deals round-up, focused on the getaways featured here and any destinations you name<br />&bull; Hotel deals to check &mdash; destinations, dates, and stay styles where live prices look worth comparing<br />&bull; Flight fare finds &mdash; routes and travel windows to price-check on Google Flights, Expedia, and Skyscanner<br />&bull; Trip ideas &mdash; ready-made getaway plans<br />&bull; Price-check links &mdash; so you always see the live total before you pay<br />&bull; Getaway Points &mdash; 100 welcome + 50 per paid month, with loyalty bonuses at 6 and 12 months<br />&bull; Getaway Giveaway entries &mdash; 50 points = 1 entry</p>
+          <p class="fineprint">Deals depend on live prices and availability on third-party travel sites, so a featured deal is an idea to check &mdash; not a guaranteed price or a confirmed booking.</p>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="more">
+          <span class="tick"></span>
+          <h2>Questions?</h2>
+          <p>Call or text Destin at <a href="tel:+12514224242">(251) 422-4242</a> &middot; <a href="https://dismukesrecruiting.com/">dismukesrecruiting.com</a></p>
+          <p class="fineprint">No payment or card details are entered on this page. Getaway Booking plans your trip and sends you to real travel sites for live prices and payment.</p>
+        </section>
+      </main>
+
+      <nav class="tabbar" aria-label="App sections">
+        <a href="#deals" data-tab="deals" class="active">Deals</a>
+        <a href="#subscribe" data-tab="subscribe">Subscribe</a>
+        <a href="#points" data-tab="points">Points</a>
+        <a href="#how" data-tab="how">More</a>
+      </nav>
+    </div>
+
+    <!-- ADD TO HOME SCREEN SHEET -->
+    <div class="hs-overlay" id="hsOverlay"></div>
+    <div class="hs-sheet" id="hsSheet" role="dialog" aria-modal="true" aria-labelledby="hsTitle">
+      <h2 id="hsTitle">&#128241; Add to Home Screen</h2>
+      <p class="hs-sub">Put Getaway Booking on your phone like an app. Free. Your phone adds it with your tap.</p>
+      <div class="hs-step" id="hsIos">
+        <h3>On iPhone</h3>
+        <ol>
+          <li>Tap the <strong>Share</strong> button (the square with the arrow) at the bottom of your browser.</li>
+          <li>Scroll down and tap <strong>&ldquo;Add to Home Screen.&rdquo;</strong></li>
+          <li>Tap <strong>Add</strong> in the top corner. Done &mdash; the app icon is on your home screen.</li>
+        </ol>
+      </div>
+      <div class="hs-step" id="hsAndroid">
+        <h3>On Android</h3>
+        <ol>
+          <li>Tap the <strong>three dots menu</strong> in the top corner of your browser.</li>
+          <li>Tap <strong>&ldquo;Add to Home Screen&rdquo;</strong> (or <strong>&ldquo;Install app&rdquo;</strong> if you see it).</li>
+          <li>Tap <strong>Add</strong>. Done &mdash; the app icon is on your home screen.</li>
+        </ol>
+      </div>
+      <button class="hs-close" type="button" id="hsClose">Close</button>
+      <p class="hs-fine">A website can&rsquo;t add itself to your phone &mdash; you tap the steps and it&rsquo;s yours.</p>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+        var deferredPrompt = null;
+        window.addEventListener("beforeinstallprompt", function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+        });
+        var btn = document.getElementById("addHomeBtn");
+        var sheetEl = document.getElementById("hsSheet");
+        var overlay = document.getElementById("hsOverlay");
+        var closeBtn = document.getElementById("hsClose");
+        function openSheet() {
+          var ua = navigator.userAgent || "";
+          var isIos = /iPhone|iPad|iPod/i.test(ua);
+          var isAndroid = /Android/i.test(ua);
+          var ios = document.getElementById("hsIos");
+          var and = document.getElementById("hsAndroid");
+          if (ios) ios.style.display = (isIos || (!isIos && !isAndroid)) ? "" : "none";
+          if (and) and.style.display = (isAndroid || (!isIos && !isAndroid)) ? "" : "none";
+          sheetEl.classList.add("open");
+          overlay.classList.add("open");
+        }
+        function closeSheet() {
+          sheetEl.classList.remove("open");
+          overlay.classList.remove("open");
+        }
+        if (btn) btn.addEventListener("click", function () {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+          } else {
+            openSheet();
+          }
+        });
+        if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+        if (overlay) overlay.addEventListener("click", closeSheet);
+        var tabLinks = Array.prototype.slice.call(document.querySelectorAll(".tabbar a"));
+        tabLinks.forEach(function (a) {
+          a.addEventListener("click", function () {
+            tabLinks.forEach(function (x) { x.classList.remove("active"); });
+            a.classList.add("active");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
