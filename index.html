@@ -4847,11 +4847,30 @@
     void el.offsetWidth;
     el.classList.add("demo-on","demo-sweep");
   }
+  /* Paint kit: spray gun in DD's hand + a wall he paints — built once per host, shown by .demo-painting. */
+  var __ddPaintSVG = '<svg class="dd-paintgun" viewBox="0 0 76 60" aria-hidden="true"><path d="M8 44 C4 52 6 56 12 56 L20 56 C24 56 26 52 26 46 L28 34 L14 34 Z" fill="#232a33"/><rect x="12" y="18" width="44" height="18" rx="6" fill="#ff8a47"/><rect x="52" y="22" width="14" height="10" rx="3" fill="#e56a1f"/><rect x="64" y="24" width="8" height="6" rx="2" fill="#232a33"/><rect x="30" y="36" width="6" height="10" rx="2" fill="#232a33"/><circle cx="20" cy="26" r="3" fill="#fff"/><path d="M14 56 C10 62 18 64 24 60" stroke="#232a33" stroke-width="3" fill="none"/></svg>';
+  function ensurePaintKit(host){
+    if(!host || host.querySelector(".dd-paintkit")) return;
+    var kit = document.createElement("div");
+    kit.className = "dd-paintkit";
+    kit.setAttribute("aria-hidden","true");
+    kit.innerHTML = __ddPaintSVG + '<div class="dd-spray"><span class="cone"></span><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span></div>';
+    host.appendChild(kit);
+    var wall = document.createElement("div");
+    wall.className = "dd-wall";
+    wall.setAttribute("aria-hidden","true");
+    wall.innerHTML = '<div class="dd-wall-fill"></div>';
+    host.appendChild(wall);
+  }
+  window.__ddPaintKit = ensurePaintKit;
   function runDemo(){
     dress("Skilled Trades");
     demoSweepLoop(dockStage); demoSweepLoop(clubStage);
     var fig = card ? card.querySelector(".dd-bulletin-fig") : null;
     if(fig) demoSweepLoop(fig);
+    if(card){ ensurePaintKit(card); card.classList.add("demo-painting"); }
+    if(dockStage){ ensurePaintKit(dockStage); dockStage.classList.add("demo-painting"); }
+    if(clubStage){ ensurePaintKit(clubStage); clubStage.classList.add("demo-painting"); }
     var line = document.querySelector("[data-demo-line]");
     if(line) line.hidden = false;
     var demoText = "Demo time \u2014 coatings, DD style: hood on, respirator checked, PPE every time. Then a steady, even sweep \u2014 blast it clean, paint it right. That's the work on this bulletin.";
@@ -5272,7 +5291,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   };
   function dressAll(field){
     /* Picking an outfit stops any running demo — the demo fns call dressAll first, then re-add the demo classes. */
-    var DEMO_CLASSES = ["demo-on","demo-sweep","demo-check","demo-present","demo-gavel","demo-hammer","demo-glide","demo-steer","demo-bounce","demo-lift"];
+    var DEMO_CLASSES = ["demo-on","demo-sweep","demo-check","demo-present","demo-gavel","demo-hammer","demo-glide","demo-steer","demo-bounce","demo-lift","demo-painting"];
     document.querySelectorAll(".demo-on").forEach(function(h){ DEMO_CLASSES.forEach(function(c){ h.classList.remove(c); }); });
     var key = KEYS[field] || "";
     document.querySelectorAll(".dd-gear-overlay").forEach(function(ov){ ov.setAttribute("data-active", key); });
@@ -5795,6 +5814,31 @@ window.__ddPlayWithFallback = function(el, path, onFail){
   .field-joke strong{color:var(--orange-ink)}
   /* Demos loop until the user picks another outfit or resets — no more "suit on, standing still" after six seconds. The gear overlay moves with the body (same keyframes, with its -50% centering kept), so the suit works instead of floating while the body sways. */
   .demo-on.demo-sweep img{animation:demoSweepA .9s ease-in-out infinite !important;transform-origin:50% 100%}
+  /* ===== DEMO PAINT KIT — spray gun in DD's hand, spray, and a wall he paints ===== */
+  .club-stage3d,#bigDdWrap{position:relative}
+  .dd-paintkit{display:none;position:absolute;right:14px;bottom:8px;z-index:6;pointer-events:none;align-items:center}
+  .demo-painting .dd-paintkit{display:flex}
+  .dd-paintgun{width:76px;height:auto;display:block;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35))}
+  .dd-spray{position:relative;width:66px;height:30px;margin-left:-6px}
+  .dd-spray .cone{position:absolute;left:0;top:4px;width:66px;height:22px;background:linear-gradient(90deg,rgba(255,138,71,.9),rgba(255,138,71,.08));clip-path:polygon(0 42%,100% 0,100% 100%);animation:ddSprayPulse .7s ease-in-out infinite}
+  .dd-spray .dot{position:absolute;width:7px;height:7px;border-radius:50%;background:#ff8a47;animation:ddSprayDot .7s ease-in-out infinite}
+  .dd-spray .dot.d1{left:14px;top:4px}
+  .dd-spray .dot.d2{left:26px;top:13px;animation-delay:.18s}
+  .dd-spray .dot.d3{left:38px;top:6px;animation-delay:.36s}
+  @keyframes ddSprayPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  @keyframes ddSprayDot{0%{transform:translate(0,0) scale(.7);opacity:0}30%{opacity:1}100%{transform:translate(20px,3px) scale(1.15);opacity:0}}
+  .dd-wall{display:none;position:absolute;right:0;top:0;bottom:0;width:13px;background:#e8e2d8;border-left:2px solid #c9c2b4;overflow:hidden;z-index:5;pointer-events:none}
+  .demo-painting .dd-wall{display:block}
+  .dd-wall-fill{position:absolute;left:0;bottom:0;width:100%;height:0;background:linear-gradient(180deg,#ff8a47,#e56a1f);transition:height 2.8s linear}
+  .demo-painting .dd-wall-fill{height:100%}
+  .dd-bulletin-fig .dd-paintgun{width:56px}
+  .dd-bulletin-fig .dd-spray{width:44px}
+  .dd-bulletin-fig .dd-spray .cone{width:44px}
+  .dd-bulletin-fig .dd-wall{width:10px}
+  @media (prefers-reduced-motion: reduce){
+    .dd-spray .cone,.dd-spray .dot{animation:none;opacity:.85}
+    .dd-wall-fill{transition:none}
+  }
   @keyframes demoSweepA{0%,100%{transform:translateX(-24px) rotate(-4deg)}50%{transform:translateX(24px) rotate(4deg)}}
   .demo-on.demo-sweep .dd-gear-overlay{animation:demoSweepAO .9s ease-in-out infinite !important;transform-origin:50% 100%}
   @keyframes demoSweepAO{0%,100%{transform:translateX(-50%) translateX(-24px) rotate(-4deg)}50%{transform:translateX(-50%) translateX(24px) rotate(4deg)}}
@@ -5993,10 +6037,14 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     }
     if(!reduce){
       collectHosts();
-      hosts.forEach(function(h){ h.classList.remove("demo-on","demo-sweep","demo-check","demo-present","demo-gavel","demo-hammer","demo-glide","demo-steer","demo-bounce","demo-lift"); });
+      hosts.forEach(function(h){ h.classList.remove("demo-on","demo-sweep","demo-check","demo-present","demo-gavel","demo-hammer","demo-glide","demo-steer","demo-bounce","demo-lift","demo-painting"); });
       void document.body.offsetWidth;
       hosts.forEach(function(h){ h.classList.add("demo-on","demo-" + f.mime); });
       /* No timer: the demo loops until the user picks another outfit or resets. */
+    }
+    if(key === "coatings" || f.mime === "sweep"){
+      collectHosts();
+      hosts.forEach(function(h){ if(window.__ddPaintKit) window.__ddPaintKit(h); h.classList.add("demo-painting"); });
     }
     if(!(opts && opts.stay)){
       var big = document.getElementById("bigdd");
@@ -6459,6 +6507,10 @@ window.__ddPlayWithFallback = function(el, path, onFail){
       void document.body.offsetWidth;
       hosts.forEach(function(h){ h.classList.add("demo-on","demo-" + f.mime); });
       /* No timer: the demo loops until the user picks another outfit or resets. */
+    }
+    if(key === "coatings" || f.mime === "sweep"){
+      collectHosts();
+      hosts.forEach(function(h){ if(window.__ddPaintKit) window.__ddPaintKit(h); h.classList.add("demo-painting"); });
     }
     var big = document.getElementById("bigdd");
     /* Jump to Big DD instantly ("instant" beats the page smooth-scroll rule) — a smooth glide over 40,000px is what made the tap look dead. */
