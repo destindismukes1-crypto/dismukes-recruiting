@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Need a Hand? Share Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --navy: #10233f;
+        --navy-2: #1a355c;
+        --orange: #f96a1b;
+        --orange-dark: #d9530d;
+        --bg: #f4f5f7;
+        --card: #ffffff;
+        --ink: #16202e;
+        --muted: #5b6a7d;
+        --line: #dde3ea;
+        --box: #eef2f7;
+        --box-ink: #1c2b3f;
+        --ok: #157a3d;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0c1522;
+          --card: #14243c;
+          --ink: #eef3f9;
+          --muted: #9db0c6;
+          --line: #2a405f;
+          --box: #0d1a2d;
+          --box-ink: #e6eef8;
+          --ok: #4ade80;
+        }
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 680px; margin: 0 auto; padding: 20px 16px 40px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: #fff;
+        border-radius: 16px;
+        padding: 26px 22px 24px;
+        margin-bottom: 16px;
+      }
+      .hero .brand {
+        font-size: 13px; font-weight: 700; letter-spacing: .14em;
+        text-transform: uppercase; color: #ffb287; margin: 0 0 10px;
+      }
+      .hero h1 {
+        font-family: "Barlow Condensed", "Barlow", sans-serif;
+        font-size: clamp(38px, 9vw, 54px);
+        line-height: .98; font-weight: 700; margin: 0 0 12px;
+        text-transform: uppercase; letter-spacing: .01em;
+      }
+      .hero h1 .hands { color: var(--orange); }
+      .hero p { margin: 0; font-size: 17px; color: #d7e2f0; max-width: 52ch; }
+      .hero p strong { color: #fff; }
+
+      /* ---------- Steps ---------- */
+      .steps {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+        margin-bottom: 20px;
+      }
+      .step {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: 12px; padding: 14px 12px; text-align: center;
+      }
+      .step .num {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 30px; height: 30px; border-radius: 50%;
+        background: var(--orange); color: #fff;
+        font-weight: 700; font-size: 15px; margin-bottom: 8px;
+      }
+      .step p { margin: 0; font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+      .step p span { display: block; font-weight: 400; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+      @media (max-width: 480px) {
+        .steps { grid-template-columns: 1fr; }
+        .step { text-align: left; display: flex; gap: 12px; align-items: flex-start; }
+        .step .num { flex: 0 0 auto; margin-bottom: 0; margin-top: 2px; }
+      }
+
+      /* ---------- Cards ---------- */
+      .card {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: 16px; padding: 20px; margin-bottom: 16px;
+      }
+      .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+      .badge {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 42px; height: 42px; border-radius: 10px; flex: 0 0 auto;
+        font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 20px; color: #fff;
+      }
+      .badge.fb { background: #1877f2; }
+      .badge.tt { background: #111111; }
+      @media (prefers-color-scheme: dark) { .badge.tt { background: #000; outline: 1px solid #3a4c68; } }
+      .badge.link { background: var(--navy-2); font-size: 17px; }
+      .card-head h2 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 26px; font-weight: 700; margin: 0; line-height: 1.1;
+        text-transform: uppercase; letter-spacing: .02em;
+      }
+      .card-head .sub { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+      .card .hint { margin: 8px 0 12px; font-size: 15px; color: var(--muted); }
+
+      .postbox {
+        background: var(--box); color: var(--box-ink);
+        border-radius: 10px; padding: 16px;
+        font-size: 16.5px; line-height: 1.55;
+        white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word;
+        margin: 0 0 14px;
+      }
+      .postbox .url { font-size: 14.5px; }
+
+      .copy-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: 100%; min-height: 52px; padding: 14px 18px;
+        border: 0; border-radius: 10px; cursor: pointer;
+        background: var(--orange); color: #fff;
+        font-family: inherit; font-size: 17px; font-weight: 700;
+      }
+      .copy-btn:active { background: var(--orange-dark); }
+      .copy-btn.copied { background: var(--ok); }
+      .copy-btn:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 2px; }
+
+      .link-row { margin-bottom: 14px; }
+      .link-row:last-of-type { margin-bottom: 4px; }
+      .link-row label { display: block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+      .link-row .postbox { margin-bottom: 10px; font-size: 15px; }
+      .copy-btn.small { min-height: 48px; font-size: 16px; background: var(--navy); }
+      .copy-btn.small:active { background: var(--navy-2); }
+      .copy-btn.small.copied { background: var(--ok); }
+
+      .note {
+        font-size: 14.5px; color: var(--muted); text-align: center;
+        margin: 20px 4px 0; line-height: 1.55;
+      }
+      .note strong { color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+
+      <section class="hero">
+        <p class="brand">Dismukes Recruiting — Share Kit</p>
+        <h1>Need a hand?<br />We got the <span class="hands">hands.</span></h1>
+        <p>Your announcement words are written and ready. <strong>Tap copy, paste it into your own Facebook or TikTok, and post it yourself.</strong> Every post points yards straight to your crew request page.</p>
+      </section>
+
+      <section class="steps" aria-label="How to post">
+        <div class="step">
+          <span class="num">1</span>
+          <p>Tap Copy<span>Grab the words below</span></p>
+        </div>
+        <div class="step">
+          <span class="num">2</span>
+          <p>Open the app<span>Facebook or TikTok</span></p>
+        </div>
+        <div class="step">
+          <span class="num">3</span>
+          <p>Paste &amp; post<span>Post it from your account</span></p>
+        </div>
+      </section>
+
+      <!-- Facebook -->
+      <section class="card">
+        <div class="card-head">
+          <span class="badge fb" aria-hidden="true">f</span>
+          <div>
+            <h2>Facebook Post</h2>
+            <p class="sub">For your page or profile</p>
+          </div>
+        </div>
+        <p class="hint">Copy this, paste it as a new Facebook post, and hit Post.</p>
+        <p class="postbox" id="fb-text">Need a hand? We got the hands. Painters, blasters, welders — tell us what crew you need in 60 seconds and we'll bring the hands. Dismukes Recruiting, workers apply free, pay printed up front.
+
+<span class="url">https://dismukesrecruiting.com/need-a-crew.html</span>
+dismukesrecruiting.com</p>
+        <button class="copy-btn" type="button" data-copy-target="fb-text">📋 Copy Facebook Post</button>
+      </section>
+
+      <!-- TikTok -->
+      <section class="card">
+        <div class="card-head">
+          <span class="badge tt" aria-hidden="true">♪</span>
+          <div>
+            <h2>TikTok Caption</h2>
+            <p class="sub">Short version for your video</p>
+          </div>
+        </div>
+        <p class="hint">Copy this and paste it as the caption on your TikTok video.</p>
+        <p class="postbox" id="tt-text">Need a hand? We got the hands. Painters, blasters, welders — tell us what crew you need in 60 seconds. Dismukes Recruiting — workers apply free, pay printed up front. 👇
+
+<span class="url">https://dismukesrecruiting.com/need-a-crew.html</span>
+dismukesrecruiting.com
+#DismukesRecruiting #Painters #Blasters #Welders #SkilledTrades #NowHiring</p>
+        <button class="copy-btn" type="button" data-copy-target="tt-text">📋 Copy TikTok Caption</button>
+      </section>
+
+      <!-- Links only -->
+      <section class="card">
+        <div class="card-head">
+          <span class="badge link" aria-hidden="true">🔗</span>
+          <div>
+            <h2>Just the Links</h2>
+            <p class="sub">Plain text — drop them anywhere</p>
+          </div>
+        </div>
+        <p class="hint">Need the link by itself for a comment, a message, or a text? Copy it here.</p>
+
+        <div class="link-row">
+          <label for="link-text">Crew request page</label>
+          <p class="postbox" id="link-text"><span class="url">https://dismukesrecruiting.com/need-a-crew.html</span></p>
+          <button class="copy-btn small" type="button" data-copy-target="link-text">📋 Copy the Link</button>
+        </div>
+
+        <div class="link-row">
+          <label for="site-text">Your website</label>
+          <p class="postbox" id="site-text">dismukesrecruiting.com</p>
+          <button class="copy-btn small" type="button" data-copy-target="site-text">📋 Copy Website</button>
+        </div>
+      </section>
+
+      <p class="note"><strong>You do the posting.</strong> Nothing on this page posts anywhere on its own — the buttons only copy the words so you can paste them from your own accounts.</p>
+
+    </main>
+
+    <script>
+      (function () {
+        function copyText(text, btn) {
+          function done() {
+            var original = btn.getAttribute("data-label") || btn.textContent;
+            if (!btn.getAttribute("data-label")) btn.setAttribute("data-label", original);
+            btn.textContent = "✓ Copied — go paste it";
+            btn.classList.add("copied");
+            setTimeout(function () {
+              btn.textContent = btn.getAttribute("data-label");
+              btn.classList.remove("copied");
+            }, 2200);
+          }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            done();
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, fallback);
+          } else {
+            fallback();
+          }
+        }
+
+        var buttons = document.querySelectorAll("[data-copy-target]");
+        for (var i = 0; i < buttons.length; i++) {
+          (function (btn) {
+            btn.addEventListener("click", function () {
+              var el = document.getElementById(btn.getAttribute("data-copy-target"));
+              if (el) copyText(el.innerText.trim(), btn);
+            });
+          })(buttons[i]);
+        }
+      })();
+    </script>
+  </body>
+</html>
