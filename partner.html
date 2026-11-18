@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Partner With Dismukes Recruiting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e2a47;
+    --navy-2:#12365e;
+    --orange:#e85d04;
+    --orange-dark:#c94e02;
+    --bg:#ffffff;
+    --bg-soft:#f2f5f8;
+    --text:#14202e;
+    --muted:#4b5b6d;
+    --line:#d9e1e9;
+    --card:#ffffff;
+    --card-border:#d9e1e9;
+    --footer-bg:#0e2a47;
+    --footer-text:#eaf0f6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1622;
+      --bg-soft:#101f31;
+      --text:#eef3f8;
+      --muted:#a9bccf;
+      --line:#24394f;
+      --card:#122336;
+      --card-border:#24394f;
+      --footer-bg:#081220;
+      --footer-text:#eaf0f6;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Barlow", system-ui, -apple-system, Segoe UI, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+
+  /* HERO */
+  .hero{
+    background:var(--navy);
+    color:#fff;
+    padding:44px 0 40px;
+    border-bottom:6px solid var(--orange);
+  }
+  .hero .brand{
+    font-size:.95rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:#ffb37a;margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:"Barlow Condensed", sans-serif;
+    font-size:clamp(2.6rem, 8vw, 4.6rem);
+    line-height:.95;
+    margin:0 0 14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+  }
+  .hero h1 span{color:#ff8a2a}
+  .hero p.lead{
+    font-size:1.2rem;line-height:1.5;max-width:640px;margin:0 0 26px;color:#dbe7f2;
+  }
+  .hero p.lead strong{color:#fff}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:56px;padding:14px 26px;
+    background:var(--orange);color:#fff;text-decoration:none;
+    font-weight:700;font-size:1.1rem;border-radius:6px;border:0;cursor:pointer;
+    width:100%;max-width:520px;text-align:center;
+  }
+  .btn:hover{background:var(--orange-dark)}
+  .btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .hero .note{margin:12px 0 0;font-size:.95rem;color:#b9cddd;max-width:520px}
+  .hero-contacts{
+    display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);
+    font-weight:600;
+  }
+  .hero-contacts a{color:#fff;text-decoration:none;padding:6px 0;min-height:36px;display:inline-flex;align-items:center}
+  .hero-contacts a:hover{text-decoration:underline}
+
+  /* SECTIONS */
+  section{padding:38px 0}
+  section.soft{background:var(--bg-soft)}
+  h2{
+    font-family:"Barlow Condensed", sans-serif;
+    font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.05;text-transform:uppercase;
+    margin:0 0 10px;font-weight:700;color:var(--text);
+  }
+  h2 .accent{color:var(--orange)}
+  .sub{color:var(--muted);font-size:1.05rem;max-width:680px;margin:0 0 22px}
+
+  .trades{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:12px;list-style:none;margin:0;padding:0;
+  }
+  @media(min-width:700px){.trades{grid-template-columns:repeat(4,1fr)}}
+  .trades li{
+    background:var(--card);border:1px solid var(--card-border);border-top:4px solid var(--navy);
+    padding:16px 14px;border-radius:6px;
+  }
+  @media (prefers-color-scheme: dark){.trades li{border-top-color:var(--orange)}}
+  .trades strong{display:block;font-size:1.05rem;margin-bottom:2px}
+  .trades span{color:var(--muted);font-size:.95rem}
+
+  .steps{display:grid;gap:14px}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{
+    background:var(--card);border:1px solid var(--card-border);border-radius:6px;padding:18px;
+  }
+  .step-num{
+    width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px;
+  }
+  .step h3{margin:0 0 6px;font-size:1.1rem}
+  .step p{margin:0;color:var(--muted)}
+
+  .plain-box{
+    border-left:5px solid var(--orange);
+    background:var(--card);border-top:1px solid var(--card-border);border-right:1px solid var(--card-border);border-bottom:1px solid var(--card-border);
+    padding:18px 18px 18px 16px;border-radius:0 6px 6px 0;
+  }
+  .plain-box p{margin:0 0 8px}
+  .plain-box p:last-child{margin-bottom:0}
+
+  /* PRICING */
+  .pricing{display:grid;gap:14px}
+  @media(min-width:700px){.pricing{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:980px){.pricing{grid-template-columns:repeat(4,1fr)}}
+  .price-card{
+    background:var(--card);border:1px solid var(--card-border);border-radius:8px;padding:20px 18px;
+    display:flex;flex-direction:column;
+  }
+  .price-card.featured{border:2px solid var(--orange)}
+  .price-card .label{font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.9rem;color:var(--muted);margin:0 0 8px}
+  .price-card .amount{font-family:"Barlow Condensed",sans-serif;font-size:2.6rem;line-height:1;font-weight:700;margin:0}
+  .price-card .per{color:var(--muted);font-weight:600;margin:2px 0 12px}
+  .price-card p.desc{color:var(--muted);margin:0 0 16px;flex:1}
+  .price-card a{
+    display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 14px;
+    border-radius:6px;text-decoration:none;font-weight:700;text-align:center;
+  }
+  .price-card .cta-solid{background:var(--navy);color:#fff}
+  @media (prefers-color-scheme: dark){.price-card .cta-solid{background:#fff;color:#0e2a47}}
+  .price-card .cta-orange{background:var(--orange);color:#fff}
+  .price-card a:hover{opacity:.92}
+  .pricing-note{color:var(--muted);margin:16px 0 0;font-size:.98rem}
+
+  /* BOTTOM CTA */
+  .cta-band{background:var(--navy);color:#fff;padding:38px 0;border-top:6px solid var(--orange)}
+  .cta-band h2{color:#fff}
+  .cta-band p{color:#dbe7f2;max-width:620px;margin:0 0 20px;font-size:1.05rem}
+
+  footer{background:var(--footer-bg);color:var(--footer-text);padding:28px 0 36px}
+  footer .cols{display:grid;gap:20px}
+  @media(min-width:700px){footer .cols{grid-template-columns:1.2fr 1fr}}
+  footer h3{margin:0 0 8px;font-size:1rem;text-transform:uppercase;letter-spacing:.08em;color:#ffb37a}
+  footer p, footer a{color:var(--footer-text)}
+  footer a{text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .contact-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .contact-list a{display:inline-flex;align-items:center;min-height:36px;padding:4px 0;font-weight:600;font-size:1.05rem}
+  .fine{color:#9db2c6;font-size:.92rem;margin-top:18px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="brand">Dismukes Recruiting</p>
+    <h1>Partner with us.<br><span>Get crews on call.</span></h1>
+    <p class="lead">Sign your business on with Dismukes Recruiting and get workers when you need them — <strong>painters, blasters, welders, or any trade.</strong></p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Sign On — Post a Job →</a>
+    <p class="note">That button opens the Post a Job form. Fill it out to sign on — this page doesn't sign you up on its own.</p>
+    <div class="hero-contacts" aria-label="Contact">
+      <a href="tel:+12514224242">☎ (251) 422-4242</a>
+      <a href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a>
+      <a href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>Crews for <span class="accent">every trade</span></h2>
+      <p class="sub">Partner businesses post the job, and workers apply to it. No trade is turned away.</p>
+      <ul class="trades">
+        <li><strong>Painters</strong><span>Brush, roll &amp; spray crews</span></li>
+        <li><strong>Blasters</strong><span>Abrasive blasting crews</span></li>
+        <li><strong>Welders</strong><span>Welders for yard &amp; field work</span></li>
+        <li><strong>Any trade</strong><span>Electricians, pipefitters, carpenters &amp; more — write it in on the form</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="wrap">
+      <h2>How partnering <span class="accent">works</span></h2>
+      <p class="sub">Plain and simple — three steps.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3>Fill out the form</h3>
+          <p>Tap the button and fill out the Post a Job form with your job, trade, pay, and per diem.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3>Your job gets posted</h3>
+          <p>Your posting goes up with the pay and per diem printed up front, so workers see it straight.</p>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3>Workers apply free</h3>
+          <p>Workers always apply free. You get crews on call for the next job, and the next one after that.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Straight with <span class="accent">workers</span></h2>
+      <div class="plain-box">
+        <p><strong>Workers apply free — always.</strong> No fees for workers to apply.</p>
+        <p><strong>Pay and per diem printed up front.</strong> The pay on the posting is the pay workers see before they apply. No games.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" id="pricing">
+    <div class="wrap">
+      <h2>Partnership <span class="accent">pricing</span></h2>
+      <p class="sub">Real published prices. Pick what fits your business — one post, or stay on call month to month.</p>
+      <div class="pricing">
+        <article class="price-card">
+          <p class="label">Post</p>
+          <p class="amount">$25</p>
+          <p class="per">one post</p>
+          <p class="desc">Post one job and get it in front of workers looking for work.</p>
+          <a class="cta-solid" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Post a Job — $25</a>
+        </article>
+
+        <article class="price-card featured">
+          <p class="label">Featured</p>
+          <p class="amount">$50</p>
+          <p class="per">one featured post</p>
+          <p class="desc">Your job featured so it stands out to workers.</p>
+          <a class="cta-orange" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Post Featured — $50</a>
+        </article>
+
+        <article class="price-card">
+          <p class="label">Subscription</p>
+          <p class="amount">$99</p>
+          <p class="per">per month</p>
+          <p class="desc">For businesses that need crews on call, month after month.</p>
+          <a class="cta-solid" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Sign On — $99/mo</a>
+        </article>
+
+        <article class="price-card">
+          <p class="label">Annual</p>
+          <p class="amount">$999</p>
+          <p class="per">per year</p>
+          <p class="desc">A full year signed on as a partner business.</p>
+          <a class="cta-solid" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Sign On — $999/yr</a>
+        </article>
+      </div>
+      <p class="pricing-note">Every button opens the same Post a Job form. Fill it out to sign on and post your job.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Need a hand? <span style="color:#ff8a2a">We got the hands.</span></h2>
+      <p>Partner with Dismukes Recruiting today. Sign on, post your job, and get crews on call — painters, blasters, welders, or any trade.</p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Sign On — Post a Job →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h3>Dismukes Recruiting</h3>
+        <p style="margin:0;max-width:420px">Businesses sign on as partners to get workers and crews whenever they need them. Workers apply free, pay and per diem printed up front.</p>
+      </div>
+      <div>
+        <h3>Talk to us</h3>
+        <ul class="contact-list">
+          <li><a href="tel:+12514224242">(251) 422-4242</a></li>
+          <li><a href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a></li>
+          <li><a href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Pricing: Post $25 · Featured $50 · Subscription $99/month · Annual $999/year.</p>
+  </div>
+</footer>
+
+</body>
+</html>
