@@ -2176,7 +2176,7 @@
     try{ if(window.__ddTapStop) window.__ddTapStop(); }catch(e){}
     try{ if(window.__ddVerseStop) window.__ddVerseStop(); }catch(e){}
     try{ if(window.__ddLinkStop) window.__ddLinkStop(); }catch(e){}
-    /* device voice removed: nothing to stop here */
+    try{ if(window.__ddHoroStop) window.__ddHoroStop(); }catch(e){} /* horoscope reader (2026-11-19) */
     pauseDomAudio();
   }
   /* Exposed so the link-read handler and other late scripts can silence
@@ -2206,7 +2206,7 @@
       try{ if(window.__ddTapStop) window.__ddTapStop(); }catch(e){}
       try{ if(window.__ddVerseStop) window.__ddVerseStop(); }catch(e){}
       pauseDomAudio();
-      /* device voice removed: nothing to stop here */
+      try{ if(window.__ddHoroStop) window.__ddHoroStop(); }catch(e){} /* horoscope reader (2026-11-19) */
       return;
     }
     if(isVoiceControl(t)){ stopEverything(); }
@@ -2242,7 +2242,7 @@
     var isLink = false;
     try{ isLink = !!(t && window.__ddLinkAudio && t === window.__ddLinkAudio); }catch(e2){}
     if(!isLink){ try{ if(window.__ddLinkStop) window.__ddLinkStop(); }catch(e){} }
-    /* device voice removed: nothing to stop here */
+    try{ if(window.__ddHoroStop) window.__ddHoroStop(); }catch(e){} /* horoscope reader (2026-11-19) */
   }, true);
 })();
 </script>
@@ -4473,6 +4473,8 @@
               <span>Focus today: <b id="horoFocus"></b></span>
               <span id="horoDate"></span>
             </div>
+            <button class="vbtn" type="button" id="horoListen" style="margin-top:14px" aria-pressed="false"><span id="horoListenLbl">Hear it</span></button>
+            <p class="hs-fine">Read aloud with your phone's built-in voice.</p>
           </div>
         </section>
 <section id="chasing">
@@ -8969,7 +8971,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     try{
     gen8++;
     try { player.pause(); player.currentTime = 0; } catch(e){}
-    /* device voice removed: nothing to stop here */ /* FIX 2026-11-17: Stop also stops the device-voice fallback */
+    try{ if(window.__ddHoroStop) window.__ddHoroStop(); }catch(e){} /* horoscope reader (2026-11-19) */ /* FIX 2026-11-17: Stop also stops the device-voice fallback */
     if(window.__ddCloneStop){ try { window.__ddCloneStop(); } catch(e){} }
     if(window.__ddDudeStop){ try { window.__ddDudeStop(); } catch(e){} }
     if(window.__ddStopTapRead){ try { window.__ddStopTapRead(false); } catch(e){} }
@@ -9552,7 +9554,7 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     try{ if(window.__ddTapStop) window.__ddTapStop(); }catch(e){}
     try{ if(window.__ddVerseStop) window.__ddVerseStop(); }catch(e){}
     try{ if(window.__ddLinkStop) window.__ddLinkStop(); }catch(e){}
-    /* device voice removed: nothing to stop here */
+    try{ if(window.__ddHoroStop) window.__ddHoroStop(); }catch(e){} /* horoscope reader (2026-11-19) */
     setStatus("Stopped.");
     } finally { _tourStopping = false; }
   }
@@ -9796,6 +9798,57 @@ window.__ddPlayWithFallback = function(el, path, onFail){
           signBtns.push(b);
         });
         renderHoro(0);
+
+        /* FIX 2026-11-19 (horoscope Hear it): Destin asked for a button that
+           reads the Daily Horoscope aloud. The words change every day per
+           sign, so no recording can match them -- this reads with the
+           phone's built-in voice, picking a man's voice when the phone
+           has one (man's voice only, per Destin). Tap again to stop.
+           Stops every other voice first via the one-voice guard. */
+        (function(){
+          var btn = document.getElementById("horoListen");
+          var lbl = document.getElementById("horoListenLbl");
+          var speaking = false;
+          function setLbl(on){ if(lbl) lbl.textContent = on ? "Stop" : "Hear it"; if(btn) btn.setAttribute("aria-pressed", on ? "true" : "false"); }
+          function stopHoro(){
+            try{ if("speechSynthesis" in window) window.speechSynthesis.cancel(); }catch(e){}
+            speaking = false; setLbl(false);
+          }
+          window.__ddHoroStop = stopHoro; /* one-voice guard hook */
+          function pickVoice(){
+            try{
+              var vs = window.speechSynthesis.getVoices() || [];
+              var en = vs.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("en") === 0; });
+              var male = en.filter(function(v){ return /daniel|david|james|alex|fred|george|guy|male/i.test(v.name); });
+              if(male.length) return male[0];
+              if(en.length) return en[0];
+              return vs.length ? vs[0] : null;
+            }catch(e){ return null; }
+          }
+          function readHoro(){
+            if(!("speechSynthesis" in window)) return;
+            if(speaking){ stopHoro(); return; }
+            try{ if(window.__ddStopEverything) window.__ddStopEverything(); }catch(e){}
+            var sign = (document.getElementById("horoSign") || {}).textContent || "";
+            var dates = (document.getElementById("horoDates") || {}).textContent || "";
+            var text = (document.getElementById("horoText") || {}).textContent || "";
+            var lucky = (document.getElementById("horoLucky") || {}).textContent || "";
+            var focus = (document.getElementById("horoFocus") || {}).textContent || "";
+            if(!text) return;
+            var words = [sign, dates, text, "Lucky number " + lucky + ".", "Focus today: " + focus + "."].join(" ");
+            var u = new SpeechSynthesisUtterance(words);
+            var v = pickVoice(); if(v) u.voice = v;
+            u.rate = 0.95; u.pitch = 0.9;
+            u.onend = function(){ speaking = false; setLbl(false); };
+            u.onerror = function(){ speaking = false; setLbl(false); };
+            speaking = true; setLbl(true);
+            window.speechSynthesis.speak(u);
+          }
+          if(btn) btn.addEventListener("click", readHoro);
+          /* Picking a new sign stops the old reading. */
+          var sg = document.getElementById("signGrid");
+          if(sg) sg.addEventListener("click", function(){ stopHoro(); });
+        })();
 
         document.getElementById("prevVerse").addEventListener("click", function () { stopSpeak(); viewIdx--; renderVerse(); });
         document.getElementById("nextVerse").addEventListener("click", function () { stopSpeak(); viewIdx++; renderVerse(); });
