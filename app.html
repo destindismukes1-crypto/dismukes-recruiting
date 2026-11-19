@@ -10066,6 +10066,123 @@ footer{padding:20px 0 16px !important}
   showTab("today");
 })();
 </script>
+<style id="dd-app-fixes-2026-11-19">
+/* ===== FIX 2026-11-19 — Destin's 4 app reports (Nov 19 voice call) =====
+   1) GUIDE TRAP: the walk sheet (.side-rail .dd-panel.walk-open) is a
+      fixed sheet with NO exit — the dock sits under it (z-90 over
+      z-64), so Destin could not get back. Big orange Close button in
+      the panel head + a Back to jobs button at the end of the panel.
+      Both drop .walk-open, stop the tour, and jump back to #jobs.
+   2) GET THE APP: this file IS the app, so the "Get the App" button
+      (which just links back to app.html) is hidden in-app.
+   3) BOTTOM TABS only filtered sections: each tab now also jumps to
+      its lead section; tapping the tab you're already on goes back
+      to the top. Labels, order and layout untouched.
+   4) DOLLAR HOLLER took no dollar and showed nothing at the tap:
+      tap now opens the $1 Stripe checkout when the link is set (see
+      DD_HOLLER_PAY_URL in the script — EMPTY until the real $1 link
+      is made in the Stripe dashboard; no link invented) and always
+      shows a black/gold toast right where he is. The holler show
+      itself (sound, dance, bubble) is untouched. */
+#getAppBtn{display:none !important}
+.dd-panel-close{margin-left:auto;flex:none;background:var(--orange);color:#fff;border:0;border-radius:8px;font:inherit;font-weight:800;font-size:15px;padding:10px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
+.dd-panel-close:hover{background:#cf4f0e}
+.dd-panel-head>div{min-width:0}
+.dd-panel-back{display:block;width:100%;margin:16px 0 4px}
+#ddHollerToast{position:fixed;left:12px;right:12px;top:12px;z-index:200;background:#000;color:#fff;border:3px solid var(--orange);border-radius:10px;padding:14px 16px;font-weight:700;font-size:16px;line-height:1.35;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+</style>
+<script>
+/* FIX 2026-11-19 — Destin's 4 app reports (Nov 19 voice call).
+   1) Guide trap  2) Get-the-App in-app  3) Tabs go somewhere  4) $1 Holler.
+   Nothing here touches the DD tap sound, the GoatCounter script, the
+   tab bar layout, or the black/gold look. */
+(function(){
+  "use strict";
+  var panel = document.getElementById("ddPanel");
+  /* ---------- 1) Exit for the guide board / walk sheet ---------- */
+  function closeDdPanel(){
+    if(panel){ try{ panel.classList.remove("walk-open"); }catch(e){} }
+    try{ window.__ddTourActive = false; }catch(e){}
+    var pill = document.getElementById("tourPill");
+    if(pill){ pill.textContent = "Guided tour \u2014 walk the site with DD"; }
+    var jobs = document.getElementById("jobs");
+    if(jobs){ try{ jobs.scrollIntoView({block:"start"}); }catch(e){ jobs.scrollIntoView(); } }
+    else { try{ window.scrollTo(0, 0); }catch(e){} }
+  }
+  window.__ddCloseGuide = closeDdPanel;
+  var head = panel ? panel.querySelector(".dd-panel-head") : null;
+  if(head && !document.getElementById("ddPanelClose")){
+    var x = document.createElement("button");
+    x.type = "button"; x.id = "ddPanelClose"; x.className = "dd-panel-close";
+    x.setAttribute("aria-label", "Close the guide and go back to the jobs");
+    x.textContent = "\u2715 Close";
+    x.addEventListener("click", closeDdPanel);
+    head.appendChild(x);
+  }
+  var pbody = panel ? panel.querySelector(".dd-panel-body") : null;
+  if(pbody && !document.getElementById("ddPanelBack")){
+    var back = document.createElement("button");
+    back.type = "button"; back.id = "ddPanelBack";
+    back.className = "btn btn-orange dd-panel-back";
+    back.textContent = "\u2190 Back to the jobs";
+    back.addEventListener("click", closeDdPanel);
+    pbody.appendChild(back);
+  }
+  document.addEventListener("keydown", function(e){
+    if(e && e.key === "Escape"){ closeDdPanel(); }
+  });
+  /* ---------- 2) Hide "Get the App" while already in the app ---------- */
+  var ga = document.querySelector('a.ra-main[href="app.html"]');
+  if(ga){ ga.id = "getAppBtn"; ga.style.display = "none"; ga.setAttribute("aria-hidden", "true"); }
+  /* ---------- 3) Bottom tabs go somewhere real ---------- */
+  var TAB_LEAD = { today:"commercial-video", jobs:"jobs", boards:"boards", tips:"tips", more:"more" };
+  var tabbar = document.querySelector(".tabbar");
+  if(tabbar){
+    tabbar.addEventListener("click", function(e){
+      var a = e.target && e.target.closest ? e.target.closest("a[data-tab]") : null;
+      if(!a) return;
+      var tab = a.getAttribute("data-tab");
+      var wasActive = a.classList.contains("active");
+      setTimeout(function(){
+        if(wasActive){ try{ window.scrollTo(0, 0); }catch(err){} return; }
+        var el = TAB_LEAD[tab] && document.getElementById(TAB_LEAD[tab]);
+        if(el){ try{ el.scrollIntoView({block:"start"}); }catch(err){ el.scrollIntoView(); } }
+      }, 70);
+    }, true);
+  }
+  /* ---------- 4) Dollar Holler: $1 via Stripe + a toast you can see ---------- */
+  /* PASTE THE REAL $1 STRIPE PAYMENT LINK HERE once it is created in the
+     Stripe dashboard (a Stripe Payment Link URL).
+     It is EMPTY on purpose right now: no $1 link exists yet, and no link
+     is invented here. Until it is pasted in, the button hollers free and
+     the toast says the $1 link is still being set up. */
+  var DD_HOLLER_PAY_URL = "";
+  window.__ddHollerPayUrl = DD_HOLLER_PAY_URL;
+  var toast = document.createElement("div");
+  toast.id = "ddHollerToast";
+  toast.setAttribute("aria-live", "polite");
+  toast.style.display = "none";
+  document.body.appendChild(toast);
+  var toastTimer = null;
+  function showHollerToast(msg){
+    toast.textContent = msg;
+    toast.style.display = "block";
+    if(toastTimer){ clearTimeout(toastTimer); }
+    toastTimer = setTimeout(function(){ toast.style.display = "none"; }, 4500);
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest("[data-holler], #tvHollerBtn") : null;
+    if(!b) return;
+    if(DD_HOLLER_PAY_URL){
+      try{ window.open(DD_HOLLER_PAY_URL, "_blank"); }catch(err){}
+      showHollerToast("Opening the $1 checkout \u2014 DD hollers right after you pay!");
+    } else {
+      showHollerToast("DD hollered! The $1 Stripe link is still being set up \u2014 the holler is free to hear for now.");
+    }
+  }, true);
+})();
+</script>
+
 <script data-goatcounter="https://dismukesrecruiting.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
