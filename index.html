@@ -688,7 +688,7 @@
               <figcaption id="ddMainCap">DD — that's Destin himself, full-body. He's on this site the whole time, bottom corner and all — and he walks with you as you scroll.</figcaption>
             </figure>
             <h3 style="font-size:1.3rem; font-weight:600; color:#fff; margin-top:22px;">DD's Career Closet — the real DD, real clothes</h3>
-            <p style="color:#b9c6d0; font-size:0.95rem; margin:8px 0 0;">Same dude in every fit — same face, same grey cap, same gold shades, same chains, same tattoos. Only the career clothes change. Tap a fit and DD changes right here and down in his corner at the same time — and Muse reads that fit's description out loud in a voice in Destin's style.</p>
+            <p style="color:#b9c6d0; font-size:0.95rem; margin:8px 0 0;">Same dude in every fit — same face, same grey cap, same gold shades, same chains, same tattoos. Only the career clothes change. Tap a fit and DD changes right here and down in his corner at the same time — and DD reads that fit's description out loud in a voice in Destin's style.</p>
             <div class="outfit-btns" role="group" aria-label="Change DD's clothes — career closet">
               <button type="button" data-outfit="street" aria-pressed="true">Everyday DD</button>
               <button type="button" data-outfit="blaster" aria-pressed="false">Blast suit + hood</button>
@@ -702,8 +702,12 @@
               <button type="button" data-outfit="teacher" aria-pressed="false">Teacher fit</button>
               <button type="button" data-outfit="pilot" aria-pressed="false">Pilot uniform</button>
               <button type="button" data-outfit="electrician" aria-pressed="false">Electrician gear</button>
+              <button type="button" data-outfit="construction" aria-pressed="false">Construction gear</button>
+              <button type="button" data-outfit="inspector" aria-pressed="false">Inspector gear</button>
+              <button type="button" data-outfit="mechanic" aria-pressed="false">Mechanic gear</button>
+              <button type="button" data-outfit="plumber" aria-pressed="false">Plumber gear</button>
             </div>
-            <p class="outfit-note">DD changes into the clothes for the career — tap a button and Muse reads the fit out loud in a voice in Destin's style as DD puts it on. Or tap any job on the board and he suits up for that trade on his own: blasting jobs put the blast suit and blast hood on him, painting jobs the painter gear, welding jobs the welder gear, electrician jobs the hi-vis and tool belt.</p>
+            <p class="outfit-note">DD changes into the clothes for the career — tap a button and DD reads the fit out loud in a voice in Destin's style as DD puts it on. Or tap any job on the board and he suits up for that trade on his own: blasting jobs put the blast suit and blast hood on him, painting jobs the painter gear, welding jobs the welder gear, electrician jobs the hi-vis and tool belt.</p>
             <img class="dd-logo" src="assets/site/dd-logo.webp" alt="The Dismukes Recruiting logo on black: a gold compass rose with white wings, golden hands holding an open book, pink spray guns and a ship — Dismukes Recruiting, Destin for the best workers, Workers Apply Free, Philippians 4:13" loading="lazy" />
           </div>
           <div>
@@ -780,7 +784,7 @@
           </div>
           <div class="read-aloud" aria-label="Read It To Me — hear the page read out loud">
             <h3>Read It To Me</h3>
-            <p>Tap <strong>Start</strong> up top and Muse reads the page from the very top, walking you through it section by section — every word read in a voice in Destin's style. Every section also has its own &#9654; Read this part button, so you can hear just one part. Only one reading plays at a time — tap any read button and whatever was playing stops first. Pause it, stop it, or tap repeat to hear the last reading again. And DD himself stays with you in the bottom corner the whole time you're in the app — his own &#9654; Read and Stop buttons ride right there with him, and his bubble shows what's playing.</p>
+            <p>Tap <strong>Start</strong> up top and DD reads the page from the very top, walking you through it section by section — every word read in a voice in Destin's style. Every section also has its own &#9654; Read this part button, so you can hear just one part. Only one reading plays at a time — tap any read button and whatever was playing stops first. Pause it, stop it, or tap repeat to hear the last reading again. And DD himself stays with you in the bottom corner the whole time you're in the app — his own &#9654; Read and Stop buttons ride right there with him, and his bubble shows what's playing.</p>
             <div class="read-aloud-btns">
               <button class="primary" type="button" id="readStartBtn">&#9654; Start — whole page from the top</button>
               <button type="button" id="readPauseBtn">Pause / Resume</button>
@@ -803,7 +807,7 @@
 
           <div style="margin:-14px 0 14px; display:flex; gap:10px; flex-wrap:wrap;">
             <button class="section-read-btn" type="button" data-read-target="jobs" style="margin-top:0;">&#9654; Read this part</button>
-            <button class="section-read-btn" type="button" id="readBoardBtn" style="margin-top:0;">&#9654; Muse reads the board — jobs &amp; pay out loud</button>
+            <button class="section-read-btn" type="button" id="readBoardBtn" style="margin-top:0;">&#9654; DD reads the board — jobs &amp; pay out loud</button>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin:0 0 26px;">
             <a class="btn btn-accent" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Worker Application — apply free</a>
@@ -2182,7 +2186,7 @@
 
     <!-- DD — fixed bottom left, on screen the whole time -->
     <div class="dd-dock" id="ddDock" aria-label="DD — Destin's guide figure">
-      <p class="bubble" id="ddBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and Muse reads this page to you out loud — in a voice in Destin's style.</p>
+      <p class="bubble" id="ddBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and DD reads this page to you out loud — in a voice in Destin's style.</p>
       <img id="ddDockImg" src="assets/site/dd-dock.webp" alt="DD — full-body figure of Destin Dismukes in cap, sunglasses and work boots" loading="lazy" />
       <span class="gear-label" id="ddGearLabel">Everyday DD</span>
       <div class="dock-btns">
@@ -2321,7 +2325,7 @@
             // The joke is told out loud too — a voice in Destin's
             // style, played through the one player the read-aloud script
             // below defines. No device robot voice anywhere on this page.
-            if (window.__ddPlay) window.__ddPlay("assets/voice/joke-" + idx + ".mp3", JOKES[idx], "Muse is telling DD's joke…");
+            if (window.__ddPlay) window.__ddPlay("assets/voice/joke-" + idx + ".mp3", JOKES[idx], "DD is telling his joke…");
           });
         }
       })();
@@ -2375,10 +2379,9 @@
           if (vDate) vDate.textContent = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
         }
 
-        // ---- DD Reads It To You — Muse reads the whole page out loud ----
+        // ---- DD Reads It To You — DD reads the whole page out loud ----
         // Every reading on this page is a voice in Destin's style —
-        // Muse is DD's partner on this site, and that voice is the voice of
-        // this page. The device speech robot is gone from
+        // DD reads this page in that voice. The device speech robot is gone from
         // this page completely: it is never called, never offered, never
         // fallen back to. One reading plays at a time, through the one
         // player below; starting anything new stops whatever was playing.
@@ -2412,7 +2415,7 @@
           lastSrc = src; lastBubble = bubbleText || ""; lastStatus = statusText || "";
           if (lastBubble) ddSay(lastBubble);
           ddReading(true);
-          setStatus(lastStatus || "Muse is reading… tap Stop any time.");
+          setStatus(lastStatus || "DD is reading… tap Stop any time.");
           player.src = src;
           var pr = player.play();
           if (pr && pr.catch) pr.catch(function () {
@@ -2435,20 +2438,20 @@
         window.__ddPlay = playVoice;
         window.__ddStop = function () { stopReading("Stopped. Tap Start to hear the page again, or Read on any section."); };
         var SEGMENTS = {
-          "dd-truck": ["assets/voice/seg-dd-truck.mp3", "Muse is reading — DD and my truck, the career closet and the jokes."],
-          "verse": ["assets/voice/seg-verse.mp3", "Muse is reading — the Verse of the Day."],
-          "astrology": ["assets/voice/seg-astrology.mp3", "Muse is reading — DD's Astrology Corner."],
-          "jobs": ["assets/voice/seg-jobs.mp3", "Muse is reading — jobs for crews, every posting with its pay."],
-          "chasing": ["assets/voice/seg-chasing.mp3", "Muse is reading — jobs I'm chasing, and the pay calculator."],
-          "how": ["assets/voice/seg-how.mp3", "Muse is reading — how it works for workers."],
-          "employers": ["assets/voice/seg-employers.mp3", "Muse is reading — for employers."],
-          "story": ["assets/voice/seg-story.mp3", "Muse is reading — who's behind it."],
-          "alaska": ["assets/voice/seg-alaska.mp3", "Muse is reading — where this is headed."]
+          "dd-truck": ["assets/voice/seg-dd-truck.mp3", "Reading — DD and my truck, the career closet and the jokes."],
+          "verse": ["assets/voice/seg-verse.mp3", "Reading — the Verse of the Day."],
+          "astrology": ["assets/voice/seg-astrology.mp3", "Reading — DD's Astrology Corner."],
+          "jobs": ["assets/voice/seg-jobs.mp3", "Reading — jobs for crews, every posting with its pay."],
+          "chasing": ["assets/voice/seg-chasing.mp3", "Reading — jobs I'm chasing, and the pay calculator."],
+          "how": ["assets/voice/seg-how.mp3", "Reading — how it works for workers."],
+          "employers": ["assets/voice/seg-employers.mp3", "Reading — for employers."],
+          "story": ["assets/voice/seg-story.mp3", "Reading — who's behind it."],
+          "alaska": ["assets/voice/seg-alaska.mp3", "Reading — where this is headed."]
         };
         function startRead() {
-          // Start = the whole page, from the top, in Muse's voice.
+          // Start = the whole page, from the top, in a voice in Destin's style.
           window.scrollTo({ top: 0, behavior: "smooth" });
-          playVoice("assets/voice/full.mp3", "Muse is reading the whole page out loud, in a voice in Destin's style — I'm right here with you the whole time.", "Muse is reading the whole page… tap Stop any time.");
+          playVoice("assets/voice/full.mp3", "DD is reading the whole page out loud, in a voice in Destin's style — I'm right here with you the whole time.", "DD is reading the whole page… tap Stop any time.");
         }
         function repeatRead() {
           if (lastSrc) { playVoice(lastSrc, lastBubble, lastStatus); }
@@ -2470,15 +2473,15 @@
         document.querySelectorAll("[data-read-target]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             var seg = SEGMENTS[btn.getAttribute("data-read-target")];
-            if (seg) playVoice(seg[0], seg[1], "Muse is reading… tap Stop any time.");
+            if (seg) playVoice(seg[0], seg[1], "DD is reading… tap Stop any time.");
           });
         });
-        // ---- Muse reads the board — every posting on the board, pay and all.
+        // ---- DD reads the board — every posting on the board, pay and all.
         // The recording always reads the full board (all 54 postings), so it
         // matches the board with no filter picked.
         var boardBtn = document.getElementById("readBoardBtn");
         if (boardBtn) boardBtn.addEventListener("click", function () {
-          playVoice("assets/voice/board.mp3", "Muse is reading the job board out loud — every posting and its pay.", "Muse is reading the board… tap Stop any time.");
+          playVoice("assets/voice/board.mp3", "DD is reading the job board out loud — every posting and its pay.", "DD is reading the board… tap Stop any time.");
         });
         var pauseBtn = document.getElementById("readPauseBtn");
         if (pauseBtn) pauseBtn.addEventListener("click", function () {
@@ -2516,7 +2519,11 @@
           police:  { src: "assets/site/outfit-police.webp", label: "Police uniform on", cap: "DD in his police fit — navy uniform and police cap, duty belt on, shades and chains still his.", alt: "DD in a dark navy police uniform with a police cap and duty belt, gold sunglasses and silver chains" },
           teacher: { src: "assets/site/outfit-teacher.webp", label: "Teacher fit on", cap: "DD in his teacher fit — brown tweed blazer and button-down shirt, book in hand, cap and shades still his.", alt: "DD dressed as a teacher: brown tweed blazer, light button-down shirt, dark slacks, holding a book, grey cap, gold sunglasses and silver chains" },
           pilot:   { src: "assets/site/outfit-pilot.webp", label: "Pilot uniform on", cap: "DD in his pilot fit — navy pilot uniform with gold stripes on the sleeves and the pilot cap on, shades and chains still his.", alt: "DD in an airline pilot uniform: navy jacket with gold sleeve stripes, white shirt and tie, navy pilot cap with a gold band, gold sunglasses and silver chains" },
-          electrician: { src: "assets/site/outfit-electrician.webp", label: "Electrician gear on", cap: "DD in his electrician fit — orange hi-vis vest, tool belt loaded with pliers and drivers, white hard hat on, shades and chains still his.", alt: "DD in electrician gear: orange high-visibility vest over a dark work shirt, leather tool belt with pliers and screwdrivers, white hard hat, gold sunglasses and silver chains" }
+          electrician: { src: "assets/site/outfit-electrician.webp", label: "Electrician gear on", cap: "DD in his electrician fit — orange hi-vis vest, tool belt loaded with pliers and drivers, white hard hat on, shades and chains still his.", alt: "DD in electrician gear: orange high-visibility vest over a dark work shirt, leather tool belt with pliers and screwdrivers, white hard hat, gold sunglasses and silver chains" },
+          construction: { src: "assets/site/outfit-construction.webp", label: "Construction gear on", cap: "DD in his construction fit — orange hi-vis vest, tool belt loaded, white hard hat on, shades and chains still his.", alt: "DD in construction gear: orange high-visibility vest over a dark work shirt, leather tool belt, white hard hat, gold sunglasses and silver chains" },
+          inspector: { src: "assets/site/outfit-inspector.webp", label: "Inspector gear on", cap: "DD in his inspector fit — white hard hat, hi-vis vest and clipboard in hand, shades and chains still his.", alt: "DD in inspector gear: white hard hat, high-visibility vest, clipboard in hand, gold sunglasses and silver chains" },
+          mechanic:  { src: "assets/site/outfit-mechanic.webp", label: "Mechanic gear on", cap: "DD in his mechanic fit — grey coveralls, wrench in hand, shades and chains still his.", alt: "DD in mechanic coveralls: grey coveralls, wrench in hand, gold sunglasses and silver chains" },
+          plumber:   { src: "assets/site/outfit-plumber.webp", label: "Plumber gear on", cap: "DD in his plumber fit — tool belt on, red pipe wrench in hand, shades and chains still his.", alt: "DD in plumber gear: tool belt on, red pipe wrench in hand, gold sunglasses and silver chains" }
         };
         var mainImg = document.getElementById("ddMainImg");
         var mainCap = document.getElementById("ddMainCap");
@@ -2533,11 +2540,11 @@
           outfitBtns.forEach(function (b) {
             b.setAttribute("aria-pressed", b.getAttribute("data-outfit") === key ? "true" : "false");
           });
-          // Muse reads the fit out loud the moment it goes on — a voice
+          // DD reads the fit out loud the moment it goes on — a voice
           // in Destin's style, through the page's one player (one voice
           // at a time, anything else playing stops first), and the words
           // show in DD's corner bubble while it plays.
-          if (speakIt && window.__ddPlay) window.__ddPlay("assets/voice/outfit-" + key + ".mp3", o.label + ". " + o.cap, "Muse is reading DD's fit…");
+          if (speakIt && window.__ddPlay) window.__ddPlay("assets/voice/outfit-" + key + ".mp3", o.label + ". " + o.cap, "DD is reading his fit…");
         }
         outfitBtns.forEach(function (b) {
           b.addEventListener("click", function () { setOutfit(b.getAttribute("data-outfit"), true); });
@@ -2608,9 +2615,9 @@
               aDates.textContent = s[1];
               aText.textContent = s[2] + " " + s[3] + " " + s[4];
               aLucky.textContent = s[5];
-              // Muse reads your reading out loud too — a voice in
+              // DD reads your reading out loud too — a voice in
               // Destin's style, through the page's one player.
-              if (window.__ddPlay) window.__ddPlay("assets/voice/sign-" + s[0].toLowerCase() + ".mp3", s[0] + " — " + aText.textContent, "Muse is reading your sign…");
+              if (window.__ddPlay) window.__ddPlay("assets/voice/sign-" + s[0].toLowerCase() + ".mp3", s[0] + " — " + aText.textContent, "DD is reading your sign…");
             });
             grid.appendChild(b);
           });
