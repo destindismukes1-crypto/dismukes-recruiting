@@ -2322,6 +2322,11 @@
   </section>
 
   <!-- 3. JOBS -->
+  <style>
+  /* Job search (added 2026-11-20) — on phones the jobs area is flex-ordered, so pin the search right under the heading, before the job card. */
+  @media (max-width:900px){ #jobs .wrap>#jobSearch{order:2} }
+  </style>
+
   <section id="jobs" style="padding-top:6px">
     <div class="wrap">
       <h2>Jobs — real pay printed up front, workers apply free</h2>
@@ -2355,8 +2360,21 @@
         <p><strong>Hot Jobs</strong> is our weekly job list. Subscribing is free for workers.</p>
       </div>
 
-      <div class="bulletin" id="bulletinBrush">
+      <!-- JOB SEARCH + SAVED JOBS — added 2026-11-20. Client-side only: the search filters the job cards as you type; saved jobs live only in the visitor's own browser. -->
+      <div class="note-box" id="jobSearch">
+        <label for="jobSearchInput" style="font-weight:700;font-size:17px;display:block;margin-bottom:8px">Search by trade and town</label>
+        <input id="jobSearchInput" type="search" placeholder="Try: painter, blaster, Newport News" autocomplete="off" style="width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--line);border-radius:8px;background:var(--input);color:var(--ink)">
+        <p id="jobSearchEmpty" hidden style="margin:10px 0 0">No jobs match that search — try a different trade or town.</p>
+        <div id="savedJobs" style="margin-top:14px;text-align:left">
+          <h3 style="margin:0 0 6px">My Saved Jobs</h3>
+          <p id="savedJobsEmpty" style="margin:0">No jobs saved yet — tap Save this job on a job you like.</p>
+          <ul id="savedJobsList" style="margin:6px 0 0;padding-left:20px"></ul>
+        </div>
+      </div>
+
+      <div class="bulletin job-card" id="bulletinBrush" data-job-search="brush crew painters blasters newport news va skilled trades coatings">
         <div class="bulletin-tags"><span class="tag tag-field">Skilled Trades</span><span class="tag tag-ext">External Posting</span><span class="tag tag-rec">Recruiter</span></div>
+        <p class="bulletin-pay">Pay: $18.00–$27.31/hr + $140/day per diem for non-local candidates</p>
         <h3>Brush crew — painters &amp; blasters</h3>
         <p class="bulletin-loc">Newport News, VA</p>
         <div class="dd-bulletin">
@@ -2369,12 +2387,12 @@
               <button class="btn btn-outline" type="button" data-laugh-job>Make me laugh</button>
               <button class="btn btn-navy" type="button" data-lasso-job>Lasso this job</button>
               <button class="btn btn-outline" type="button" data-demo-job>Watch DD demo this job</button>
+              <button class="btn btn-outline" type="button" data-save-job data-job-title="Brush crew — painters &amp; blasters" data-job-loc="Newport News, VA" data-job-pay="$18.00–$27.31/hr + $140/day per diem for non-local candidates">Save this job</button>
             </div>
             <p class="joke-line" data-job-joke hidden></p>
             <p class="demo-line" data-demo-line hidden><strong>DD demo:</strong> hood on, respirator checked, PPE every time — then a nice even sweep with the gun, steady passes, no rushing. That's the work: blast it clean, paint it right.</p>
           </div>
         </div>
-        <p class="bulletin-pay">Pay: $18.00–$27.31/hr + $140/day per diem for non-local candidates</p>
         <div class="bulletin-detail" data-job-facts>
           <p><strong>Job facts — exactly as printed on this job, nothing added:</strong></p>
           <p><strong>Where:</strong> Newport News, VA. <strong>Work:</strong> brush crew — painters &amp; blasters (coatings work). <strong>Type:</strong> External Posting, through a recruiter.</p>
@@ -2389,7 +2407,7 @@
         </div>
       </div>
 
-      <div class="bulletin" id="where-going">
+      <div class="bulletin" id="where-going" data-job-search="brush crew painters blasters newport news va skilled trades coatings">
         <h3>Where you’re going — Newport News, VA</h3>
         <p class="bulletin-loc">The facts below start from what’s printed on the job above — everything else is general guidance, and local costs are yours to check.</p>
         <p><strong>The place:</strong> Newport News is a city in coastal Virginia. The work on this bulletin is coatings work — a brush crew of painters &amp; blasters — posted as an External Posting through a recruiter. That’s the work area as printed; the exact site and start details are confirmed with you before any placement, and the start date is not listed on this job.</p>
@@ -2414,6 +2432,156 @@
       </div>
       <p class="joke-strip"><strong>DD joke:</strong> I told a job board workers apply free. It said that's not how this works. I said watch. Now it's watching.</p>
       <p class="joke-strip"><strong>DD joke:</strong> I told the crew the job comes with travel. They heard “vacation.” Then I showed them the blast hose — good work, honest work, and the per diem's printed before anybody packs a bag.</p>
+      <!-- ONE-TAP APPLY + JOB ALERTS — added 2026-11-20. No backend: tap Send and your email app opens with the answers ready to send to dismukesreqag369@gmail.com -->
+      <div class="note-box" id="quick-apply">
+        <h3 style="margin:0 0 6px">Apply in one tap — workers apply free</h3>
+        <p style="margin:0 0 10px">Three boxes. That is the whole application — name, phone, trade.</p>
+        <form class="crew-form" id="quickApplyForm">
+          <div>
+            <label for="quickName">Your name</label>
+            <input id="quickName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="quickPhone">Phone</label>
+            <input id="quickPhone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div>
+            <label for="quickTrade">Trade</label>
+            <input id="quickTrade" name="trade" type="text" autocomplete="off" placeholder="Painter, blaster, welder…" required>
+          </div>
+          <div>
+            <button class="btn btn-orange" type="submit">Apply free — email</button>
+          </div>
+        </form>
+        <p class="ask-note" id="quickApplyStatus" aria-live="polite">Tap the button and your email app opens with your application ready to send — nothing is sent until you tap Send in your email app.</p>
+      </div>
+      <div class="note-box" id="job-alerts">
+        <h3 style="margin:0 0 6px">Get new crew jobs by email</h3>
+        <p style="margin:0 0 10px">Tell DD your trade and your town and he emails you when a new crew job fits.</p>
+        <form class="crew-form" id="jobAlertsForm">
+          <div>
+            <label for="alertName">Your name</label>
+            <input id="alertName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="alertTrade">Trade</label>
+            <input id="alertTrade" name="trade" type="text" autocomplete="off" placeholder="Painter, blaster, welder…" required>
+          </div>
+          <div>
+            <label for="alertTown">Town</label>
+            <input id="alertTown" name="town" type="text" autocomplete="off" placeholder="Newport News, Mobile…" required>
+          </div>
+          <div>
+            <button class="btn btn-navy" type="submit">Sign me up for job alerts — email</button>
+          </div>
+        </form>
+        <p class="ask-note" id="jobAlertsStatus" aria-live="polite">Free. One email when a new crew job fits. Tap the button and your email app opens with the signup ready to send — nothing is sent until you tap Send in your email app.</p>
+      </div>
+      <script>
+      (function(){
+        /* One-tap apply + job alerts + job search + saved jobs — client-side only, no backend. */
+        function v(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+        /* --- One-tap apply --- */
+        var qa=document.getElementById('quickApplyForm');
+        if(qa){
+          qa.addEventListener('submit',function(e){
+            e.preventDefault();
+            var lines=['Your name: '+v('quickName'),'Phone: '+v('quickPhone'),'Trade: '+v('quickTrade')];
+            var subject='One-tap application — '+v('quickTrade');
+            var s=document.getElementById('quickApplyStatus');
+            if(s){s.textContent='Your email app should open with your application ready to send — tap Send in your email app.';}
+            window.location.href='mailto:dismukesreqag369@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
+          });
+        }
+        /* --- Job alerts --- */
+        var ja=document.getElementById('jobAlertsForm');
+        if(ja){
+          ja.addEventListener('submit',function(e){
+            e.preventDefault();
+            var lines=['Your name: '+v('alertName'),'Trade: '+v('alertTrade'),'Town: '+v('alertTown')];
+            var subject='Job alerts — '+v('alertTrade')+' in '+v('alertTown');
+            var s=document.getElementById('jobAlertsStatus');
+            if(s){s.textContent='Your email app should open with your signup ready to send — tap Send in your email app.';}
+            window.location.href='mailto:dismukesreqag369@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
+          });
+        }
+        /* --- Job search --- */
+        var input=document.getElementById('jobSearchInput');
+        var empty=document.getElementById('jobSearchEmpty');
+        var cards=document.querySelectorAll('[data-job-search]');
+        function runSearch(){
+          var q=input?input.value.trim().toLowerCase():'';
+          var shown=0;
+          for(var i=0;i<cards.length;i++){
+            var hay=(cards[i].getAttribute('data-job-search')||'').toLowerCase();
+            var match=!q||hay.indexOf(q)>-1;
+            cards[i].hidden=!match;
+            if(match){shown++;}
+          }
+          if(empty){empty.hidden=shown>0;}
+        }
+        if(input){input.addEventListener('input',runSearch);}
+        /* --- Saved jobs (this browser only) --- */
+        var KEY='ddSavedJobs';
+        var list=document.getElementById('savedJobsList');
+        var listEmpty=document.getElementById('savedJobsEmpty');
+        function readSaved(){
+          try{var raw=window.localStorage.getItem(KEY);var arr=raw?JSON.parse(raw):[];return Array.isArray(arr)?arr:[];}
+          catch(err){return [];}
+        }
+        function writeSaved(arr){
+          try{window.localStorage.setItem(KEY,JSON.stringify(arr));}catch(err){}
+        }
+        function renderSaved(){
+          var saved=readSaved();
+          if(listEmpty){listEmpty.hidden=saved.length>0;}
+          if(!list){return;}
+          list.innerHTML='';
+          for(var i=0;i<saved.length;i++){
+            (function(job){
+              var li=document.createElement('li');
+              li.textContent=job.title+' — '+job.loc+' — '+job.pay+' ';
+              var rm=document.createElement('button');
+              rm.type='button';rm.textContent='Remove';
+              rm.addEventListener('click',function(){
+                writeSaved(readSaved().filter(function(j){return j.title!==job.title||j.loc!==job.loc;}));
+                renderSaved();syncSaveButtons();
+              });
+              li.appendChild(rm);
+              list.appendChild(li);
+            })(saved[i]);
+          }
+        }
+        function isSaved(title,loc){
+          return readSaved().some(function(j){return j.title===title&&j.loc===loc;});
+        }
+        function syncSaveButtons(){
+          var btns=document.querySelectorAll('[data-save-job]');
+          for(var i=0;i<btns.length;i++){
+            var b=btns[i];
+            var saved=isSaved(b.getAttribute('data-job-title')||'',b.getAttribute('data-job-loc')||'');
+            b.textContent=saved?'Saved':'Save this job';
+          }
+        }
+        var saveBtns=document.querySelectorAll('[data-save-job]');
+        for(var i=0;i<saveBtns.length;i++){
+          saveBtns[i].addEventListener('click',function(){
+            var title=this.getAttribute('data-job-title')||'';
+            var loc=this.getAttribute('data-job-loc')||'';
+            var pay=this.getAttribute('data-job-pay')||'';
+            var saved=readSaved();
+            if(isSaved(title,loc)){
+              saved=saved.filter(function(j){return j.title!==title||j.loc!==loc;});
+            }else{
+              saved.push({title:title,loc:loc,pay:pay});
+            }
+            writeSaved(saved);
+            renderSaved();syncSaveButtons();
+          });
+        }
+        renderSaved();syncSaveButtons();
+      })();
+      </script>
     </div>
   </section>
 
