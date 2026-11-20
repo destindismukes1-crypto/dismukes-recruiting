@@ -1798,15 +1798,7 @@
   .pay-btn{min-height:54px}
   .pay-btn .pay-amt{font-size:17.5px;font-weight:800}
   @media (max-width:760px){ .funny-tag{font-size:14.5px} .cheap-way{padding:14px} }
-  /* Visitor counter — The Door Counter: counts page loads, labeled honestly */
-  .visitor-counter{margin-top:20px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:16px 18px;max-width:640px}
-  .visitor-counter .vc-label{margin:0 0 6px;font-size:15.5px;color:#dbe5ee}
-  .visitor-counter .vc-label strong{color:#ffb287;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;font-size:17px}
-  .visitor-counter .vc-count{margin:0 0 6px;font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:700;color:#fff;line-height:1.1}
-  .visitor-counter .vc-count span{color:#ff8a47}
-  .visitor-counter .vc-note{margin:0;font-size:14px;color:#c3d2df}
-  .visitor-counter .vc-note strong{color:#fff}
-  /* External jobs — a separate board for jobs found in public listings */
+    /* External jobs — a separate board for jobs found in public listings */
   #external-jobs{order:4 !important}
   .ext-cards{grid-template-columns:1fr 1fr}
   @media (max-width:800px){ .ext-cards{grid-template-columns:1fr} }
@@ -1870,6 +1862,7 @@
     <a href="#employers">Employers</a>
     <a href="#crew-matching">Crew Matching</a>
     <a href="#help">Help</a>
+    <a href="app.html">Open the App</a>
     <a href="#topics">Start Here</a>
     <a href="#topics">Apprenticeships</a>
     <a href="#topics">Job Fairs</a>
@@ -1913,24 +1906,14 @@
 
 <div class="page-layout">
 <main>
-  <!-- DOOR COUNTER — page loads, not subscribers -->
-  <section id="doorCounterSection" style="background:var(--navy2);color:#fff;padding:20px 0">
-    <div class="wrap">
-      <div class="visitor-counter" id="visitorCounter">
-        <p class="vc-label"><strong>DD calls this: The Door Counter</strong> — every swing of the door gets one click.</p>
-        <p class="vc-count">Page loads so far: <span id="visitCount">counting&hellip;</span></p>
-        <p class="vc-note">Straight talk: this counts <strong>page loads</strong> — every time this page is opened or refreshed — <strong>not unique people</strong>, and it is <strong>not a verified count of individual visitors</strong>. One person opening the page twice counts twice. It runs on a free counter service and collects <strong>no personal data</strong> — no names, no bank details, no login details.</p>
-      </div>
-    </div>
-  </section>
-
+  
   <!-- VIDEO — Dismukes Recruiting commercial: Destined for the best workers -->
   <section class="video-spot" id="commercial-video" style="padding:20px 16px;text-align:center">
     <h2 style="margin:0 0 8px">Dismukes Recruiting — Destined for the best workers</h2>
     <p style="margin:0 0 12px">Workers apply free. Watch DD, then scroll down for the jobs.</p>
     <div style="max-width:360px;margin:0 auto">
       <video width="100%" height="640" controls preload="metadata" playsinline title="Dismukes Recruiting commercial — Destined for the best workers" style="background:#000">
-        <source src="dismukes-recruiting-commercial-v4.mp4" type="video/mp4">
+        <source src="dismukes-recruiting-commercial-v4-dotcom.mp4" type="video/mp4">
         Your browser can't play this video here.
       </video>
     </div>
@@ -2019,6 +2002,7 @@
           <h3>I&rsquo;m Looking for Work</h3>
           <p>Workers apply free, always. The pay is printed up front before you travel anywhere.</p>
           <a class="btn btn-orange" href="#jobs">See the jobs</a>
+          <a class="btn btn-navy" href="app.html">Open the app</a>
         </div>
         <div class="door-card">
           <h3>I&rsquo;m Looking for Workers</h3>
@@ -8575,23 +8559,6 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     walk9();
   }, true);
   setTimeout(function(){ if(!document.hidden) walk9(); }, 5000);
-})();
-</script>
-<script>
-/* The Door Counter — free page-load counter (Abacus by Jason Cameron).
-   One hit = one page load. It counts loads, not unique people, and the
-   label beside the number on the page says exactly that. The request
-   carries no personal data: no name, no bank details, no login details. */
-(function(){
-  var el = document.getElementById("visitCount");
-  if(!el || !window.fetch) { if(el) el.textContent = "not available right now"; return; }
-  fetch("https://abacus.jasoncameron.dev/hit/dismukes-recruiting-251/page-loads")
-    .then(function(r){ if(!r.ok) throw new Error("counter"); return r.json(); })
-    .then(function(d){
-      if(d && typeof d.value === "number"){ el.textContent = d.value.toLocaleString("en-US"); }
-      else { el.textContent = "not available right now"; }
-    })
-    .catch(function(){ el.textContent = "not available right now — the free counter service did not answer"; });
 })();
 </script>
 
