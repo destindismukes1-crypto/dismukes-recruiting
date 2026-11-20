@@ -688,7 +688,7 @@
               <figcaption id="ddMainCap">DD — that's Destin himself, full-body. He's on this site the whole time, bottom corner and all — and he walks with you as you scroll.</figcaption>
             </figure>
             <h3 style="font-size:1.3rem; font-weight:600; color:#fff; margin-top:22px;">DD's Career Closet — the real DD, real clothes</h3>
-            <p style="color:#b9c6d0; font-size:0.95rem; margin:8px 0 0;">Same dude in every fit — same face, same grey cap, same gold shades, same chains, same tattoos. Only the career clothes change. Tap a fit and DD changes right here and down in his corner at the same time — and Muse reads that fit's description out loud in his own voice.</p>
+            <p style="color:#b9c6d0; font-size:0.95rem; margin:8px 0 0;">Same dude in every fit — same face, same grey cap, same gold shades, same chains, same tattoos. Only the career clothes change. Tap a fit and DD changes right here and down in his corner at the same time — and Muse reads that fit's description out loud in a voice in Destin's style.</p>
             <div class="outfit-btns" role="group" aria-label="Change DD's clothes — career closet">
               <button type="button" data-outfit="street" aria-pressed="true">Everyday DD</button>
               <button type="button" data-outfit="blaster" aria-pressed="false">Blast suit + hood</button>
@@ -703,7 +703,7 @@
               <button type="button" data-outfit="pilot" aria-pressed="false">Pilot uniform</button>
               <button type="button" data-outfit="electrician" aria-pressed="false">Electrician gear</button>
             </div>
-            <p class="outfit-note">DD changes into the clothes for the career — tap a button and Muse reads the fit out loud in his own voice as DD puts it on. Or tap any job on the board and he suits up for that trade on his own: blasting jobs put the blast suit and blast hood on him, painting jobs the painter gear, welding jobs the welder gear, electrician jobs the hi-vis and tool belt.</p>
+            <p class="outfit-note">DD changes into the clothes for the career — tap a button and Muse reads the fit out loud in a voice in Destin's style as DD puts it on. Or tap any job on the board and he suits up for that trade on his own: blasting jobs put the blast suit and blast hood on him, painting jobs the painter gear, welding jobs the welder gear, electrician jobs the hi-vis and tool belt.</p>
             <img class="dd-logo" src="assets/site/dd-logo.webp" alt="The Dismukes Recruiting logo on black: a gold compass rose with white wings, golden hands holding an open book, pink spray guns and a ship — Dismukes Recruiting, Destin for the best workers, Workers Apply Free, Philippians 4:13" loading="lazy" />
           </div>
           <div>
@@ -776,11 +776,11 @@
           <div class="sec-head" style="margin-bottom:14px;">
             <span class="tick" aria-hidden="true"></span>
             <h2>DD Reads It To You</h2>
-            <p>Can't read the page, or just rather listen? Hit Read and hear the whole walk-through out loud — DD and the truck, the jokes, the verse, the astrology corner, the jobs with their pay exactly as printed, how it works, all of it — read in Muse's own voice, DD's partner on this site. Recorded in Muse's voice, not the robot voice off your device — that robot voice is gone from this page for good. DD can read the job board by itself too — there's a Read the board button right on the board.</p>
+            <p>Can't read the page, or just rather listen? Hit Read and hear the whole walk-through out loud — DD and the truck, the jokes, the verse, the astrology corner, the jobs with their pay exactly as printed, how it works, all of it — read in a voice in Destin's style, DD's partner on this site. Made in a voice in Destin's style, not the robot voice off your device — that robot voice is gone from this page for good. DD can read the job board by itself too — there's a Read the board button right on the board.</p>
           </div>
           <div class="read-aloud" aria-label="Read It To Me — hear the page read out loud">
             <h3>Read It To Me</h3>
-            <p>Tap <strong>Start</strong> up top and Muse reads the page from the very top, walking you through it section by section — every word a recording in Muse's own voice. Every section also has its own &#9654; Read this part button, so you can hear just one part. Only one recording plays at a time — tap any read button and whatever was playing stops first. Pause it, stop it, or tap repeat to hear the last reading again. And DD himself stays with you in the bottom corner the whole time you're in the app — his own &#9654; Read and Stop buttons ride right there with him, and his bubble shows what's playing.</p>
+            <p>Tap <strong>Start</strong> up top and Muse reads the page from the very top, walking you through it section by section — every word read in a voice in Destin's style. Every section also has its own &#9654; Read this part button, so you can hear just one part. Only one reading plays at a time — tap any read button and whatever was playing stops first. Pause it, stop it, or tap repeat to hear the last reading again. And DD himself stays with you in the bottom corner the whole time you're in the app — his own &#9654; Read and Stop buttons ride right there with him, and his bubble shows what's playing.</p>
             <div class="read-aloud-btns">
               <button class="primary" type="button" id="readStartBtn">&#9654; Start — whole page from the top</button>
               <button type="button" id="readPauseBtn">Pause / Resume</button>
@@ -2182,7 +2182,7 @@
 
     <!-- DD — fixed bottom left, on screen the whole time -->
     <div class="dd-dock" id="ddDock" aria-label="DD — Destin's guide figure">
-      <p class="bubble" id="ddBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and Muse reads this page to you out loud — in his own voice.</p>
+      <p class="bubble" id="ddBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and Muse reads this page to you out loud — in a voice in Destin's style.</p>
       <img id="ddDockImg" src="assets/site/dd-dock.webp" alt="DD — full-body figure of Destin Dismukes in cap, sunglasses and work boots" loading="lazy" />
       <span class="gear-label" id="ddGearLabel">Everyday DD</span>
       <div class="dock-btns">
@@ -2318,8 +2318,8 @@
           btn.addEventListener("click", function () {
             idx = (idx + 1) % JOKES.length;
             text.textContent = JOKES[idx];
-            // The joke is told out loud too — a recording in Muse's own
-            // voice, played through the one player the read-aloud script
+            // The joke is told out loud too — a voice in Destin's
+            // style, played through the one player the read-aloud script
             // below defines. No device robot voice anywhere on this page.
             if (window.__ddPlay) window.__ddPlay("assets/voice/joke-" + idx + ".mp3", JOKES[idx], "Muse is telling DD's joke…");
           });
@@ -2376,11 +2376,11 @@
         }
 
         // ---- DD Reads It To You — Muse reads the whole page out loud ----
-        // Every reading on this page is a RECORDING in Muse's own voice —
-        // Muse is DD's partner on this site, and his voice is the voice of
+        // Every reading on this page is a voice in Destin's style —
+        // Muse is DD's partner on this site, and that voice is the voice of
         // this page. The device speech robot is gone from
         // this page completely: it is never called, never offered, never
-        // fallen back to. One recording plays at a time, through the one
+        // fallen back to. One reading plays at a time, through the one
         // player below; starting anything new stops whatever was playing.
         var status = document.getElementById("readStatus");
         function setStatus(msg) { if (status) status.textContent = msg; }
@@ -2448,7 +2448,7 @@
         function startRead() {
           // Start = the whole page, from the top, in Muse's voice.
           window.scrollTo({ top: 0, behavior: "smooth" });
-          playVoice("assets/voice/full.mp3", "Muse is reading the whole page out loud, in his own voice — I'm right here with you the whole time.", "Muse is reading the whole page… tap Stop any time.");
+          playVoice("assets/voice/full.mp3", "Muse is reading the whole page out loud, in a voice in Destin's style — I'm right here with you the whole time.", "Muse is reading the whole page… tap Stop any time.");
         }
         function repeatRead() {
           if (lastSrc) { playVoice(lastSrc, lastBubble, lastStatus); }
@@ -2533,8 +2533,8 @@
           outfitBtns.forEach(function (b) {
             b.setAttribute("aria-pressed", b.getAttribute("data-outfit") === key ? "true" : "false");
           });
-          // Muse reads the fit out loud the moment it goes on — a recording
-          // in Muse's own voice, through the page's one player (one voice
+          // Muse reads the fit out loud the moment it goes on — a voice
+          // in Destin's style, through the page's one player (one voice
           // at a time, anything else playing stops first), and the words
           // show in DD's corner bubble while it plays.
           if (speakIt && window.__ddPlay) window.__ddPlay("assets/voice/outfit-" + key + ".mp3", o.label + ". " + o.cap, "Muse is reading DD's fit…");
@@ -2608,8 +2608,8 @@
               aDates.textContent = s[1];
               aText.textContent = s[2] + " " + s[3] + " " + s[4];
               aLucky.textContent = s[5];
-              // Muse reads your reading out loud too — his own voice,
-              // through the page's one player.
+              // Muse reads your reading out loud too — a voice in
+              // Destin's style, through the page's one player.
               if (window.__ddPlay) window.__ddPlay("assets/voice/sign-" + s[0].toLowerCase() + ".mp3", s[0] + " — " + aText.textContent, "Muse is reading your sign…");
             });
             grid.appendChild(b);
