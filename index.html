@@ -1940,10 +1940,15 @@
   </section>
 
   <!-- VERSE OF THE DAY — a different real Bible verse every day, changes on its own -->
-  <section id="verse-of-the-day" style="padding:18px 16px;text-align:center;background:#fff8e6">
+  <section id="verse-of-the-day" style="padding:18px 16px;text-align:center;background:#fff8e6;position:relative">
+  <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden">
+    <img src="media-generation-dismukes-recruiting-logo-black-0-3776ee9f-a657-4691-9f5a-d18162a2ca7e.webp" alt="" style="max-width:96%;max-height:92%;width:auto;height:auto;opacity:.8;mix-blend-mode:screen">
+  </div>
+    <div style="position:relative;z-index:1">
     <h2 style="margin:0 0 6px">Verse of the Day</h2>
     <p id="dailyVerseText" style="margin:0;font-size:18px;font-style:italic">Behold, the kingdom of God is within you. &mdash; Luke 17:21</p>
     <p id="dailyVerseDate" style="margin:6px 0 0;font-size:13px;color:#666"></p>
+    </div>
   </section>
   <script>
   (function(){
@@ -2016,9 +2021,6 @@
 
   <!-- TWO DOORS — workers one way, employers the other -->
   <section id="two-doors" style="padding:18px 16px;text-align:center;position:relative">
-  <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden">
-    <img src="media-generation-dismukes-recruiting-logo-black-0-3776ee9f-a657-4691-9f5a-d18162a2ca7e.webp" alt="" style="max-width:96%;max-height:92%;width:auto;height:auto;opacity:.8;mix-blend-mode:screen">
-  </div>
     <div class="wrap" style="position:relative;z-index:1">
       <h2 style="margin:0 0 12px">Which door is yours?</h2>
       <div class="two-doors">
@@ -5523,7 +5525,26 @@ window.__ddPlayWithFallback = function(el, path, onFail){
     "Warehouse & Logistics": { badge:"On the job: hi-vis vest \u00b7 scanner \u00b7 steel toes", title:"Warehouse DD", desc:"hi-vis vest and work gloves on. Lift with the legs \u2014 pick Warehouse & Logistics and apply free.", line:"Warehouse mode \u2014 vest on, gloves on, lift with the legs." },
     "General Labor": { badge:"On the job: work gloves \u00b7 boots \u00b7 ready hands", title:"General labor DD", desc:"hi-vis vest and gloves on, boots laced, ready to work.", line:"General labor mode \u2014 gloves on, boots laced, ready to work." },
     "Legal": { badge:"On the job: suit \u00b7 case files", title:"Legal DD", desc:"suit on, case files under the arm. Facts first, always.", line:"Suit on, case files under the arm \u2014 legal mode. Facts first, always." },
-    "High-Income Careers": { badge:"On the job: sharp suit \u00b7 briefcase \u2014 the big-career look", title:"Big-career DD", desc:"sharp suit, briefcase, shoulders back. No salary is promised here \u2014 a real posting with real pay shows when an employer posts it.", line:"Big-career look: sharp suit, briefcase, shoulders back." }
+    "High-Income Careers": { badge:"On the job: sharp suit \u00b7 briefcase \u2014 the big-career look", title:"Big-career DD", desc:"sharp suit, briefcase, shoulders back. No salary is promised here \u2014 a real posting with real pay shows when an employer posts it.", line:"Big-career look: sharp suit, briefcase, shoulders back." },
+    "Painter": { badge:"On the job: painter whites \u00b7 roller \u00b7 drop cloth", title:"Painter DD", desc:"painter whites on, roller in hand \u2014 clean lines, steady hands. Cap and chain still his.", line:"Painter whites on \u2014 roller ready, lines straight. Same DD underneath." },
+    "Welder": { badge:"On the job: leather apron \u00b7 welding mask \u00b7 gloves", title:"Welder DD", desc:"leather apron on, mask down \u2014 sparks fly, DD stays steady. Cap and chain still his.", line:"Welder gear on \u2014 apron on, mask down. Sparks fly, I stay steady." },
+    "Sprayer": { badge:"On the job: spray suit \u00b7 hood \u00b7 respirator", title:"Sprayer DD", desc:"spray suit on, hood up \u2014 even coats, no runs. Cap and chain still his.", line:"Spray suit on \u2014 hood up, even coats only." },
+    "Nurse": { badge:"On the job: nurse scrubs \u00b7 stethoscope", title:"Nurse DD", desc:"scrubs on, stethoscope ready \u2014 kind hands, steady work. Cap and chain still his.", line:"Nurse mode \u2014 scrubs on, stethoscope ready." },
+    "Chef": { badge:"On the job: chef whites \u00b7 apron \u00b7 tray", title:"Chef DD", desc:"chef whites on, apron on \u2014 kitchen is open. Cap and chain still his.", line:"Chef mode \u2014 whites on, apron on." },
+    "Electrician": { badge:"On the job: hard hat \u00b7 tool belt \u00b7 voltage tester", title:"Electrician DD", desc:"hard hat on, belt loaded \u2014 power on, safety first. Cap and chain still his.", line:"Electrician mode \u2014 hard hat on, tester in hand." },
+    "Plumber": { badge:"On the job: blue coveralls \u00b7 wrench \u00b7 pipe dope", title:"Plumber DD", desc:"coveralls on, wrench in hand \u2014 leaks stop here. Cap and chain still his.", line:"Plumber mode \u2014 wrench in hand, leaks stop here." },
+    "Mechanic": { badge:"On the job: coveralls \u00b7 wrench \u00b7 name patch", title:"Mechanic DD", desc:"coveralls on, wrench turning \u2014 engines run right. Cap and chain still his.", line:"Mechanic mode \u2014 coveralls on, wrench turning." },
+    "Firefighter": { badge:"On the job: turnout gear \u00b7 helmet \u00b7 hose", title:"Firefighter DD", desc:"turnout gear on, helmet on \u2014 running toward the work. Cap and chain still his.", line:"Firefighter mode \u2014 turnout on, helmet on." },
+    "Police": { badge:"On the job: police uniform \u00b7 badge \u00b7 duty belt", title:"Police DD", desc:"uniform on, badge on \u2014 keeping the peace. Cap and chain still his.", line:"Police mode \u2014 uniform on, badge on." },
+    "Farmer": { badge:"On the job: denim overalls \u00b7 straw hat \u00b7 boots", title:"Farmer DD", desc:"overalls on, straw hat on \u2014 sun up, work done. Cap and chain still his.", line:"Farmer mode \u2014 overalls on, straw hat on." },
+    "Pilot": { badge:"On the job: pilot uniform \u00b7 cap \u00b7 wings", title:"Pilot DD", desc:"uniform on, wings on \u2014 cleared for takeoff. Cap and chain still his.", line:"Pilot mode \u2014 uniform on, wings on." },
+    "Sailor": { badge:"On the job: sailor whites \u00b7 neckerchief \u00b7 cap", title:"Sailor DD", desc:"whites on, cap on \u2014 steady on the water. Cap and chain still his.", line:"Sailor mode \u2014 whites on, cap on." },
+    "Soldier": { badge:"On the job: camo \u00b7 helmet \u00b7 boots", title:"Soldier DD", desc:"camo on, helmet on \u2014 standing tall. Cap and chain still his.", line:"Soldier mode \u2014 camo on, helmet on." },
+    "CEO": { badge:"On the job: sharp suit \u00b7 tie \u00b7 briefcase", title:"CEO DD", desc:"sharp suit on, briefcase in hand \u2014 running the show. Cap and chain still his.", line:"CEO mode \u2014 sharp suit on, briefcase in hand." },
+    "Scientist": { badge:"On the job: lab coat \u00b7 safety glasses", title:"Scientist DD", desc:"lab coat on, glasses on \u2014 testing, not guessing. Cap and chain still his.", line:"Scientist mode \u2014 lab coat on, glasses on." },
+    "Delivery": { badge:"On the job: driving jacket \u00b7 hi-vis stripes \u00b7 keys", title:"Delivery DD", desc:"jacket on, keys in hand \u2014 packages moving. Cap and chain still his.", line:"Delivery mode \u2014 jacket on, keys in hand." },
+    "Security": { badge:"On the job: security uniform \u00b7 badge \u00b7 radio", title:"Security DD", desc:"uniform on, badge on \u2014 watching the gate. Cap and chain still his.", line:"Security mode \u2014 uniform on, badge on." },
+    "Inspector": { badge:"On the job: white hard hat \u00b7 hi-vis vest \u00b7 clipboard", title:"Inspector DD", desc:"hard hat on, clipboard in hand \u2014 checking every inch. Cap and chain still his.", line:"Inspector mode \u2014 hard hat on, clipboard in hand." }
   };
   function dressAll(field){
     var key = KEYS[field] || "";
