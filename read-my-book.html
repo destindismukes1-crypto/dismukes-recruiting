@@ -92,6 +92,7 @@
   }
   .btn-solid{ background:var(--gold-bright); color:#171204; }
   .btn-ghost{ background:transparent; color:var(--cover-ink); }
+  .btn-dark{ background:var(--cover); color:var(--cover-ink); border-color:var(--cover); }
   .cover .names-line{ font-size:17px; color:#e8dcbc; margin:20px 0 0; max-width:620px; }
   .cover .bundle-note{ font-size:15px; color:#cbbd93; margin:14px 0 0; max-width:620px; }
   .cover .names-line strong{ color:var(--gold-bright); }
@@ -113,115 +114,10 @@
   }
   .intro-p{ color:var(--ink-soft); max-width:660px; margin:0 0 8px; }
 
-  /* ---------- READER ---------- */
-  .reader-shell{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:10px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-  }
-  .reader-bar{
-    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
-    padding:12px 16px;
-    border-bottom:1px solid var(--line);
-    background:var(--paper-2);
-  }
-  .reader-bar .pos{
-    font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--ink-soft);
-    margin-right:auto;
-  }
-  .tool-btn{
-    background:transparent; color:var(--ink);
-    border:1px solid var(--line); border-radius:6px;
-    padding:8px 14px; font-family:"IBM Plex Mono", monospace; font-size:14px;
-    min-width:44px;
-  }
-  .tool-btn:active{ background:var(--line); }
-  .progress{ height:5px; background:var(--line); }
-  .progress > div{ height:100%; background:var(--gold-bright); width:0%; transition:width .3s ease; }
-  .chapter-view{ padding:38px 26px 30px; }
-  @media (min-width:700px){ .chapter-view{ padding:52px 64px 40px; } }
-  .ch-num{
-    font-family:"IBM Plex Mono", monospace; font-size:13px; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--gold); margin:0 0 10px;
-  }
-  .chapter-view h3{
-    font-family:"Playfair Display", Georgia, serif;
-    font-size:clamp(30px,5.5vw,44px); font-weight:700; line-height:1.12; margin:0 0 8px;
-  }
-  .ch-drop{ width:44px; height:3px; background:var(--gold-bright); margin:18px 0 24px; }
-  .chapter-view p{ margin:0 0 1.15em; }
-  .chapter-view p:first-of-type::first-letter{
-    font-family:"Playfair Display", Georgia, serif;
-    font-size:3.1em; float:left; line-height:.85; padding:4px 10px 0 0; color:var(--gold);
-    font-weight:700;
-  }
-  .reader-nav{
-    display:flex; gap:12px; justify-content:space-between; align-items:stretch;
-    padding:16px; border-top:1px solid var(--line); background:var(--paper-2); flex-wrap:wrap;
-  }
-  .nav-btn{
-    flex:1 1 150px; background:var(--cover); color:var(--cover-ink);
-    border:none; border-radius:6px; padding:12px 16px;
-    font-family:"IBM Plex Mono", monospace; font-size:14px;
-  }
-  .nav-btn:disabled{ opacity:.35; cursor:default; }
-  .nav-btn small{ display:block; font-size:12px; color:#b7a97f; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-
-  /* ---------- QUICK LIST + SEARCH ---------- */
-  .quick-list{ display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
-  .quick-list button{
-    background:var(--card); color:var(--ink); border:1px solid var(--line);
-    border-radius:999px; padding:10px 18px; font-size:16px;
-  }
-  .quick-list button .qn{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--gold); margin-right:7px; }
-  .quick-list button:hover{ border-color:var(--gold-bright); }
-  .search-box{
-    margin-top:30px; border:1px solid var(--line); border-radius:10px;
-    background:var(--card); padding:22px 24px;
-  }
-  .search-box label{ font-family:"Playfair Display", Georgia, serif; font-size:21px; font-weight:700; display:block; margin-bottom:12px; }
-  .search-row{ display:flex; gap:10px; flex-wrap:wrap; }
-  .search-row input{
-    flex:1 1 240px; font:inherit; font-size:17px; padding:11px 14px;
-    border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink);
-    min-height:44px;
-  }
-  #searchResults{ margin-top:6px; }
-  .hit{
-    display:block; width:100%; text-align:left; background:none; border:none;
-    border-top:1px solid var(--line); padding:13px 4px; color:var(--ink);
-  }
-  .hit .ht{ font-family:"Playfair Display", Georgia, serif; font-weight:700; font-size:18px; }
-  .hit .hs{ display:block; color:var(--ink-soft); font-size:15px; margin-top:2px; }
-  .hit mark{ background:var(--gold-bright); color:#171204; padding:0 2px; border-radius:2px; }
-  .no-hits{ color:var(--ink-soft); padding:12px 0 2px; margin:0; }
-
-  /* ---------- MONEY, THE RIGHT WAY ---------- */
-  .path-list{ margin-top:22px; border-top:1px solid var(--line); }
-  .path-row{
-    display:grid; gap:6px; padding:22px 4px; border-bottom:1px solid var(--line);
-  }
-  @media (min-width:700px){ .path-row{ grid-template-columns: 240px 1fr; gap:26px; } }
-  .path-row h3{ font-family:"Playfair Display", Georgia, serif; font-size:23px; margin:0; }
-  .path-row h3 .step{ display:block; font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; font-weight:500;}
-  .path-row p{ margin:0 0 10px; color:var(--ink-soft); }
-  .path-row p strong{ color:var(--ink); }
-  .invite-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:4px; }
-  .copy-btn, .open-link{
-    display:inline-flex; align-items:center; justify-content:center;
-    border-radius:6px; padding:10px 18px; font-family:"IBM Plex Mono",monospace; font-size:14px;
-    text-decoration:none; min-height:44px;
-  }
-  .copy-btn{ background:var(--cover); color:var(--cover-ink); border:none; }
-  .open-link{ border:1px solid var(--gold); color:var(--ink); background:transparent; }
-  .copy-note{ font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--gold); }
-  .honest{
-    margin-top:24px; background:var(--paper-2); border:1px solid var(--line);
-    border-radius:10px; padding:20px 24px; color:var(--ink-soft); font-size:16px;
-  }
-  .honest strong{ color:var(--ink); }
+  /* ---------- BUY ---------- */
+  .buy-list{ display:grid; gap:12px; margin-top:22px; max-width:620px; }
+  .buy-list .btn{ justify-content:flex-start; padding:16px 22px; font-size:16px; }
+  .buy-note{ font-size:16px; color:var(--ink-soft); margin-top:18px; max-width:620px; }
 
   /* ---------- END LINKS ---------- */
   .end-links{ display:grid; gap:14px; margin-top:22px; }
@@ -233,23 +129,6 @@
   .end-link .el-t{ font-family:"Playfair Display", Georgia, serif; font-size:21px; font-weight:700; display:block; margin-bottom:6px;}
   .end-link .el-d{ color:var(--ink-soft); font-size:15px; display:block; }
   .end-link .el-go{ font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--gold); display:block; margin-top:12px; }
-
-  /* ---------- CONTENTS ---------- */
-  .toc{ list-style:none; margin:22px 0 0; padding:0; border-top:1px solid var(--line); }
-  .toc li{ border-bottom:1px solid var(--line); }
-  .toc button{
-    width:100%; background:none; border:none; text-align:left;
-    display:flex; align-items:baseline; gap:16px;
-    padding:15px 6px; color:var(--ink);
-  }
-  .toc .n{
-    font-family:"IBM Plex Mono", monospace; font-size:14px; color:var(--gold);
-    min-width:34px; flex:none;
-  }
-  .toc .t{ font-family:"Playfair Display", Georgia, serif; font-size:20px; font-weight:700; }
-  .toc .d{ display:block; font-family:"Source Serif 4", serif; font-size:15px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
-  .toc button:hover .t, .toc button:focus-visible .t{ color:var(--gold); }
-  .toc li.read .t::after{ content:" ✓ read"; font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--gold); font-weight:400;}
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -287,6 +166,13 @@
     font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--ink-soft);
     margin-top:16px;
   }
+  .copy-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    border-radius:6px; padding:10px 18px; font-family:"IBM Plex Mono",monospace; font-size:14px;
+    text-decoration:none; min-height:44px;
+    background:var(--cover); color:var(--cover-ink); border:none;
+  }
+  .copy-note{ font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--gold); }
 
   .colophon{
     margin:56px 0 0; padding:26px 0 44px; border-top:1px solid var(--line);
@@ -296,7 +182,6 @@
   :focus-visible{ outline:3px solid var(--gold-bright); outline-offset:2px; }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
-    .progress > div{transition:none}
   }
 </style>
 </head>
@@ -311,14 +196,15 @@
     <p class="names-line">Destin means <strong>destined</strong> — meant to be. Alexander means <strong>defender of men</strong>.</p>
     <p class="dedication">For my grandma, my guardian angel, still watching over me.</p>
     <div class="cover-actions">
-      <a class="btn btn-solid" href="#read" id="startBtn">Start reading</a>
-      <a class="btn btn-ghost" href="#contents">Table of contents</a>
-      <a class="btn btn-solid" href="https://buy.stripe.com/9B6cN66PKd9AcxE4o6gfu09">Get Both Books — $40</a>
+      <a class="btn btn-solid" href="https://buy.stripe.com/cNi28s2zu0mOgNU4o6gfu02">Buy Destin: Destined to Stand — $22.14</a>
+      <a class="btn btn-ghost" href="https://buy.stripe.com/bJe7sM3Dy1qSapw3k2gfu01">Buy Desoteric — $22.14</a>
+      <a class="btn btn-solid" href="https://buy.stripe.com/9B6cN66PKd9AcxE4o6gfu09">Buy both books — $40 (save $4.28)</a>
     </div>
     <p class="bundle-note">Both books together — $40. Save $4.28 vs $44.28 apart.</p>
     <div class="cover-meta">
-      <span>A new short coded edition — 14 chapters</span>
-      <span>The full original book — 65 chapters — stays published, untouched</span>
+      <span>67 chapters</span>
+      <span>About 32,432 words</span>
+      <span>My life, in my own words</span>
     </div>
   </div>
 </header>
@@ -343,49 +229,12 @@
     </div>
   </section>
 
-  <!-- FRONT CHAPTER LIST + SEARCH -->
-  <section aria-label="Chapters and search" style="padding-top:40px">
-    <h2>Jump to a chapter</h2>
-    <p class="intro-p">Every chapter, right up front. Tap one and the reader opens straight to it.</p>
-    <div class="quick-list" id="quickList"></div>
-
-    <div class="search-box">
-      <label for="searchInput">Find words in the book</label>
-      <div class="search-row">
-        <input type="search" id="searchInput" placeholder="Try “Alaska”, “river”, “soul”, “work”…" autocomplete="off" />
-        <button class="tool-btn" id="searchClear" type="button">Clear</button>
-      </div>
-      <div id="searchResults" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- READER -->
-  <section id="read" aria-label="Book reader">
-    <h2>Read the book</h2>
-    <p class="intro-p">One chapter at a time, the way it was lived — one day at a time. Use the arrows or the contents below to jump anywhere.</p>
-    <p class="intro-p">This coded edition is a new, short telling of the story — 14 chapters written fresh in code. It is <strong>not</strong> the full book. The complete original <em>Destined to Stand</em> — all 65 chapters — stays published exactly as it was: <a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/" target="_blank" rel="noopener">read the full original edition →</a></p>
-
-    <div class="reader-shell" style="margin-top:22px">
-      <div class="reader-bar">
-        <span class="pos" id="posLabel">Chapter 1 of 13</span>
-        <button class="tool-btn" id="fontDown" aria-label="Make text smaller">A−</button>
-        <button class="tool-btn" id="fontUp" aria-label="Make text bigger">A+</button>
-        <button class="tool-btn" id="tocJump">Contents</button>
-      </div>
-      <div class="progress" aria-hidden="true"><div id="progressFill"></div></div>
-      <article class="chapter-view" id="chapterView" tabindex="-1"></article>
-      <div class="reader-nav">
-        <button class="nav-btn" id="prevBtn">← Previous</button>
-        <button class="nav-btn" id="nextBtn">Next →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTENTS -->
-  <section id="contents" aria-label="Table of contents">
-    <h2>Contents</h2>
-    <p class="intro-p">Tap any chapter to open it in the reader.</p>
-    <ol class="toc" id="tocList"></ol>
+  <!-- ABOUT THE BOOK -->
+  <section aria-label="About the book">
+    <h2>About the book</h2>
+    <p class="intro-p">My life in my own words — 67 chapters, about 32,000 words.</p>
+    <p class="intro-p">A hard childhood in Alabama. Thirteen years blasting and painting across the country. The boat sinking on the James River. The 18-wheeler crash in Louisiana. Building Dismukes Recruiting in Tennessee. The Alaska goal. And the faith that carried me through.</p>
+    <p class="intro-p">This book is paid only. There are no free chapters here — tap a button below to buy it.</p>
   </section>
 
   <!-- ABOUT -->
@@ -412,75 +261,20 @@
 
     <blockquote class="pull">
       “The ending is not written. That’s the whole point of standing up — you get to write it yourself.”
-      <footer>— From Chapter 14, “The Ending Is Not Written”</footer>
+      <footer>— From Chapter 29, “The Ending Is Not Written”</footer>
     </blockquote>
   </section>
 
-  <!-- GET RICH THE RIGHT WAY -->
-  <section aria-label="How to get rich the right way">
-    <h2>How to get rich — the right way</h2>
-    <p class="intro-p">This is Chapter 13 as a working page: the actual paths Destin is building on. No schemes, no shortcuts, no promises — just real doors, and what each one honestly takes.</p>
-
-    <div class="path-list">
-      <div class="path-row">
-        <h3><span class="step">Path one</span>Dismukes Recruiting</h3>
-        <div>
-          <p><strong>The business.</strong> Destin connects painters, blasters, and crews to real employer jobs — workers apply free, employers pay to post. It’s a sole proprietorship with his name on it, built on one rule: no made-up jobs, pay as printed.</p>
-          <div class="invite-row">
-            <a class="open-link" href="https://dismukesrecruiting.com/" target="_blank" rel="noopener">Visit Dismukes Recruiting →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="path-row">
-        <h3><span class="step">Path two</span>His referral invites</h3>
-        <div>
-          <p><strong>OnePay.</strong> Join with Destin’s invite and add $500+ in direct deposits within 45 days, and you can earn $50 cash back (paid as points). Terms apply — the bonus only pays if you do what the app asks.</p>
-          <div class="invite-row">
-            <button class="copy-btn" type="button" data-copy="https://web.onepay.com/wlink/refer-a-friend?product=one_banking&referral_code=XPAbkefOY&referrer_campaign_id=campaign.8e50139f-839f-4274-ba41-dd991a0b0eb6">Copy OnePay invite</button>
-            <a class="open-link" href="https://web.onepay.com/wlink/refer-a-friend?product=one_banking&referral_code=XPAbkefOY&referrer_campaign_id=campaign.8e50139f-839f-4274-ba41-dd991a0b0eb6" target="_blank" rel="noopener">Open OnePay →</a>
-            <span class="copy-note" role="status"></span>
-          </div>
-          <p style="margin-top:18px"><strong>Cash App.</strong> Get $5 when you send $5+ with Cash App. Create your account with Destin’s code: <strong>V8L81J8</strong>. Terms apply.</p>
-          <div class="invite-row">
-            <button class="copy-btn" type="button" data-copy="https://cash.app/refer/V8L81J8">Copy Cash App invite</button>
-            <button class="copy-btn" type="button" data-copy="V8L81J8">Copy code V8L81J8</button>
-            <a class="open-link" href="https://cash.app/refer/V8L81J8" target="_blank" rel="noopener">Open Cash App →</a>
-            <span class="copy-note" role="status"></span>
-          </div>
-          <p style="margin-top:18px"><strong>Chime.</strong> Join Destin on Chime and get $100. Terms apply — read Chime’s terms on their page for what the offer requires.</p>
-          <div class="invite-row">
-            <button class="copy-btn" type="button" data-copy="https://www.chime.com/r/destindismukes1/?c=s">Copy Chime invite</button>
-            <a class="open-link" href="https://www.chime.com/r/destindismukes1/?c=s" target="_blank" rel="noopener">Open Chime →</a>
-            <span class="copy-note" role="status"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="path-row">
-        <h3><span class="step">Path three</span>This book</h3>
-        <div>
-          <p><strong>The story, working.</strong> <em>Destin: Destined to Stand</em> is his life in his own words — the original edition stays published as it is, and this coded edition carries it further. A story told honestly is an asset: it opens doors, brings people to the recruiting site, and stands long after a shift ends.</p>
-          <div class="invite-row">
-            <a class="open-link" href="#read">Read it from the top →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="path-row">
-        <h3><span class="step">Path four</span>DDS Space 16</h3>
-        <div>
-          <p><strong>The study community.</strong> Destin’s study &amp; exam prep site — physics, chemistry, biology, math, and English questions answered, with a question of the day, focus timer, and revision planner. Traffic and trust built by actually helping students, every day.</p>
-          <div class="invite-row">
-            <a class="open-link" href="https://dds-space-hub.base44.app" target="_blank" rel="noopener">Visit DDS Space 16 →</a>
-          </div>
-        </div>
-      </div>
+  <!-- BUY THE BOOK -->
+  <section aria-label="Buy the book">
+    <h2>Buy the book</h2>
+    <p class="intro-p">Tap a button to pay. The book is yours once you pay.</p>
+    <div class="buy-list">
+      <a class="btn btn-dark" href="https://buy.stripe.com/cNi28s2zu0mOgNU4o6gfu02">Buy Destin: Destined to Stand — $22.14</a>
+      <a class="btn btn-dark" href="https://buy.stripe.com/bJe7sM3Dy1qSapw3k2gfu01">Buy Desoteric — $22.14</a>
+      <a class="btn btn-solid" href="https://buy.stripe.com/9B6cN66PKd9AcxE4o6gfu09">Buy both books — $40 (save $4.28)</a>
     </div>
-
-    <div class="honest">
-      <strong>The honest print:</strong> none of this is guaranteed. Referral bonuses pay only when the person who joins meets that app’s terms — read them in the app. Recruiting earns when employers post and crews get hired. Books and sites earn when people show up. That’s the deal with the right way: it’s real, it’s slower, and it’s his.
-    </div>
+    <p class="buy-note">Both books together — $40. Save $4.28 vs $44.28 apart.</p>
   </section>
 
   <!-- END LINKS -->
@@ -501,9 +295,9 @@
   </section>
 
   <div class="colophon">
-    <span>Destin: Destined to Stand — new short coded edition (14 chapters)</span>
+    <span>Destin: Destined to Stand — 67 chapters</span>
     <span>By Destin Alexander Dismukes</span>
-    <span>The full original edition (65 chapters) remains published, untouched</span>
+    <span>About 32,432 words, in my own words</span>
   </div>
 
 </main>
@@ -511,257 +305,7 @@
 <script>
 (function(){
   "use strict";
-
-  var chapters = [
-    {
-      title: "The Boy Outside",
-      desc: "Where it started — nights outside, and words no child should hear.",
-      body: [
-        "I need to start where it started, because if I skip this part, the rest of it won’t make sense. I grew up hearing things from my own folks that no kid should ever hear. They told me they wished they had aborted me. Said it plain, like it was nothing.",
-        "There were nights I would rather sleep outside than be in that house. Night after night, outside — cold, tired, and still choosing the street over the people who were supposed to love me. A kid shouldn’t have to make that choice. I made it more times than I can count.",
-        "I’m not telling you this so you feel sorry for me. I’m telling you because everything I built later — the work, the traveling, the company, this book — it all stands on top of that boy outside. He didn’t quit. So I don’t get to quit either."
-      ]
-    },
-    {
-      title: "Trouble Learning in School",
-      desc: "Special-need classes, bad treatment, and learning by voice instead.",
-      body: [
-        "School was never built for the way my mind works. At North Mobile County Middle School I was put in special need classes, and instead of help, I got treated badly by the very teachers who were supposed to teach me. That stays with a kid. You start believing the problem is you.",
-        "The problem was never that I couldn’t learn. I have ADHD, and reading off a page has never been my road in. My road in is my ears and my hands — hear it, say it, do it. Once somebody shows me, I’ve got it. On a job site, that made me fast. In a classroom, it made me invisible.",
-        "So I stopped waiting on classrooms. I learned the coatings trade by voice and by work, learned business by talking to people, and learned my own story by telling it out loud. This whole book exists the way I learn — spoken first, written second."
-      ]
-    },
-    {
-      title: "Quiet Hurt",
-      desc: "The kind of pain that doesn’t make noise.",
-      body: [
-        "Not all hurt is loud. Some of it just sits quiet in a man while he goes to work, pays what he can, smiles when he’s supposed to. That was me for years — treated badly my whole life, and mostly quiet about it.",
-        "Quiet hurt will fool people. They think because you’re standing, you’re fine. They think because you’re working, it doesn’t weigh anything. It weighs plenty. I just learned to carry it the way I carry everything else — one shift at a time.",
-        "Writing this down is me putting the weight where people can see it. Not to complain. To be honest. A man can’t stand all the way up while he’s pretending the load isn’t there."
-      ]
-    },
-    {
-      title: "James River, 2023",
-      desc: "Work on the water, and what the river taught me.",
-      body: [
-        "In 2023 my work took me to the James River in Virginia, and that job is one I still think about. There’s something about working over moving water that puts a man’s whole life in front of him. The river doesn’t stop for anybody. You respect it or it teaches you why you should have.",
-        "I was a coatings hand — blasting, painting, doing the work right when nobody was watching. That’s where my pride lives. Anybody can look good when the boss is standing there. The test is the surface nobody will ever see again after it’s coated over.",
-        "The river taught me the same lesson my life kept teaching: keep moving, keep your footing, and don’t let the current decide where you end up. You decide."
-      ]
-    },
-    {
-      title: "What the Work Looked Like",
-      desc: "Thirteen years of blasting, coating, and showing up.",
-      body: [
-        "Let me tell you what the work actually looked like, because people hear ‘coatings’ and picture a man with a paintbrush. It looked like blast pots and nozzles — my own equipment. It looked like containment, dust, heat, heights, and surfaces that had to be perfect because ships and plants and people’s lives depend on what’s under the paint.",
-        "Thirteen years of it. OSHA 10. C7. C12. Traveling work, plant work, yard work — wherever the job was, that’s where I went. I earned every bit of it with my hands, and nobody handed me any of it.",
-        "Work was the one place the world made sense to me. You prep it right, you spray it right, it holds. Life doesn’t always work that fair. But the work taught me my standard: do it like it matters, because it does."
-      ]
-    },
-    {
-      title: "The States in My Shoes",
-      desc: "Alabama, Virginia, California, Georgia, Louisiana — and everywhere between.",
-      body: [
-        "If you want to know me, look at the map I’ve walked. Alabama raised me. Virginia put me on the James River. California, Georgia, Louisiana — I’ve lived and worked in all of them, and every state left something in my shoes.",
-        "Traveling work means you learn to stand on your own in places where nobody knows your name. That’s a lonely skill, but it’s a real one. I’ve been the new hand in the yard more times than I can count, and I’ve earned respect in every one of them the same way: show up, work hard, don’t run your mouth about what you can’t do.",
-        "Every state also taught me the workers are the same everywhere — good people, trying to get paid right and get home safe. That’s who I recruit for now. I’ve been them in five states and counting."
-      ]
-    },
-    {
-      title: "Fast Water",
-      desc: "When life moves quick and you have to move with it.",
-      body: [
-        "Some seasons of life are slow water. You can see the bottom, take your time, pick your steps. And some seasons are fast water — money moving, people moving, trouble moving — and if you freeze up, it takes you where it wants.",
-        "I’ve been in fast water more than once. Checks that came and went. People who smiled and meant none of it. Doors that opened just enough to close in my face. Fast water will teach you who you are, because there’s no time to fake it.",
-        "Here’s what I learned in it: keep your feet under you, keep your eyes on the far bank, and don’t grab at everything floating past. Some of what floats by looks like help and isn’t. Stand, step, stand again. That’s the whole technique — in a river and in a life."
-      ]
-    },
-    {
-      title: "Figuring the Soul Out",
-      desc: "Questions I asked in the dark, and answers that came slow.",
-      body: [
-        "There came a point where the questions got bigger than work and money. Why am I here? What was all that hurt for? Is there something on the other side of all this standing, or is standing the whole thing?",
-        "I don’t have it all figured out, and anybody who says they do is selling something. But I’ve figured out this much: my soul didn’t break under what happened to me. It got shaped by it. There’s a difference, and the difference is everything.",
-        "Figuring the soul out isn’t a test you pass. It’s a conversation you stay in — with God, with yourself, with the people who actually show up for you. I’m still in it. I plan to stay in it."
-      ]
-    },
-    {
-      title: "Finding the Divine",
-      desc: "Faith that met me outside, not inside four walls.",
-      body: [
-        "Nobody handed me my faith in a building. I found the divine the same place I found everything else — outside, working, looking up. On dawn shifts. On long drives between states. In the quiet after hard days, when it would have been easier to believe in nothing.",
-        "I’ve seen too much line up to call it all accident. The right person at the right moment. The door that opened after a hundred closed. The fact that I’m still here at all, after the start I got — that one alone will preach.",
-        "Finding the divine didn’t make me soft. It made me stand straighter. A man who believes he was made on purpose walks different than a man who thinks he’s a mistake. I was told I was a mistake. I don’t believe it anymore."
-      ]
-    },
-    {
-      title: "Trust by Patterns",
-      desc: "Believe what people do over and over — not what they say once.",
-      body: [
-        "I used to trust words. Words are cheap and I paid full price for that lesson, more than once — in work, in money, in people I called family and people I called friends.",
-        "Now I trust patterns. One good day is weather. What a person does over and over, that’s climate. Watch what repeats. The one who shows up once is being nice. The one who shows up every time — that’s who they are.",
-        "It works the other way too, and I hold myself to it: if you want to know who I am, don’t listen to this book. Watch my pattern. I show up. I work. I build. That’s the pattern, and it’s been running a long time."
-      ]
-    },
-    {
-      title: "A Door for Other Workers",
-      desc: "Why Dismukes Recruiting exists.",
-      body: [
-        "Here’s what thirteen years on the road teaches you: the workers are out there, and the good jobs are out there, and half the time they never find each other. Men with real skills sit home while yards run short, because nobody who’s actually done the work is doing the connecting.",
-        "So I built the door myself. Dismukes Recruiting — one man, my name on it, connecting painters, blasters, and crews to real work. No made-up jobs. Pay as printed. I don’t post what I can’t stand behind, because I’ve been the man reading those postings, hoping they were real.",
-        "That’s the turn in my story I’m proudest of. The boy nobody would open a door for grew up and started building doors. If you’re a worker and you’re reading this: the door is for you."
-      ]
-    },
-    {
-      title: "Long Light, Long Dark",
-      desc: "Alaska on my mind — dawn that stays, and cold that tests.",
-      body: [
-        "Alaska stays on my mind. A place where the light can last near all day, and so can the dark — long light, long dark, nothing in between pretending. There’s an honesty to a place like that. It doesn’t do halfway, and neither do I.",
-        "I want the inspector work, the QA work — to take everything my hands know about coatings and turn it into the eye that signs off on it being right. Employer-sponsored training, per diem, travel — I’ve lived that life already. Alaska is just the biggest version of it.",
-        "Maybe I get there and maybe the road bends somewhere else first. Either way, a man needs a far shore to aim at. Mine has long light on it."
-      ]
-    },
-    {
-      title: "The Right Way Up",
-      desc: "Getting rich the right way — real work, real doors, no shortcuts.",
-      body: [
-        "Let me say this plain, because I’ve had every shortcut waved in my face: there is no code, no trick, and no scheme that makes a man rich the right way overnight. Anybody promising you that is selling you the rope they’ll hang your account with. I won’t do it, and this book won’t either.",
-        "Here’s my actual road up, and it’s not a secret. Work a real trade and get so good they have to pay you. Build a business with your name on it — mine is Dismukes Recruiting — and never post a job or a price you can’t stand behind. Put your story in a book and let it work while you sleep. Teach and build spaces like DDS Space 16 where people come back every day. And share the honest invites — banking and Cash App referrals — where everybody who joins right gets something and nobody gets played.",
-        "Slow money spends the same as fast money, and it lets you sleep. I’d rather stack it the right way, brick by brick, standing — than grab it the wrong way and spend the rest of my life looking over my shoulder. The right way up is the only way that stays up."
-      ]
-    },
-    {
-      title: "The Ending Is Not Written",
-      desc: "The last word — which is really the first word of what’s next.",
-      body: [
-        "People who hear my story sometimes talk like it’s already over — like the hard start decided the whole book. It didn’t. It decided the first chapters. That’s all a start ever gets to decide, if a man refuses to hand it the pen.",
-        "I’ve got a company with my name on it. I’ve got skills nobody can take off me. I’ve got this book — my story in my own words, in code now too, so it can go places my feet haven’t been yet. The original stands, and this stands next to it, and I’m still standing in front of both of them.",
-        "So here’s the ending, which isn’t one: I was destined to stand. Not because it was easy, and not because anybody carried me — because every time life put me down, outside, in the dark, in fast water, I got up one more time than it knocked me down. The ending is not written. I’m writing it now."
-      ]
-    }
-  ];
-
-  var current = 0;
-  var readSet = {};
-  var fontScale = 1;
-
-  var view = document.getElementById("chapterView");
-  var posLabel = document.getElementById("posLabel");
-  var fill = document.getElementById("progressFill");
-  var prevBtn = document.getElementById("prevBtn");
-  var nextBtn = document.getElementById("nextBtn");
-  var tocList = document.getElementById("tocList");
-
-  function romanPad(n){ return "Chapter " + n; }
-
-  function render(){
-    var ch = chapters[current];
-    readSet[current] = true;
-    var html = '<p class="ch-num">' + romanPad(current + 1) + ' of ' + chapters.length + '</p>' +
-      '<h3>' + ch.title + '</h3><div class="ch-drop"></div>';
-    for (var i = 0; i < ch.body.length; i++){
-      html += '<p>' + ch.body[i] + '</p>';
-    }
-    view.innerHTML = html;
-    view.style.fontSize = (18 * fontScale) + "px";
-    posLabel.textContent = "Chapter " + (current + 1) + " of " + chapters.length + " — " + ch.title;
-    fill.style.width = (((current + 1) / chapters.length) * 100) + "%";
-
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === chapters.length - 1;
-    prevBtn.innerHTML = "← Previous" + (current > 0 ? "<small>" + chapters[current-1].title + "</small>" : "");
-    nextBtn.innerHTML = "Next →" + (current < chapters.length - 1 ? "<small>" + chapters[current+1].title + "</small>" : "");
-
-    var items = tocList.children;
-    for (var j = 0; j < items.length; j++){
-      if (readSet[j]) items[j].classList.add("read");
-    }
-  }
-
-  function goTo(idx, focus){
-    current = Math.max(0, Math.min(chapters.length - 1, idx));
-    render();
-    document.getElementById("read").scrollIntoView({behavior:"smooth", block:"start"});
-    if (focus) view.focus({preventScroll:true});
-  }
-
-  // Build TOC
-  chapters.forEach(function(ch, i){
-    var li = document.createElement("li");
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.innerHTML = '<span class="n">' + String(i+1).padStart(2,"0") + '</span>' +
-      '<span><span class="t">' + ch.title + '</span><span class="d">' + ch.desc + '</span></span>';
-    btn.addEventListener("click", function(){ goTo(i, true); });
-    li.appendChild(btn);
-    tocList.appendChild(li);
-  });
-
-  prevBtn.addEventListener("click", function(){ goTo(current - 1, false); });
-  nextBtn.addEventListener("click", function(){ goTo(current + 1, false); });
-  document.getElementById("startBtn").addEventListener("click", function(){ goTo(0, false); });
-  document.getElementById("tocJump").addEventListener("click", function(){
-    document.getElementById("contents").scrollIntoView({behavior:"smooth"});
-  });
-  document.getElementById("fontUp").addEventListener("click", function(){
-    fontScale = Math.min(1.4, fontScale + 0.1); render();
-  });
-  document.getElementById("fontDown").addEventListener("click", function(){
-    fontScale = Math.max(0.85, fontScale - 0.1); render();
-  });
-  document.addEventListener("keydown", function(e){
-    if (e.key === "ArrowRight") goTo(current + 1, false);
-    if (e.key === "ArrowLeft") goTo(current - 1, false);
-  });
-
-  // ---- Front quick chapter list ----
-  var quickList = document.getElementById("quickList");
-  chapters.forEach(function(ch, i){
-    var b = document.createElement("button");
-    b.type = "button";
-    b.innerHTML = '<span class="qn">' + String(i+1).padStart(2,"0") + '</span>' + ch.title;
-    b.addEventListener("click", function(){ goTo(i, true); });
-    quickList.appendChild(b);
-  });
-
-  // ---- Search the book ----
-  var searchInput = document.getElementById("searchInput");
-  var searchResults = document.getElementById("searchResults");
-  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-  function runSearch(){
-    var q = searchInput.value.trim().toLowerCase();
-    searchResults.innerHTML = "";
-    if (q.length < 2) return;
-    var found = 0;
-    chapters.forEach(function(ch, i){
-      var hay = (ch.title + " " + ch.body.join(" ")).toLowerCase();
-      var pos = hay.indexOf(q);
-      if (pos === -1) return;
-      found++;
-      var full = ch.title + " — " + ch.body.join(" ");
-      var start = Math.max(0, pos - 55);
-      var snippet = (start > 0 ? "…" : "") + full.slice(start, pos + q.length + 75) + "…";
-      var rel = snippet.toLowerCase().indexOf(q);
-      var marked = esc(snippet.slice(0, rel)) + "<mark>" + esc(snippet.slice(rel, rel + q.length)) + "</mark>" + esc(snippet.slice(rel + q.length));
-      var btn = document.createElement("button");
-      btn.type = "button"; btn.className = "hit";
-      btn.innerHTML = '<span class="ht">Chapter ' + (i+1) + ": " + esc(ch.title) + '</span><span class="hs">' + marked + "</span>";
-      btn.addEventListener("click", function(){ goTo(i, true); });
-      searchResults.appendChild(btn);
-    });
-    if (!found){
-      var p = document.createElement("p");
-      p.className = "no-hits";
-      p.textContent = "No matches for “" + searchInput.value.trim() + "” in the book yet.";
-      searchResults.appendChild(p);
-    }
-  }
-  searchInput.addEventListener("input", runSearch);
-  document.getElementById("searchClear").addEventListener("click", function(){
-    searchInput.value = ""; searchResults.innerHTML = ""; searchInput.focus();
-  });
-
-  // ---- Copy invite buttons ----
+  // ---- Copy tip buttons ----
   var copyBtns = document.querySelectorAll("[data-copy]");
   for (var c = 0; c < copyBtns.length; c++){
     (function(btn){
@@ -782,8 +326,6 @@
       });
     })(copyBtns[c]);
   }
-
-  render();
 })();
 </script>
 <script data-goatcounter="https://dismukesrecruiting.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
