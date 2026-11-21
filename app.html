@@ -197,6 +197,8 @@
       .btn-gold { background: var(--gold-bright); color: #171410; }
       .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
       .btn-sm { min-height: 42px; padding: 8px 14px; font-size: 0.92rem; }
+      .doors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+      .doors .door { flex: 1 1 200px; text-align: center; font-weight: 700; padding: 13px 16px; font-size: 1rem; }
 
       /* ---------- job cards ---------- */
       .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -654,6 +656,10 @@
               <div class="dd-hero-actions">
                 <a class="btn btn-gold btn-sm" href="#closet">See DD’s closet</a>
                 <a class="btn btn-accent btn-sm" href="tel:+12514224242">Call DD</a>
+              </div>
+              <div class="doors" role="group" aria-label="Two doors — looking for work, or looking for workers">
+                <a class="btn btn-gold door" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">I&rsquo;m Looking for Work</a>
+                <a class="btn btn-accent door" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">I&rsquo;m Looking for Workers</a>
               </div>
             </div>
           </div>
@@ -1700,36 +1706,22 @@
 
         /* ============ Daily verse — Day 1 is Luke 17:21, Nov 11, 2026 ============ */
         var VERSES = [
-          { t: "Neither shall they say, Lo here! or, lo there! for, behold, the kingdom of God is within you.", r: "Luke 17:21" },
+          { t: "Behold, the kingdom of God is within you.", r: "Luke 17:21" },
           { t: "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.", r: "Joshua 1:9" },
-          { t: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.", r: "Isaiah 40:31" },
-          { t: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", r: "Proverbs 3:5–6" },
-          { t: "This is the day which the LORD hath made; we will rejoice and be glad in it.", r: "Psalm 118:24" },
-          { t: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.", r: "Romans 8:28" },
-          { t: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.", r: "Jeremiah 29:11" },
           { t: "The LORD is my shepherd; I shall not want.", r: "Psalm 23:1" },
+          { t: "Trust in the LORD with all thine heart; and lean not unto thine own understanding.", r: "Proverbs 3:5" },
+          { t: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee.", r: "Isaiah 41:10" },
+          { t: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.", r: "Jeremiah 29:11" },
+          { t: "And we know that all things work together for good to them that love God.", r: "Romans 8:28" },
+          { t: "The LORD is my light and my salvation; whom shall I fear?", r: "Psalm 27:1" },
           { t: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", r: "Matthew 11:28" },
-          { t: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", r: "2 Timothy 1:7" },
           { t: "God is our refuge and strength, a very present help in trouble.", r: "Psalm 46:1" },
-          { t: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", r: "Isaiah 41:10" },
-          { t: "I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life.", r: "John 8:12" },
-          { t: "Now faith is the substance of things hoped for, the evidence of things not seen.", r: "Hebrews 11:1" },
-          { t: "Delight thyself also in the LORD; and he shall give thee the desires of thine heart.", r: "Psalm 37:4" },
-          { t: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.", r: "Matthew 6:33" },
-          { t: "And let us not be weary in well doing: for in due season we shall reap, if we faint not.", r: "Galatians 6:9" },
-          { t: "I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth.", r: "Psalm 121:1–2" },
-          { t: "He hath shewed thee, O man, what is good; and what doth the LORD require of thee, but to do justly, and to love mercy, and to walk humbly with thy God?", r: "Micah 6:8" },
+          { t: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles.", r: "Isaiah 40:31" },
+          { t: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", r: "2 Timothy 1:7" },
           { t: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", r: "John 3:16" },
-          { t: "It is of the LORD’s mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.", r: "Lamentations 3:22–23" },
-          { t: "The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.", r: "Zephaniah 3:17" },
-          { t: "Let the words of my mouth, and the meditation of my heart, be acceptable in thy sight, O LORD, my strength, and my redeemer.", r: "Psalm 19:14" },
-          { t: "Watch ye, stand fast in the faith, quit you like men, be strong.", r: "1 Corinthians 16:13" },
-          { t: "And the LORD, he it is that doth go before thee; he will be with thee, he will not fail thee, neither forsake thee: fear not, neither be dismayed.", r: "Deuteronomy 31:8" },
-          { t: "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.", r: "John 14:27" },
-          { t: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", r: "Psalm 34:18" },
-          { t: "When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.", r: "Isaiah 43:2" },
-          { t: "With men this is impossible; but with God all things are possible.", r: "Matthew 19:26" },
-          { t: "Commit thy works unto the LORD, and thy thoughts shall be established.", r: "Proverbs 16:3" }
+          { t: "This is the day which the LORD hath made; we will rejoice and be glad in it.", r: "Psalm 118:24" },
+          { t: "In all thy ways acknowledge him, and he shall direct thy paths.", r: "Proverbs 3:6" },
+          { t: "I can do all things through Christ which strengtheneth me.", r: "Philippians 4:13" }
         ];
 
         var anchor = new Date(2026, 10, 11); /* Nov 11, 2026 — launch day, Day 1 */
@@ -1746,10 +1738,19 @@
         var verseDate = document.getElementById("verseDate");
         var verseDay = document.getElementById("verseDay");
 
+        /* Verse of the Day — same 16 verses and same day-of-year rotation
+           as the main site, so the same day shows the same verse on both
+           pages. idx is days since the Nov 11, 2026 launch anchor. */
         function verseFor(idx) {
-          var n = VERSES.length;
-          return VERSES[((idx % n) + n) % n];
+          var d = new Date(anchor.getTime() + idx * 86400000);
+          var start = new Date(d.getFullYear(), 0, 0);
+          var doy = Math.floor((d - start) / 86400000);
+          return VERSES[doy % VERSES.length];
         }
+        /* Recording for each verse, by reference — same map as the main
+           site. Proverbs 3:5 and 3:6 share the 3:5-6 recording; Psalm 27:1
+           has its own (verse-31); Philippians 4:13 uses seg-verse. */
+        var VERSE_AUDIO = { "Luke 17:21": "assets/audio/verse-01.mp3", "Joshua 1:9": "assets/audio/verse-02.mp3", "Psalm 23:1": "assets/audio/verse-08.mp3", "Proverbs 3:5": "assets/audio/verse-04.mp3", "Isaiah 41:10": "assets/audio/verse-12.mp3", "Jeremiah 29:11": "assets/audio/verse-07.mp3", "Romans 8:28": "assets/audio/verse-06.mp3", "Psalm 27:1": "assets/audio/verse-31.mp3", "Matthew 11:28": "assets/audio/verse-09.mp3", "Psalm 46:1": "assets/audio/verse-11.mp3", "Isaiah 40:31": "assets/audio/verse-03.mp3", "2 Timothy 1:7": "assets/audio/verse-10.mp3", "John 3:16": "assets/audio/verse-20.mp3", "Psalm 118:24": "assets/audio/verse-05.mp3", "Proverbs 3:6": "assets/audio/verse-04.mp3", "Philippians 4:13": "assets/voice/seg-verse.mp3" };
         function renderVerse() {
           var v = verseFor(viewIdx);
           verseText.textContent = "“" + v.t + "”";
@@ -1899,6 +1900,16 @@
         var playQueue = [];
         var playPos = 0;
         function pad2(n) { return (n < 10 ? "0" : "") + n; }
+        /* Audio hardening: always fully reset the one shared player before
+           a new clip — pause, rewind, drop the old source — so the tail of
+           the last reading can't keep playing and one bad or stalled clip
+           can't wedge the player silent until a fresh tab. A failed play
+           never throws into a click handler. */
+        function resetDdAudio() {
+          try { ddAudio.pause(); } catch (e) {}
+          try { ddAudio.currentTime = 0; } catch (e) {}
+          try { ddAudio.removeAttribute("src"); ddAudio.load(); } catch (e) {}
+        }
         /* Play the queue of {src, text} recordings one after another.
            The bubble shows each recording's words as it plays. */
         function playCurrent(token, btn, lblEl, offTxt) {
@@ -1931,9 +1942,19 @@
               playCurrent(token, btn, lblEl, offTxt);
             }, wait);
           };
+          ddAudio.onstalled = function () {
+            if (token !== speakSeq) return;
+            /* A stalled load frees the player and moves on instead of
+               leaving it wedged silent. */
+            resetDdAudio();
+            playPos++;
+            playCurrent(token, btn, lblEl, offTxt);
+          };
+          resetDdAudio();
           ddAudio.src = item.src;
+          try { ddAudio.load(); } catch (e) {}
           var p = ddAudio.play();
-          if (p && p.catch) p.catch(function () {});
+          if (p && p.catch) p.catch(function () { resetDdAudio(); });
         }
         function playItems(items, btn, lblEl, offTxt) {
           if (speakingBtn === btn) { stopSpeak(); return; }
@@ -2015,7 +2036,8 @@
           ddAudio.onended = null;
           ddAudio.onerror = null;
           ddAudio.onloadedmetadata = null;
-          try { ddAudio.pause(); } catch (e) {}
+          ddAudio.onstalled = null;
+          resetDdAudio();
           resetBtns();
           bubbleHide();
         }
@@ -2038,8 +2060,8 @@
         });
         listenBtn.addEventListener("click", function () {
           var v = verseFor(viewIdx);
-          var vi = ((viewIdx % VERSES.length) + VERSES.length) % VERSES.length;
-          speak({ src: "assets/audio/verse-" + pad2(vi + 1) + ".mp3", text: v.t + " " + v.r + "." }, listenBtn, document.getElementById("listenLbl"), "DD reads it");
+          var src = VERSE_AUDIO[v.r] || "assets/voice/seg-verse.mp3";
+          speak({ src: src, text: v.t + " " + v.r + "." }, listenBtn, document.getElementById("listenLbl"), "DD reads it");
         });
         radioBtn.addEventListener("click", function () {
           speak({ src: "assets/audio/radio.mp3", text: document.getElementById("radioScript").textContent }, radioBtn, document.getElementById("radioListenLbl"), "DD reads the script");

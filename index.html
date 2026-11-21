@@ -172,6 +172,9 @@
         margin: 20px 0 28px; max-width: 34em;
       }
       .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+      .doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+      .doors .door { flex: 1 1 220px; text-align: center; font-size: 1.15rem; font-weight: 700; padding: 16px 20px; }
+      .hero .doors .btn-ghost { color: #f2f5f7; border-color: #f2f5f7; }
       .hero .btn-ghost { color: #f2f5f7; }
       .cred-row {
         display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 36px;
@@ -662,6 +665,10 @@
               <a class="btn btn-ghost" href="#jobs">See the jobs</a>
               <a class="btn btn-accent" href="app.html">Open the App</a>
             </div>
+            <div class="doors" role="group" aria-label="Two doors — looking for work, or looking for workers">
+              <a class="btn btn-accent door" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">I&rsquo;m Looking for Work</a>
+              <a class="btn btn-ghost door" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">I&rsquo;m Looking for Workers</a>
+            </div>
             <div class="cred-row" aria-label="Credentials">
               <span><b>13 years</b> in coatings</span>
               <span><b>OSHA 10</b></span>
@@ -730,7 +737,7 @@
               <a class="btn btn-ghost" href="#jobs">See the jobs</a>
             </p>
             <p style="margin-top:12px;">
-              <button class="section-read-btn on-dark" type="button" id="hearDdBtn" onclick="if(window.__ddStop){window.__ddStop();}var a=document.getElementById('destinRecordedAudio');a.currentTime=0;a.onended=function(){var s=document.getElementById('readStatus');if(s)s.textContent='Done. Tap Hear DD to hear it again.';};a.play();var s=document.getElementById('readStatus');if(s)s.textContent='Playing \u2014 Destin\u0027s own voice.';">&#9654; Hear DD — Destin's own voice</button>
+              <button class="section-read-btn on-dark" type="button" id="hearDdBtn" onclick="if(window.__ddStop){window.__ddStop();}var a=document.getElementById('destinRecordedAudio');a.currentTime=0;a.onended=function(){var s=document.getElementById('readStatus');if(s)s.textContent='Done. Tap Hear DD to hear it again.';};var __p=a.play();if(__p&&__p.catch)__p.catch(function(){});var s=document.getElementById('readStatus');if(s)s.textContent='Playing \u2014 Destin\u0027s own voice.';">&#9654; Hear DD — Destin's own voice</button>
               <audio id="destinRecordedAudio" src="destin-dd-voice.mp3" preload="none"></audio>
             </p>
             <button class="section-read-btn on-dark" type="button" data-read-target="dd-truck">&#9654; Read this part</button>
@@ -1142,7 +1149,7 @@
               </div>
               <p class="note">Show finisher painting at Walt Disney World in Orlando — keeping the park&#x27;s surfaces looking like new.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="https://www.indeed.com/viewjob?jk=98c376e8394ef749" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=56EFDC722CBA4DF69000B3DE956ED3E3206" target="_blank" rel="noopener">See the original posting</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
               </div>
             </article>
@@ -1822,7 +1829,7 @@
               </div>
               <p class="note">Second-shift painting and blasting at Celeros Flow Technology in Houston, with the shift differential printed on top of the rate. Pay as printed: $25 – $26/hour plus $2.50/hour shift differential.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="https://jooble.org/jdp/-1042978031480611870" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-accent btn-sm" href="https://jooble.org/jdp/7396490157767788415" target="_blank" rel="noopener">See the original posting</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
               </div>
             </article>
@@ -2416,15 +2423,26 @@
           if (ddDockEl) ddDockEl.classList.toggle("reading", !!on);
           if (!on && ddBubble) ddBubble.textContent = ddBubbleHome;
         }
-        function stopAllVoices() {
+        /* Audio hardening: one shared player, always fully reset before a
+           new clip — pause, rewind, drop the old source, then load the new
+           one fresh. The old code only paused the player, so the tail of the
+           previous reading could keep playing, and a bad clip (or a play
+           interrupted mid-load) could wedge the player so nothing played
+           again until a fresh tab. A failed play never throws into a click
+           handler and never blocks the other buttons. */
+        function resetPlayer() {
           try { player.pause(); } catch (e) {}
+          try { player.currentTime = 0; } catch (e) {}
+          try { player.removeAttribute("src"); player.load(); } catch (e) {}
+        }
+        function stopAllVoices() {
+          resetPlayer();
           Array.prototype.forEach.call(document.querySelectorAll("audio, video"), function (el) {
             if (el !== player) { try { el.pause(); } catch (e) {} }
           });
         }
         function stopReading(msg) {
           stopAllVoices();
-          try { player.removeAttribute("src"); player.load(); } catch (e) {}
           ddReading(false);
           if (msg) setStatus(msg);
         }
@@ -2435,8 +2453,10 @@
           ddReading(true);
           setStatus(lastStatus || "DD is reading… tap Stop any time.");
           player.src = src;
+          try { player.load(); } catch (e) {}
           var pr = player.play();
           if (pr && pr.catch) pr.catch(function () {
+            resetPlayer();
             ddReading(false);
             setStatus("That recording could not play just now — tap the read button to try it again.");
           });
@@ -2447,8 +2467,18 @@
         });
         player.addEventListener("error", function () {
           if (player.getAttribute("src")) {
+            resetPlayer();
             ddReading(false);
             setStatus("That recording could not play just now — tap the read button to try it again.");
+          }
+        });
+        /* If the browser stalls mid-load (the wedged-tab symptom), drop the
+           clip and free the player instead of leaving it stuck silent. */
+        player.addEventListener("stalled", function () {
+          if (player.getAttribute("src")) {
+            resetPlayer();
+            ddReading(false);
+            setStatus("That recording stalled — tap the read button to try it again.");
           }
         });
         // Other parts of the page (DD's jokes, the career closet, the
@@ -2505,7 +2535,7 @@
         if (pauseBtn) pauseBtn.addEventListener("click", function () {
           var rec = document.getElementById("destinRecordedAudio");
           if (rec && !rec.paused && !rec.ended) { rec.pause(); setStatus("Paused."); return; }
-          if (rec && rec.paused && rec.currentTime > 0 && !rec.ended && !player.getAttribute("src")) { rec.play(); setStatus("Playing \u2014 Destin's own voice."); return; }
+          if (rec && rec.paused && rec.currentTime > 0 && !rec.ended && !player.getAttribute("src")) { var __rp = rec.play(); if (__rp && __rp.catch) __rp.catch(function () {}); setStatus("Playing \u2014 Destin's own voice."); return; }
           if (!player.getAttribute("src")) return;
           if (!player.paused && !player.ended) { player.pause(); setStatus("Paused."); }
           else if (player.paused && !player.ended) {
