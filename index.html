@@ -2382,9 +2382,9 @@
           // the recording for the verse actually on screen — not the one
           // fixed Philippians 4:13 recording. Files live in assets/audio/
           // (the app's per-verse recordings). Proverbs 3:5 and 3:6 share
-          // the 3:5-6 recording; Psalm 27:1 has no recording yet, so on
-          // that day the button honestly says it plays Philippians 4:13.
-          var VERSE_AUDIO = { "Luke 17:21": "assets/audio/verse-01.mp3", "Joshua 1:9": "assets/audio/verse-02.mp3", "Psalm 23:1": "assets/audio/verse-08.mp3", "Proverbs 3:5": "assets/audio/verse-04.mp3", "Isaiah 41:10": "assets/audio/verse-12.mp3", "Jeremiah 29:11": "assets/audio/verse-07.mp3", "Romans 8:28": "assets/audio/verse-06.mp3", "Matthew 11:28": "assets/audio/verse-09.mp3", "Psalm 46:1": "assets/audio/verse-11.mp3", "Isaiah 40:31": "assets/audio/verse-03.mp3", "2 Timothy 1:7": "assets/audio/verse-10.mp3", "John 3:16": "assets/audio/verse-20.mp3", "Psalm 118:24": "assets/audio/verse-05.mp3", "Proverbs 3:6": "assets/audio/verse-04.mp3", "Philippians 4:13": "assets/voice/seg-verse.mp3" };
+          // the 3:5-6 recording; Psalm 27:1 has its own recording
+          // (verse-31.mp3), made Nov 21, 2026.
+          var VERSE_AUDIO = { "Luke 17:21": "assets/audio/verse-01.mp3", "Joshua 1:9": "assets/audio/verse-02.mp3", "Psalm 23:1": "assets/audio/verse-08.mp3", "Proverbs 3:5": "assets/audio/verse-04.mp3", "Isaiah 41:10": "assets/audio/verse-12.mp3", "Jeremiah 29:11": "assets/audio/verse-07.mp3", "Romans 8:28": "assets/audio/verse-06.mp3", "Matthew 11:28": "assets/audio/verse-09.mp3", "Psalm 46:1": "assets/audio/verse-11.mp3", "Isaiah 40:31": "assets/audio/verse-03.mp3", "2 Timothy 1:7": "assets/audio/verse-10.mp3", "John 3:16": "assets/audio/verse-20.mp3", "Psalm 118:24": "assets/audio/verse-05.mp3", "Proverbs 3:6": "assets/audio/verse-04.mp3", "Psalm 27:1": "assets/audio/verse-31.mp3", "Philippians 4:13": "assets/voice/seg-verse.mp3" };
           var vBtn = document.getElementById("verseReadBtn");
           var vSrc = VERSE_AUDIO[v[1]];
           if (vBtn && vSrc) {
