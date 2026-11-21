@@ -1,0 +1,2628 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="assets/site/logo.webp" />
+    <title>Dismukes Recruiting — Painters &amp; Blasters, Pay Up Front</title>
+    <meta name="description" content="Dismukes Recruiting places painters and blasters in shipyards and industrial coatings. Every posting shows the pay and the per diem up front. Workers apply free, always." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        /* Palette matched to the GitHub site: black, navy, orange */
+        --bg: #000000;
+        --surface: #101216;
+        --surface-2: #1a1e24;
+        --ink: #ffffff;
+        --ink-soft: #d3dce4;
+        --line: #454f5a;
+        --accent: #f06414;
+        --accent-strong: #cf4f0e;
+        --accent-ink: #ffffff;
+        --steel: #1d3a52;
+        --steel-ink: #eef3f6;
+        --good: #2f9e5f;
+        --chip-bg: #1a1e24;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; animation: none !important; }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3, .display {
+        font-family: "Barlow Condensed", "Barlow", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.08;
+        margin: 0;
+      }
+      a { color: var(--accent); }
+      img { display: block; max-width: 100%; }
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- top bar ---------- */
+      .indeed-banner {
+        background: var(--accent); color: #fff; text-align: center;
+        font-weight: 700; font-size: 0.95rem; padding: 9px 14px;
+      }
+      .topbar {
+        position: sticky; top: 0; z-index: 60;
+        background: var(--steel); color: #fff;
+        border-bottom: 3px solid var(--accent);
+      }
+      .topbar-in {
+        display: flex; align-items: center; gap: 14px;
+        padding: 10px 0;
+      }
+      .brand {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 700;
+        font-size: 24px; letter-spacing: 0.02em; text-transform: uppercase;
+        color: #fff; text-decoration: none; white-space: nowrap; line-height: 1;
+      }
+      .brand .brand-tag {
+        display: block; font-family: "Barlow", sans-serif; font-size: 10.5px; font-weight: 600;
+        letter-spacing: 0.14em; color: #b9c9d8; margin-top: 3px; text-transform: uppercase;
+      }
+      .logo-wrap { flex: none; text-align: center; line-height: 1.15; }
+      .logo-wrap .verse-cap {
+        display: block; font-size: 10px; color: #d4af37; max-width: 170px; margin-top: 2px;
+      }
+      .menu-btn {
+        margin-left: auto; flex: none; background: transparent; color: #fff;
+        border: 2px solid rgba(255,255,255,.65); cursor: pointer; font: inherit;
+        font-weight: 700; font-size: 16.5px; padding: 10px 18px; border-radius: 8px; min-height: 46px;
+      }
+      .menu-btn:hover { background: rgba(255,255,255,.12); }
+      .sticky-read-btn, .sticky-repeat-btn {
+        flex: none; cursor: pointer; font: inherit; font-weight: 700; font-size: 15px;
+        padding: 10px 14px; border-radius: 8px; min-height: 46px; border: 0;
+      }
+      .sticky-read-btn { background: var(--accent); color: #fff; }
+      .sticky-read-btn:hover { background: var(--accent-strong); }
+      .sticky-repeat-btn { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.65); }
+      .sticky-repeat-btn:hover { background: rgba(255,255,255,.12); }
+      .menu-panel {
+        display: none;
+        background: #000; border-top: 3px solid var(--accent);
+        box-shadow: 0 18px 34px rgba(0,0,0,.35);
+        max-height: 70dvh; overflow-y: auto; padding: 14px 0 18px;
+      }
+      .menu-panel.open { display: block; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 4px 14px; }
+      .menu-grid a {
+        color: #e6edf4; text-decoration: none; font-weight: 700; font-size: 16px;
+        padding: 9px 10px; border-radius: 6px;
+      }
+      .menu-grid a:hover { background: rgba(255,255,255,.1); color: #fff; }
+      .brand span { color: var(--accent); }
+      .topnav { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+      .topnav a.navlink {
+        color: #e6edf4; text-decoration: none; font-weight: 700; font-size: 17px;
+        padding: 10px 12px; border-radius: 6px;
+      }
+      .topnav a.navlink:hover { background: rgba(255,255,255,.12); color: #fff; }
+      @media (max-width: 640px) {
+        .topnav a.navlink { display: none; }
+        .brand { font-size: 19px; }
+        .brand .brand-tag { display: none; }
+        .logo-wrap .verse-cap { display: none; }
+        .logo-wrap img { height: 38px !important; }
+        .topbar-in { gap: 8px; flex-wrap: wrap; }
+        .brand { min-width: 0; overflow-wrap: anywhere; }
+        .menu-btn { margin-left: 0; font-size: 14px; padding: 8px 12px; min-height: 40px; }
+        .sticky-read-btn, .sticky-repeat-btn { font-size: 13.5px; padding: 8px 10px; min-height: 40px; }
+        .topbar .btn { white-space: nowrap; padding: 8px 12px; font-size: 0.82rem; }
+      }
+      .btn {
+        display: inline-block; border: 0; cursor: pointer; text-decoration: none;
+        font-family: inherit; font-weight: 700; font-size: 17px;
+        padding: 14px 22px; border-radius: 8px; line-height: 1.2; text-align: center;
+        transition: background 0.12s ease;
+      }
+      .btn:active { transform: translateY(1px); }
+      .btn-accent { background: var(--accent); color: #fff; }
+      .btn-accent:hover { background: var(--accent-strong); }
+      .btn-navy { background: var(--steel); color: #fff; }
+      .btn-navy:hover { background: #26506f; }
+      .btn-ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); }
+      .btn-ghost:hover { border-color: var(--accent); }
+      .btn-sm { padding: 10px 16px; font-size: 15px; }
+      .btn svg { width: 17px; height: 17px; flex: none; vertical-align: -3px; margin-right: 6px; }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative; color: #f2f5f7; isolation: isolate;
+        background: #10151b;
+      }
+      .hero img.bg {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; object-position: center 38%; z-index: -2;
+      }
+      .hero::after {
+        content: ""; position: absolute; inset: 0; z-index: -1;
+        background: linear-gradient(100deg, rgba(8, 12, 16, 0.28) 0%, rgba(8, 12, 16, 0.55) 38%, rgba(8, 12, 16, 0.88) 70%);
+      }
+      .hero-in { padding: 74px 0 64px; max-width: 720px; }
+      .hero .rule-line {
+        display: inline-block; font-weight: 700; letter-spacing: 0.14em;
+        text-transform: uppercase; font-size: 0.8rem; color: #ffb37e;
+        border: 1px solid rgba(255, 179, 126, 0.55); border-radius: 999px;
+        padding: 5px 13px; margin-bottom: 20px; background: rgba(10, 14, 18, 0.45);
+      }
+      .hero h1 { font-size: clamp(2.5rem, 6.5vw, 4.3rem); font-weight: 700; }
+      .hero h1 em { font-style: normal; color: #ff8c42; }
+      .hero p.lede {
+        font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: #d7dee4;
+        margin: 20px 0 28px; max-width: 34em;
+      }
+      .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+      .hero .btn-ghost { color: #f2f5f7; }
+      .cred-row {
+        display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 36px;
+        font-family: "Barlow Condensed", "Barlow", sans-serif; text-transform: uppercase;
+        letter-spacing: 0.08em; font-size: 0.85rem; color: #c3ced6;
+      }
+      .cred-row b { color: #ffffff; font-weight: 600; }
+      .cred-row span::before { content: "▸ "; color: #ff8c42; }
+
+      /* ---------- sections ---------- */
+      section { padding: 64px 0; }
+      .sec-head { max-width: 46em; margin-bottom: 34px; }
+      .sec-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 600; }
+      .sec-head p { color: var(--ink-soft); margin: 12px 0 0; font-size: 1.05rem; }
+      .sec-head .tick {
+        display: block; width: 54px; height: 5px; background: var(--accent);
+        border-radius: 3px; margin-bottom: 16px;
+      }
+
+      /* ---------- job board ---------- */
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+      .chip {
+        font-family: "Barlow", sans-serif; font-weight: 600; font-size: 0.92rem;
+        padding: 8px 16px; border-radius: 999px; cursor: pointer;
+        background: var(--chip-bg); color: var(--ink-soft);
+        border: 1.5px solid var(--line);
+      }
+      .chip[aria-pressed="true"] {
+        background: var(--steel); color: var(--steel-ink); border-color: var(--steel);
+      }
+      .job-count { color: var(--ink-soft); font-size: 0.95rem; margin: 10px 0 20px; }
+      .state-filter { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0 2px; }
+      .state-filter label { font-weight: 700; font-size: 0.95rem; color: var(--ink-soft); }
+      .state-filter select {
+        font: inherit; font-weight: 600; font-size: 1rem; min-height: 46px;
+        padding: 9px 12px; border-radius: 8px; border: 1.5px solid var(--line);
+        background: var(--surface-2); color: var(--ink); max-width: 100%;
+      }
+      .state-filter select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      /* Anchored sections clear the sticky top bar instead of hiding under it */
+      section[id], .alaska[id], .jokes[id] { scroll-margin-top: 96px; }
+      /* Job card buttons always sit fully inside the card, never clipped */
+      .job-actions .btn { flex: 1 1 150px; white-space: normal; }
+      .jobs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      @media (max-width: 760px) { .jobs { grid-template-columns: 1fr; } }
+      .job {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: 10px; padding: 22px; box-shadow: var(--shadow);
+        display: flex; flex-direction: column; gap: 12px;
+      }
+      .job-top { display: flex; align-items: flex-start; gap: 10px; }
+      .job h3 { font-size: 1.28rem; font-weight: 600; flex: 1; }
+      .tag {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-size: 0.72rem; font-weight: 600;
+        letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+        padding: 4px 9px; border-radius: 4px; margin-top: 3px;
+      }
+      .tag-open { background: var(--good); color: #fff; }
+      @media (prefers-color-scheme: dark) { .tag-open { color: #0c1a11; } }
+      .tag-list { background: var(--surface-2); color: var(--ink-soft); }
+      .tag-chase { background: var(--accent); color: #fff; }
+      @media (prefers-color-scheme: dark) { .tag-chase { color: #17100a; } }
+      .job .where {
+        display: flex; align-items: center; gap: 7px;
+        color: var(--ink-soft); font-weight: 600; margin-top: -6px;
+      }
+      .job .where svg { width: 15px; height: 15px; flex: none; }
+      .payrow {
+        display: flex; gap: 0; border: 1px solid var(--line); border-radius: 8px;
+        overflow: hidden; text-align: center;
+      }
+      .payrow > div { flex: 1; padding: 10px 6px; background: var(--surface-2); }
+      .payrow > div + div { border-left: 1px solid var(--line); }
+      .payrow .amt {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-size: 1.3rem; font-weight: 600;
+        display: block; line-height: 1.15;
+      }
+      .payrow .lbl {
+        font-size: 0.74rem; font-weight: 700; letter-spacing: 0.09em;
+        text-transform: uppercase; color: var(--ink-soft);
+      }
+      .job .note { color: var(--ink-soft); font-size: 0.97rem; margin: 0; flex: 1; }
+      .job-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .job[hidden] { display: none; }
+      .empty-note {
+        border: 1.5px dashed var(--line); border-radius: 10px; padding: 26px;
+        text-align: center; color: var(--ink-soft); background: var(--surface);
+      }
+
+      /* ---------- calculator ---------- */
+      .calc {
+        margin-top: 26px; background: var(--steel); color: var(--steel-ink);
+        border-radius: 12px; padding: 28px; display: grid;
+        grid-template-columns: 1.1fr 1fr; gap: 30px; align-items: center;
+      }
+      @media (max-width: 760px) { .calc { grid-template-columns: 1fr; } }
+      .calc h3 { font-size: 1.45rem; font-weight: 600; }
+      .calc p { color: #b9c6d0; margin: 10px 0 0; }
+      .calc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .calc label {
+        display: block; font-size: 0.78rem; font-weight: 700;
+        letter-spacing: 0.09em; text-transform: uppercase; color: #9fb0be;
+        margin-bottom: 6px;
+      }
+      .calc input {
+        width: 100%; font: inherit; font-weight: 600; font-size: 1.1rem;
+        padding: 10px 12px; border-radius: 6px; border: 1px solid #3a4a59;
+        background: #0d141b; color: #f2f6f9;
+      }
+      .calc input:focus { outline: 2px solid #ff8c42; outline-offset: 1px; }
+      .calc-total {
+        grid-column: 1 / -1; border-top: 1px solid #3a4a59; padding-top: 14px;
+        display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+        flex-wrap: wrap;
+      }
+      .calc-total .t-lbl { font-weight: 600; color: #b9c6d0; }
+      .calc-total .t-amt {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-size: 2rem; font-weight: 700; color: #ff8c42;
+      }
+
+      /* ---------- how it works ---------- */
+      .steps { display: grid; gap: 0; border-top: 1px solid var(--line); }
+      .step {
+        display: grid; grid-template-columns: 74px 1fr; gap: 18px;
+        padding: 24px 0; border-bottom: 1px solid var(--line); align-items: start;
+      }
+      .step .num {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-size: 2.4rem; font-weight: 700;
+        color: var(--accent); line-height: 1;
+      }
+      .step h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+      .step p { margin: 0; color: var(--ink-soft); max-width: 44em; }
+
+      /* ---------- split sections ---------- */
+      .split {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+      }
+      @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+      .split figure { margin: 0; }
+      .split figure img {
+        width: 100%; height: 100%; max-height: 460px; object-fit: cover;
+        border-radius: 12px; box-shadow: var(--shadow);
+      }
+      .split figcaption { color: var(--ink-soft); font-size: 0.85rem; margin-top: 8px; }
+      .plain-list { list-style: none; margin: 18px 0 24px; padding: 0; display: grid; gap: 12px; }
+      .plain-list li { display: flex; gap: 11px; align-items: flex-start; }
+      .plain-list svg { width: 20px; height: 20px; flex: none; margin-top: 3px; color: var(--accent); }
+      .chime-row {
+        display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+        padding: 12px 16px; margin-top: 18px; max-width: 480px;
+      }
+      .chime-row .handle { font-family: "Barlow Condensed", "Barlow", sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.03em; }
+      .chime-row .lbl { color: var(--ink-soft); font-size: 0.9rem; width: 100%; margin-bottom: -4px; }
+      .copy-btn {
+        margin-left: auto; font: inherit; font-weight: 700; font-size: 0.9rem;
+        background: var(--steel); color: var(--steel-ink); border: 0; border-radius: 6px;
+        padding: 8px 14px; cursor: pointer;
+      }
+
+      /* ---------- story / alaska bands ---------- */
+      .band { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .story-quote {
+        font-size: clamp(1.25rem, 3vw, 1.6rem); font-weight: 600; line-height: 1.4;
+        max-width: 30em; margin: 0;
+      }
+      .story-quote b { color: var(--accent); }
+      .alaska { position: relative; color: #f2f5f7; isolation: isolate; background: #0d141b; }
+      .alaska img.bg {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; z-index: -2;
+      }
+      .alaska::after {
+        content: ""; position: absolute; inset: 0; z-index: -1;
+        background: linear-gradient(95deg, rgba(8, 13, 18, 0.9) 25%, rgba(8, 13, 18, 0.55) 60%, rgba(8, 13, 18, 0.2) 100%);
+      }
+      .alaska-in { padding: 70px 0; max-width: 620px; }
+      .alaska h2 { font-size: clamp(1.8rem, 4.5vw, 2.7rem); font-weight: 700; }
+      .alaska p { color: #d7dee4; font-size: 1.08rem; margin: 16px 0 0; max-width: 32em; }
+
+      /* ---------- DD & the truck ---------- */
+      .dd-band { background: var(--steel); color: var(--steel-ink); }
+      .dd-grid {
+        display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start;
+      }
+      @media (max-width: 820px) { .dd-grid { grid-template-columns: 1fr; } }
+      .dd-fig { margin: 0; text-align: center; }
+      /* The outfit photo is sized by WIDTH with height auto, so the tall
+         full-body photo always shows head to boots — a fixed height with
+         object-fit is what cropped it down to legs on phones. */
+      .dd-fig img {
+        width: min(252px, 68vw); height: auto; max-width: 100%; margin: 0 auto;
+        filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
+      }
+      .dd-fig figcaption { color: #b9c6d0; font-size: 0.88rem; margin-top: 10px; }
+      .dd-band h2 { font-size: clamp(1.8rem, 4.5vw, 2.7rem); font-weight: 700; color: #fff; }
+      .dd-band h2 em { font-style: normal; color: #ff8c42; }
+      .dd-band .dd-lede { color: #d7dee4; font-size: 1.08rem; margin: 14px 0 0; max-width: 36em; }
+      .truck-shots { display: grid; gap: 16px; margin-top: 26px; }
+      .truck-shots figure { margin: 0; }
+      .truck-shots img { width: 100%; border-radius: 10px; box-shadow: var(--shadow); }
+      .truck-shots .wide img { aspect-ratio: 1800 / 589; object-fit: cover; background: #000; }
+      .truck-shots figcaption { color: #b9c6d0; font-size: 0.88rem; margin-top: 7px; }
+      .founder-photo {
+        width: 92px; height: 92px; border-radius: 50%; object-fit: cover; object-position: top;
+        border: 3px solid var(--accent); margin-bottom: 16px;
+      }
+
+      /* ---------- DD & truck docks — on screen the whole time ---------- */
+      .dd-dock {
+        position: fixed; left: 10px; bottom: 10px; z-index: 30; width: 84px;
+        text-align: center; filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.3));
+        pointer-events: none;
+      }
+      .dd-dock .bubble {
+        background: var(--surface); color: var(--ink); border: 2px solid var(--steel);
+        border-radius: 10px; padding: 5px 7px; font-size: 0.7rem; font-weight: 600;
+        line-height: 1.3; margin-bottom: 4px;
+      }
+      .dd-dock img { height: 92px; width: auto; margin: 0 auto; object-fit: contain; }
+      .dd-dock a {
+        display: block; margin-top: 4px; background: var(--accent); color: var(--accent-ink);
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.05em; font-size: 0.78rem; text-decoration: none;
+        padding: 7px 8px; border-radius: 999px; pointer-events: auto;
+      }
+      .dd-dock a:hover { background: var(--accent-strong); }
+      .truck-dock {
+        position: fixed; right: 10px; bottom: 10px; z-index: 30; width: 100px;
+        background: #10151b; color: #eef3f6; border: 1px solid #3a4a59; border-radius: 10px;
+        box-shadow: var(--shadow); padding: 8px; text-align: center;
+        pointer-events: none;
+      }
+      .truck-dock .t-label {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.04em; font-size: 0.82rem; line-height: 1.2;
+      }
+      .truck-dock img { width: 100%; border-radius: 6px; margin-top: 6px; }
+      .truck-dock .t-cap { display: none; }
+      .truck-dock a {
+        display: block; background: var(--steel); color: var(--steel-ink);
+        border: 1px solid #3a4a59; font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.78rem;
+        text-decoration: none; padding: 8px 10px; border-radius: 999px; pointer-events: auto;
+      }
+      .truck-dock a:hover { border-color: #ff8c42; color: #fff; }
+      /* DD stays with you inside the app — his dock and the truck dock are
+         fixed on phones too, riding just above the call bar, compact enough
+         that they never cover a job card's buttons. */
+      .dd-dock .dock-btns { display: flex; gap: 4px; margin-top: 4px; }
+      .dd-dock .dock-btns button {
+        flex: 1; pointer-events: auto; cursor: pointer; font: inherit;
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.72rem;
+        padding: 7px 4px; border-radius: 999px; border: 0; min-height: 34px;
+        background: var(--steel); color: #fff;
+      }
+      .dd-dock .dock-btns button.read-now { background: var(--accent); }
+      .dd-dock .dock-btns button:hover { background: var(--accent-strong); }
+      .dd-dock.reading .bubble { border-color: var(--accent); }
+      .dd-dock.reading img { animation: ddStride 0.45s ease-in-out infinite; }
+      @media (max-width: 759px) {
+        .dd-dock {
+          left: 8px; bottom: calc(84px + env(safe-area-inset-bottom)); width: 96px;
+        }
+        .dd-dock .bubble {
+          font-size: 0.64rem; padding: 4px 5px; max-height: 7.2em; overflow: hidden;
+        }
+        .dd-dock img { height: 84px; }
+        .dd-dock a { font-size: 0.7rem; padding: 6px 5px; }
+        .dd-dock .gear-label { font-size: 0.64rem; }
+        .truck-dock {
+          right: 8px; bottom: calc(84px + env(safe-area-inset-bottom)); width: 84px; padding: 6px;
+        }
+        .truck-dock .t-label { font-size: 0.64rem; white-space: nowrap; }
+        .truck-dock .t-label .t-suffix { display: none; }
+        .truck-dock img { margin-top: 4px; }
+        .truck-dock a { font-size: 0.62rem; padding: 5px 4px; }
+        footer { padding-bottom: 300px; }
+      }
+
+      /* ---------- logo, hero DD & jokes ---------- */
+      .brand-logo { height: 42px; width: auto; border-radius: 6px; flex: none; }
+      @media (max-width: 640px) { .brand-logo { height: 36px; } }
+      .hero-flex { display: flex; gap: 34px; align-items: flex-end; }
+      .hero-flex .hero-in { flex: 1; min-width: 0; }
+      .hero-dd { margin: 0; padding-bottom: 30px; text-align: center; flex: none; }
+      .hero-dd img {
+        height: 400px; width: auto; object-fit: contain;
+        filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.5));
+      }
+      .hero-dd figcaption {
+        color: #ffb37e; font-family: "Barlow Condensed", "Barlow", sans-serif; text-transform: uppercase;
+        letter-spacing: 0.08em; font-size: 0.82rem; margin-top: 8px;
+      }
+      @media (max-width: 820px) {
+        .hero-flex { flex-direction: column; align-items: stretch; }
+        .hero-flex .hero-in { order: 1; }
+        .hero-dd { order: 2; padding-bottom: 38px; }
+        .hero-dd img { height: 270px; margin: 0 auto; }
+      }
+      .dd-logo {
+        width: 100%; max-width: 300px; border-radius: 10px; margin: 26px auto 0;
+        box-shadow: var(--shadow);
+      }
+      .jokes {
+        margin-top: 40px; border: 1px solid #3a4a59; border-radius: 12px;
+        background: #131a21; padding: 24px 26px;
+      }
+      .jokes h3 { font-size: 1.35rem; font-weight: 600; color: #fff; }
+      .jokes .joke-text {
+        font-size: 1.12rem; line-height: 1.55; color: #eef3f6;
+        margin: 12px 0 18px; max-width: 44em; min-height: 3.2em;
+      }
+      .jokes .joke-note { color: #9fb0be; font-size: 0.88rem; margin: 12px 0 0; }
+
+      /* ---------- read it to me (GitHub read-aloud box) ---------- */
+      .read-aloud {
+        margin-top: 14px; background: #10151c; border: 2px solid var(--accent);
+        border-radius: 12px; padding: 18px 20px;
+      }
+      .read-aloud h3 { font-size: 22px; color: #ffb287; margin-bottom: 4px; }
+      .read-aloud p { margin: 0 0 12px; font-size: 15px; color: var(--ink-soft); max-width: 46em; }
+      .read-aloud-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+      .read-aloud-btns button {
+        background: var(--steel); color: #fff; border: 0; cursor: pointer; font: inherit;
+        font-weight: 700; font-size: 15px; padding: 11px 16px; border-radius: 8px; min-height: 46px;
+      }
+      .read-aloud-btns button:hover { background: #26506f; }
+      .read-aloud-btns button.primary { background: var(--accent); }
+      .read-aloud-btns button.primary:hover { background: var(--accent-strong); }
+      .read-status { font-size: 0.9rem; color: #ffb287; margin: 10px 0 0; min-height: 1.2em; }
+      .section-read-btn {
+        display: inline-block; margin-top: 14px; background: var(--steel); color: #fff;
+        border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 15px;
+        padding: 11px 16px; border-radius: 8px; min-height: 46px;
+      }
+      .section-read-btn:hover { background: #26506f; }
+      .section-read-btn.on-dark { background: var(--accent); }
+      .section-read-btn.on-dark:hover { background: var(--accent-strong); }
+
+      /* ---------- DD outfits & walking ---------- */
+      .outfit-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+      .outfit-btns button {
+        font: inherit; font-weight: 700; font-size: 15px; cursor: pointer;
+        padding: 10px 15px; border-radius: 8px; min-height: 46px;
+        background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.55);
+      }
+      .outfit-btns button:hover { background: rgba(255,255,255,.12); }
+      .outfit-btns button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .outfit-note { color: #b9c6d0; font-size: 0.92rem; margin: 12px 0 0; clear: both; }
+      /* On phones the closet buttons sit in a clean two-column grid — every
+         button full-width in its own cell, so none of them can overlap. */
+      @media (max-width: 820px) {
+        .outfit-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .outfit-btns button { width: 100%; min-height: 52px; padding: 10px 8px; }
+      }
+      /* While the big DD & truck section is on screen, the corner docks step
+         aside entirely — the big DD is right there, and the little DD's
+         bubble and photo can never cover the closet words or buttons. The
+         moment you scroll past the section, both docks come back. */
+      .dd-dock, .truck-dock { transition: opacity 0.25s ease; }
+      body.dd-section-open .dd-dock,
+      body.dd-section-open .truck-dock {
+        opacity: 0; visibility: hidden; pointer-events: none !important;
+      }
+      .dd-dock .gear-label {
+        display: block; margin-top: 4px; background: var(--steel); color: #fff;
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.72rem;
+        padding: 5px 6px; border-radius: 6px; line-height: 1.25;
+      }
+      @keyframes ddBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @keyframes ddStride { 0%, 100% { transform: translateX(0) translateY(0); } 25% { transform: translateX(-3px) translateY(-6px); } 75% { transform: translateX(3px) translateY(-6px); } }
+      .dd-dock img { animation: ddBob 2.6s ease-in-out infinite; }
+      .dd-dock.walking img { animation: ddStride 0.45s ease-in-out infinite; }
+
+      /* ---------- astrology corner ---------- */
+      .astro { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .sign-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 20px; }
+      .sign-grid button {
+        font: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer;
+        padding: 9px 15px; border-radius: 999px; min-height: 44px;
+        background: var(--surface-2); color: var(--ink-soft); border: 1.5px solid var(--line);
+      }
+      .sign-grid button:hover { border-color: var(--accent); color: var(--ink); }
+      .sign-grid button[aria-pressed="true"] { background: var(--steel); color: #fff; border-color: var(--steel); }
+      .astro-reading {
+        border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2);
+        padding: 22px 24px; max-width: 46em;
+      }
+      .astro-reading h3 { font-size: 1.4rem; font-weight: 600; }
+      .astro-reading .dates { color: var(--accent); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 4px 0 10px; }
+      .astro-reading p { margin: 0 0 10px; color: var(--ink-soft); }
+      .astro-reading p:last-child { margin-bottom: 0; }
+      .astro-reading .lucky { color: var(--ink); font-weight: 600; }
+
+      /* ---------- verse of the day ---------- */
+      .verse-band { background: #fff8e6; color: #1a1a1a; text-align: center; padding: 26px 0; position: relative; overflow: hidden; }
+      .verse-band::before { content: ""; position: absolute; inset: 0; background: url("assets/site/logo.webp") center / 340px auto no-repeat; opacity: 0.10; pointer-events: none; }
+      .verse-band .wrap { position: relative; z-index: 1; }
+      .verse-band h2 { font-size: 1.5rem; color: #1a1a1a; }
+      .verse-band p { margin: 8px auto 0; font-size: 1.12rem; font-style: italic; max-width: 40em; }
+
+      /* ---------- footer ---------- */
+      footer { padding: 54px 0 260px; }
+      @media (min-width: 760px) { footer { padding-bottom: 260px; } }
+      .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 34px; }
+      @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+      footer h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+      footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
+      footer a:hover { color: var(--accent); }
+      footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+      footer p, footer li { color: var(--ink-soft); }
+      .credits { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.82rem; color: var(--ink-soft); }
+
+      /* ---------- sticky call bar (mobile) ---------- */
+      .callbar {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+        display: none; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        backdrop-filter: blur(10px); border-top: 1px solid var(--line);
+      }
+      .callbar .btn { flex: 1; justify-content: center; }
+      @media (max-width: 759px) { .callbar { display: flex; } }
+    </style>
+  </head>
+  <body>
+    <div class="indeed-banner" role="note">Hiring painters and blasters? Post the pay up front &mdash; workers apply free.</div>
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <span class="logo-wrap">
+          <img class="brand-logo" src="assets/site/logo.webp" alt="Dismukes Recruiting logo" style="height:52px; width:auto; display:block; margin:0 auto" />
+          <span class="verse-cap">I can do all things through Christ who strengthens me. &mdash; Philippians 4:13</span>
+        </span>
+        <a class="brand" href="#jobs">Dismukes <span>Recruiting</span>
+          <small class="brand-tag">Pay printed up front &middot; Workers apply free</small>
+        </a>
+        <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel">Menu &#9662;</button>
+        <button class="sticky-read-btn" id="stickyReadBtn" type="button" aria-label="Start — read the whole page out loud from the top, section by section">&#9654; Start</button>
+        <button class="sticky-repeat-btn" id="stickyRepeatBtn" type="button" aria-label="Tap to repeat — hear the last reading again">Tap to repeat</button>
+        <nav class="topnav" aria-label="Site" style="display:none">
+          <a href="#jobs">Jobs</a>
+          <a href="#employers">Employers</a>
+          <a href="#how">Help</a>
+          <a href="#dd-truck">Clubhouse</a>
+          <a href="#story">Contact</a>
+        </nav>
+      </div>
+
+    <nav class="menu-panel" id="menuPanel" aria-label="Full menu">
+      <div class="wrap menu-grid">
+        <a href="#dd-truck">DD &amp; My Truck</a>
+        <a href="#jokes">DD's Jokes</a>
+        <a href="#astrology">Astrology Corner</a>
+        <a href="#read">DD Reads It To You</a>
+        <a href="#verse">Verse of the Day</a>
+        <a href="#jobs">Jobs for Crews</a>
+        <a href="#chasing">Jobs I'm Chasing</a>
+        <a href="#how">How It Works</a>
+        <a href="#employers">For Employers</a>
+        <a href="#story">The Story</a>
+        <a href="#alaska">Where This Is Headed</a>
+        <a href="tel:+12514224242">Call DD — (251) 422-4242</a>
+        <a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/">Destin: Destined to Stand — the book</a>
+      </div>
+    </nav>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <div class="hero">
+        <img class="bg" src="assets/site/hero-bg.jpg" alt="A blaster in a helmet and protective gear abrasive-blasting the red hull of a ship in dry dock" />
+        <div class="wrap hero-flex">
+          <figure class="hero-dd">
+            <img src="assets/site/hero-dd.webp" alt="DD — Destin Dismukes himself, full-body: white cap, gold sunglasses, chains, tattoos, dark cargo pants and work boots" />
+            <figcaption>DD — Destin himself</figcaption>
+          </figure>
+          <div class="hero-in">
+            <span class="rule-line">Workers apply free — always</span>
+            <h1>Painters &amp; blasters get hired here. <em>Pay up front.</em></h1>
+            <p class="lede">Where a posting prints the pay and the per diem, you see both right on the card — before you ever pick up the phone. Where it doesn't print them, the card says so. No guessing, no surprises after you travel.</p>
+            <div class="hero-cta">
+              <a class="btn btn-accent" href="tel:+12514224242">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Call Destin
+              </a>
+              <a class="btn btn-ghost" href="#jobs">See the jobs</a>
+              <a class="btn btn-accent" href="app.html">Open the App</a>
+            </div>
+            <div class="cred-row" aria-label="Credentials">
+              <span><b>13 years</b> in coatings</span>
+              <span><b>OSHA 10</b></span>
+              <span><b>C7</b> blaster</span>
+              <span><b>C12</b> spray</span>
+              <span>Own blast pot &amp; nozzles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="app-banner" style="background:#ff6a00;color:#fff;text-align:center;padding:22px 16px;">
+        <div class="wrap">
+          <h2 style="color:#fff;margin:0 0 6px;font-size:26px;">Open the App</h2>
+          <p style="margin:0 0 14px;color:#fff;">DD walks with you, reads the jobs out loud, and tries on every work outfit — open the Dismukes Recruiting app.</p>
+          <a class="btn btn-accent" href="app.html" style="display:inline-block;background:#fff;color:#ff6a00;font-weight:700;font-size:18px;padding:12px 26px;border-radius:8px;text-decoration:none;">Open the App</a>
+        </div>
+      </section>
+      <!-- DD & THE TRUCK -->
+      <section id="dd-truck" class="dd-band">
+        <div class="wrap dd-grid">
+          <div>
+            <figure class="dd-fig">
+              <img id="ddMainImg" src="assets/site/dd-main.webp" alt="DD — the full-body figure of Destin Dismukes: white cap, gold sunglasses, chains, tattoos, dark cargo pants and work boots" />
+              <figcaption id="ddMainCap">DD — that's Destin himself, full-body. He's on this site the whole time, bottom corner and all — and he walks with you as you scroll.</figcaption>
+            </figure>
+            <h3 style="font-size:1.3rem; font-weight:600; color:#fff; margin-top:22px;">DD's Career Closet — the real DD, real clothes</h3>
+            <p style="color:#b9c6d0; font-size:0.95rem; margin:8px 0 0;">Same dude in every fit — same face, same grey cap, same gold shades, same chains, same tattoos. Only the career clothes change. Tap a fit and DD changes right here and down in his corner at the same time — and DD reads that fit's description out loud in a voice in Destin's style.</p>
+            <div class="outfit-btns" role="group" aria-label="Change DD's clothes — career closet">
+              <button type="button" data-outfit="street" aria-pressed="true">Everyday DD</button>
+              <button type="button" data-outfit="blaster" aria-pressed="false">Blast suit + hood</button>
+              <button type="button" data-outfit="painter" aria-pressed="false">Painter gear</button>
+              <button type="button" data-outfit="welder" aria-pressed="false">Welder gear</button>
+              <button type="button" data-outfit="lawyer" aria-pressed="false">Lawyer suit</button>
+              <button type="button" data-outfit="doctor" aria-pressed="false">Doctor coat</button>
+              <button type="button" data-outfit="chef" aria-pressed="false">Chef whites</button>
+              <button type="button" data-outfit="firefighter" aria-pressed="false">Firefighter gear</button>
+              <button type="button" data-outfit="police" aria-pressed="false">Police uniform</button>
+              <button type="button" data-outfit="teacher" aria-pressed="false">Teacher fit</button>
+              <button type="button" data-outfit="pilot" aria-pressed="false">Pilot uniform</button>
+              <button type="button" data-outfit="electrician" aria-pressed="false">Electrician gear</button>
+              <button type="button" data-outfit="construction" aria-pressed="false">Construction gear</button>
+              <button type="button" data-outfit="inspector" aria-pressed="false">Inspector gear</button>
+              <button type="button" data-outfit="mechanic" aria-pressed="false">Mechanic gear</button>
+              <button type="button" data-outfit="plumber" aria-pressed="false">Plumber gear</button>
+            </div>
+            <p class="outfit-note">DD changes into the clothes for the career — tap a button and DD reads the fit out loud in a voice in Destin's style as DD puts it on. Or tap any job on the board and he suits up for that trade on his own: blasting jobs put the blast suit and blast hood on him, painting jobs the painter gear, welding jobs the welder gear, electrician jobs the hi-vis and tool belt.</p>
+            <img class="dd-logo" src="assets/site/dd-logo.webp" alt="The Dismukes Recruiting logo on black: a gold compass rose with white wings, golden hands holding an open book, pink spray guns and a ship — Dismukes Recruiting, Destin for the best workers, Workers Apply Free, Philippians 4:13" loading="lazy" />
+          </div>
+          <div>
+            <span class="tick" aria-hidden="true" style="display:block; width:54px; height:5px; background:var(--accent); border-radius:3px; margin-bottom:16px;"></span>
+            <h2>DD &amp; <em>my truck</em> — right here</h2>
+            <p class="dd-lede">This whole business is one man: Destin “DD” Dismukes. That's him standing here — cap, shades, tattoos and all — and that's his truck below, the rolling office this company runs out of. If you're calling about a crew or a job, you're calling DD.</p>
+            <div class="truck-shots">
+              <figure class="wide">
+                <img src="assets/site/truck-driver.webp" alt="DD in the driver's seat of his white Chevrolet Silverado, headlights on, crimson A on the back glass, mud on the tires" loading="lazy" />
+                <figcaption>DD in the driver's seat — headlights on, crimson A on the back glass, mud on the tires.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/site/truck-real.jpg" alt="Destin's real truck: a white lifted Chevrolet Silverado crew cab with black wheels, parked at home" loading="lazy" />
+                <figcaption>The real truck — Destin's 2015 pearl white lifted Chevrolet Silverado.</figcaption>
+              </figure>
+            </div>
+            <p style="margin-top: 22px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-accent" href="tel:+12514224242">Call DD — (251) 422-4242</a>
+              <a class="btn btn-ghost" href="#jobs">See the jobs</a>
+            </p>
+            <p style="margin-top:12px;">
+              <button class="section-read-btn on-dark" type="button" id="hearDdBtn" onclick="if(window.__ddStop){window.__ddStop();}var a=document.getElementById('destinRecordedAudio');a.currentTime=0;a.play();">&#9654; Hear DD — Destin's own voice</button>
+              <audio id="destinRecordedAudio" src="destin-dd-voice.mp3" preload="none"></audio>
+            </p>
+            <button class="section-read-btn on-dark" type="button" data-read-target="dd-truck">&#9654; Read this part</button>
+          </div>
+        </div>
+        <div class="wrap">
+          <div class="jokes" id="jokes">
+            <h3>DD's jokes</h3>
+            <p class="joke-text" id="jokeText" aria-live="polite">DD joke: Why did DD bring a ladder to the job fair? Heard the pay was going up. He still checked the per diem first.</p>
+            <button class="btn btn-accent" type="button" id="jokeBtn">Tell me a joke</button>
+            <p class="joke-note">DD's own joke list — the same jokes from his main site, kept right here with him and the truck.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VERSE OF THE DAY — right under DD & the truck, like the GitHub site -->
+      <section class="verse-band" id="verse" style="padding:26px 0;">
+        <div class="wrap">
+          <h2>Verse of the Day</h2>
+          <p id="dailyVerseText">I can do all things through Christ which strengtheneth me. &mdash; Philippians 4:13</p>
+          <p id="dailyVerseDate" style="font-style:normal; font-size:0.85rem; color:#555;"></p>
+          <button class="section-read-btn" type="button" data-read-target="verse">&#9654; Read this part</button>
+        </div>
+      </section>
+
+      <!-- ASTROLOGY CORNER — DD's astrology, right under the verse -->
+      <section id="astrology" class="astro">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="tick" aria-hidden="true"></span>
+            <h2>DD's Astrology Corner</h2>
+            <p>The stars, DD style — a straight-up look at what your sign says about your work week. Pick your sign and read your corner. For fun and a little direction, the same way DD checks the sky before he checks the board.</p>
+            <button class="section-read-btn" type="button" data-read-target="astrology">&#9654; Read this part</button>
+          </div>
+          <div class="sign-grid" id="signGrid" role="group" aria-label="Pick your zodiac sign"></div>
+          <div class="astro-reading" aria-live="polite">
+            <h3 id="astroName">Pick your sign above</h3>
+            <p class="dates" id="astroDates">All twelve signs are up there</p>
+            <p id="astroText">Tap your sign and your reading shows up right here — your sign's strength, your work word for the week, and what to watch for on the job.</p>
+            <p class="lucky" id="astroLucky"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DD READS IT TO YOU — the reading, right under DD -->
+      <section id="read" style="padding:34px 0 6px;">
+        <div class="wrap">
+          <div class="sec-head" style="margin-bottom:14px;">
+            <span class="tick" aria-hidden="true"></span>
+            <h2>DD Reads It To You</h2>
+            <p>Can't read the page, or just rather listen? Hit Read and hear the whole walk-through out loud — DD and the truck, the jokes, the verse, the astrology corner, the jobs with their pay exactly as printed, how it works, all of it — read in a voice in Destin's style, DD's partner on this site. Made in a voice in Destin's style, not the robot voice off your device — that robot voice is gone from this page for good. DD can read the job board by itself too — there's a Read the board button right on the board.</p>
+          </div>
+          <div class="read-aloud" aria-label="Read It To Me — hear the page read out loud">
+            <h3>Read It To Me</h3>
+            <p>Tap <strong>Start</strong> up top and DD reads the page from the very top, walking you through it section by section — every word read in a voice in Destin's style. Every section also has its own &#9654; Read this part button, so you can hear just one part. Only one reading plays at a time — tap any read button and whatever was playing stops first. Pause it, stop it, or tap repeat to hear the last reading again. And DD himself stays with you in the bottom corner the whole time you're in the app — his own &#9654; Read and Stop buttons ride right there with him, and his bubble shows what's playing.</p>
+            <div class="read-aloud-btns">
+              <button class="primary" type="button" id="readStartBtn">&#9654; Start — whole page from the top</button>
+              <button type="button" id="readPauseBtn">Pause / Resume</button>
+              <button type="button" id="readStopBtn">Stop</button>
+              <button type="button" id="readRepeatBtn">Tap to repeat</button>
+            </div>
+            <p class="read-status" id="readStatus" role="status"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOB BOARD -->
+      <section id="jobs">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="tick" aria-hidden="true"></span>
+            <h2>Jobs for crews</h2>
+            <p>One real posting from every state — fifty states, fifty jobs — on top of the standing crew lists Dismukes Recruiting places from all year. Every card shows the pay and the per diem exactly as printed on the original posting; where a posting didn't print a per diem, the card says "Not stated" instead of dressing it up. Tap "See the original posting" on any card to go straight to that job's own listing. The CTS and Vigor postings further down the page are different: those are jobs Destin is applying to himself, not jobs he's hiring for.</p>
+          </div>
+
+          <div style="margin:-14px 0 14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="section-read-btn" type="button" data-read-target="jobs" style="margin-top:0;">&#9654; Read this part</button>
+            <button class="section-read-btn" type="button" id="readBoardBtn" style="margin-top:0;">&#9654; DD reads the board — jobs &amp; pay out loud</button>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin:0 0 26px;">
+            <a class="btn btn-accent" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Worker Application — apply free</a>
+            <a class="btn btn-ghost" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Post a Job — $25 a post, $50 if featured</a>
+          </div>
+
+          <div class="filters" role="group" aria-label="Filter jobs">
+            <button class="chip" type="button" data-filter="all" aria-pressed="true">All jobs</button>
+            <button class="chip" type="button" data-filter="blaster" aria-pressed="false">Blasters</button>
+            <button class="chip" type="button" data-filter="painter" aria-pressed="false">Painters</button>
+            <button class="chip" type="button" data-filter="welder" aria-pressed="false">Welders</button>
+            <button class="chip" type="button" data-filter="electrician" aria-pressed="false">Electricians</button>
+            <button class="chip" type="button" data-filter="perdiem" aria-pressed="false">Per diem printed</button>
+          </div>
+          <div class="state-filter">
+            <label for="stateFilter">Jump to a state</label>
+            <select id="stateFilter">
+              <option value="all">All 50 states + crew lists</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia — Newport News brush crew</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+            </select>
+          </div>
+          <p class="job-count" id="jobCount" role="status"></p>
+
+          <div class="jobs" id="jobGrid">
+            <article class="job" data-trades="blaster" data-open="0" data-perdiem="0">
+              <div class="job-top">
+                <h3>C7 Blasters — Crew List</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Shipyards nationwide — travel work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Per posting</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Certified C7 abrasive blasters are the first calls yards make when a hull hits the dock. Get on the list with your certs and your travel range, and you hear about the job — with the pay — before it posts anywhere else.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=C7%20Blaster%20—%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-open="0" data-perdiem="0">
+              <div class="job-top">
+                <h3>C12 Spray Painters — Crew List</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Shipyards nationwide — travel work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Per posting</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">C12 spray application is its own skill and yards pay for it. If you can run airless and plural-component rigs and hold a spec, put your name down — every call you get from us comes with the rate attached.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=C12%20Spray%20Painter%20—%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-open="0" data-perdiem="0">
+              <div class="job-top">
+                <h3>Coatings Crew — Morristown Area</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Morristown, Tennessee — local work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Local</span><span class="lbl">Sleep at home</span></div>
+              </div>
+              <p class="note">Not everybody wants the road. We're building a local list for East Tennessee industrial and plant work, so local people can take local jobs and be home at night. Same rule: the pay is on the posting before you apply.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=Morristown%20local%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-open="0" data-perdiem="1">
+              <div class="job-top">
+                <h3>Travel Crews — Gulf Coast Yards</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Gulf Coast — MS / AL / LA shipyards
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Preferred</span><span class="lbl">Per diem on travel jobs</span></div>
+              </div>
+              <p class="note">The Gulf yards run year-round and per diem is what makes the travel worth it. On this list, travel postings lead with per diem — if a yard won't state it, the card says "not stated" and you decide with your eyes open.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=Gulf%20Coast%20travel%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-state="AL" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Paint Blaster — Staffmark Group</h3>
+                <span class="tag tag-list">Alabama</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Trussville, AL
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$19.80-$24.20/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Paint blasting work in Trussville through Staffmark Group. Rate depends on experience, exactly as the posting prints it. Pay as printed: $19.80-$24.20/hr (based on experience).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/15472661/Paint-Blaster-Alabama-Trussville" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="AK" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Waste Connections (Alaska Waste)</h3>
+                <span class="tag tag-list">Alaska</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Anchorage, AK
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$25.00/hr to start</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding work with Alaska Waste in Anchorage. Starting pay is printed right on the posting. Pay as printed: Starting Pay is $25.00 per hour depending on experience.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/15273478/Welder-Alaska-Anchorage" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="AZ" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Boilermaker / Welder — D2B Groups</h3>
+                <span class="tag tag-list">Arizona</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Phoenix, AZ
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$45–$55/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Provided on out-of-town assignments — amount not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Boilermaker and welding work in Phoenix. Per diem is provided on out-of-town assignments; the posting doesn&#x27;t print the amount.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.careerbuilder.com/job-details/boilermaker-welder-phoenix-az--d57e8232-b799-46dd-b815-46b39a3d8948" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="AR" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Combo Pipe Welder – BRS — The Systems Group</h3>
+                <span class="tag tag-list">Arkansas</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Osceola, AR
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$32/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">$100/day</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Combo pipe welding at BRS in Osceola, posted on the employer&#x27;s own careers site. The posting prints a 6–8 month duration.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://careers.tsg.bz/job/combo-pipe-welder-brs-osceola-ar-3/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster" data-state="CA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Sand Blaster — Manpower</h3>
+                <span class="tag tag-list">California</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Fresno, CA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$20</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Sand blasting work in Fresno, posted by Manpower. The pay is printed simply as $20, just like the posting shows it. Pay as printed: $20 — the posting prints it simply as &quot;$20&quot; with no per-hour label; Manpower is the poster and the end client isn&#x27;t named.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.manpower.com/en/job/production/sand-blaster/5913034" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="CO" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman Electrician — RK Industries</h3>
+                <span class="tag tag-list">Colorado</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Denver, CO
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$33-41/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journeyman electrician work in Denver with RK Industries.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.monster.com/job-openings/journeyman-electrician-denver-co--8b0c5e6f-7772-4d76-8268-9d3df0adf2a3" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="CT" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman Electrician — Spearhead Staffing</h3>
+                <span class="tag tag-list">Connecticut</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newtown, CT
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$38.00 – $44.00/hr + overtime</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journeyman electrician work posted by Spearhead Staffing, with jobsites across Southwestern Connecticut and Fairfield County. Pay as printed: $38.00 – $44.00 / hour (DOE) + Overtime.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.spearheadstaffing.com/jobs/electrician-newtown-ct-cdcba205/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="DE" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Experienced TIG Welder — Weekend Shift — Bloom Energy</h3>
+                <span class="tag tag-list">Delaware</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newark, DE
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$28.00 - $31.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">TIG welding on the weekend shift (Friday–Sunday) at Bloom Energy in Newark. The posting also prints a $1,500 sign-on bonus.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.indeed.com/viewjob?jk=0baa6981c5af2796" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="FL" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — Show Finisher — Walt Disney World</h3>
+                <span class="tag tag-list">Florida</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Orlando, FL
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$37.95/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Show finisher painting at Walt Disney World in Orlando — keeping the park&#x27;s surfaces looking like new.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.indeed.com/viewjob?jk=98c376e8394ef749" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="GA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Electrician — Trillium Staffing</h3>
+                <span class="tag tag-list">Georgia</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Fayetteville, GA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$42/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Electrician work in Fayetteville through Trillium Staffing. The journeyman rate is printed right on the posting. Pay as printed: $42/hour for Journeyman.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://trilliumstaffing.com/jobs/job/802851-electrician-fayetteville-georgia.html" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="laborer" data-state="HI" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Construction Laborer — LAUKOA</h3>
+                <span class="tag tag-list">Hawaii</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Honolulu, HI
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$21.00-$35.00</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Construction labor work in Honolulu with LAUKOA. Pay as printed: $21.00-$35.00 (Salary Range as printed; the posting doesn&#x27;t put a per-hour label on it).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/9839173/Construction-Laborer-Hawaii-Honolulu" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="ID" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman Electrician — Clearwater Paper</h3>
+                <span class="tag tag-list">Idaho</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Lewiston, ID
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$48.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journeyman electrician work at Clearwater Paper in Lewiston.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="http://diversityjobs.com/career/10223168/Journeyman-Electrician-Idaho-Lewiston" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="IL" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Intermediate, 2nd Shift — S&amp;C Electric Company</h3>
+                <span class="tag tag-list">Illinois</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Chicago, IL
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$29.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Second-shift welding at S&amp;C Electric in Chicago. Pay as printed: $29.00 per hour (listed as &quot;estimated hourly pay rate&quot;).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/16449994/Welder-Intermediate-Illinois-Chicago" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="IN" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Machine Operator / Welder — Malone</h3>
+                <span class="tag tag-list">Indiana</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Batesville, IN
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$20.00/hr 1st shift · $21.00/hr 2nd/3rd</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Machine operating and welding in Batesville, hiring for a sawmill manufacturing company (Wood-Mizer). Posted November 20, 2026. Pay as printed: $20.00/hour (1st shift); $21.00/hour (2nd/3rd shift) — &quot;Starting pay rates at $20 an hour.&quot;</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.malonesolutions.com/job/907934-machine-operator-welder-batesville-indiana/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="IA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — Vermeer</h3>
+                <span class="tag tag-list">Iowa</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Des Moines, IA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$25.36 - $28.02</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painting work at Vermeer in Des Moines. Pay as printed: $25.36 - $28.02 (Hourly Wage Range as printed).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://grabjobs.co/us/job/full-time/others/painter-153451723" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="KS" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Production — Spirit AeroSystems, Inc.</h3>
+                <span class="tag tag-list">Kansas</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Wichita, KS
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$27.31/hr, up to $41.13/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Production welding at Spirit AeroSystems in Wichita. Pay as printed: $27.31/hour, with potential to earn up to $41.13/hour.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://builtin.com/job/welder-production/11867062" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter blaster" data-state="KY" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Industrial Painter / Sandblaster — Impact Workforce Solutions</h3>
+                <span class="tag tag-list">Kentucky</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mayfield, KY
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$19.00–$23.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Industrial painting and sandblasting in Mayfield through Impact Workforce Solutions.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=8AAF63C7516A446899E0DDB27243A84C206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="LA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Hutco, Inc.</h3>
+                <span class="tag tag-list">Louisiana</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Port Allen, LA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$23.00 to $27.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">No per diem available — as printed</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding work in Port Allen through Hutco. Heads up, printed right on the posting: no per diem on this one.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.simplyhired.com/job/GEe7nmPEEp6YNm3q2tjhfJMZLjn3LTpp_rOW5-v1wltnYttzpFRGiQ" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="ME" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Lead Painter — Bates College</h3>
+                <span class="tag tag-list">Maine</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Lewiston, ME
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$29.00 to $31.23/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Lead painter work at Bates College in Lewiston.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.adzuna.com/details/5900456646?utm_medium=api&amp;utm_source=cb7e50ab" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="MD" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter, Finisher — HARGROVE — Encore (HARGROVE)</h3>
+                <span class="tag tag-list">Maryland</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Lanham, MD
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$24.98 - $32.48/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter and finisher work with HARGROVE in Lanham.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=70FF6AF7A49B4980A139D3DE0F98FC09206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="pipefitter" data-state="MA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman Pipefitter Plumber (Union) — Precision Castparts — Wyman Gordon Grafton</h3>
+                <span class="tag tag-list">Massachusetts</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                North Grafton, MA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$49.01/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Union pipefitter plumber work in North Grafton. A Massachusetts journeyman or master plumber&#x27;s license is required, as printed.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/16420710/Journeyman-Pipefitter-Plumber-Union-Massachusetts-North-Grafton" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="MI" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Auto Body Technician / Painter — M-43 Auto Body &amp; Mechanical</h3>
+                <span class="tag tag-list">Michigan</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Hastings, MI
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$18.00 - $26.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Auto body tech and painting work at M-43 Auto Body &amp; Mechanical in Hastings.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=8B193E73DAC74E5D9BDEF84BD03A14F7206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder laborer" data-state="MN" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Field Welder Laborer — Wells</h3>
+                <span class="tag tag-list">Minnesota</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Maple Grove, MN
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$40.51-$49.86/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Field welding and labor work with Wells in Maple Grove.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.indeed.com/viewjob?jk=7ca427252c44f61e" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="MS" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — Skilled — Huntington Ingalls Industries (Ingalls Shipbuilding)</h3>
+                <span class="tag tag-list">Mississippi</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Pascagoula, MS
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Up to $35.99/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Skilled painter work at Ingalls Shipbuilding in Pascagoula — shipyard painting on the Gulf Coast.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=AE585090679A467A9A7AE2E2D04DEA86206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="MO" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>MIG Welder — Cardinal Scale Manufacturing, Co.</h3>
+                <span class="tag tag-list">Missouri</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Webb City, MO
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$20 - $24/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">MIG welding at Cardinal Scale in Webb City. The button below goes straight to this job&#x27;s own listing page.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.simplyhired.com/job/ob7OyJKCnD6OK1GrhMb7Zuf-EWSj9zst6iL8u4LIHtiAv2eKFGBQAA" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="operator" data-state="MT" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Equipment Operator — MDU Construction Services Group, Inc</h3>
+                <span class="tag tag-list">Montana</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Belgrade, MT
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$22.87 - $33.57</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Equipment operating work in Belgrade with MDU Construction Services Group. Pay as printed: $22.87 - $33.57 (as printed; the posting doesn&#x27;t put a per-hour label on it).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="http://diversityjobs.com/career/9331440/Equipment-Operator-Montana-Belgrade" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="NE" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder 1 (74NE) — Black Hills Energy</h3>
+                <span class="tag tag-list">Nebraska</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Alliance, NE
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$30.84-$44.29/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding work with Black Hills Energy in Alliance. API 1104 welding certification preferred, as printed.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/11424129/Welder-1-74ne-Nebraska-Alliance" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="NV" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Epiroc USA LLC</h3>
+                <span class="tag tag-list">Nevada</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Elko, NV
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$35 - $53/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding and line-bore work with Epiroc in Elko.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/15397370/Welder-Line-Bore-Technician-Nevada-Elko" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="mechanic" data-state="NH" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Fabrication B Mechanic — Westinghouse Electric Company, LLC</h3>
+                <span class="tag tag-list">New Hampshire</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newington, NH
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$35.95 to $38.66/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Fabrication mechanic work at Westinghouse in Newington, posted on the employer&#x27;s own careers site.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://careers.westinghousenuclear.com/job/Newington-Fabrication-B-Mechanic-NH-3801/1421144100/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="NJ" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — RWJBarnabas Health</h3>
+                <span class="tag tag-list">New Jersey</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newark, NJ
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$39.67/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter work at RWJBarnabas Health in Newark. Pay as printed: $39.67 - $39.67 per hour.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/15446052/Painter-New-Jersey-Newark" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="NM" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Federal Signal Corp</h3>
+                <span class="tag tag-list">New Mexico</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Albuquerque, NM
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$23-$28/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding work at Federal Signal in Albuquerque.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.monster.com/job-openings/welder-albuquerque-nm--de84555b-4988-4b56-b179-5c5c136ba85f" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="NY" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Fabricator Set-Up Welder — 2nd Shift — API Heat Transfer</h3>
+                <span class="tag tag-list">New York</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Buffalo, NY
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$30.45/hr to start</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Fabrication and set-up welding on second shift at API Heat Transfer in Buffalo, with a $1.50 shift differential on top. Pay as printed: Starting wage $30.45/hour, incremental increases move to $32.67/hour after one year, plus shift differential of $1.50.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/16219070/Fabricator-Set-Up-Welder-2nd-Shift-Hourly-Rate-30-45-Plus-Shift-Differential-1-50-New-York-Buffalo" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="NC" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Rinehart Racing</h3>
+                <span class="tag tag-list">North Carolina</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Fletcher, NC
+              </p>
+              <div class="payrow">
+                <div><span class="amt">From $22.94/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding work at Rinehart Racing in Fletcher.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.indeed.com/viewjob?jk=e01812a7b7d4cfdb" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="ND" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Heavy Wall Welder — PCL Industrial Construction Co.</h3>
+                <span class="tag tag-list">North Dakota</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ray, ND
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$55.00</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">$175.00/day worked</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Heavy wall welding in Ray with PCL Industrial Construction — strong pay and strong per diem, both printed on the posting. Pay as printed: $55.00 (as printed; per-hour implied).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://craftlink.pcl.com/en-US/jobs/101001" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="OH" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — Volt Information Sciences Inc</h3>
+                <span class="tag tag-list">Ohio</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mansfield, OH
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$21.00 - $23.70/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter work in Mansfield through Volt.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.monster.com/job-openings/painter-mansfield-oh--46d4be03-64fc-436a-b116-b9b4baa70ddb" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="OK" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Class A Welder — Day Shift — Stand-By Personnel</h3>
+                <span class="tag tag-list">Oklahoma</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Collinsville / Owasso area, OK
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$26.00–$34.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Class A welding on day shift in the Collinsville / Owasso area through Stand-By Personnel.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.careerbuilder.com/job-details/class-a-welder-day-shift-collinsville-ok--7dff0d3a-2d73-4cb4-87b0-1a5425e56776" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="OR" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Skilled Residential Painter — Pearl Painters</h3>
+                <span class="tag tag-list">Oregon</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Portland, OR
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$23.50 - $29.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Skilled residential painting with Pearl Painters in Portland.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.ziprecruiter.com/c/Pearl-Painters/Job/Skilled-Residential-Painter/-in-Portland,OR?jid=bcbae59f4f9000e9" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="PA" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>MIG Welders — Kelly Services</h3>
+                <span class="tag tag-list">Pennsylvania</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                McConnellsburg, PA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$26.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">$181/day — paid 7 days a week ($1,267/week)</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">MIG welding in McConnellsburg through Kelly Services, with daily per diem paid seven days a week, exactly as printed.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=8372271E1ADB473A9F70D5DA2CF8E0DB206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="RI" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter — Entry Level and Skilled — General Dynamics Electric Boat</h3>
+                <span class="tag tag-list">Rhode Island</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                North Kingstown, RI
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$17.75 - $24.25/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter work at Electric Boat in North Kingstown — the submarine builders at Quonset Point, with 50 openings on the posting.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://gd.com/careers/painter-entry-level-and-skilled-north-kingstown-ri-us-2026-21407-eb-opportunity/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="SC" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman-Level Electrician — CCS Construction Staffing</h3>
+                <span class="tag tag-list">South Carolina</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Rock Hill, SC
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$35.50/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journeyman electrician work in Rock Hill through CCS Construction Staffing.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.staffccs.com/job/67994-journeyman-electricians-rock-hill-sc/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="SD" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter / General Maintenance — South Dakota Board of Regents (South Dakota Mines)</h3>
+                <span class="tag tag-list">South Dakota</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Rapid City, SD
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Minimum of $19.50/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter and general maintenance work (Senior Building Maintenance Worker) at South Dakota Mines in Rapid City.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.monster.com/job-openings/painter-general-maintenance-senior-building-maintenance-worker-rapid-city-sd--5058ed08-4ef6-4759-b8e1-a1bf0d0212d0" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-state="TN" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Overnight Painter — Gaylord Hotels (Marriott International)</h3>
+                <span class="tag tag-list">Tennessee</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Nashville, TN
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$21.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Overnight painter work at Gaylord Hotels in Nashville.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.onetonline.org/link/jobinfo?id=760C9215D43D46EFA6CC8E6241053A07206" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter blaster" data-state="TX" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter / Blaster — 2nd Shift — Celeros Flow Technology, LLC</h3>
+                <span class="tag tag-list">Texas</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Houston, TX
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$25 – $26/hr + $2.50/hr shift differential</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Second-shift painting and blasting at Celeros Flow Technology in Houston, with the shift differential printed on top of the rate. Pay as printed: $25 – $26/hour plus $2.50/hour shift differential.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://jooble.org/jdp/-1042978031480611870" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="UT" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Welder — Per Diem Offered — Trillium Construction</h3>
+                <span class="tag tag-list">Utah</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Grantsville, UT
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$55/hr welding · $50/hr rig</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">$150/day, all 7 days — plus $500 travel in and $500 travel out, as printed</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Welding in Grantsville (greater Salt Lake area) through Trillium — per diem all seven days plus travel pay both ways, exactly as printed. Pay as printed: $55 an hour for welding and $50 an hour for Rig.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://trilliumstaffing.com/jobs/job/802358-welder-per-diem-offered-grantsville-utah.html" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="hvac" data-state="VT" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>HVAC Service Technician — Alliance Group Services, LLC</h3>
+                <span class="tag tag-list">Vermont</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                North Clarendon, VT
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$30.00–$50.00/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">HVAC service tech work in North Clarendon with Alliance Group Services.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://app.loxo.co/job/MzA2OC1lMzhlYnFtN29wMDQ1YmJk?t=1787666221" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter blaster" data-state="VA" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Brush Crew — Painters &amp; Blasters — CTR Group</h3>
+                <span class="tag tag-list">Virginia</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newport News, VA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$18.00 - $27.31/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">$140/day for non-local candidates</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Brush &amp; roll and spray painters for marine work in Newport News through CTR Group. This is the board&#x27;s standing Newport News opening — per diem is for non-local candidates, as printed.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://gotradesmen.com/job/marine-painter-brush-roll-2/" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="WA" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Welder — Journey Level, Swing — Vigor Marine</h3>
+                <span class="tag tag-list">Washington</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Seattle, WA
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$39.85/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journey-level welding on the swing shift at Vigor Marine in Seattle — shipyard work. Pay as printed: $39.85 per hour (HOURLY RATE: $39.85).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/12419652/Welder-Journey-Level-Swing-Washington-Seattle" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="welder" data-state="WV" data-open="1" data-perdiem="1">
+              <div class="job-top">
+                <h3>Structural MIG Welder — Mural Group</h3>
+                <span class="tag tag-list">West Virginia</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Apple Grove, WV
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$45 to $60/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Per diem applies — amount not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Structural MIG welding in Apple Grove through Mural Group. Per diem applies on this one; the posting doesn&#x27;t print the amount.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.monster.com/job-openings/structural-mig-welder-apple-grove-wv--13e6f5ee-74b2-46f9-b8f9-ebdeee5a423f" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter welder" data-state="WI" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Painter or Welder — Apogee Enterprises Inc</h3>
+                <span class="tag tag-list">Wisconsin</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Wausau, WI
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$21.00/hr starting</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Painter or welder work at Apogee Enterprises in Wausau. Pay as printed: $21.00 / HR (Starting Pay).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/14440293/Painter-Or-Welder-Wisconsin-Wausau" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="electrician" data-state="WY" data-open="1" data-perdiem="0">
+              <div class="job-top">
+                <h3>Journeyman Electrician — State of Wyoming</h3>
+                <span class="tag tag-list">Wyoming</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Cheyenne, WY
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$32.33/hr</span><span class="lbl">Pay — as printed</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Journeyman electrician work with the State of Wyoming in Cheyenne — open until filled, as printed. Pay as printed: $32.33 Hourly (Job 2026-01450, Open Until Filled).</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.careerbuilder.com/job-details/journeyman-electrician-2026-01450-cheyenne-wy--94d3ad9f-6f42-4d95-a069-e786a3baf476" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
+              </div>
+            </article>
+          </div>
+          <div class="empty-note" id="emptyNote" hidden>No postings match that filter right now. Call <a href="tel:+12514224242">(251) 422-4242</a> — new work lands by phone before it lands here.</div>
+
+        </div>
+      </section>
+
+      <!-- JOBS I'M CHASING -->
+      <section id="chasing" class="band" style="padding-top: 56px;">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="tick" aria-hidden="true"></span>
+            <h2>Jobs I'm chasing</h2>
+            <p>These two are personal. Destin is the one applying to CTS and Vigor — Dismukes Recruiting isn't hiring for either company and doesn't place crews into these postings. They're listed here, separate from the crew board, so there's no mix-up about who's hiring and who's applying. Pay is shown exactly as printed on each posting.</p>
+            <button class="section-read-btn" type="button" data-read-target="chasing">&#9654; Read this part</button>
+          </div>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3>1st Class Painter / Blaster — CTS</h3>
+                <span class="tag tag-chase">I'm applying</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Pascagoula, Mississippi — shipyard
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$34</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">$147.04</span><span class="lbl">Per diem / day</span></div>
+              </div>
+              <p class="note">First-class coatings work through Craft &amp; Tech (CTS). Destin has already sent in his own application for this one and asked CTS to confirm the $147.04/day per diem in writing. If you're crew looking for work, the board above is the place — this card is his application, not a placement.</p>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Painter, Journey Level — Vigor Alaska</h3>
+                <span class="tag tag-chase">I'm applying</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ketchikan, Alaska — shipyard
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Not printed</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Union journey-level painter role at the Ketchikan yard — the one job Destin has said he wants for himself. He hasn't applied yet: he's asking about per diem first, because the posting doesn't print pay or per diem. Drug test and background check required.</p>
+            </article>
+          </div>
+
+          <!-- CALCULATOR -->
+          <div class="calc" aria-label="Weekly pay calculator">
+            <div>
+              <h3>Run the numbers yourself</h3>
+              <p>This is the CTS Pascagoula job Destin is chasing, filled in. Change the numbers to match any posting and see the week before you pack a bag. Straight-time estimate — overtime only adds.</p>
+            </div>
+            <div class="calc-fields">
+              <div>
+                <label for="calcRate">Hourly pay ($)</label>
+                <input id="calcRate" type="number" inputmode="decimal" min="0" step="0.25" value="34" />
+              </div>
+              <div>
+                <label for="calcHours">Hours per week</label>
+                <input id="calcHours" type="number" inputmode="numeric" min="0" step="1" value="50" />
+              </div>
+              <div>
+                <label for="calcPerDiem">Per diem ($/day)</label>
+                <input id="calcPerDiem" type="number" inputmode="decimal" min="0" step="0.01" value="147.04" />
+              </div>
+              <div>
+                <label for="calcDays">Days per week</label>
+                <input id="calcDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="6" />
+              </div>
+              <div class="calc-total">
+                <span class="t-lbl">Estimated gross for the week</span>
+                <span class="t-amt" id="calcTotal">$0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how" style="padding-top: 10px;">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="tick" aria-hidden="true"></span>
+            <h2>How it works for workers</h2>
+            <p>No fees. No runaround. No finding out the pay after you've driven six hours.</p>
+            <button class="section-read-btn" type="button" data-read-target="how">&#9654; Read this part</button>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <div class="num" aria-hidden="true">1</div>
+              <div>
+                <h3>Call or email — that's the application</h3>
+                <p>One call to <a href="tel:+12514224242">(251) 422-4242</a>. Tell Destin your trade, your certs (C7, C12, OSHA), and how far you'll travel. No portal, no account, no password to forget.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">2</div>
+              <div>
+                <h3>You see the pay before you say yes</h3>
+                <p>Every job we bring you comes with the hourly rate and the per diem attached — or an honest "not stated" when the yard hasn't printed one. You decide with the real numbers in front of you.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">3</div>
+              <div>
+                <h3>You go to work — and it costs you nothing</h3>
+                <p>Workers never pay Dismukes Recruiting a dime. Employers pay for placements. That's the deal on day one and it doesn't change.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMPLOYERS -->
+      <section id="employers" class="band">
+        <div class="wrap split">
+          <figure>
+            <img src="assets/site/employers-painter.jpg" alt="A painter in a respirator and protective suit spray-painting the black hull of a ship inside a dry dock hall" loading="lazy" />
+            <figcaption>Coatings crews for shipyards and industrial work — blasters, spray painters, and full hull teams.</figcaption>
+          </figure>
+          <div>
+            <div class="sec-head" style="margin-bottom: 0;">
+              <span class="tick" aria-hidden="true"></span>
+              <h2>Need a crew that can hold a spec?</h2>
+              <button class="section-read-btn" type="button" data-read-target="employers">&#9654; Read this part</button>
+            </div>
+            <ul class="plain-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>Certified hands, screened by a coatings man.</strong> Destin worked the trade 13 years — C7, C12, OSHA 10 — so a résumé gets read by somebody who has actually held the nozzle.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>Pay posted up front fills crews faster.</strong> Every Dismukes posting prints the rate and the per diem. Workers trust it, and they show up for it.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span><strong>Travel crews and local crews.</strong> Gulf Coast and Alaska travel hands, plus a growing local list around Morristown, Tennessee.</span>
+              </li>
+            </ul>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-accent" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20request%20—%20Dismukes%20Recruiting">Request a crew</a>
+              <a class="btn btn-ghost" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSdD_jBq4z6LTx7Y15dkxd-REuHZNMOmSQbNjSBTU50oEGdMEg/viewform" target="_blank" rel="noopener">Post a Job — $25 a post, $50 if featured</a>
+              <a class="btn btn-ghost" style="color:var(--ink)" href="tel:+12514224242">Call (251) 422-4242</a>
+            </div>
+            <div class="chime-row">
+              <span class="lbl">Partner &amp; placement payments — Chime:</span>
+              <span class="handle" id="chimeHandle">$DDBABY12</span>
+              <button class="copy-btn" type="button" id="copyChime">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STORY -->
+      <section id="story">
+        <div class="wrap split">
+          <div>
+            <div class="sec-head" style="margin-bottom: 18px;">
+              <span class="tick" aria-hidden="true"></span>
+              <h2>Who's behind it</h2>
+              <button class="section-read-btn" type="button" data-read-target="story">&#9654; Read this part</button>
+            </div>
+            <img class="founder-photo" src="assets/site/founder-photo.jpg" alt="Destin Dismukes — a mirror selfie, cap on, red phone in hand" loading="lazy" />
+            <p class="story-quote">Built by <b>Destin Dismukes</b>, a blaster/painter who worked 13 years in coatings, lived on the street, and kept standing — workers apply free, always.</p>
+            <p style="color:var(--ink-soft); margin-top: 18px;">Destin ran blast pots and spray rigs in yards up and down the Gulf and on the road with traveling crews. He started Dismukes Recruiting out of Morristown, Tennessee, because he'd been on the wrong end of postings that hid the pay until a man was already packed. Here, the numbers come first.</p>
+            <p style="color:var(--ink-soft);">His full story is in his book, <a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/"><em>Destin: Destined to Stand</em></a> — free to read and listen to online.</p>
+          </div>
+          <figure>
+            <img src="assets/site/story-photo.jpg" alt="A worker in a blast helmet and yellow protective suit pressure-washing the rusted side of a ship's hull" loading="lazy" />
+            <figcaption>The work this company comes from: surface prep on a hull, the unglamorous half of every paint job that decides whether the coating holds.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ALASKA -->
+      <div class="alaska" id="alaska">
+        <img class="bg" src="assets/site/alaska-bg.jpg" alt="A small wooden cabin on a forested hillside above a quiet Alaska coastal inlet at golden hour" loading="lazy" />
+        <div class="wrap">
+          <div class="alaska-in">
+            <h2>Where this is headed</h2>
+            <p>Every crew placed is a step toward the long goal: a wooded piece of the Alaska coast, a cabin, and a self-sufficient life lived on his own terms. That's why the Vigor yard in Ketchikan is one of the jobs he's chasing for himself — and why this company is being built to last, one honest posting at a time.</p>
+            <p style="margin-top: 22px;"><a class="btn btn-accent" href="tel:+12514224242">Work with Destin</a></p>
+            <button class="section-read-btn on-dark" type="button" data-read-target="alaska">&#9654; Read this part</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <h3>Dismukes Recruiting</h3>
+            <p>Painters, blasters, and coatings crews — placed by a man who did the work for 13 years. Based in Morristown, Tennessee. Placing nationwide.</p>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <ul>
+              <li><a href="tel:+12514224242">(251) 422-4242</a></li>
+              <li><a href="mailto:dismukesreqag369@gmail.com">dismukesreqag369@gmail.com</a></li>
+              <li>Chime: $DDBABY12</li>
+            </ul>
+          </div>
+          <div>
+            <h3>More from Destin</h3>
+            <ul>
+              <li><a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/">Destin: Destined to Stand — the book</a></li>
+              <li><a href="https://dismukesrecruiting.com">Dismukes Recruiting — main site</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="credits">Job details are shown as printed on the original postings and were current when checked — the fifty state postings were checked on November 20, 2026 — call to confirm before traveling. DD, the Silverado, the compass logo, and Destin's portrait are Destin's own images, brought over from his other recruiting sites, DD's work-gear photos were made from his own full-body photo, and the jokes are his own list from his main site. Other photos: shipyard blasting via AAA India; hull prep via Tilda CDN; spray painting via Melbourne Extreme Coatings; Alaska cabin via Granite Point, Seward.</p>
+      </div>
+    </footer>
+
+    <!-- DD — fixed bottom left, on screen the whole time -->
+    <div class="dd-dock" id="ddDock" aria-label="DD — Destin's guide figure">
+      <p class="bubble" id="ddBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and DD reads this page to you out loud — in a voice in Destin's style.</p>
+      <img id="ddDockImg" src="assets/site/dd-dock.webp" alt="DD — full-body figure of Destin Dismukes in cap, sunglasses and work boots" loading="lazy" />
+      <span class="gear-label" id="ddGearLabel">Everyday DD</span>
+      <div class="dock-btns">
+        <button type="button" class="read-now" id="dockReadBtn" aria-label="DD reads the page out loud">&#9654; Read</button>
+        <button type="button" id="dockStopBtn" aria-label="Stop DD reading">Stop</button>
+      </div>
+      <a href="tel:+12514224242">Call DD</a>
+    </div>
+
+    <!-- The truck — fixed bottom right, on screen the whole time -->
+    <div class="truck-dock" aria-label="DD's truck">
+      <p class="t-label">DD's Truck<span class="t-suffix"> — The Rolling Office</span></p>
+      <img src="assets/site/truck-dock.webp" alt="DD driving his white Chevrolet Silverado, headlights on" loading="lazy" />
+      <p class="t-cap">2015 pearl white lifted Silverado — DD in the driver's seat.</p>
+      <a href="#dd-truck">See DD &amp; the truck</a>
+    </div>
+
+    <div class="callbar" aria-label="Quick contact">
+      <a class="btn btn-accent" href="tel:+12514224242">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call
+      </a>
+      <a class="btn btn-ghost" style="color:var(--ink); background:var(--surface)" href="sms:+12514224242">Text</a>
+      <a class="btn btn-ghost" style="color:var(--ink); background:var(--surface)" href="#jobs">Jobs</a>
+    </div>
+
+    <script>
+      (function () {
+        // ---- Job filters (trade chips + state picker work together) ----
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+        var cards = Array.prototype.slice.call(document.querySelectorAll("#jobGrid .job"));
+        var count = document.getElementById("jobCount");
+        var empty = document.getElementById("emptyNote");
+        var stateSel = document.getElementById("stateFilter");
+        var activeFilter = "all";
+
+        function matches(card, filter) {
+          if (filter === "all") return true;
+          if (filter === "open") return card.getAttribute("data-open") === "1";
+          if (filter === "perdiem") return card.getAttribute("data-perdiem") === "1";
+          return (card.getAttribute("data-trades") || "").split(" ").indexOf(filter) !== -1;
+        }
+        function applyFilters() {
+          var state = stateSel ? stateSel.value : "all";
+          var shown = 0;
+          cards.forEach(function (card) {
+            var ok = matches(card, activeFilter)
+              && (state === "all" || card.getAttribute("data-state") === state);
+            card.hidden = !ok;
+            if (ok) shown++;
+          });
+          count.textContent = shown === cards.length
+            ? "Showing all " + shown + " postings and crew lists — one job from every state, plus the crew lists."
+            : "Showing " + shown + " of " + cards.length + " postings.";
+          empty.hidden = shown !== 0;
+        }
+        chips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+            chip.setAttribute("aria-pressed", "true");
+            activeFilter = chip.getAttribute("data-filter");
+            applyFilters();
+          });
+        });
+        if (stateSel) stateSel.addEventListener("change", applyFilters);
+        applyFilters();
+
+        // ---- Weekly pay calculator ----
+        var rate = document.getElementById("calcRate");
+        var hours = document.getElementById("calcHours");
+        var perdiem = document.getElementById("calcPerDiem");
+        var days = document.getElementById("calcDays");
+        var total = document.getElementById("calcTotal");
+        function num(el) {
+          var v = parseFloat(el.value);
+          return isNaN(v) || v < 0 ? 0 : v;
+        }
+        function calc() {
+          var sum = num(rate) * num(hours) + num(perdiem) * num(days);
+          total.textContent = "$" + sum.toLocaleString("en-US", {
+            minimumFractionDigits: 2, maximumFractionDigits: 2
+          });
+        }
+        [rate, hours, perdiem, days].forEach(function (el) {
+          el.addEventListener("input", calc);
+        });
+        calc();
+
+        // ---- Copy Chime handle ----
+        var copyBtn = document.getElementById("copyChime");
+        copyBtn.addEventListener("click", function () {
+          var text = document.getElementById("chimeHandle").textContent.trim();
+          function done() {
+            copyBtn.textContent = "Copied";
+            setTimeout(function () { copyBtn.textContent = "Copy"; }, 1800);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, done);
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            done();
+          }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        // ---- DD's jokes — his own list from his main site ----
+        var JOKES = [
+          "DD joke: Why did DD bring a ladder to the job fair? Heard the pay was going up. He still checked the per diem first.",
+          "Dude, is it just me or does the microwave always take longer when you're starving? Like, way longer.",
+          "DD joke: The truck's lights are on and the mud is flying \u2014 that's not a breakdown, that's a entrance.",
+          "DD joke: I don't chase jobs \u2014 I walk right up and introduce myself.",
+          "DD joke: I read the per diem before the job title \u2014 priorities. The title don't pay for the hotel, friend.",
+          "DD joke: Blasting tip \u2014 the paint comes off a lot faster when you aim at the steel, not your sandwich. PPE on, lunch safe.",
+          "DD joke: They said the pay was 'competitive.' DD said, 'Print it, then we'll race.'",
+          "DD joke: Flying out for work, I take the window seat \u2014 best view in the house for watching the per diem math work.",
+          "DD joke: The hotel asked if I wanted a wake-up call. Friend, $140 a day in per diem already had me wide awake.",
+          "DD joke: I told the crew the job comes with travel. They heard 'vacation.' Then I showed them the blast hose.",
+          "DD joke: DD's first investment was a good pair of boots \u2014 pays him back every shift. His second move was asking about the 401k.",
+          "DD joke: A 401k is future-you saying thanks. Present DD is still learning to send future DD more than a thank-you card.",
+          "DD joke: The pay went up, the per diem showed up, and DD showed up. In that order, every time."
+        ];
+        var idx = 0;
+        var text = document.getElementById("jokeText");
+        var btn = document.getElementById("jokeBtn");
+        if (text && btn) {
+          btn.addEventListener("click", function () {
+            idx = (idx + 1) % JOKES.length;
+            text.textContent = JOKES[idx];
+            // The joke is told out loud too — a voice in Destin's
+            // style, played through the one player the read-aloud script
+            // below defines. No device robot voice anywhere on this page.
+            if (window.__ddPlay) window.__ddPlay("assets/voice/joke-" + idx + ".mp3", JOKES[idx], "DD is telling his joke…");
+          });
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        // ---- Menu panel (GitHub site) ----
+        var menuBtn = document.getElementById("menuBtn");
+        var panel = document.getElementById("menuPanel");
+        if (menuBtn && panel) {
+          menuBtn.addEventListener("click", function () {
+            var open = panel.classList.toggle("open");
+            menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+          panel.addEventListener("click", function (e) {
+            if (e.target.tagName === "A") {
+              panel.classList.remove("open");
+              menuBtn.setAttribute("aria-expanded", "false");
+            }
+          });
+        }
+
+        // ---- Verse of the Day — rotates by date, same verses as the GitHub site ----
+        var VERSES = [
+          ["Behold, the kingdom of God is within you.", "Luke 17:21"],
+          ["Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.", "Joshua 1:9"],
+          ["The LORD is my shepherd; I shall not want.", "Psalm 23:1"],
+          ["Trust in the LORD with all thine heart; and lean not unto thine own understanding.", "Proverbs 3:5"],
+          ["Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee.", "Isaiah 41:10"],
+          ["For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.", "Jeremiah 29:11"],
+          ["And we know that all things work together for good to them that love God.", "Romans 8:28"],
+          ["The LORD is my light and my salvation; whom shall I fear?", "Psalm 27:1"],
+          ["Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"],
+          ["God is our refuge and strength, a very present help in trouble.", "Psalm 46:1"],
+          ["But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles.", "Isaiah 40:31"],
+          ["For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", "2 Timothy 1:7"],
+          ["For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", "John 3:16"],
+          ["This is the day which the LORD hath made; we will rejoice and be glad in it.", "Psalm 118:24"],
+          ["In all thy ways acknowledge him, and he shall direct thy paths.", "Proverbs 3:6"],
+          ["I can do all things through Christ which strengtheneth me.", "Philippians 4:13"]
+        ];
+        var vText = document.getElementById("dailyVerseText");
+        var vDate = document.getElementById("dailyVerseDate");
+        if (vText) {
+          var now = new Date();
+          var start = new Date(now.getFullYear(), 0, 0);
+          var day = Math.floor((now - start) / 86400000);
+          var v = VERSES[day % VERSES.length];
+          vText.innerHTML = "";
+          vText.appendChild(document.createTextNode(v[0] + " \u2014 " + v[1]));
+          if (vDate) vDate.textContent = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+        }
+
+        // ---- DD Reads It To You — DD reads the whole page out loud ----
+        // Every reading on this page is a voice in Destin's style —
+        // DD reads this page in that voice. The device speech robot is gone from
+        // this page completely: it is never called, never offered, never
+        // fallen back to. One reading plays at a time, through the one
+        // player below; starting anything new stops whatever was playing.
+        var status = document.getElementById("readStatus");
+        function setStatus(msg) { if (status) status.textContent = msg; }
+        var player = new Audio();
+        player.preload = "auto";
+        var lastSrc = null, lastBubble = "", lastStatus = "";
+        var ddBubble = document.getElementById("ddBubble");
+        var ddDockEl = document.getElementById("ddDock");
+        var ddBubbleHome = ddBubble ? ddBubble.textContent : "";
+        function ddSay(line) { if (ddBubble && line) ddBubble.textContent = line; }
+        function ddReading(on) {
+          if (ddDockEl) ddDockEl.classList.toggle("reading", !!on);
+          if (!on && ddBubble) ddBubble.textContent = ddBubbleHome;
+        }
+        function stopAllVoices() {
+          try { player.pause(); } catch (e) {}
+          Array.prototype.forEach.call(document.querySelectorAll("audio, video"), function (el) {
+            if (el !== player) { try { el.pause(); } catch (e) {} }
+          });
+        }
+        function stopReading(msg) {
+          stopAllVoices();
+          try { player.removeAttribute("src"); player.load(); } catch (e) {}
+          ddReading(false);
+          if (msg) setStatus(msg);
+        }
+        function playVoice(src, bubbleText, statusText) {
+          stopAllVoices();
+          lastSrc = src; lastBubble = bubbleText || ""; lastStatus = statusText || "";
+          if (lastBubble) ddSay(lastBubble);
+          ddReading(true);
+          setStatus(lastStatus || "DD is reading… tap Stop any time.");
+          player.src = src;
+          var pr = player.play();
+          if (pr && pr.catch) pr.catch(function () {
+            ddReading(false);
+            setStatus("That recording could not play just now — tap the read button to try it again.");
+          });
+        }
+        player.addEventListener("ended", function () {
+          ddReading(false);
+          setStatus("Done reading. Tap repeat to hear it again.");
+        });
+        player.addEventListener("error", function () {
+          if (player.getAttribute("src")) {
+            ddReading(false);
+            setStatus("That recording could not play just now — tap the read button to try it again.");
+          }
+        });
+        // Other parts of the page (DD's jokes, the career closet, the
+        // astrology corner) play their recordings through this same player.
+        window.__ddPlay = playVoice;
+        window.__ddStop = function () { stopReading("Stopped. Tap Start to hear the page again, or Read on any section."); };
+        var SEGMENTS = {
+          "dd-truck": ["assets/voice/seg-dd-truck.mp3", "Reading — DD and my truck, the career closet and the jokes."],
+          "verse": ["assets/voice/seg-verse.mp3", "Reading — the Verse of the Day."],
+          "astrology": ["assets/voice/seg-astrology.mp3", "Reading — DD's Astrology Corner."],
+          "jobs": ["assets/voice/seg-jobs.mp3", "Reading — jobs for crews, every posting with its pay."],
+          "chasing": ["assets/voice/seg-chasing.mp3", "Reading — jobs I'm chasing, and the pay calculator."],
+          "how": ["assets/voice/seg-how.mp3", "Reading — how it works for workers."],
+          "employers": ["assets/voice/seg-employers.mp3", "Reading — for employers."],
+          "story": ["assets/voice/seg-story.mp3", "Reading — who's behind it."],
+          "alaska": ["assets/voice/seg-alaska.mp3", "Reading — where this is headed."]
+        };
+        function startRead() {
+          // Start = the whole page, from the top, in a voice in Destin's style.
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          playVoice("assets/voice/full.mp3", "DD is reading the whole page out loud, in a voice in Destin's style — I'm right here with you the whole time.", "DD is reading the whole page… tap Stop any time.");
+        }
+        function repeatRead() {
+          if (lastSrc) { playVoice(lastSrc, lastBubble, lastStatus); }
+          else { startRead(); }
+        }
+        var map = [
+          ["readStartBtn", startRead], ["stickyReadBtn", startRead], ["dockReadBtn", startRead],
+          ["readRepeatBtn", repeatRead], ["stickyRepeatBtn", repeatRead]
+        ];
+        map.forEach(function (pair) {
+          var b = document.getElementById(pair[0]);
+          if (b) b.addEventListener("click", pair[1]);
+        });
+        var dockStop = document.getElementById("dockStopBtn");
+        if (dockStop) dockStop.addEventListener("click", function () {
+          stopReading("Stopped. DD's still right here — tap ▶ Read on him any time.");
+        });
+        // Individual section Read buttons — hear just that one part.
+        document.querySelectorAll("[data-read-target]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var seg = SEGMENTS[btn.getAttribute("data-read-target")];
+            if (seg) playVoice(seg[0], seg[1], "DD is reading… tap Stop any time.");
+          });
+        });
+        // ---- DD reads the board — every posting on the board, pay and all.
+        // The recording always reads the full board (all 54 postings), so it
+        // matches the board with no filter picked.
+        var boardBtn = document.getElementById("readBoardBtn");
+        if (boardBtn) boardBtn.addEventListener("click", function () {
+          playVoice("assets/voice/board.mp3", "DD is reading the job board out loud — every posting and its pay.", "DD is reading the board… tap Stop any time.");
+        });
+        var pauseBtn = document.getElementById("readPauseBtn");
+        if (pauseBtn) pauseBtn.addEventListener("click", function () {
+          if (!player.getAttribute("src")) return;
+          if (!player.paused && !player.ended) { player.pause(); setStatus("Paused."); }
+          else if (player.paused && !player.ended) {
+            var pr = player.play();
+            if (pr && pr.catch) pr.catch(function () {});
+            setStatus("Reading…");
+          }
+        });
+        var stopBtn = document.getElementById("readStopBtn");
+        if (stopBtn) stopBtn.addEventListener("click", function () {
+          stopReading("Stopped. Tap Start to hear the page again, or Read on any section.");
+        });
+
+        // DD and the truck ride along on screen as you scroll — the one
+        // exception is DD's own big section: while that is on screen the
+        // corner docks step aside (body.dd-section-open, in the outfit
+        // script below) so they never cover the closet, then come back.
+      })();
+    </script>
+    <script>
+      (function () {
+        // ---- DD walks the whole page with you + changes into his work gear ----
+        var OUTFITS = {
+          street:  { src: "assets/site/outfit-street.webp", label: "Everyday DD", cap: "DD — that's Destin himself, full-body. He's on this site the whole time, bottom corner and all — and he walks with you as you scroll.", alt: "DD — the full-body figure of Destin Dismukes: white cap, gold sunglasses, chains, tattoos, dark cargo pants and work boots" },
+          blaster: { src: "assets/site/outfit-blaster.webp", label: "Blast suit + blast hood on", cap: "DD suited up for blasting — full blast suit and blast hood on, gloves on, ready to hold the nozzle.", alt: "DD in his abrasive blasting gear: tan blast suit, blast hood with a clear viewing window, and heavy gloves" },
+          painter: { src: "assets/site/outfit-painter.webp", label: "Painter gear on", cap: "DD in his painter gear — speckled painter whites, respirator at his neck, spray gun in hand.", alt: "DD in his painter gear: white speckled coveralls, respirator hanging at his neck, holding a spray gun" },
+          welder:  { src: "assets/site/outfit-welder.webp", label: "Welder gear on", cap: "DD in his welder gear — welding jacket, leather gloves, helmet flipped up and ready.", alt: "DD in his welder gear: dark welding jacket, leather welding gloves, welding helmet flipped up on his head" },
+          lawyer:  { src: "assets/site/outfit-lawyer.webp", label: "Lawyer suit on", cap: "DD in his lawyer fit — real tailored navy suit, white shirt and tie, chains over the top, cap and shades still his.", alt: "DD in a real tailored dark navy lawyer suit with a white dress shirt and dark tie, grey cap, gold sunglasses and silver chains" },
+          doctor:  { src: "assets/site/outfit-doctor.webp", label: "Doctor coat on", cap: "DD in his doctor fit — white coat over teal scrubs, stethoscope around his neck, cap and shades still his.", alt: "DD in a white doctor coat over teal scrubs with a stethoscope around his neck, grey cap, gold sunglasses and silver chains" },
+          chef:  { src: "assets/site/outfit-chef.webp", label: "Chef whites on", cap: "DD in his chef fit — white chef jacket and tall chef hat, black apron, checkered chef pants, shades and chains still his.", alt: "DD in chef whites: white double-breasted chef jacket, tall white chef hat, black apron and black-and-white checkered chef pants, gold sunglasses and silver chains" },
+          firefighter: { src: "assets/site/outfit-firefighter.webp", label: "Firefighter gear on", cap: "DD in his firefighter fit — full turnout coat and pants with reflective stripes, red helmet on, gloves on, shades and chains still his.", alt: "DD in firefighter turnout gear: tan turnout coat and pants with silver and yellow reflective stripes, red firefighter helmet and black gloves, gold sunglasses and silver chains" },
+          police:  { src: "assets/site/outfit-police.webp", label: "Police uniform on", cap: "DD in his police fit — navy uniform and police cap, duty belt on, shades and chains still his.", alt: "DD in a dark navy police uniform with a police cap and duty belt, gold sunglasses and silver chains" },
+          teacher: { src: "assets/site/outfit-teacher.webp", label: "Teacher fit on", cap: "DD in his teacher fit — brown tweed blazer and button-down shirt, book in hand, cap and shades still his.", alt: "DD dressed as a teacher: brown tweed blazer, light button-down shirt, dark slacks, holding a book, grey cap, gold sunglasses and silver chains" },
+          pilot:   { src: "assets/site/outfit-pilot.webp", label: "Pilot uniform on", cap: "DD in his pilot fit — navy pilot uniform with gold stripes on the sleeves and the pilot cap on, shades and chains still his.", alt: "DD in an airline pilot uniform: navy jacket with gold sleeve stripes, white shirt and tie, navy pilot cap with a gold band, gold sunglasses and silver chains" },
+          electrician: { src: "assets/site/outfit-electrician.webp", label: "Electrician gear on", cap: "DD in his electrician fit — orange hi-vis vest, tool belt loaded with pliers and drivers, white hard hat on, shades and chains still his.", alt: "DD in electrician gear: orange high-visibility vest over a dark work shirt, leather tool belt with pliers and screwdrivers, white hard hat, gold sunglasses and silver chains" },
+          construction: { src: "assets/site/outfit-construction.webp", label: "Construction gear on", cap: "DD in his construction fit — orange hi-vis vest, tool belt loaded, white hard hat on, shades and chains still his.", alt: "DD in construction gear: orange high-visibility vest over a dark work shirt, leather tool belt, white hard hat, gold sunglasses and silver chains" },
+          inspector: { src: "assets/site/outfit-inspector.webp", label: "Inspector gear on", cap: "DD in his inspector fit — white hard hat, hi-vis vest and clipboard in hand, shades and chains still his.", alt: "DD in inspector gear: white hard hat, high-visibility vest, clipboard in hand, gold sunglasses and silver chains" },
+          mechanic:  { src: "assets/site/outfit-mechanic.webp", label: "Mechanic gear on", cap: "DD in his mechanic fit — grey coveralls, wrench in hand, shades and chains still his.", alt: "DD in mechanic coveralls: grey coveralls, wrench in hand, gold sunglasses and silver chains" },
+          plumber:   { src: "assets/site/outfit-plumber.webp", label: "Plumber gear on", cap: "DD in his plumber fit — tool belt on, red pipe wrench in hand, shades and chains still his.", alt: "DD in plumber gear: tool belt on, red pipe wrench in hand, gold sunglasses and silver chains" }
+        };
+        var mainImg = document.getElementById("ddMainImg");
+        var mainCap = document.getElementById("ddMainCap");
+        var dockImg = document.getElementById("ddDockImg");
+        var gearLabel = document.getElementById("ddGearLabel");
+        var outfitBtns = Array.prototype.slice.call(document.querySelectorAll("[data-outfit]"));
+        function setOutfit(key, speakIt) {
+          var o = OUTFITS[key];
+          if (!o) return;
+          if (mainImg) { mainImg.src = o.src; mainImg.alt = o.alt; }
+          if (dockImg) { dockImg.src = o.src; dockImg.alt = o.alt; }
+          if (mainCap) mainCap.textContent = o.cap;
+          if (gearLabel) gearLabel.textContent = o.label;
+          outfitBtns.forEach(function (b) {
+            b.setAttribute("aria-pressed", b.getAttribute("data-outfit") === key ? "true" : "false");
+          });
+          // DD reads the fit out loud the moment it goes on — a voice
+          // in Destin's style, through the page's one player (one voice
+          // at a time, anything else playing stops first), and the words
+          // show in DD's corner bubble while it plays.
+          if (speakIt && window.__ddPlay) window.__ddPlay("assets/voice/outfit-" + key + ".mp3", o.label + ". " + o.cap, "DD is reading his fit…");
+        }
+        outfitBtns.forEach(function (b) {
+          b.addEventListener("click", function () { setOutfit(b.getAttribute("data-outfit"), true); });
+        });
+        // Tap any job on the board and DD suits up for that trade — and says so.
+        Array.prototype.forEach.call(document.querySelectorAll("#jobGrid .job"), function (card) {
+          card.addEventListener("click", function () {
+            var trades = card.getAttribute("data-trades") || "";
+            if (trades.indexOf("blaster") !== -1) setOutfit("blaster", true);
+            else if (trades.indexOf("welder") !== -1) setOutfit("welder", true);
+            else if (trades.indexOf("painter") !== -1) setOutfit("painter", true);
+            else if (trades.indexOf("electrician") !== -1) setOutfit("electrician", true);
+          });
+        });
+        // While the big DD & truck section is on screen, the corner docks
+        // step aside (see the body.dd-section-open CSS) so the little DD's
+        // bubble and photo can never cover the closet's words or buttons.
+        // Scroll past the section and both docks come right back.
+        var ddSection = document.getElementById("dd-truck");
+        if (ddSection && "IntersectionObserver" in window) {
+          var ddObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              document.body.classList.toggle("dd-section-open", en.isIntersecting);
+            });
+          }, { threshold: 0.04 });
+          ddObs.observe(ddSection);
+        }
+        // DD walks while you scroll, and settles when you stop.
+        var dock = document.getElementById("ddDock");
+        var walkTimer = null;
+        window.addEventListener("scroll", function () {
+          if (!dock) return;
+          dock.classList.add("walking");
+          if (walkTimer) clearTimeout(walkTimer);
+          walkTimer = setTimeout(function () { dock.classList.remove("walking"); }, 650);
+        }, { passive: true });
+
+        // ---- DD's Astrology Corner ----
+        var SIGNS = [
+          ["Aries", "Mar 21 – Apr 19", "First one through the gate and first one on the tools. Your fire gets crews moving.", "Work word: start. Take the lead on the hard part of the job early in the week, while your energy is high.", "Watch for: rushing the prep. Blast twice in your head before you blast once on the steel.", "Lucky number: 1 · Best day: Tuesday"],
+          ["Taurus", "Apr 20 – May 20", "Steady hands and a strong back. You finish what other people start.", "Work word: build. Slow, solid work pays this week — the coating you lay down right stays down.", "Watch for: digging in when a better method shows up. Hear the man out, then decide.", "Lucky number: 6 · Best day: Friday"],
+          ["Gemini", "May 21 – Jun 20", "Quick mind, quicker talk. You can run a hose and a conversation at the same time.", "Work word: connect. Your next good job likely comes through somebody you talk to this week.", "Watch for: saying yes to two crews at once. Pick one and be all the way in.", "Lucky number: 5 · Best day: Wednesday"],
+          ["Cancer", "Jun 21 – Jul 22", "You look out for your crew like family, and they know it.", "Work word: protect. Check on your people this week — a good word from you carries weight.", "Watch for: carrying everybody's problems home. Help on the clock, rest off it.", "Lucky number: 2 · Best day: Monday"],
+          ["Leo", "Jul 23 – Aug 22", "Born to be seen doing good work. The yard notices when you are on it.", "Work word: shine. Let your work talk — a clean, spec-right job is your loudest statement.", "Watch for: pride getting between you and good advice. The best hands still listen.", "Lucky number: 9 · Best day: Sunday"],
+          ["Virgo", "Aug 23 – Sep 22", "Eagle eye for the details everybody else walks past — runs, sags, thin spots.", "Work word: inspect. Your eye for detail is worth money this week. Trust it and say what you see.", "Watch for: picking your own work apart after hours. Done right is done.", "Lucky number: 3 · Best day: Wednesday"],
+          ["Libra", "Sep 23 – Oct 22", "Fair-minded and even-handed — the one crews ask to settle things.", "Work word: balance. Weigh the pay against the travel before you commit, not after.", "Watch for: taking too long to decide. The posting with the right numbers won't wait forever.", "Lucky number: 7 · Best day: Friday"],
+          ["Scorpio", "Oct 23 – Nov 21", "Quiet, intense, and all the way loyal. When you commit, you commit.", "Work word: focus. One target this week — the job, the cert, the call — and put everything on it.", "Watch for: holding a grudge against a bad posting. Let it go and take the next one.", "Lucky number: 8 · Best day: Thursday"],
+          ["Sagittarius", "Nov 22 – Dec 21", "Built for the road. New towns, new yards, new horizons — that is home to you.", "Work word: travel. A job a few states over could be the right move this week. Run the per diem math first.", "Watch for: packing before the numbers are printed. Pay up front, then roll.", "Lucky number: 4 · Best day: Thursday"],
+          ["Capricorn", "Dec 22 – Jan 19", "The climber. You play the long game and you do not quit on a hill.", "Work word: climb. One steady step this week beats a leap — certs, savings, reputation, all of it compounds.", "Watch for: working yourself into the ground. Even climbers camp and rest.", "Lucky number: 10 · Best day: Saturday"],
+          ["Aquarius", "Jan 20 – Feb 18", "You see a better way to do it before anybody else does — and you are usually right.", "Work word: invent. That smarter setup you have been thinking about? This week, speak up about it.", "Watch for: going so far your own way you end up working alone. Bring the crew with you.", "Lucky number: 11 · Best day: Saturday"],
+          ["Pisces", "Feb 19 – Mar 20", "Big heart, strong gut feeling. You read people and rooms better than most.", "Work word: trust. Your gut call on a crew or a foreman is probably right this week. Act on it.", "Watch for: taking a job out of sympathy when the pay is not printed. Kind is good — paid is too.", "Lucky number: 12 · Best day: Monday"]
+        ];
+        var grid = document.getElementById("signGrid");
+        var aName = document.getElementById("astroName");
+        var aDates = document.getElementById("astroDates");
+        var aText = document.getElementById("astroText");
+        var aLucky = document.getElementById("astroLucky");
+        if (grid && aName) {
+          SIGNS.forEach(function (s) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.textContent = s[0];
+            b.setAttribute("aria-pressed", "false");
+            b.addEventListener("click", function () {
+              grid.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+              b.setAttribute("aria-pressed", "true");
+              aName.textContent = s[0];
+              aDates.textContent = s[1];
+              aText.textContent = s[2] + " " + s[3] + " " + s[4];
+              aLucky.textContent = s[5];
+              // DD reads your reading out loud too — a voice in
+              // Destin's style, through the page's one player.
+              if (window.__ddPlay) window.__ddPlay("assets/voice/sign-" + s[0].toLowerCase() + ".mp3", s[0] + " — " + aText.textContent, "DD is reading your sign…");
+            });
+            grid.appendChild(b);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -617,7 +617,7 @@
           <a href="#employers">Employers</a>
           <a href="#how">Help</a>
           <a href="#dd-truck">Clubhouse</a>
-          <a href="#story">Contact</a>
+          <a href="#contact">Contact</a>
         </nav>
       </div>
 
@@ -729,7 +729,7 @@
               <a class="btn btn-ghost" href="#jobs">See the jobs</a>
             </p>
             <p style="margin-top:12px;">
-              <button class="section-read-btn on-dark" type="button" id="hearDdBtn" onclick="if(window.__ddStop){window.__ddStop();}var a=document.getElementById('destinRecordedAudio');a.currentTime=0;a.play();">&#9654; Hear DD — Destin's own voice</button>
+              <button class="section-read-btn on-dark" type="button" id="hearDdBtn" onclick="if(window.__ddStop){window.__ddStop();}var a=document.getElementById('destinRecordedAudio');a.currentTime=0;a.onended=function(){var s=document.getElementById('readStatus');if(s)s.textContent='Done. Tap Hear DD to hear it again.';};a.play();var s=document.getElementById('readStatus');if(s)s.textContent='Playing \u2014 Destin\u0027s own voice.';">&#9654; Hear DD — Destin's own voice</button>
               <audio id="destinRecordedAudio" src="destin-dd-voice.mp3" preload="none"></audio>
             </p>
             <button class="section-read-btn on-dark" type="button" data-read-target="dd-truck">&#9654; Read this part</button>
@@ -751,7 +751,7 @@
           <h2>Verse of the Day</h2>
           <p id="dailyVerseText">I can do all things through Christ which strengtheneth me. &mdash; Philippians 4:13</p>
           <p id="dailyVerseDate" style="font-style:normal; font-size:0.85rem; color:#555;"></p>
-          <button class="section-read-btn" type="button" data-read-target="verse">&#9654; Read this part</button>
+          <button class="section-read-btn" type="button" id="verseReadBtn">&#9654; Read this verse</button>
         </div>
       </section>
 
@@ -807,7 +807,8 @@
 
           <div style="margin:-14px 0 14px; display:flex; gap:10px; flex-wrap:wrap;">
             <button class="section-read-btn" type="button" data-read-target="jobs" style="margin-top:0;">&#9654; Read this part</button>
-            <button class="section-read-btn" type="button" id="readBoardBtn" style="margin-top:0;">&#9654; DD reads the board — jobs &amp; pay out loud</button>
+            <p style="margin:6px 0 0; font-size:0.85rem; color:#555;">The board recording reads all 54 postings, even with a filter on — the filter only changes what you see.</p>
+          <button class="section-read-btn" type="button" id="readBoardBtn" style="margin-top:0;">&#9654; DD reads the whole board — all 54, out loud</button>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin:0 0 26px;">
             <a class="btn btn-accent" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Worker Application — apply free</a>
@@ -896,7 +897,7 @@
               </div>
               <p class="note">Certified C7 abrasive blasters are the first calls yards make when a hull hits the dock. Get on the list with your certs and your travel range, and you hear about the job — with the pay — before it posts anywhere else.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=C7%20Blaster%20—%20crew%20list">Email instead</a>
               </div>
@@ -917,7 +918,7 @@
               </div>
               <p class="note">C12 spray application is its own skill and yards pay for it. If you can run airless and plural-component rigs and hold a spec, put your name down — every call you get from us comes with the rate attached.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=C12%20Spray%20Painter%20—%20crew%20list">Email instead</a>
               </div>
@@ -938,7 +939,7 @@
               </div>
               <p class="note">Not everybody wants the road. We're building a local list for East Tennessee industrial and plant work, so local people can take local jobs and be home at night. Same rule: the pay is on the posting before you apply.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=Morristown%20local%20crew%20list">Email instead</a>
               </div>
@@ -959,7 +960,7 @@
               </div>
               <p class="note">The Gulf yards run year-round and per diem is what makes the travel worth it. On this list, travel postings lead with per diem — if a yard won't state it, the card says "not stated" and you decide with your eyes open.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Join the list</a>
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="https://docs.google.com/forms/d/e/1FAIpQLSd1Wp9iL2sDM4jlWyyzMzU_8FbcgsnGgG0H1SeYCE-DcA4gdw/viewform" target="_blank" rel="noopener">Apply free — Worker Application</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="mailto:dismukesreqag369@gmail.com?subject=Gulf%20Coast%20travel%20crew%20list">Email instead</a>
               </div>
@@ -1200,7 +1201,7 @@
               </div>
               <p class="note">Journeyman electrician work at Clearwater Paper in Lewiston.</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="http://diversityjobs.com/career/10223168/Journeyman-Electrician-Idaho-Lewiston" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/10223168/Journeyman-Electrician-Idaho-Lewiston" target="_blank" rel="noopener">See the original posting</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
               </div>
             </article>
@@ -1480,7 +1481,7 @@
               </div>
               <p class="note">Equipment operating work in Belgrade with MDU Construction Services Group. Pay as printed: $22.87 - $33.57 (as printed; the posting doesn&#x27;t put a per-hour label on it).</p>
               <div class="job-actions">
-                <a class="btn btn-accent btn-sm" href="http://diversityjobs.com/career/9331440/Equipment-Operator-Montana-Belgrade" target="_blank" rel="noopener">See the original posting</a>
+                <a class="btn btn-accent btn-sm" href="https://diversityjobs.com/career/9331440/Equipment-Operator-Montana-Belgrade" target="_blank" rel="noopener">See the original posting</a>
                 <a class="btn btn-ghost btn-sm" style="color:var(--ink)" href="tel:+12514224242">Call DD about it</a>
               </div>
             </article>
@@ -2157,7 +2158,7 @@
       </div>
     </main>
 
-    <footer>
+    <footer id="contact">
       <div class="wrap">
         <div class="foot-grid">
           <div>
@@ -2320,12 +2321,12 @@
         var btn = document.getElementById("jokeBtn");
         if (text && btn) {
           btn.addEventListener("click", function () {
-            idx = (idx + 1) % JOKES.length;
             text.textContent = JOKES[idx];
             // The joke is told out loud too — a voice in Destin's
             // style, played through the one player the read-aloud script
             // below defines. No device robot voice anywhere on this page.
             if (window.__ddPlay) window.__ddPlay("assets/voice/joke-" + idx + ".mp3", JOKES[idx], "DD is telling his joke…");
+            idx = (idx + 1) % JOKES.length;
           });
         }
       })();
@@ -2377,6 +2378,22 @@
           vText.innerHTML = "";
           vText.appendChild(document.createTextNode(v[0] + " \u2014 " + v[1]));
           if (vDate) vDate.textContent = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+          // The Verse of the Day rotates, so its read button must play
+          // the recording for the verse actually on screen — not the one
+          // fixed Philippians 4:13 recording. Files live in assets/audio/
+          // (the app's per-verse recordings). Proverbs 3:5 and 3:6 share
+          // the 3:5-6 recording; Psalm 27:1 has no recording yet, so on
+          // that day the button honestly says it plays Philippians 4:13.
+          var VERSE_AUDIO = { "Luke 17:21": "assets/audio/verse-01.mp3", "Joshua 1:9": "assets/audio/verse-02.mp3", "Psalm 23:1": "assets/audio/verse-08.mp3", "Proverbs 3:5": "assets/audio/verse-04.mp3", "Isaiah 41:10": "assets/audio/verse-12.mp3", "Jeremiah 29:11": "assets/audio/verse-07.mp3", "Romans 8:28": "assets/audio/verse-06.mp3", "Matthew 11:28": "assets/audio/verse-09.mp3", "Psalm 46:1": "assets/audio/verse-11.mp3", "Isaiah 40:31": "assets/audio/verse-03.mp3", "2 Timothy 1:7": "assets/audio/verse-10.mp3", "John 3:16": "assets/audio/verse-20.mp3", "Psalm 118:24": "assets/audio/verse-05.mp3", "Proverbs 3:6": "assets/audio/verse-04.mp3", "Philippians 4:13": "assets/voice/seg-verse.mp3" };
+          var vBtn = document.getElementById("verseReadBtn");
+          var vSrc = VERSE_AUDIO[v[1]];
+          if (vBtn && vSrc) {
+            vBtn.textContent = "\u25b6 Read this verse \u2014 " + v[1];
+            vBtn.addEventListener("click", function () { if (window.__ddPlay) window.__ddPlay(vSrc, v[0] + " \u2014 " + v[1], "Reading \u2014 the Verse of the Day."); });
+          } else if (vBtn) {
+            vBtn.textContent = "\u25b6 Hear Philippians 4:13";
+            vBtn.addEventListener("click", function () { if (window.__ddPlay) window.__ddPlay("assets/voice/seg-verse.mp3", "I can do all things through Christ which strengtheneth me. \u2014 Philippians 4:13", "Reading \u2014 Philippians 4:13."); });
+          }
         }
 
         // ---- DD Reads It To You — DD reads the whole page out loud ----
@@ -2485,6 +2502,9 @@
         });
         var pauseBtn = document.getElementById("readPauseBtn");
         if (pauseBtn) pauseBtn.addEventListener("click", function () {
+          var rec = document.getElementById("destinRecordedAudio");
+          if (rec && !rec.paused && !rec.ended) { rec.pause(); setStatus("Paused."); return; }
+          if (rec && rec.paused && rec.currentTime > 0 && !rec.ended && !player.getAttribute("src")) { rec.play(); setStatus("Playing \u2014 Destin's own voice."); return; }
           if (!player.getAttribute("src")) return;
           if (!player.paused && !player.ended) { player.pause(); setStatus("Paused."); }
           else if (player.paused && !player.ended) {
@@ -2551,7 +2571,8 @@
         });
         // Tap any job on the board and DD suits up for that trade — and says so.
         Array.prototype.forEach.call(document.querySelectorAll("#jobGrid .job"), function (card) {
-          card.addEventListener("click", function () {
+          card.addEventListener("click", function (e) {
+            if (e && e.target && e.target.closest && e.target.closest("a, button")) return;
             var trades = card.getAttribute("data-trades") || "";
             if (trades.indexOf("blaster") !== -1) setOutfit("blaster", true);
             else if (trades.indexOf("welder") !== -1) setOutfit("welder", true);
