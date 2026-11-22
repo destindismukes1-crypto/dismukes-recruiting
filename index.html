@@ -629,7 +629,6 @@
         <a href="#read">DD Reads It To You</a>
         <a href="#verse">Verse of the Day</a>
         <a href="#jobs">Jobs for Crews</a>
-        <a href="#chasing">Jobs I'm Chasing</a>
         <a href="#how">How It Works</a>
         <a href="#employers">For Employers</a>
         <a href="#story">The Story</a>
@@ -1971,81 +1970,6 @@
         </div>
       </section>
 
-      <!-- JOBS I'M CHASING -->
-      <section id="chasing" class="band" style="padding-top: 56px;">
-        <div class="wrap">
-          <div class="sec-head">
-            <span class="tick" aria-hidden="true"></span>
-            <h2>Jobs I'm chasing</h2>
-            <p>These two are personal. Destin is the one applying to CTS and Vigor — Dismukes Recruiting isn't hiring for either company and doesn't place crews into these postings. They're listed here, separate from the crew board, so there's no mix-up about who's hiring and who's applying. Pay is shown exactly as printed on each posting.</p>
-            <button class="section-read-btn" type="button" data-read-target="chasing">&#9654; Read this part</button>
-          </div>
-
-          <div class="jobs">
-            <article class="job">
-              <div class="job-top">
-                <h3>1st Class Painter / Blaster — CTS</h3>
-                <span class="tag tag-chase">I'm applying</span>
-              </div>
-              <p class="where">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Pascagoula, Mississippi — shipyard
-              </p>
-              <div class="payrow">
-                <div><span class="amt">$34</span><span class="lbl">Per hour</span></div>
-                <div><span class="amt">$147.04</span><span class="lbl">Per diem / day</span></div>
-              </div>
-              <p class="note">First-class coatings work through Craft &amp; Tech (CTS). Destin has already sent in his own application for this one and asked CTS to confirm the $147.04/day per diem in writing. If you're crew looking for work, the board above is the place — this card is his application, not a placement.</p>
-            </article>
-
-            <article class="job">
-              <div class="job-top">
-                <h3>Painter, Journey Level — Vigor Alaska</h3>
-                <span class="tag tag-chase">I'm applying</span>
-              </div>
-              <p class="where">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Ketchikan, Alaska — shipyard
-              </p>
-              <div class="payrow">
-                <div><span class="amt">Not printed</span><span class="lbl">Per hour</span></div>
-                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
-              </div>
-              <p class="note">Union journey-level painter role at the Ketchikan yard — the one job Destin has said he wants for himself. He hasn't applied yet: he's asking about per diem first, because the posting doesn't print pay or per diem. Drug test and background check required.</p>
-            </article>
-          </div>
-
-          <!-- CALCULATOR -->
-          <div class="calc" aria-label="Weekly pay calculator">
-            <div>
-              <h3>Run the numbers yourself</h3>
-              <p>This is the CTS Pascagoula job Destin is chasing, filled in. Change the numbers to match any posting and see the week before you pack a bag. Straight-time estimate — overtime only adds.</p>
-            </div>
-            <div class="calc-fields">
-              <div>
-                <label for="calcRate">Hourly pay ($)</label>
-                <input id="calcRate" type="number" inputmode="decimal" min="0" step="0.25" value="34" />
-              </div>
-              <div>
-                <label for="calcHours">Hours per week</label>
-                <input id="calcHours" type="number" inputmode="numeric" min="0" step="1" value="50" />
-              </div>
-              <div>
-                <label for="calcPerDiem">Per diem ($/day)</label>
-                <input id="calcPerDiem" type="number" inputmode="decimal" min="0" step="0.01" value="147.04" />
-              </div>
-              <div>
-                <label for="calcDays">Days per week</label>
-                <input id="calcDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="6" />
-              </div>
-              <div class="calc-total">
-                <span class="t-lbl">Estimated gross for the week</span>
-                <span class="t-amt" id="calcTotal">$0</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- HOW IT WORKS -->
       <section id="how" style="padding-top: 10px;">
@@ -2271,10 +2195,12 @@
             minimumFractionDigits: 2, maximumFractionDigits: 2
           });
         }
-        [rate, hours, perdiem, days].forEach(function (el) {
-          el.addEventListener("input", calc);
-        });
-        calc();
+        if (rate && hours && perdiem && days && total) {
+          [rate, hours, perdiem, days].forEach(function (el) {
+            el.addEventListener("input", calc);
+          });
+          calc();
+        }
 
         // ---- Copy Chime handle ----
         var copyBtn = document.getElementById("copyChime");

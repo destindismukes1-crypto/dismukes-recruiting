@@ -1161,97 +1161,6 @@
           <p class="closet-note">Watch DD at the bottom of the screen — right now he’s wearing: <strong id="closetNow">his regular fit</strong>. Tapping a job card dresses him for that trade too, same as always.</p>
         </section>
 
-        <!-- JOBS I'M CHASING -->
-        <section id="chasing">
-          <span class="tick" aria-hidden="true"></span>
-          <h2>Jobs I’m chasing</h2>
-          <p class="sec-sub">These two are personal. Destin is the one applying to CTS and Vigor — Dismukes Recruiting isn’t hiring for either company. Pay is shown exactly as printed on each posting.</p>
-
-          <div class="jobs">
-            <article class="job">
-              <div class="job-top">
-                <h3>1st Class Painter / Blaster — CTS</h3>
-                <span class="tag tag-chase">I’m applying</span>
-              </div>
-              <p class="where">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Pascagoula, Mississippi — shipyard
-              </p>
-              <div class="payrow">
-                <div><span class="amt">$34</span><span class="lbl">Per hour</span></div>
-                <div><span class="amt">$147.04</span><span class="lbl">Per diem / day</span></div>
-              </div>
-              <p class="note">First-class coatings work through Craft &amp; Tech (CTS). Destin has already sent in his own application for this one and asked CTS to confirm the $147.04/day per diem in writing. If you’re crew looking for work, the board above is the place — this card is his application, not a placement.</p>
-            </article>
-
-            <article class="job">
-              <div class="job-top">
-                <h3>Painter, Journey Level — Vigor Alaska</h3>
-                <span class="tag tag-chase">I’m applying</span>
-              </div>
-              <p class="where">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Ketchikan, Alaska — shipyard
-              </p>
-              <div class="payrow">
-                <div><span class="amt">Not printed</span><span class="lbl">Per hour</span></div>
-                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
-              </div>
-              <p class="note">Union journey-level painter role at the Ketchikan yard — the one job Destin has said he wants for himself. He hasn’t applied yet: he’s asking about per diem first, because the posting doesn’t print pay or per diem. Drug test and background check required.</p>
-            </article>
-          </div>
-
-          <div class="calc" aria-label="Weekly pay calculator">
-            <h3>Run the numbers yourself</h3>
-            <p>Filled in with the CTS Pascagoula job Destin is chasing. Change the numbers to match any posting and see the week before you pack a bag. Straight-time estimate — overtime only adds.</p>
-            <div class="calc-grid">
-              <div>
-                <label for="calcRate">Hourly pay ($)</label>
-                <input id="calcRate" type="number" inputmode="decimal" min="0" step="0.25" value="34" />
-              </div>
-              <div>
-                <label for="calcHours">Hours per week</label>
-                <input id="calcHours" type="number" inputmode="numeric" min="0" step="1" value="50" />
-              </div>
-              <div>
-                <label for="calcPerDiem">Per diem ($/day)</label>
-                <input id="calcPerDiem" type="number" inputmode="decimal" min="0" step="0.01" value="147.04" />
-              </div>
-              <div>
-                <label for="calcDays">Days per week</label>
-                <input id="calcDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="6" />
-              </div>
-              <div class="calc-total">
-                <span class="t-lbl">Estimated gross for the week</span>
-                <span class="t-amt" id="calcTotal">$0</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="steps" style="margin-top: 20px;">
-            <div class="step">
-              <div class="num" aria-hidden="true">1</div>
-              <div>
-                <h3>Call or email — that’s the application</h3>
-                <p>One call to <a href="tel:+12514224242">(251) 422-4242</a>. Tell Destin your trade, your certs (C7, C12, OSHA), and how far you’ll travel. No portal, no account, no password to forget.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="num" aria-hidden="true">2</div>
-              <div>
-                <h3>You see the pay before you say yes</h3>
-                <p>Every job we bring you comes with the hourly rate and the per diem attached — or an honest “not stated” when the yard hasn’t printed one.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="num" aria-hidden="true">3</div>
-              <div>
-                <h3>You go to work — and it costs you nothing</h3>
-                <p>Workers never pay Dismukes Recruiting a dime. Employers pay for placements. That’s the deal on day one and it doesn’t change.</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <!-- BOARDS -->
         <section id="boards">
@@ -2480,8 +2389,10 @@
           var sum = num(rate) * num(hours) + num(perdiem) * num(days);
           total.textContent = "$" + sum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
-        [rate, hours, perdiem, days].forEach(function (el) { el.addEventListener("input", calc); });
-        calc();
+        if (rate && hours && perdiem && days && total) {
+          [rate, hours, perdiem, days].forEach(function (el) { el.addEventListener("input", calc); });
+          calc();
+        }
 
         /* ============ Tab bar active state ============ */
         var tabLinks = Array.prototype.slice.call(document.querySelectorAll(".tabbar a"));
