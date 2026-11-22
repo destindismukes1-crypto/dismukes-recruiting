@@ -624,6 +624,59 @@
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
       }
+    
+      /* ---------- DD dock — on screen the whole time (same DD as the main site) ---------- */
+      .dd-dock {
+        position: fixed; left: 10px; bottom: 10px; z-index: 30; width: 84px;
+        text-align: center; filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.3));
+        pointer-events: none;
+      }
+      .dd-dock .bubble {
+        background: var(--surface); color: var(--ink); border: 2px solid var(--navy);
+        border-radius: 10px; padding: 5px 7px; font-size: 0.7rem; font-weight: 600;
+        line-height: 1.3; margin-bottom: 4px;
+      }
+      .dd-dock img { height: 92px; width: auto; margin: 0 auto; object-fit: contain; }
+      .dd-dock a {
+        display: block; margin-top: 4px; background: var(--accent); color: var(--on-accent);
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.05em; font-size: 0.78rem; text-decoration: none;
+        padding: 7px 8px; border-radius: 999px; pointer-events: auto;
+      }
+      .dd-dock a:hover { background: var(--gold-bright); }
+      .dd-dock .dock-btns { display: flex; gap: 4px; margin-top: 4px; }
+      .dd-dock .dock-btns button {
+        flex: 1; pointer-events: auto; cursor: pointer; font: inherit;
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.72rem;
+        padding: 7px 4px; border-radius: 999px; border: 0; min-height: 34px;
+        background: var(--navy); color: #fff;
+      }
+      .dd-dock .dock-btns button.read-now { background: var(--accent); }
+      .dd-dock .dock-btns button:hover { background: var(--gold-bright); }
+      .dd-dock.reading .bubble { border-color: var(--accent); }
+      .dd-dock.reading img { animation: ddStride 0.45s ease-in-out infinite; }
+      .dd-dock .gear-label {
+        display: block; margin-top: 4px; background: var(--navy); color: #fff;
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.72rem;
+        padding: 5px 6px; border-radius: 6px; line-height: 1.25;
+      }
+      @keyframes ddBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @keyframes ddStride { 0%, 100% { transform: translateX(0) translateY(0); } 25% { transform: translateX(-3px) translateY(-6px); } 75% { transform: translateX(3px) translateY(-6px); } }
+      .dd-dock img { animation: ddBob 2.6s ease-in-out infinite; }
+      .dd-dock.walking img { animation: ddStride 0.45s ease-in-out infinite; }
+      @media (max-width: 759px) {
+        .dd-dock {
+          left: 8px; bottom: calc(84px + env(safe-area-inset-bottom)); width: 96px;
+        }
+        .dd-dock .bubble {
+          font-size: 0.64rem; padding: 4px 5px; max-height: 7.2em; overflow: hidden;
+        }
+        .dd-dock img { height: 84px; }
+        .dd-dock a { font-size: 0.7rem; padding: 6px 5px; }
+        .dd-dock .gear-label { font-size: 0.64rem; }
+      }
     </style>
   </head>
   <body>
@@ -2424,5 +2477,39 @@
       })();
     </script>
   <script data-goatcounter="https://dismukesrecruiting.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    <!-- DD — fixed bottom left, on screen the whole time -->
+    <div class="dd-dock" id="ddDock" aria-label="DD — Destin's guide figure">
+      <p class="bubble" id="ddDockBubble" aria-live="polite">I'm DD — Destin himself. I stay right here with you in the app. Tap &#9654; Read and DD reads this page to you out loud — in a voice in Destin's style.</p>
+      <img id="ddDockImg" src="assets/site/dd-dock.webp" alt="DD — full-body figure of Destin Dismukes in cap, sunglasses and work boots" loading="lazy" />
+      <span class="gear-label" id="ddGearLabel">Everyday DD</span>
+      <div class="dock-btns">
+        <button type="button" class="read-now" id="dockReadBtn" aria-label="DD reads the page out loud">&#9654; Read</button>
+        <button type="button" id="dockStopBtn" aria-label="Stop DD reading">Stop</button>
+      </div>
+      <a href="tel:+12514224242">Call DD</a>
+    </div>
+    <script>
+      (function () {
+        var dock = document.getElementById("ddDock");
+        var walkTimer = null;
+        window.addEventListener("scroll", function () {
+          if (!dock) return;
+          dock.classList.add("walking");
+          if (walkTimer) clearTimeout(walkTimer);
+          walkTimer = setTimeout(function () { dock.classList.remove("walking"); }, 650);
+        }, { passive: true });
+        var main = document.getElementById("ddReadBtn");
+        function syncDock() {
+          if (dock && main) dock.classList.toggle("reading", main.getAttribute("aria-pressed") === "true");
+        }
+        var r = document.getElementById("dockReadBtn");
+        var st = document.getElementById("dockStopBtn");
+        if (r) r.addEventListener("click", function () { if (main) { main.click(); syncDock(); } });
+        if (st) st.addEventListener("click", function () {
+          if (main && main.getAttribute("aria-pressed") === "true") { main.click(); syncDock(); }
+        });
+      })();
+    </script>
 </body>
 </html>
