@@ -662,6 +662,36 @@
         text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.72rem;
         padding: 5px 6px; border-radius: 6px; line-height: 1.25;
       }
+      /* ---------- DD's truck dock — fixed bottom right, same as the website:
+         DD stands on the left, the truck sits on the right ---------- */
+      .truck-dock {
+        position: fixed; right: 10px; bottom: 10px; z-index: 30; width: 100px;
+        background: #10151b; color: #eef3f6; border: 1px solid #3a4a59; border-radius: 10px;
+        box-shadow: var(--shadow); padding: 8px; text-align: center;
+        pointer-events: none;
+      }
+      .truck-dock .t-label {
+        font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.04em; font-size: 0.82rem; line-height: 1.2; margin: 0;
+      }
+      .truck-dock img { width: 100%; border-radius: 6px; margin-top: 6px; display: block; }
+      .truck-dock .t-cap { display: none; }
+      .truck-dock a {
+        display: block; margin-top: 6px; background: var(--navy); color: #fff;
+        border: 1px solid #3a4a59; font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.78rem;
+        text-decoration: none; padding: 8px 10px; border-radius: 999px; pointer-events: auto;
+      }
+      .truck-dock a:hover { border-color: #ff8c42; color: #fff; }
+      @media (max-width: 759px) {
+        .truck-dock {
+          right: 8px; bottom: calc(84px + env(safe-area-inset-bottom)); width: 84px; padding: 6px;
+        }
+        .truck-dock .t-label { font-size: 0.64rem; white-space: nowrap; }
+        .truck-dock .t-label .t-suffix { display: none; }
+        .truck-dock img { margin-top: 4px; }
+        .truck-dock a { font-size: 0.62rem; padding: 5px 4px; }
+      }
       @keyframes ddBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
       @keyframes ddStride { 0%, 100% { transform: translateX(0) translateY(0); } 25% { transform: translateX(-3px) translateY(-6px); } 75% { transform: translateX(3px) translateY(-6px); } }
       .dd-dock img { animation: ddBob 2.6s ease-in-out infinite; }
@@ -1977,6 +2007,13 @@
           ddAudio.onerror = null;
           ddAudio.onloadedmetadata = null;
           try { ddAudio.pause(); } catch (e) {}
+          /* One voice only — starting or stopping a reading also silences
+             every other sound on the page, so two voices can never talk
+             over each other. */
+          var allMedia = document.querySelectorAll("audio, video");
+          for (var mi = 0; mi < allMedia.length; mi++) {
+            if (allMedia[mi] !== ddAudio) { try { allMedia[mi].pause(); } catch (e) {} }
+          }
           resetBtns();
           bubbleHide();
         }
@@ -2488,6 +2525,14 @@
         <button type="button" id="dockStopBtn" aria-label="Stop DD reading">Stop</button>
       </div>
       <a href="tel:+14235230228">Call DD</a>
+    </div>
+
+    <!-- DD's truck — fixed bottom right, on screen the whole time, same as the website -->
+    <div class="truck-dock" aria-label="DD's truck">
+      <p class="t-label">DD's Truck<span class="t-suffix"> — The Rolling Office</span></p>
+      <img src="assets/site/truck-dock.webp" alt="DD driving his white Chevrolet Silverado, headlights on" loading="lazy" />
+      <p class="t-cap">2015 pearl white lifted Silverado — DD in the driver's seat.</p>
+      <a href="#ddWalk">See DD &amp; the truck</a>
     </div>
     <script>
       (function () {
