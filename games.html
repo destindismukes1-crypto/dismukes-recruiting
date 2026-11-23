@@ -301,6 +301,24 @@
       }
       .dd-tool.right { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
       .dd-tool.wrong { background: #b3261e; color: #ffffff; border-color: #b3261e; }
+          .dd-stage { display: flex; gap: 12px; align-items: flex-start; margin: 12px 0; }
+      .dd-figure-wrap { position: relative; flex: none; width: 120px; }
+      .dd-figure-wrap .dd-fig { margin: 0; width: 120px; max-width: 120px; }
+      .dd-hat { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 62px; height: 19px; border-radius: 60px 60px 0 0; background: #f7b500; display: none; z-index: 3; }
+      .dd-hat::after { content: ""; position: absolute; bottom: -4px; left: -11px; right: -11px; height: 6px; border-radius: 3px; background: inherit; }
+      .dd-vest { position: absolute; left: 6%; right: 6%; top: 44%; height: 27%; border-radius: 6px; background: var(--accent); opacity: 0; transition: opacity .4s ease; z-index: 2; pointer-events: none; }
+      .dd-gear { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; flex: 1; min-height: 44px; padding-top: 6px; }
+      .gear-chip { background: var(--accent-soft); border: 2px solid var(--accent); color: var(--ink); font-weight: 700; font-size: 0.98rem; padding: 8px 12px; border-radius: 999px; opacity: 0; transform: scale(0.6); transition: opacity .25s ease, transform .25s ease; }
+      .gear-chip.on { opacity: 1; transform: scale(1); }
+      .dd-scene { position: relative; flex: 1; min-width: 0; min-height: 172px; background: var(--bg); border: 2px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .dd-bar { height: 16px; background: var(--line); border-radius: 8px; overflow: hidden; margin: 6px 0; }
+      .dd-bar > div { height: 100%; width: 0%; background: var(--accent); transition: width .12s ease; }
+      .dd-bar.time > div { background: #3a7bd5; width: 100%; }
+      .dd-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; pointer-events: none; z-index: 6; transition: transform .45s ease-out, opacity .45s ease-out; }
+      .dd-drop { position: absolute; width: 9px; height: 13px; background: #3a7bd5; border-radius: 50% 50% 60% 60%; animation: dd-fall 1s linear infinite; z-index: 4; }
+      .dd-workbtn { touch-action: none; -webkit-user-select: none; user-select: none; }
+      @keyframes dd-spin { to { transform: rotate(360deg); } }
+      @keyframes dd-fall { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(92px); opacity: 0; } }
     </style>
   </head>
   <body>
@@ -332,13 +350,39 @@
 
       <section class="game" aria-label="DD Does Every Trade">
         <h2>DD Does <span class="accent">Every Trade</span></h2>
-        <p class="sub">DD jumps in on every job — name the trade, then pick the tool DD needs. 10 rounds.</p>
+        <p class="sub">DD jumps in on every job — pick his tool, suit him up, then work the job before the clock runs out. 10 rounds. Right tool = 1 point, job done = 2 more.</p>
         <img class="dd-fig" src="dd-base.webp" alt="DD" onerror="this.style.display='none'" />
         <p class="big-pick" id="ddTrade" aria-live="polite"></p>
         <p class="sub" id="ddJobLine"></p>
         <div class="dd-tools" id="ddTools"></div>
+        <div id="ddSuit" hidden>
+          <p class="game-msg"><strong>Suit Up!</strong> DD is putting on his gear for the job.</p>
+          <div class="dd-stage">
+            <div class="dd-figure-wrap">
+              <div class="dd-hat" id="ddHat"></div>
+              <img class="dd-fig" src="dd-base.webp" alt="DD suiting up" onerror="this.style.display='none'" />
+              <div class="dd-vest" id="ddVest"></div>
+            </div>
+            <div class="dd-gear" id="ddGear"></div>
+          </div>
+          <button class="send" type="button" id="ddGo" hidden>Start the job</button>
+        </div>
+        <div id="ddWork" hidden>
+          <div class="dd-stage">
+            <div class="dd-figure-wrap">
+              <img class="dd-fig" src="dd-base.webp" alt="DD at work" onerror="this.style.display='none'" />
+            </div>
+            <div class="dd-scene" id="ddScene" aria-hidden="true"></div>
+          </div>
+          <p class="game-msg">Job done: <strong id="ddProgTxt">0%</strong> &middot; Time left: <strong id="ddTimeTxt">20</strong>s</p>
+          <div class="dd-bar"><div id="ddProgFill"></div></div>
+          <div class="dd-bar time"><div id="ddTimeFill"></div></div>
+          <button class="send dd-workbtn" type="button" id="ddWorkBtn">Work it</button>
+          <p class="game-msg" id="ddWorkMsg" aria-live="polite"></p>
+          <button class="send" type="button" id="ddNext" hidden>Next round</button>
+        </div>
         <p class="game-msg" id="ddMsg" aria-live="polite">Press Start to play.</p>
-        <p class="game-msg">Round: <strong id="ddRound">-</strong> &middot; Score: <strong id="ddScore">0 / 10</strong></p>
+        <p class="game-msg">Round: <strong id="ddRound">-</strong> &middot; Score: <strong id="ddScore">0</strong></p>
         <button class="send" type="button" id="ddStart">Start</button>
         <div id="ddEnd" hidden>
           <p class="game-msg" id="ddFinal"></p>
@@ -562,19 +606,19 @@
       (function () {
         "use strict";
         var JOBS = [
-          { trade: "Painter", job: "the crew is coating a big ship hull", tool: "Spray gun", who: "a painter", toolPhrase: "a spray gun" },
-          { trade: "Blaster", job: "the crew is stripping old paint off steel", tool: "Blast nozzle", who: "a blaster", toolPhrase: "a blast nozzle" },
-          { trade: "Welder", job: "the crew is joining steel pipe", tool: "Welding torch", who: "a welder", toolPhrase: "a welding torch" },
-          { trade: "Plumber", job: "the crew is fixing a leaking water line", tool: "Pipe wrench", who: "a plumber", toolPhrase: "a pipe wrench" },
-          { trade: "HVAC Tech", job: "the crew is charging an air conditioning system", tool: "Refrigerant gauges", who: "an HVAC tech", toolPhrase: "refrigerant gauges" },
-          { trade: "Carpenter", job: "the crew is cutting boards for a wall frame", tool: "Circular saw", who: "a carpenter", toolPhrase: "a circular saw" },
-          { trade: "CDL Driver", job: "the crew is hauling a load down the highway", tool: "Truck keys", who: "a CDL driver", toolPhrase: "the truck keys" },
-          { trade: "Equipment Operator", job: "the crew is digging a trench", tool: "Excavator controls", who: "an equipment operator", toolPhrase: "excavator controls" },
-          { trade: "Pipefitter", job: "the crew is threading pipe at a plant", tool: "Pipe threader", who: "a pipefitter", toolPhrase: "a pipe threader" },
-          { trade: "Ironworker", job: "the crew is bolting up structural steel", tool: "Spud wrench", who: "an ironworker", toolPhrase: "a spud wrench" },
-          { trade: "Roofer", job: "the crew is putting shingles on a new roof", tool: "Nail gun", who: "a roofer", toolPhrase: "a nail gun" },
-          { trade: "Diesel Mechanic", job: "the crew is tracking down an engine fault", tool: "Diagnostic scanner", who: "a diesel mechanic", toolPhrase: "a diagnostic scanner" },
-          { trade: "General Labor", job: "the crew is hauling gravel across the site", tool: "Wheelbarrow", who: "a general labor hand", toolPhrase: "a wheelbarrow" }
+          { trade: "Painter", job: "the crew is coating a big ship hull", tool: "Spray gun", who: "a painter", toolPhrase: "a spray gun", gear: ["Respirator mask", "Spray suit", "Gloves"], color: "#3a7bd5", scene: "painter", burst: "#9fc3e8" },
+          { trade: "Blaster", job: "the crew is stripping old paint off steel", tool: "Blast nozzle", who: "a blaster", toolPhrase: "a blast nozzle", gear: ["Blast hood", "Heavy blast suit", "Air hose"], color: "#c9a227", scene: "blaster", burst: "#d8b98a" },
+          { trade: "Welder", job: "the crew is joining steel pipe", tool: "Welding torch", who: "a welder", toolPhrase: "a welding torch", gear: ["Welding helmet", "Leather gloves", "Steel-toe boots"], color: "#33383e", scene: "welder", burst: "#ffb347" },
+          { trade: "Plumber", job: "the crew is fixing a leaking water line", tool: "Pipe wrench", who: "a plumber", toolPhrase: "a pipe wrench", gear: ["Cap", "Work gloves", "Knee pads"], color: "#27ae60", scene: "plumber", burst: "#7db8e8" },
+          { trade: "HVAC Tech", job: "the crew is charging an air conditioning system", tool: "Refrigerant gauges", who: "an HVAC tech", toolPhrase: "refrigerant gauges", gear: ["Cap", "Safety glasses", "Gloves"], color: "#3a7bd5", scene: "hvac", burst: "#bfe3f2" },
+          { trade: "Carpenter", job: "the crew is cutting boards for a wall frame", tool: "Circular saw", who: "a carpenter", toolPhrase: "a circular saw", gear: ["Hard hat", "Tool belt", "Safety glasses"], color: "#f7b500", scene: "carpenter", burst: "#e8c33a" },
+          { trade: "CDL Driver", job: "the crew is hauling a load down the highway", tool: "Truck keys", who: "a CDL driver", toolPhrase: "the truck keys", gear: ["Cap", "Safety vest", "Logbook"], color: "#e85a08", scene: "cdl", burst: "#f7b500" },
+          { trade: "Equipment Operator", job: "the crew is digging a trench", tool: "Excavator controls", who: "an equipment operator", toolPhrase: "excavator controls", gear: ["Hard hat", "Safety vest", "Ear protection"], color: "#f7b500", scene: "operator", burst: "#d8b98a" },
+          { trade: "Pipefitter", job: "the crew is threading pipe at a plant", tool: "Pipe threader", who: "a pipefitter", toolPhrase: "a pipe threader", gear: ["Welding helmet", "Gloves", "Pipe stand"], color: "#33383e", scene: "pipefitter", burst: "#ffb347" },
+          { trade: "Ironworker", job: "the crew is bolting up structural steel", tool: "Spud wrench", who: "an ironworker", toolPhrase: "a spud wrench", gear: ["Hard hat", "Safety harness", "Spud wrench belt"], color: "#c0392b", scene: "ironworker", burst: "#e8c33a" },
+          { trade: "Roofer", job: "the crew is putting shingles on a new roof", tool: "Nail gun", who: "a roofer", toolPhrase: "a nail gun", gear: ["Hard hat", "Safety harness", "Gloves"], color: "#7f8c8d", scene: "roofer", burst: "#e8a37a" },
+          { trade: "Diesel Mechanic", job: "the crew is tracking down an engine fault", tool: "Diagnostic scanner", who: "a diesel mechanic", toolPhrase: "a diagnostic scanner", gear: ["Cap", "Gloves", "Safety glasses"], color: "#5d6d7e", scene: "diesel", burst: "#9fe8a9" },
+          { trade: "General Labor", job: "the crew is hauling gravel across the site", tool: "Wheelbarrow", who: "a general labor hand", toolPhrase: "a wheelbarrow", gear: ["Safety vest", "Hard hat", "Gloves"], color: "#e8c33a", scene: "labor", burst: "#e8c33a" }
         ];
         var tradeEl = document.getElementById('ddTrade'),
             jobEl = document.getElementById('ddJobLine'),
@@ -584,29 +628,59 @@
             scoreEl = document.getElementById('ddScore'),
             startBtn = document.getElementById('ddStart'),
             endEl = document.getElementById('ddEnd'),
-            finalEl = document.getElementById('ddFinal');
-        if (!tradeEl || !startBtn) { return; }
+            finalEl = document.getElementById('ddFinal'),
+            suitEl = document.getElementById('ddSuit'),
+            hatEl = document.getElementById('ddHat'),
+            vestEl = document.getElementById('ddVest'),
+            gearEl = document.getElementById('ddGear'),
+            goBtn = document.getElementById('ddGo'),
+            workEl = document.getElementById('ddWork'),
+            scene = document.getElementById('ddScene'),
+            progTxt = document.getElementById('ddProgTxt'),
+            timeTxt = document.getElementById('ddTimeTxt'),
+            progFill = document.getElementById('ddProgFill'),
+            timeFill = document.getElementById('ddTimeFill'),
+            workBtn = document.getElementById('ddWorkBtn'),
+            workMsg = document.getElementById('ddWorkMsg'),
+            nextBtn = document.getElementById('ddNext');
+        if (!tradeEl || !startBtn || !scene) { return; }
         var rounds = [], idx = 0, score = 0, lock = false;
+        var phase = "idle", progress = 0, timeLeft = 20;
+        var timerId = null, holdId = null, suitIds = [], sc = null;
+        var downAt = 0, suppressClick = false, holdTicks = 0;
         function shuffle(a) {
           for (var i = a.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
           }
           return a;
         }
+        function cur() { return rounds[idx]; }
+        function setScore() { scoreEl.textContent = String(score); }
+        function clearTimers() {
+          if (timerId) { clearInterval(timerId); timerId = null; }
+          if (holdId) { clearInterval(holdId); holdId = null; }
+          for (var i = 0; i < suitIds.length; i++) { clearTimeout(suitIds[i]); }
+          suitIds = [];
+        }
         function startGame() {
+          clearTimers();
           rounds = shuffle(JOBS.slice()).slice(0, 10);
-          idx = 0; score = 0; lock = false;
+          idx = 0; score = 0; lock = false; setScore();
           endEl.hidden = true;
           startBtn.style.display = 'none';
           showRound();
         }
         function showRound() {
-          var r = rounds[idx];
+          clearTimers();
+          phase = "quiz"; lock = false;
+          var r = cur();
+          suitEl.hidden = true;
+          workEl.hidden = true;
+          toolsEl.style.display = "";
           tradeEl.textContent = r.trade;
           jobEl.textContent = "DD is on a job — " + r.job + ". Which tool does DD grab?";
           msgEl.textContent = "Pick the right tool.";
           roundEl.textContent = (idx + 1) + " / 10";
-          scoreEl.textContent = score + " / 10";
           var others = shuffle(JOBS.filter(function (j) { return j.tool !== r.tool; }));
           var opts = shuffle([r.tool, others[0].tool, others[1].tool]);
           toolsEl.innerHTML = "";
@@ -618,40 +692,371 @@
           });
         }
         function answer(b, t, r) {
-          if (lock) { return; }
+          if (lock || phase !== "quiz") { return; }
           lock = true;
           var btns = toolsEl.getElementsByTagName('button'), i;
           for (i = 0; i < btns.length; i++) { btns[i].disabled = true; }
-          if (t === r.tool) {
+          var right = (t === r.tool);
+          if (right) {
             score++;
             b.classList.add('right');
-            msgEl.textContent = "That's right!";
+            msgEl.textContent = "That's right! Now suit DD up.";
           } else {
             b.classList.add('wrong');
             for (i = 0; i < btns.length; i++) {
               if (btns[i].textContent === r.tool) { btns[i].classList.add('right'); }
             }
-            msgEl.textContent = "Not that one — " + r.who + " runs " + r.toolPhrase + ".";
+            msgEl.textContent = "Not that one — " + r.who + " runs " + r.toolPhrase + ". DD grabs the " + r.tool + " — now suit up.";
           }
-          scoreEl.textContent = score + " / 10";
-          setTimeout(function () {
-            idx++; lock = false;
-            if (idx >= rounds.length) { endGame(); } else { showRound(); }
-          }, 1600);
+          setScore();
+          setTimeout(function () { showSuit(r); }, right ? 1100 : 1800);
+        }
+        function showSuit(r) {
+          phase = "suit";
+          toolsEl.style.display = "none";
+          suitEl.hidden = false;
+          hatEl.style.background = r.color;
+          hatEl.style.display = "block";
+          vestEl.style.background = r.color;
+          vestEl.style.opacity = "0";
+          gearEl.innerHTML = "";
+          goBtn.hidden = true;
+          msgEl.textContent = "Suit up! Gear going on…";
+          r.gear.forEach(function (g, i) {
+            var chip = document.createElement('span');
+            chip.className = 'gear-chip';
+            chip.textContent = g;
+            gearEl.appendChild(chip);
+            suitIds.push(setTimeout(function () {
+              chip.classList.add('on');
+              if (i === 0) { vestEl.style.opacity = "0.55"; }
+              if (i === r.gear.length - 1) {
+                suitIds.push(setTimeout(function () {
+                  goBtn.hidden = false;
+                  msgEl.textContent = "Suited up and ready. Start the job!";
+                }, 350));
+              }
+            }, 300 + i * 380));
+          });
+        }
+        function startJob() {
+          var r = cur();
+          phase = "work";
+          suitEl.hidden = true;
+          workEl.hidden = false;
+          nextBtn.hidden = true;
+          workBtn.disabled = false;
+          progress = 0; timeLeft = 20; holdTicks = 0;
+          buildScene(r);
+          updateWork();
+          workMsg.textContent = "Tap WORK IT — or hold it down — to finish the job before time runs out!";
+          if (timerId) { clearInterval(timerId); }
+          timerId = setInterval(function () {
+            timeLeft = Math.max(0, timeLeft - 0.1);
+            timeTxt.textContent = String(Math.ceil(timeLeft));
+            timeFill.style.width = (timeLeft / 20 * 100) + "%";
+            if (timeLeft <= 0) { finishJob(false); }
+          }, 100);
+        }
+        function updateWork() {
+          progTxt.textContent = Math.floor(progress) + "%";
+          progFill.style.width = progress + "%";
+          timeTxt.textContent = String(Math.ceil(timeLeft));
+          timeFill.style.width = (timeLeft / 20 * 100) + "%";
+          updateScene(progress);
+        }
+        function addWork(n, burstIt) {
+          if (phase !== "work") { return; }
+          progress = Math.min(100, progress + n);
+          if (burstIt) { burst(cur().burst); }
+          updateWork();
+          if (progress >= 100) { finishJob(true); }
+        }
+        function finishJob(won) {
+          if (phase !== "work") { return; }
+          phase = "done";
+          if (timerId) { clearInterval(timerId); timerId = null; }
+          if (holdId) { clearInterval(holdId); holdId = null; }
+          workBtn.disabled = true;
+          var r = cur();
+          if (won) {
+            score += 2; setScore();
+            workMsg.textContent = "Job Done! +2 points. Clean work, DD.";
+            burst(r.burst); burst(r.burst);
+          } else {
+            timeTxt.textContent = "0";
+            timeFill.style.width = "0%";
+            workMsg.textContent = "Out of time — the crew moves on. The right setup was: " + r.tool + " + " + r.gear.join(", ") + ".";
+          }
+          nextBtn.textContent = (idx >= rounds.length - 1) ? "See final score" : "Next round";
+          nextBtn.hidden = false;
         }
         function endGame() {
+          clearTimers();
+          phase = "over";
+          suitEl.hidden = true;
+          workEl.hidden = true;
+          toolsEl.style.display = "";
+          toolsEl.innerHTML = "";
           tradeEl.textContent = "";
           jobEl.textContent = "";
-          toolsEl.innerHTML = "";
           roundEl.textContent = "10 / 10";
           msgEl.textContent = "All 10 rounds done.";
-          finalEl.textContent = "Final score: " + score + " / 10." + (score === 10 ? " Perfect — DD can run every trade!" : score >= 7 ? " Strong work!" : " Good try — run it again!");
+          finalEl.textContent = "Final score: " + score + " / 30." + (score >= 27 ? " Perfect run — DD can run every trade!" : score >= 20 ? " Strong work!" : score >= 12 ? " Solid — the crew got it done." : " Good try — run it again!");
           endEl.hidden = false;
           startBtn.style.display = "";
           startBtn.textContent = "Start";
         }
+        function mk(tag, css, parent) {
+          var el = document.createElement(tag);
+          if (css) { el.style.cssText = css; }
+          if (parent) { parent.appendChild(el); }
+          return el;
+        }
+        function sceneLabel(text) {
+          var l = mk("div", "position:absolute;top:8px;left:10px;font-weight:700;font-size:0.95rem;z-index:3;", scene);
+          l.textContent = text;
+          return l;
+        }
+        function burst(color) {
+          if (!sc || !scene.clientWidth) { return; }
+          var w = scene.clientWidth, h = scene.clientHeight;
+          var cx = (sc.fx || 0.5) * w, cy = (sc.fy || 0.5) * h, i;
+          for (i = 0; i < 6; i++) {
+            var d = document.createElement("span");
+            d.className = "dd-dot";
+            d.style.background = color || "#ffb347";
+            d.style.left = cx + "px";
+            d.style.top = cy + "px";
+            scene.appendChild(d);
+            (function (el) {
+              var dx = Math.random() * 90 - 45, dy = Math.random() * 70 - 45;
+              requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                  el.style.transform = "translate(" + dx + "px," + dy + "px) scale(0.3)";
+                  el.style.opacity = "0";
+                });
+              });
+              setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 520);
+            })(d);
+          }
+        }
+        function buildScene(r) {
+          scene.innerHTML = "";
+          sc = { kind: r.scene, fx: 0.5, fy: 0.5 };
+          var i, el;
+          if (r.scene === "welder") {
+            sceneLabel("Weld the seam");
+            var pipe = mk("div", "position:absolute;left:6%;right:6%;top:52%;height:26px;background:#7f8c8d;border-radius:13px;overflow:hidden;", scene);
+            sc.bead = mk("div", "height:100%;width:0%;background:linear-gradient(90deg,#f7b500,#ff7a29);", pipe);
+            sc.fy = 0.55;
+          } else if (r.scene === "painter") {
+            var wall = mk("div", "position:absolute;left:10px;right:10px;top:12px;bottom:12px;background:#d8dde1;border:2px solid #b9bfc4;border-radius:6px;overflow:hidden;", scene);
+            sc.paint = mk("div", "height:100%;width:0%;background:#3a7bd5;", wall);
+          } else if (r.scene === "blaster") {
+            sceneLabel("Blast the rust off");
+            var plate = mk("div", "position:absolute;left:14px;right:14px;top:34px;bottom:14px;background:#c0c6cc;border-radius:6px;overflow:hidden;", scene);
+            sc.rust = mk("div", "position:absolute;left:0;right:0;top:0;bottom:0;background:repeating-linear-gradient(45deg,#8a4b1f 0 14px,#74401a 14px 28px);opacity:1;", plate);
+          } else if (r.scene === "plumber") {
+            mk("div", "position:absolute;top:16px;left:6%;right:6%;height:18px;background:#7f8c8d;border-radius:9px;", scene);
+            mk("div", "position:absolute;left:50%;top:11px;width:16px;height:28px;margin-left:-8px;background:#5d6d7e;border-radius:4px;", scene);
+            sc.drops = [];
+            for (i = 0; i < 3; i++) {
+              el = document.createElement("span");
+              el.className = "dd-drop";
+              el.style.left = "calc(50% - 4px)";
+              el.style.top = "44px";
+              el.style.animationDelay = (i * 0.33) + "s";
+              scene.appendChild(el);
+              sc.drops.push(el);
+            }
+            sc.fixed = mk("div", "position:absolute;bottom:12px;left:0;right:0;text-align:center;font-weight:700;color:#27ae60;display:none;", scene);
+            sc.fixed.textContent = "Leak fixed.";
+            sc.fy = 0.3;
+          } else if (r.scene === "hvac") {
+            sceneLabel("Cool it down");
+            var fan = mk("div", "position:absolute;left:14px;top:36px;width:92px;height:92px;border:3px solid #5d6d7e;border-radius:50%;background:var(--panel);", scene);
+            sc.blades = mk("div", "position:absolute;left:6px;right:6px;top:6px;bottom:6px;border-radius:50%;background:repeating-conic-gradient(#3a7bd5 0deg 28deg, rgba(0,0,0,0) 28deg 60deg);animation:dd-spin 2.2s linear infinite;", fan);
+            mk("div", "position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#5d6d7e;", fan);
+            sc.bars = [];
+            for (i = 0; i < 3; i++) {
+              sc.bars.push(mk("div", "position:absolute;right:12px;height:10px;border-radius:5px;background:#9fc3e8;width:24px;top:" + (52 + i * 32) + "px;", scene));
+            }
+            sc.fx = 0.25; sc.fy = 0.45;
+          } else if (r.scene === "carpenter") {
+            sceneLabel("Nail the board down");
+            mk("div", "position:absolute;left:6%;right:6%;bottom:34px;height:22px;background:#b07d3c;border-radius:4px;", scene);
+            sc.nails = [];
+            for (i = 0; i < 5; i++) {
+              sc.nails.push(mk("div", "position:absolute;width:6px;height:16px;background:#444444;border-radius:2px;bottom:50px;left:" + (14 + i * 17) + "%;opacity:0.3;transform:translateY(-4px);transition:all .15s ease;", scene));
+            }
+            sc.fy = 0.6;
+          } else if (r.scene === "cdl") {
+            el = mk("div", "position:absolute;right:8px;bottom:56px;font-weight:700;font-size:0.85rem;z-index:3;", scene);
+            el.textContent = "JOB SITE";
+            mk("div", "position:absolute;left:0;right:0;bottom:0;height:44px;background:#33353b;", scene);
+            mk("div", "position:absolute;left:0;right:0;bottom:20px;height:4px;background:repeating-linear-gradient(90deg,#f2f1ec 0 22px, rgba(0,0,0,0) 22px 44px);", scene);
+            sc.truck = mk("div", "position:absolute;left:2px;bottom:46px;width:92px;height:56px;z-index:2;", scene);
+            var fb = mk("div", "position:absolute;left:0;top:0;width:92px;height:56px;background:#26262a;border-radius:8px;color:#ff7a29;font-weight:700;display:flex;align-items:center;justify-content:center;", sc.truck);
+            fb.textContent = "DD";
+            var img = document.createElement("img");
+            img.src = "dd-truck.webp";
+            img.alt = "";
+            img.style.cssText = "position:absolute;left:0;top:0;width:92px;height:56px;object-fit:contain;";
+            img.onerror = function () { img.style.display = "none"; };
+            sc.truck.appendChild(img);
+            sc.fx = 0.3; sc.fy = 0.6;
+          } else if (r.scene === "operator") {
+            sceneLabel("Pile up the dirt");
+            mk("div", "position:absolute;left:0;right:0;bottom:0;height:14px;background:#6b4a2a;", scene);
+            sc.pile = mk("div", "position:absolute;bottom:14px;right:10%;width:24px;height:10px;background:#8a5a2b;border-radius:50% 50% 0 0/100% 100% 0 0;transition:all .15s ease;", scene);
+            sc.fx = 0.75; sc.fy = 0.7;
+          } else if (r.scene === "pipefitter") {
+            sceneLabel("Join the pipe");
+            mk("div", "position:absolute;top:56%;height:24px;width:28%;left:2%;background:#7f8c8d;border-radius:12px;", scene);
+            sc.seg2 = mk("div", "position:absolute;top:56%;height:24px;width:28%;left:34%;background:#8b959b;border-radius:12px;", scene);
+            sc.seg3 = mk("div", "position:absolute;top:56%;height:24px;width:28%;left:66%;background:#7f8c8d;border-radius:12px;", scene);
+            sc.fy = 0.6;
+          } else if (r.scene === "ironworker") {
+            sceneLabel("Bolt the beam");
+            mk("div", "position:absolute;top:56px;left:6%;right:6%;height:20px;background:#5d6d7e;border-radius:3px;", scene);
+            sc.bolts = [];
+            for (i = 0; i < 5; i++) {
+              sc.bolts.push(mk("div", "position:absolute;width:13px;height:13px;border-radius:50%;background:#2f353b;border:2px solid #e8c33a;top:59px;left:" + (14 + i * 17) + "%;opacity:0.25;transform:scale(0.7);transition:all .15s ease;", scene));
+            }
+            sc.fy = 0.4;
+          } else if (r.scene === "roofer") {
+            sceneLabel("Shingle the roof");
+            var roof = mk("div", "position:absolute;left:8%;right:8%;bottom:12px;height:112px;background:#9aa0a3;border-radius:6px;transform:rotate(-3deg);overflow:hidden;", scene);
+            sc.rows = [];
+            for (i = 0; i < 3; i++) {
+              sc.rows.push(mk("div", "position:absolute;left:0;right:0;height:34px;bottom:" + (i * 37) + "px;background:repeating-linear-gradient(90deg,#6e3b2a 0 24px,#7d4630 24px 48px);border-top:3px solid #59301f;display:none;", roof));
+            }
+            sc.fy = 0.6;
+          } else if (r.scene === "diesel") {
+            var dash = mk("div", "position:absolute;left:12px;right:12px;top:24px;bottom:24px;background:#26262a;border-radius:10px;", scene);
+            var row = mk("div", "position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:12px;", dash);
+            var caps = ["ENG", "OIL", "ALT", "TEMP"], offs = ["#b3261e", "#e8c33a", "#b3261e", "#e8c33a"];
+            sc.lights = [];
+            for (i = 0; i < 4; i++) {
+              var col = mk("div", "text-align:center;", row);
+              var li = mk("div", "width:30px;height:30px;border-radius:50%;margin:0 auto;background:" + offs[i] + ";", col);
+              li.setAttribute("data-off", offs[i]);
+              var cap = mk("div", "color:#f2f1ec;font-size:10px;font-weight:700;margin-top:4px;", col);
+              cap.textContent = caps[i];
+              sc.lights.push(li);
+            }
+          } else if (r.scene === "labor") {
+            sceneLabel("Stack the boxes");
+            var stack = mk("div", "position:absolute;bottom:12px;left:12%;display:flex;flex-direction:column-reverse;gap:4px;", scene);
+            sc.boxes = [];
+            for (i = 0; i < 5; i++) {
+              sc.boxes.push(mk("div", "width:46px;height:26px;background:#b07d3c;border:2px solid #8a5a2b;border-radius:3px;display:none;", stack));
+            }
+            sc.fx = 0.25; sc.fy = 0.6;
+          }
+        }
+        function setOn(el, on, kind) {
+          if (kind === "nail") {
+            el.style.opacity = on ? "1" : "0.3";
+            el.style.transform = on ? "translateY(2px)" : "translateY(-4px)";
+            el.style.background = on ? "#d7dde2" : "#444444";
+          } else {
+            el.style.opacity = on ? "1" : "0.25";
+            el.style.transform = on ? "scale(1)" : "scale(0.7)";
+          }
+        }
+        function updateScene(p) {
+          if (!sc) { return; }
+          var n, i;
+          switch (sc.kind) {
+            case "welder":
+              sc.bead.style.width = p + "%";
+              sc.fx = 0.06 + 0.88 * (p / 100);
+              break;
+            case "painter":
+              sc.paint.style.width = p + "%";
+              sc.fx = 0.05 + 0.9 * (p / 100);
+              break;
+            case "blaster":
+              sc.rust.style.opacity = String(1 - p / 100);
+              break;
+            case "plumber":
+              n = p >= 100 ? 0 : p >= 75 ? 1 : p >= 45 ? 2 : 3;
+              for (i = 0; i < sc.drops.length; i++) { sc.drops[i].style.display = i < n ? "block" : "none"; }
+              sc.fixed.style.display = p >= 100 ? "block" : "none";
+              break;
+            case "hvac":
+              sc.blades.style.animationDuration = Math.max(0.35, 2.2 - p * 0.019) + "s";
+              for (i = 0; i < sc.bars.length; i++) { sc.bars[i].style.width = (24 + p * 1.0) + "px"; }
+              break;
+            case "carpenter":
+              n = Math.min(5, Math.floor(p / 20));
+              for (i = 0; i < sc.nails.length; i++) { setOn(sc.nails[i], i < n, "nail"); }
+              break;
+            case "cdl":
+              var maxX = Math.max(0, scene.clientWidth - 102);
+              sc.truck.style.transform = "translateX(" + (p / 100 * maxX) + "px)";
+              break;
+            case "operator":
+              sc.pile.style.width = (24 + p * 1.2) + "px";
+              sc.pile.style.height = (10 + p * 0.8) + "px";
+              break;
+            case "pipefitter":
+              sc.seg2.style.left = (34 - p * 0.04) + "%";
+              sc.seg3.style.left = (66 - p * 0.08) + "%";
+              break;
+            case "ironworker":
+              n = Math.min(5, Math.floor(p / 20));
+              for (i = 0; i < sc.bolts.length; i++) { setOn(sc.bolts[i], i < n, "bolt"); }
+              break;
+            case "roofer":
+              n = p >= 85 ? 3 : p >= 55 ? 2 : p >= 25 ? 1 : 0;
+              for (i = 0; i < sc.rows.length; i++) { sc.rows[i].style.display = i < n ? "block" : "none"; }
+              break;
+            case "diesel":
+              n = Math.min(4, Math.floor(p / 25));
+              for (i = 0; i < sc.lights.length; i++) {
+                sc.lights[i].style.background = i < n ? "#27ae60" : sc.lights[i].getAttribute("data-off");
+                sc.lights[i].style.boxShadow = i < n ? "0 0 10px #27ae60" : "none";
+              }
+              break;
+            case "labor":
+              n = Math.min(5, Math.floor(p / 20));
+              for (i = 0; i < sc.boxes.length; i++) { sc.boxes[i].style.display = i < n ? "block" : "none"; }
+              break;
+          }
+        }
         startBtn.addEventListener('click', startGame);
         document.getElementById('ddAgain').addEventListener('click', startGame);
+        goBtn.addEventListener('click', startJob);
+        nextBtn.addEventListener('click', function () {
+          idx++;
+          if (idx >= rounds.length) { endGame(); } else { showRound(); }
+        });
+        workBtn.addEventListener('pointerdown', function () {
+          if (phase !== "work") { return; }
+          downAt = Date.now();
+          holdTicks = 0;
+          if (holdId) { clearInterval(holdId); }
+          holdId = setInterval(function () {
+            if (phase !== "work") { clearInterval(holdId); holdId = null; return; }
+            holdTicks++;
+            addWork(2, holdTicks % 6 === 0);
+          }, 130);
+        });
+        function endPointer() {
+          if (holdId) { clearInterval(holdId); holdId = null; }
+          if (downAt && Date.now() - downAt > 380) { suppressClick = true; }
+          downAt = 0;
+        }
+        workBtn.addEventListener('pointerup', endPointer);
+        workBtn.addEventListener('pointerleave', endPointer);
+        workBtn.addEventListener('pointercancel', endPointer);
+        workBtn.addEventListener('click', function () {
+          if (suppressClick) { suppressClick = false; return; }
+          addWork(5, true);
+        });
       })();
       </script>
 
