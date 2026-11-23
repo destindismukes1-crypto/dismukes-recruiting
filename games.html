@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="data:," />
     <title>Take a Break — Little Games — Dismukes Recruiting</title>
-    <meta name="description" content="Three little games from Dismukes Recruiting: Spin the Trade Wheel, Guess the Pay, and Memory Match. Free to play." />
+    <meta name="description" content="Five little games from Dismukes Recruiting: DD Truck Run, DD Does Every Trade, Spin the Trade Wheel, Guess the Pay, and Memory Match. Free to play." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -271,6 +271,36 @@
       }
       .mem-card.face { background: var(--panel); border-color: var(--accent); }
       .mem-card.done { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); cursor: default; }
+      .truck-stage { position: relative; max-width: 360px; margin: 10px auto 0; }
+      .truck-stage canvas {
+        display: block; width: 100%; height: auto;
+        background: #26262a; border: 2px solid var(--line); border-radius: 10px;
+      }
+      .truck-over {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background: rgba(10, 10, 12, 0.8); border-radius: 10px;
+        text-align: center; padding: 16px;
+      }
+      .truck-over[hidden] { display: none; }
+      .truck-over-title {
+        font-family: "Barlow Condensed", sans-serif; font-weight: 700; text-transform: uppercase;
+        font-size: 2.4rem; line-height: 1; color: #ffffff; margin: 0 0 6px;
+      }
+      .truck-over .game-msg { color: #ffffff; }
+      .truck-controls { display: flex; gap: 10px; max-width: 360px; margin: 10px auto 0; }
+      .truck-controls .send { margin-top: 0; flex: 1; }
+      .truck-btn { touch-action: none; user-select: none; -webkit-user-select: none; }
+      .dd-fig { display: block; width: 120px; max-width: 40%; height: auto; margin: 4px auto; }
+      .dd-tools { display: grid; gap: 10px; margin: 14px 0; }
+      .dd-tool {
+        font: inherit; font-weight: 700; font-size: 1.15rem;
+        min-height: 60px; padding: 12px 14px;
+        border: 2px solid var(--line); border-radius: 10px;
+        background: var(--panel); color: var(--ink); cursor: pointer;
+      }
+      .dd-tool.right { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+      .dd-tool.wrong { background: #b3261e; color: #ffffff; border-color: #b3261e; }
     </style>
   </head>
   <body>
@@ -278,7 +308,44 @@
       <div class="stripe" aria-hidden="true"></div>
 
       <h1>Take a <span class="accent">break</span></h1>
-      <p class="sub">Three little games. No sign-up, no cost — just a break. When you are ready to work, <strong>applying is free</strong>.</p>
+      <p class="sub">Five little games. No sign-up, no cost — just a break. When you are ready to work, <strong>applying is free</strong>.</p>
+
+      <section class="game" aria-label="DD Truck Run">
+        <h2>DD <span class="accent">Truck Run</span></h2>
+        <p class="sub">DD is hauling a crew to the job — dodge the cones, grab the gold, don't crash.</p>
+        <p class="game-msg">Score: <strong id="truckScore">0</strong> &middot; Best: <strong id="truckBest">0</strong></p>
+        <div class="truck-stage">
+          <canvas id="truckCanvas" width="360" height="480"></canvas>
+          <div class="truck-over" id="truckOver" hidden>
+            <p class="truck-over-title">Game Over</p>
+            <p class="game-msg" id="truckFinal">Score: 0</p>
+            <button class="send small" type="button" id="truckRestart">Restart</button>
+          </div>
+        </div>
+        <div class="truck-controls">
+          <button class="send truck-btn" type="button" id="truckLeft" aria-label="Move left">&#8592; Left</button>
+          <button class="send truck-btn" type="button" id="truckRight" aria-label="Move right">Right &#8594;</button>
+        </div>
+        <button class="send" type="button" id="truckStart">Start the run</button>
+        <p class="game-msg" id="truckMsg" aria-live="polite">Tap Start, then steer with the Left and Right buttons — or the arrow keys on a keyboard.</p>
+      </section>
+
+      <section class="game" aria-label="DD Does Every Trade">
+        <h2>DD Does <span class="accent">Every Trade</span></h2>
+        <p class="sub">DD jumps in on every job — name the trade, then pick the tool DD needs. 10 rounds.</p>
+        <img class="dd-fig" src="dd-base.webp" alt="DD" onerror="this.style.display='none'" />
+        <p class="big-pick" id="ddTrade" aria-live="polite"></p>
+        <p class="sub" id="ddJobLine"></p>
+        <div class="dd-tools" id="ddTools"></div>
+        <p class="game-msg" id="ddMsg" aria-live="polite">Press Start to play.</p>
+        <p class="game-msg">Round: <strong id="ddRound">-</strong> &middot; Score: <strong id="ddScore">0 / 10</strong></p>
+        <button class="send" type="button" id="ddStart">Start</button>
+        <div id="ddEnd" hidden>
+          <p class="game-msg" id="ddFinal"></p>
+          <p class="game-msg">DD places real workers in all these trades — <a href="apply.html">apply free</a>.</p>
+          <button class="send small" type="button" id="ddAgain">Play again</button>
+        </div>
+      </section>
 
       <section class="game" aria-label="Spin the Trade Wheel">
         <h2>Spin the <span class="accent">Trade Wheel</span></h2>
@@ -308,6 +375,285 @@
         <p class="game-msg">Moves: <strong id="memMoves">0</strong></p>
         <button class="send small" type="button" id="memNew">Shuffle &amp; restart</button>
       </section>
+
+      <script>
+      (function () {
+        "use strict";
+        var canvas = document.getElementById('truckCanvas');
+        if (!canvas || !canvas.getContext) { return; }
+        var ctx = canvas.getContext('2d');
+        var W = 360, H = 480, LANES = [60, 180, 300];
+        var scoreEl = document.getElementById('truckScore'),
+            bestEl = document.getElementById('truckBest'),
+            msgEl = document.getElementById('truckMsg'),
+            overEl = document.getElementById('truckOver'),
+            finalEl = document.getElementById('truckFinal'),
+            startBtn = document.getElementById('truckStart');
+        var truckImg = new Image(), imgOk = false;
+        truckImg.onload = function () { imgOk = true; if (!running) { draw(); } };
+        truckImg.src = 'dd-truck.webp';
+        var running = false, raf = null, lastT = 0;
+        var lane = 1, truckX = LANES[1], truckY = H - 110, truckW = 54, truckH = 80;
+        var score = 0, best = 0, speed = 3, dist = 0, obTimer = 0, coinTimer = 0;
+        var obstacles = [], coins = [];
+        var CAR_COLORS = ['#3a7bd5', '#c0392b', '#27ae60', '#8e44ad', '#7f8c8d', '#d4ac0d'];
+        function reset() {
+          lane = 1; truckX = LANES[1]; score = 0; speed = 3; dist = 0;
+          obTimer = 500; coinTimer = 1000; obstacles = []; coins = [];
+          scoreEl.textContent = '0';
+        }
+        function start() {
+          reset();
+          running = true;
+          overEl.hidden = true;
+          startBtn.textContent = 'Restart the run';
+          msgEl.textContent = 'Go, DD, go! Dodge the cones and cars, grab the gold stars.';
+          lastT = 0;
+          if (raf) { cancelAnimationFrame(raf); }
+          raf = requestAnimationFrame(loop);
+        }
+        function gameOver() {
+          running = false;
+          if (score > best) { best = score; bestEl.textContent = String(best); }
+          finalEl.textContent = 'Score: ' + score + ' · Best: ' + best;
+          overEl.hidden = false;
+          msgEl.textContent = 'Crash! Tap Restart to run it again.';
+        }
+        function spawnObstacle() {
+          var l = Math.floor(Math.random() * 3);
+          if (Math.random() < 0.35) {
+            obstacles.push({ kind: 'cone', lane: l, y: -44, w: 38, h: 42, passed: false });
+          } else {
+            obstacles.push({ kind: 'car', lane: l, y: -88, w: 52, h: 82, passed: false, color: CAR_COLORS[Math.floor(Math.random() * CAR_COLORS.length)] });
+          }
+        }
+        function spawnCoin() { coins.push({ lane: Math.floor(Math.random() * 3), y: -20, r: 13 }); }
+        function move(dir) { if (!running) { return; } lane = Math.max(0, Math.min(2, lane + dir)); }
+        function loop(t) {
+          if (!running) { return; }
+          if (!lastT) { lastT = t; }
+          var dt = Math.min(50, t - lastT); lastT = t;
+          var step = dt / 16.667;
+          speed = Math.min(7.5, speed + dt * 0.00012);
+          dist += speed * step;
+          truckX += (LANES[lane] - truckX) * Math.min(1, step * 0.3);
+          obTimer -= dt;
+          if (obTimer <= 0) { spawnObstacle(); obTimer = Math.max(430, 640 + Math.random() * 380 - speed * 24); }
+          coinTimer -= dt;
+          if (coinTimer <= 0) { spawnCoin(); coinTimer = 1100 + Math.random() * 1400; }
+          var dy = speed * step, i, o, c;
+          for (i = obstacles.length - 1; i >= 0; i--) {
+            o = obstacles[i]; o.y += dy;
+            if (!o.passed && o.y > truckY + truckH) { o.passed = true; score += 1; scoreEl.textContent = String(score); }
+            if (o.y > H + 100) { obstacles.splice(i, 1); continue; }
+            if (hit(o)) { draw(); gameOver(); return; }
+          }
+          for (i = coins.length - 1; i >= 0; i--) {
+            c = coins[i]; c.y += dy;
+            if (c.y > H + 30) { coins.splice(i, 1); continue; }
+            if (Math.abs(LANES[c.lane] - truckX) < 46 && Math.abs(c.y - (truckY + truckH / 2)) < 54) {
+              coins.splice(i, 1); score += 10; scoreEl.textContent = String(score);
+              msgEl.textContent = 'Gold star! +10 points.';
+            }
+          }
+          draw();
+          raf = requestAnimationFrame(loop);
+        }
+        function hit(o) {
+          var px = truckX - truckW / 2 + 6, pw = truckW - 12, py = truckY + 6, ph = truckH - 12;
+          var x = LANES[o.lane] - o.w / 2 + 4, w = o.w - 8, y = o.y + 4, h = o.h - 8;
+          return px < x + w && px + pw > x && py < y + h && py + ph > y;
+        }
+        function roundRect(x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+        function drawStar(cx, cy, r) {
+          ctx.beginPath();
+          for (var i = 0; i < 10; i++) {
+            var rad = i % 2 === 0 ? r : r * 0.5;
+            var a = -Math.PI / 2 + i * Math.PI / 5;
+            var px = cx + rad * Math.cos(a), py = cy + rad * Math.sin(a);
+            if (i === 0) { ctx.moveTo(px, py); } else { ctx.lineTo(px, py); }
+          }
+          ctx.closePath();
+          ctx.fillStyle = '#f7b500'; ctx.fill();
+          ctx.lineWidth = 2; ctx.strokeStyle = '#c77f00'; ctx.stroke();
+        }
+        function drawObstacle(o) {
+          var cx = LANES[o.lane], top = o.y;
+          if (o.kind === 'cone') {
+            var w = o.w, h = o.h;
+            ctx.fillStyle = '#e85a08';
+            ctx.beginPath();
+            ctx.moveTo(cx - 6, top); ctx.lineTo(cx + 6, top);
+            ctx.lineTo(cx + w / 2, top + h - 8); ctx.lineTo(cx - w / 2, top + h - 8);
+            ctx.closePath(); ctx.fill();
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(cx - w / 2 + 7, top + h * 0.45, w - 14, 7);
+            ctx.fillStyle = '#c24e06'; ctx.fillRect(cx - w / 2 - 3, top + h - 8, w + 6, 8);
+          } else {
+            var w2 = o.w, h2 = o.h, x2 = cx - w2 / 2;
+            ctx.fillStyle = o.color;
+            roundRect(x2, top, w2, h2, 9); ctx.fill();
+            ctx.fillStyle = 'rgba(0,0,0,0.35)';
+            roundRect(x2 + 7, top + 12, w2 - 14, 16, 4); ctx.fill();
+            roundRect(x2 + 7, top + h2 - 28, w2 - 14, 14, 4); ctx.fill();
+            ctx.fillStyle = '#17181a';
+            ctx.fillRect(x2 - 3, top + 10, 5, 14); ctx.fillRect(x2 + w2 - 2, top + 10, 5, 14);
+            ctx.fillRect(x2 - 3, top + h2 - 24, 5, 14); ctx.fillRect(x2 + w2 - 2, top + h2 - 24, 5, 14);
+          }
+        }
+        function drawTruck() {
+          var x = truckX - truckW / 2, y = truckY;
+          if (imgOk) { ctx.drawImage(truckImg, x, y, truckW, truckH); return; }
+          ctx.fillStyle = '#e85a08';
+          roundRect(x, y + 14, truckW, truckH - 14, 7); ctx.fill();
+          ctx.fillStyle = '#ff7a29';
+          roundRect(x + 6, y, truckW - 12, 26, 6); ctx.fill();
+          ctx.fillStyle = '#bfe3f2';
+          roundRect(x + 10, y + 5, truckW - 20, 13, 3); ctx.fill();
+          ctx.fillStyle = '#17181a';
+          var wheels = [[12, 18], [truckW - 12, 18], [12, truckH - 8], [truckW - 12, truckH - 8]];
+          for (var i = 0; i < wheels.length; i++) {
+            ctx.beginPath(); ctx.arc(x + wheels[i][0], y + wheels[i][1], 8, 0, Math.PI * 2); ctx.fill();
+          }
+        }
+        function draw() {
+          ctx.fillStyle = '#26262a'; ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = '#1b1b1e'; ctx.fillRect(0, 0, 14, H); ctx.fillRect(W - 14, 0, 14, H);
+          ctx.fillStyle = '#f2f1ec'; ctx.fillRect(12, 0, 3, H); ctx.fillRect(W - 15, 0, 3, H);
+          ctx.fillStyle = '#e8c33a';
+          var off = dist % 54, x, y, i;
+          for (x = 0; x < 2; x++) {
+            var lx = x === 0 ? 120 : 240;
+            for (y = -54 + off; y < H; y += 54) { ctx.fillRect(lx - 3, y, 6, 30); }
+          }
+          for (i = 0; i < coins.length; i++) { drawStar(LANES[coins[i].lane], coins[i].y, coins[i].r); }
+          for (i = 0; i < obstacles.length; i++) { drawObstacle(obstacles[i]); }
+          drawTruck();
+        }
+        function bindBtn(id, dir) {
+          var b = document.getElementById(id), fired = false;
+          b.addEventListener('pointerdown', function (e) { e.preventDefault(); fired = true; move(dir); });
+          b.addEventListener('click', function () { if (!fired) { move(dir); } fired = false; });
+        }
+        bindBtn('truckLeft', -1);
+        bindBtn('truckRight', 1);
+        startBtn.addEventListener('click', start);
+        document.getElementById('truckRestart').addEventListener('click', start);
+        window.addEventListener('keydown', function (e) {
+          if (!running) { return; }
+          var t = e.target;
+          if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT')) { return; }
+          if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') { e.preventDefault(); move(-1); }
+          else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') { e.preventDefault(); move(1); }
+        });
+        reset();
+        draw();
+      })();
+      </script>
+
+      <script>
+      (function () {
+        "use strict";
+        var JOBS = [
+          { trade: "Painter", job: "the crew is coating a big ship hull", tool: "Spray gun", who: "a painter", toolPhrase: "a spray gun" },
+          { trade: "Blaster", job: "the crew is stripping old paint off steel", tool: "Blast nozzle", who: "a blaster", toolPhrase: "a blast nozzle" },
+          { trade: "Welder", job: "the crew is joining steel pipe", tool: "Welding torch", who: "a welder", toolPhrase: "a welding torch" },
+          { trade: "Plumber", job: "the crew is fixing a leaking water line", tool: "Pipe wrench", who: "a plumber", toolPhrase: "a pipe wrench" },
+          { trade: "HVAC Tech", job: "the crew is charging an air conditioning system", tool: "Refrigerant gauges", who: "an HVAC tech", toolPhrase: "refrigerant gauges" },
+          { trade: "Carpenter", job: "the crew is cutting boards for a wall frame", tool: "Circular saw", who: "a carpenter", toolPhrase: "a circular saw" },
+          { trade: "CDL Driver", job: "the crew is hauling a load down the highway", tool: "Truck keys", who: "a CDL driver", toolPhrase: "the truck keys" },
+          { trade: "Equipment Operator", job: "the crew is digging a trench", tool: "Excavator controls", who: "an equipment operator", toolPhrase: "excavator controls" },
+          { trade: "Pipefitter", job: "the crew is threading pipe at a plant", tool: "Pipe threader", who: "a pipefitter", toolPhrase: "a pipe threader" },
+          { trade: "Ironworker", job: "the crew is bolting up structural steel", tool: "Spud wrench", who: "an ironworker", toolPhrase: "a spud wrench" },
+          { trade: "Roofer", job: "the crew is putting shingles on a new roof", tool: "Nail gun", who: "a roofer", toolPhrase: "a nail gun" },
+          { trade: "Diesel Mechanic", job: "the crew is tracking down an engine fault", tool: "Diagnostic scanner", who: "a diesel mechanic", toolPhrase: "a diagnostic scanner" },
+          { trade: "General Labor", job: "the crew is hauling gravel across the site", tool: "Wheelbarrow", who: "a general labor hand", toolPhrase: "a wheelbarrow" }
+        ];
+        var tradeEl = document.getElementById('ddTrade'),
+            jobEl = document.getElementById('ddJobLine'),
+            toolsEl = document.getElementById('ddTools'),
+            msgEl = document.getElementById('ddMsg'),
+            roundEl = document.getElementById('ddRound'),
+            scoreEl = document.getElementById('ddScore'),
+            startBtn = document.getElementById('ddStart'),
+            endEl = document.getElementById('ddEnd'),
+            finalEl = document.getElementById('ddFinal');
+        if (!tradeEl || !startBtn) { return; }
+        var rounds = [], idx = 0, score = 0, lock = false;
+        function shuffle(a) {
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+          }
+          return a;
+        }
+        function startGame() {
+          rounds = shuffle(JOBS.slice()).slice(0, 10);
+          idx = 0; score = 0; lock = false;
+          endEl.hidden = true;
+          startBtn.style.display = 'none';
+          showRound();
+        }
+        function showRound() {
+          var r = rounds[idx];
+          tradeEl.textContent = r.trade;
+          jobEl.textContent = "DD is on a job — " + r.job + ". Which tool does DD grab?";
+          msgEl.textContent = "Pick the right tool.";
+          roundEl.textContent = (idx + 1) + " / 10";
+          scoreEl.textContent = score + " / 10";
+          var others = shuffle(JOBS.filter(function (j) { return j.tool !== r.tool; }));
+          var opts = shuffle([r.tool, others[0].tool, others[1].tool]);
+          toolsEl.innerHTML = "";
+          opts.forEach(function (t) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'dd-tool'; b.textContent = t;
+            b.addEventListener('click', function () { answer(b, t, r); });
+            toolsEl.appendChild(b);
+          });
+        }
+        function answer(b, t, r) {
+          if (lock) { return; }
+          lock = true;
+          var btns = toolsEl.getElementsByTagName('button'), i;
+          for (i = 0; i < btns.length; i++) { btns[i].disabled = true; }
+          if (t === r.tool) {
+            score++;
+            b.classList.add('right');
+            msgEl.textContent = "That's right!";
+          } else {
+            b.classList.add('wrong');
+            for (i = 0; i < btns.length; i++) {
+              if (btns[i].textContent === r.tool) { btns[i].classList.add('right'); }
+            }
+            msgEl.textContent = "Not that one — " + r.who + " runs " + r.toolPhrase + ".";
+          }
+          scoreEl.textContent = score + " / 10";
+          setTimeout(function () {
+            idx++; lock = false;
+            if (idx >= rounds.length) { endGame(); } else { showRound(); }
+          }, 1600);
+        }
+        function endGame() {
+          tradeEl.textContent = "";
+          jobEl.textContent = "";
+          toolsEl.innerHTML = "";
+          roundEl.textContent = "10 / 10";
+          msgEl.textContent = "All 10 rounds done.";
+          finalEl.textContent = "Final score: " + score + " / 10." + (score === 10 ? " Perfect — DD can run every trade!" : score >= 7 ? " Strong work!" : " Good try — run it again!");
+          endEl.hidden = false;
+          startBtn.style.display = "";
+          startBtn.textContent = "Start";
+        }
+        startBtn.addEventListener('click', startGame);
+        document.getElementById('ddAgain').addEventListener('click', startGame);
+      })();
+      </script>
 
       <script>
       (function () {
