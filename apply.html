@@ -295,7 +295,7 @@
         <div class="stripe" aria-hidden="true"></div>
         <div class="contact">
           <p class="biz">Dismukes Recruiting</p>
-          <p><a class="taplink" href="tel:+12514224242">(251) 422-4242</a></p>
+          <p><a class="taplink" href="tel:+14235230228">(423) 523-0228</a></p>
           <p><a class="taplink" href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a></p>
         </div>
       </footer>
@@ -350,7 +350,7 @@
 
       // Honest note up front while the inbox is not connected yet.
       if (!endpointReady()) {
-        setStatus('Applications are being set up — this form is not sending yet. Call or text DD at (251) 422-4242 and he will take your application by phone.', 'bad');
+        setStatus('Applications are being set up — this form is not sending yet. Call or text DD at (423) 523-0228 and he will take your application by phone.', 'bad');
       }
 
       form.addEventListener('submit', function (e) {
@@ -362,7 +362,7 @@
         }
 
         if (!endpointReady()) {
-          setStatus('Applications are being set up — this form is not sending yet. Call or text DD at (251) 422-4242 and he will take your application by phone.', 'bad');
+          setStatus('Applications are being set up — this form is not sending yet. Call or text DD at (423) 523-0228 and he will take your application by phone.', 'bad');
           return;
         }
 
@@ -396,10 +396,10 @@
             form.reset();
             setStatus('Application sent. DD will see it.', 'good');
           } else {
-            setStatus('That did not send. Try again, or call DD at (251) 422-4242.', 'bad');
+            setStatus('That did not send. Try again, or call DD at (423) 523-0228.', 'bad');
           }
         }).catch(function () {
-          setStatus('That did not send. Check your connection and try again, or call DD at (251) 422-4242.', 'bad');
+          setStatus('That did not send. Check your connection and try again, or call DD at (423) 523-0228.', 'bad');
         }).then(function () {
           sendBtn.disabled = false;
           sendBtn.textContent = 'Send my application';

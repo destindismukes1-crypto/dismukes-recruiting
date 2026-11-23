@@ -1,0 +1,2516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="The Dismukes Recruiting app: painters and blasters, pay up front, a fresh Bible verse every day, and Destin one call away." />
+    <link rel="icon" type="image/png" href="assets/app/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/app/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Dismukes Recruiting" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Dismukes Recruiting App</title>
+    <style>
+      :root {
+        --bg: #f4f1ea;
+        --surface: #fffdf8;
+        --surface-2: #ece5d5;
+        --ink: #1c1a15;
+        --ink-soft: #5a5344;
+        --line: #d9cfb8;
+        --navy: #10283f;
+        --navy-deep: #0a1a2c;
+        --gold: #a97e14;
+        --gold-bright: #c9a227;
+        --gold-soft: #f3e5bb;
+        --accent: #10283f;
+        --on-accent: #ffffff;
+        --tab-bg: rgba(255, 253, 248, 0.97);
+        --shadow: 0 2px 10px rgba(28, 26, 21, 0.08);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #12100c;
+          --surface: #1e1b15;
+          --surface-2: #2a2619;
+          --ink: #f0ead9;
+          --ink-soft: #b8ae94;
+          --line: #3d3728;
+          --navy: #7fa8cc;
+          --gold: #d4af37;
+          --gold-bright: #e3c65c;
+          --gold-soft: #3a3115;
+          --accent: #c9a227;
+          --on-accent: #171410;
+          --tab-bg: rgba(24, 21, 15, 0.97);
+          --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+          color-scheme: dark;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        line-height: 1.55;
+        -webkit-text-size-adjust: 100%;
+      }
+      .serif { font-family: Georgia, "Times New Roman", Times, serif; }
+      a { color: var(--navy); }
+      @media (prefers-color-scheme: dark) { a { color: var(--gold-bright); } }
+      img { max-width: 100%; display: block; }
+
+      /* ---------- app column ---------- */
+      .app {
+        max-width: 560px;
+        margin: 0 auto;
+        padding-bottom: calc(238px + env(safe-area-inset-bottom));
+        min-height: 100vh;
+      }
+      @media (min-width: 900px) {
+        body { background: #0a0f16; }
+        @media (prefers-color-scheme: light) { body { background: #ddd5c2; } }
+        .app {
+          background: var(--bg);
+          box-shadow: 0 0 60px rgba(0, 0, 0, 0.35);
+        }
+      }
+      main { padding: 0 18px; }
+      section { padding-top: 30px; scroll-margin-top: 12px; }
+      h2 {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 1.55rem;
+        line-height: 1.2;
+        margin: 0 0 6px;
+        font-weight: 700;
+      }
+      h3 { font-size: 1.12rem; margin: 0; line-height: 1.3; }
+      .sec-sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 0.98rem; }
+      .tick { display: block; width: 44px; height: 4px; background: var(--gold-bright); border-radius: 2px; margin-bottom: 12px; }
+
+      /* ---------- logo block ---------- */
+      .logoblock { background: #000; padding: 14px 16px 13px; text-align: center; }
+      .logoblock img { width: 100%; max-width: 300px; margin: 0 auto; }
+      .logo-verse {
+        margin: 9px auto 0;
+        max-width: 460px;
+        color: #e9d48a;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        line-height: 1.45;
+      }
+      .logo-verse .ref { display: block; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: #b7a05a; margin-top: 5px; }
+
+      /* ---------- verse of the day ---------- */
+      .verse-card {
+        margin-top: 22px;
+        background: var(--navy-deep);
+        color: #f4ecd4;
+        border: 1px solid #2c4258;
+        border-top: 5px solid var(--gold-bright);
+        border-radius: 14px;
+        padding: 24px 22px 20px;
+        box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) {
+        .verse-card { background: #0d1520; border-color: #26313f; }
+      }
+      .verse-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      .verse-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-bright); font-weight: 700; }
+      .verse-date { font-size: 0.88rem; color: #c9bfa4; }
+      .verse-text {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 1.38rem;
+        line-height: 1.5;
+        margin: 16px 0 10px;
+      }
+      .verse-ref { font-family: Georgia, serif; font-style: italic; color: var(--gold-bright); font-size: 1.02rem; margin: 0 0 18px; }
+      .verse-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      .verse-nav { display: flex; gap: 8px; margin-left: auto; }
+      .vbtn {
+        min-height: 44px; min-width: 44px;
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        border-radius: 10px; border: 1px solid #47617c;
+        background: rgba(255,255,255,0.06); color: #f4ecd4;
+        font: inherit; font-size: 0.95rem; font-weight: 600;
+        padding: 8px 14px; cursor: pointer;
+      }
+      .vbtn:active { background: rgba(255,255,255,0.16); }
+      .vbtn svg { width: 18px; height: 18px; flex: none; }
+      .vbtn[aria-pressed="true"] { background: var(--gold-bright); color: #171410; border-color: var(--gold-bright); }
+      .verse-day { font-size: 0.85rem; color: #c9bfa4; margin: 14px 0 0; }
+
+      /* ---------- daily job alert (home screen) ---------- */
+      .job-alert {
+        margin-top: 22px;
+        background: var(--surface); border: 1px solid var(--line);
+        border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 18px; box-shadow: var(--shadow);
+      }
+      .job-alert-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+      .job-alert-head svg { width: 20px; height: 20px; flex: none; color: var(--gold); }
+      .job-alert-kicker { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 800; }
+      .job-alert-date { margin-left: auto; font-size: 0.86rem; color: var(--ink-soft); }
+      .job-alert-text {
+        margin: 12px 0 0; background: var(--surface-2); border: 1px solid var(--line);
+        border-radius: 12px; padding: 13px 15px; font-size: 0.97rem; line-height: 1.55;
+      }
+      .job-alert-text strong { color: var(--gold); }
+      .job-alert .payrow { margin-top: 12px; }
+      .job-alert-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+      .job-alert-note { margin: 12px 0 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+      /* ---------- quick actions ---------- */
+      .quick { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 16px; }
+      .quick a {
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        padding: 14px 6px 12px; border-radius: 12px; text-decoration: none;
+        background: var(--surface); border: 1px solid var(--line);
+        color: var(--ink); font-weight: 700; font-size: 0.92rem; box-shadow: var(--shadow);
+        min-height: 44px;
+      }
+      .quick a svg { width: 24px; height: 24px; color: var(--gold); }
+      .quick a.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .quick a.primary svg { color: var(--gold-bright); }
+      .cred-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+      .cred-row span {
+        background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+        padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
+      }
+      .cred-row b { color: var(--gold); }
+
+      /* ---------- buttons ---------- */
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        min-height: 46px; padding: 10px 18px; border-radius: 11px;
+        font-weight: 700; font-size: 0.98rem; text-decoration: none; cursor: pointer;
+        border: 1px solid transparent; font-family: inherit;
+      }
+      .btn svg { width: 18px; height: 18px; flex: none; }
+      .btn-accent { background: var(--accent); color: var(--on-accent); }
+      .btn-gold { background: var(--gold-bright); color: #171410; }
+      .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+      .btn-sm { min-height: 42px; padding: 8px 14px; font-size: 0.92rem; }
+
+      /* ---------- job cards ---------- */
+      .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+      .chip {
+        min-height: 40px; padding: 8px 16px; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+        font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      }
+      .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .job-count { color: var(--ink-soft); font-size: 0.9rem; margin: 6px 0 14px; }
+      .jobs { display: grid; gap: 16px; }
+      .job {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px;
+      }
+      .job[hidden] { display: none; }
+      .job-top { display: flex; align-items: flex-start; gap: 10px; }
+      .job-top h3 { flex: 1; font-size: 1.18rem; }
+      .tag {
+        flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 5px 9px; border-radius: 6px; margin-top: 2px;
+      }
+      .tag-list { background: var(--gold-soft); color: #6d5410; }
+      @media (prefers-color-scheme: dark) { .tag-list { color: var(--gold-bright); } }
+      .tag-chase { background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--line); }
+      .where { display: flex; align-items: center; gap: 7px; color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
+      .where svg { width: 15px; height: 15px; flex: none; }
+      .payrow { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+      .payrow > div { flex: 1; padding: 10px 8px; background: var(--surface-2); text-align: center; }
+      .payrow > div + div { border-left: 1px solid var(--line); }
+      .payrow .amt { display: block; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); line-height: 1.15; }
+      .payrow .lbl { display: block; font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; font-weight: 700; }
+      .job .note { color: var(--ink-soft); font-size: 0.96rem; margin: 0; flex: 1; }
+      .job-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .empty-note {
+        border: 1px dashed var(--line); border-radius: 12px; padding: 16px;
+        color: var(--ink-soft); background: var(--surface);
+      }
+
+      /* ---------- photo band ---------- */
+      .photo { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); margin-top: 20px; }
+      .photo img { width: 100%; height: 210px; object-fit: cover; }
+      .photo figcaption { background: var(--surface); padding: 12px 16px; font-size: 0.9rem; color: var(--ink-soft); }
+
+      /* ---------- calculator ---------- */
+      .calc {
+        margin-top: 20px; background: var(--surface); border: 1px solid var(--line);
+        border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+      }
+      .calc p { color: var(--ink-soft); font-size: 0.95rem; margin: 6px 0 16px; }
+      .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .calc-grid label { display: block; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+      .calc-grid input {
+        width: 100%; min-height: 48px; padding: 10px 12px; font: inherit; font-size: 1.1rem;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink);
+      }
+      .calc-total {
+        grid-column: 1 / -1; background: var(--navy-deep); color: #f4ecd4; border-radius: 12px;
+        padding: 16px; text-align: center;
+      }
+      @media (prefers-color-scheme: dark) { .calc-total { background: #0d1520; } }
+      .calc-total .t-lbl { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #c9bfa4; font-weight: 700; }
+      .calc-total .t-amt { display: block; font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--gold-bright); margin-top: 4px; }
+
+      /* ---------- steps & lists ---------- */
+      .steps { display: grid; gap: 14px; }
+      .step { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+      .step .num {
+        flex: none; width: 40px; height: 40px; border-radius: 50%;
+        background: var(--gold-bright); color: #171410; font-family: Georgia, serif;
+        font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; justify-content: center;
+      }
+      .step p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
+
+      .price-list { display: grid; gap: 12px; }
+      .price {
+        display: flex; gap: 14px; align-items: flex-start;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        padding: 16px; box-shadow: var(--shadow);
+      }
+      .price .amt {
+        flex: none; font-family: Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold);
+        min-width: 74px; text-align: center; background: var(--surface-2);
+        border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; line-height: 1.1;
+      }
+      .price .amt small { display: block; font-family: inherit; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; margin-top: 3px; }
+      .price p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+      .chime-row {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
+      }
+      .chime-row .lbl { font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
+      .chime-row .handle { font-family: Georgia, serif; font-weight: 700; font-size: 1.15rem; color: var(--gold); }
+      .copy-btn {
+        margin-left: auto; min-height: 40px; padding: 8px 16px; border-radius: 9px; cursor: pointer;
+        border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+        font: inherit; font-size: 0.9rem; font-weight: 700;
+      }
+
+      .contact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      .contact-list a {
+        display: flex; align-items: center; gap: 12px; min-height: 52px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+        padding: 12px 16px; text-decoration: none; color: var(--ink); font-weight: 600; box-shadow: var(--shadow);
+        overflow-wrap: anywhere;
+      }
+      .contact-list svg { width: 20px; height: 20px; flex: none; color: var(--gold); }
+      .story-quote { font-family: Georgia, serif; font-size: 1.22rem; line-height: 1.5; margin: 0; }
+      .story-body { color: var(--ink-soft); margin-top: 14px; }
+      footer { padding: 34px 18px 10px; color: var(--ink-soft); font-size: 0.88rem; }
+      footer .fine { border-top: 1px solid var(--line); padding-top: 16px; }
+
+      /* ---------- daily horoscope ---------- */
+      .sign-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+      .sign-chip {
+        min-height: 40px; padding: 8px 14px; border-radius: 999px;
+        border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+        font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      }
+      .sign-chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .horoscope-card {
+        background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 20px; box-shadow: var(--shadow);
+      }
+      .horoscope-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      .horoscope-sign { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.4rem; font-weight: 700; margin: 0; }
+      .horoscope-dates { color: var(--ink-soft); font-size: 0.9rem; }
+      .horoscope-text { margin: 12px 0 0; font-size: 1.02rem; line-height: 1.6; }
+      .horoscope-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+      .horoscope-row span {
+        background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+        padding: 6px 12px; font-size: 0.85rem; font-weight: 600;
+      }
+      .horoscope-row b { color: var(--gold); }
+      .astro-note { margin: 14px 0 0; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; font-size: 0.94rem; line-height: 1.55; color: var(--ink-soft); }
+      .astro-note strong { color: var(--ink); }
+
+      /* ---------- DD tells the jokes ---------- */
+      .joke-card {
+        background: var(--navy-deep); color: #f4ecd4;
+        border: 1px solid #2c4258; border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 22px; box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) { .joke-card { background: #0d1520; border-color: #26313f; } }
+      .joke-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-bright); font-weight: 700; margin: 0; }
+      .joke-text { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.28rem; line-height: 1.55; margin: 14px 0 6px; min-height: 3.6em; }
+      .joke-by { color: #c9bfa4; font-size: 0.92rem; margin: 0 0 16px; font-style: italic; }
+      .joke-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .joke-count { font-size: 0.85rem; color: #c9bfa4; margin: 12px 0 0; }
+
+      /* ---------- tool giveaway ---------- */
+      .prize-banner {
+        background: var(--navy-deep); color: #f4ecd4;
+        border: 1px solid #2c4258; border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 22px; box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) { .prize-banner { background: #0d1520; border-color: #26313f; } }
+      .prize-kicker { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-bright); font-weight: 700; margin: 0; }
+      .prize-name { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.6rem; line-height: 1.25; margin: 8px 0 6px; }
+      .prize-sub { color: #c9bfa4; margin: 0; font-size: 0.97rem; }
+      .giveaway-rules { display: grid; gap: 10px; margin-top: 16px; }
+      .giveaway-rule {
+        display: flex; gap: 12px; align-items: flex-start;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+        padding: 14px 16px; box-shadow: var(--shadow);
+      }
+      .giveaway-rule svg { width: 22px; height: 22px; flex: none; color: var(--gold); margin-top: 2px; }
+      .giveaway-rule p { margin: 3px 0 0; color: var(--ink-soft); font-size: 0.96rem; }
+      .tip-list { margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.96rem; display: grid; gap: 9px; }
+      .tip-list strong { color: var(--ink); }
+
+      /* ---------- DD walks the whole app (truck stays parked at the end) ---------- */
+      .dd-walk {
+        position: fixed; left: 50%; transform: translateX(-50%);
+        bottom: calc(63px + env(safe-area-inset-bottom));
+        width: min(560px, 100%); z-index: 49;
+        background: var(--tab-bg); border-top: 1px solid var(--line);
+        backdrop-filter: blur(8px);
+        padding: 6px 12px;
+        min-height: 98px;
+        display: flex; align-items: center; gap: 10px;
+      }
+      .dd-walk-label {
+        display: flex; flex-direction: column; gap: 0;
+        flex: 0 0 86px; overflow: hidden;
+        font-size: 0.66rem; line-height: 1.3; font-weight: 700; color: var(--ink-soft);
+      }
+      .dd-walk-label .dd-name {
+        font-family: Georgia, serif; font-size: 0.92rem; font-weight: 700;
+        color: var(--gold); letter-spacing: 0.04em; line-height: 1.15;
+      }
+      .dd-read-btn {
+        flex: none; display: inline-flex; align-items: center; gap: 6px;
+        min-height: 44px; padding: 8px 12px; border-radius: 10px; cursor: pointer;
+        border: 1px solid var(--gold-bright); background: var(--accent);
+        color: var(--on-accent); font: inherit; font-size: 0.85rem; font-weight: 700;
+      }
+      .dd-read-btn svg { width: 18px; height: 18px; flex: none; }
+      .dd-read-btn[aria-pressed="true"] { background: var(--gold-bright); color: #171410; }
+      @media (max-width: 420px) {
+        .dd-walk-label { flex-basis: 74px; }
+        .dd-read-btn { padding: 8px 9px; font-size: 0.8rem; }
+      }
+      .dd-road { position: relative; flex: 1; height: 86px; }
+      /* ---------- DD's speech bubble — his words show on screen as he reads,
+         so he visibly works in the app even when a phone's voice stays silent ---------- */
+      .dd-bubble {
+        position: fixed; left: 50%; transform: translateX(-50%);
+        bottom: calc(170px + env(safe-area-inset-bottom));
+        width: min(520px, calc(100% - 24px)); z-index: 59;
+        background: var(--navy-deep); color: #f4ecd4;
+        border: 1px solid #2c4258; border-top: 4px solid var(--gold-bright);
+        border-radius: 12px; padding: 12px 16px; box-shadow: var(--shadow);
+      }
+      @media (prefers-color-scheme: dark) { .dd-bubble { background: #0d1520; border-color: #26313f; } }
+      .dd-bubble[hidden] { display: none; }
+      .dd-bubble-head {
+        margin: 0 0 6px; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--gold-bright); font-weight: 700; display: flex; align-items: center; gap: 8px;
+      }
+      .dd-bubble-head::after {
+        content: ""; width: 8px; height: 8px; border-radius: 50%; flex: none;
+        background: var(--gold-bright); animation: ddPulse 0.9s ease-in-out infinite alternate;
+      }
+      @keyframes ddPulse { from { opacity: 0.3; } to { opacity: 1; } }
+      .dd-bubble-text { margin: 0; font-size: 0.98rem; line-height: 1.5; max-height: 110px; overflow-y: auto; }
+      .dd-walk.talking .dd-leg-l { animation: ddStep 0.32s ease-in-out infinite alternate; }
+      .dd-walk.talking .dd-leg-r { animation: ddStep 0.32s ease-in-out infinite alternate-reverse; }
+      .dd-walk.talking .dd-body { animation: ddBob 0.32s ease-in-out infinite alternate; }
+      @media (prefers-reduced-motion: reduce) {
+        .dd-bubble-head::after { animation: none; }
+        .dd-walk.talking .dd-leg-l, .dd-walk.talking .dd-leg-r, .dd-walk.talking .dd-body { animation: none; }
+      }
+      .dd-road::after {
+        content: ""; position: absolute; left: 0; right: 0; bottom: 3px;
+        border-bottom: 3px dashed var(--line);
+      }
+      .dd-figure { position: absolute; left: 0; bottom: 4px; width: 40px; z-index: 2; will-change: transform; }
+      .dd-figure img { display: block; height: 84px; width: auto; max-width: none; }
+      .dd-figure.face-back img { transform: scaleX(-1); }
+      .dd-walk.walking .dd-figure img, .dd-walk.talking .dd-figure img { animation: ddImgBob 0.3s ease-in-out infinite alternate; }
+      @keyframes ddImgBob { from { margin-bottom: 0; } to { margin-bottom: 3px; } }
+      @media (prefers-reduced-motion: reduce) {
+        .dd-walk.walking .dd-figure img, .dd-walk.talking .dd-figure img { animation: none; }
+      }
+      .dd-truck { position: absolute; right: 0; bottom: 8px; width: 96px; z-index: 1; }
+      .dd-truck img { display: block; width: 100%; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+      .dd-leg { transform-box: fill-box; transform-origin: 50% 0%; }
+      .dd-walk.walking .dd-leg-l { animation: ddStep 0.3s ease-in-out infinite alternate; }
+      .dd-walk.walking .dd-leg-r { animation: ddStep 0.3s ease-in-out infinite alternate-reverse; }
+      .dd-walk.walking .dd-body { animation: ddBob 0.3s ease-in-out infinite alternate; }
+      @keyframes ddStep { from { transform: rotate(-17deg); } to { transform: rotate(17deg); } }
+      @keyframes ddBob { from { transform: translateY(0); } to { transform: translateY(-1.6px); } }
+      @media (prefers-reduced-motion: reduce) {
+        .dd-walk.walking .dd-leg-l, .dd-walk.walking .dd-leg-r, .dd-walk.walking .dd-body { animation: none; }
+      }
+      /* DD's quick-change closet — only the work clothes swap; cap, sunglasses, chain & tattoos stay his */
+      .dd-gear { display: none; }
+      .dd-stage[data-outfit="painter"] .gear-painter,
+      .dd-stage[data-outfit="welder"] .gear-welder,
+      .dd-stage[data-outfit="blaster"] .gear-blaster,
+      .dd-stage[data-outfit="sprayer"] .gear-sprayer,
+      .dd-stage[data-outfit="driver"] .gear-hivis,
+      .dd-stage[data-outfit="lawyer"] .gear-lawyer,
+      .dd-stage[data-outfit="doctor"] .gear-doctor,
+      .dd-stage[data-outfit="nurse"] .gear-nurse,
+      .dd-stage[data-outfit="chef"] .gear-chef,
+      .dd-stage[data-outfit="construction"] .gear-construction,
+      .dd-stage[data-outfit="electrician"] .gear-electrician,
+      .dd-stage[data-outfit="plumber"] .gear-plumber,
+      .dd-stage[data-outfit="mechanic"] .gear-mechanic,
+      .dd-stage[data-outfit="firefighter"] .gear-firefighter,
+      .dd-stage[data-outfit="police"] .gear-police,
+      .dd-stage[data-outfit="teacher"] .gear-teacher,
+      .dd-stage[data-outfit="farmer"] .gear-farmer,
+      .dd-stage[data-outfit="pilot"] .gear-pilot,
+      .dd-stage[data-outfit="sailor"] .gear-sailor,
+      .dd-stage[data-outfit="soldier"] .gear-soldier,
+      .dd-stage[data-outfit="ceo"] .gear-ceo,
+      .dd-stage[data-outfit="scientist"] .gear-scientist,
+      .dd-stage[data-outfit="delivery"] .gear-delivery,
+      .dd-stage[data-outfit="security"] .gear-security,
+      .dd-stage[data-outfit="inspector"] .gear-inspector { display: block; }
+      .dd-stage[data-outfit="painter"] .dd-shirt { fill: #efe9d8; }
+      .dd-stage[data-outfit="painter"] .dd-pants { fill: #e6dfca; }
+      .dd-stage[data-outfit="painter"] .dd-letters { fill: #10283f; }
+      .dd-stage[data-outfit="welder"] .dd-shirt { fill: #37473a; }
+      .dd-stage[data-outfit="welder"] .dd-pants { fill: #2c2c30; }
+      .dd-stage[data-outfit="blaster"] .dd-shirt { fill: #b99b5f; }
+      .dd-stage[data-outfit="blaster"] .dd-pants { fill: #a8894e; }
+      .dd-stage[data-outfit="sprayer"] .dd-shirt { fill: #dfe3e6; }
+      .dd-stage[data-outfit="sprayer"] .dd-pants { fill: #dfe3e6; }
+      .dd-stage[data-outfit="sprayer"] .dd-letters { fill: #10283f; }
+      .dd-stage[data-outfit="driver"] .dd-shirt { fill: #d96f1e; }
+      .dd-stage[data-outfit="driver"] .dd-pants { fill: #2c2c30; }
+      .dd-stage[data-outfit="driver"] .dd-letters { fill: #10283f; }
+      .dd-stage[data-outfit="lawyer"] .dd-shirt { fill: #23242c; }
+      .dd-stage[data-outfit="lawyer"] .dd-pants { fill: #23242c; }
+      .dd-stage[data-outfit="lawyer"] .dd-letters { fill: #e3c65c; }
+      .dd-stage[data-outfit="doctor"] .dd-shirt { fill: #eef0ea; }
+      .dd-stage[data-outfit="doctor"] .dd-pants { fill: #33506b; }
+      .dd-stage[data-outfit="doctor"] .dd-letters { fill: #b03a3a; }
+      .dd-stage[data-outfit="nurse"] .dd-shirt { fill: #2e7f7a; }
+      .dd-stage[data-outfit="nurse"] .dd-pants { fill: #256b66; }
+      .dd-stage[data-outfit="nurse"] .dd-letters { fill: #ffffff; }
+      .dd-stage[data-outfit="chef"] .dd-shirt { fill: #f2efe6; }
+      .dd-stage[data-outfit="chef"] .dd-pants { fill: #3a3a40; }
+      .dd-stage[data-outfit="chef"] .dd-letters { fill: #8c2f2f; }
+      .dd-stage[data-outfit="construction"] .dd-shirt { fill: #c9a227; }
+      .dd-stage[data-outfit="construction"] .dd-pants { fill: #5a5344; }
+      .dd-stage[data-outfit="construction"] .dd-letters { fill: #10283f; }
+      .dd-stage[data-outfit="electrician"] .dd-shirt { fill: #274b73; }
+      .dd-stage[data-outfit="electrician"] .dd-pants { fill: #2c2c30; }
+      .dd-stage[data-outfit="electrician"] .dd-letters { fill: #f2c230; }
+      .dd-stage[data-outfit="plumber"] .dd-shirt { fill: #3f6d4e; }
+      .dd-stage[data-outfit="plumber"] .dd-pants { fill: #33506b; }
+      .dd-stage[data-outfit="plumber"] .dd-letters { fill: #ffffff; }
+      .dd-stage[data-outfit="mechanic"] .dd-shirt { fill: #4c5a68; }
+      .dd-stage[data-outfit="mechanic"] .dd-pants { fill: #414e5c; }
+      .dd-stage[data-outfit="mechanic"] .dd-letters { fill: #f0ead9; }
+      .dd-stage[data-outfit="firefighter"] .dd-shirt { fill: #33302a; }
+      .dd-stage[data-outfit="firefighter"] .dd-pants { fill: #33302a; }
+      .dd-stage[data-outfit="firefighter"] .dd-letters { fill: #f2c230; }
+      .dd-stage[data-outfit="police"] .dd-shirt { fill: #1d3557; }
+      .dd-stage[data-outfit="police"] .dd-pants { fill: #16283f; }
+      .dd-stage[data-outfit="police"] .dd-letters { fill: #e3c65c; }
+      .dd-stage[data-outfit="teacher"] .dd-shirt { fill: #7a3049; }
+      .dd-stage[data-outfit="teacher"] .dd-pants { fill: #4a4238; }
+      .dd-stage[data-outfit="teacher"] .dd-letters { fill: #f3e5bb; }
+      .dd-stage[data-outfit="farmer"] .dd-shirt { fill: #a83c32; }
+      .dd-stage[data-outfit="farmer"] .dd-pants { fill: #33506b; }
+      .dd-stage[data-outfit="farmer"] .dd-letters { fill: #ffffff; }
+      .dd-stage[data-outfit="pilot"] .dd-shirt { fill: #eef0ea; }
+      .dd-stage[data-outfit="pilot"] .dd-pants { fill: #23242c; }
+      .dd-stage[data-outfit="pilot"] .dd-letters { fill: #10283f; }
+      .dd-stage[data-outfit="sailor"] .dd-shirt { fill: #eef0ea; }
+      .dd-stage[data-outfit="sailor"] .dd-pants { fill: #1d3557; }
+      .dd-stage[data-outfit="sailor"] .dd-letters { fill: #1d3557; }
+      .dd-stage[data-outfit="soldier"] .dd-shirt { fill: #55613f; }
+      .dd-stage[data-outfit="soldier"] .dd-pants { fill: #4a5537; }
+      .dd-stage[data-outfit="soldier"] .dd-letters { fill: #e9e2c8; }
+      .dd-stage[data-outfit="ceo"] .dd-shirt { fill: #10283f; }
+      .dd-stage[data-outfit="ceo"] .dd-pants { fill: #10283f; }
+      .dd-stage[data-outfit="scientist"] .dd-shirt { fill: #eef0ea; }
+      .dd-stage[data-outfit="scientist"] .dd-pants { fill: #4a4238; }
+      .dd-stage[data-outfit="scientist"] .dd-letters { fill: #2e7f7a; }
+      .dd-stage[data-outfit="delivery"] .dd-shirt { fill: #6d4c2f; }
+      .dd-stage[data-outfit="delivery"] .dd-pants { fill: #57391f; }
+      .dd-stage[data-outfit="delivery"] .dd-letters { fill: #f2c230; }
+      .dd-stage[data-outfit="security"] .dd-shirt { fill: #1c1a15; }
+      .dd-stage[data-outfit="security"] .dd-pants { fill: #1c1a15; }
+      .dd-stage[data-outfit="security"] .dd-letters { fill: #f2c230; }
+      .dd-stage[data-outfit="inspector"] .dd-shirt { fill: #ddd6c2; }
+      .dd-stage[data-outfit="inspector"] .dd-pants { fill: #5a5344; }
+      .dd-stage[data-outfit="inspector"] .dd-letters { fill: #10283f; }
+      .dd-walk .dd-outfit-lbl { color: var(--gold); font-weight: 700; }
+
+      /* ---------- DD's closet — pick a career, DD changes into it ---------- */
+      .closet-stage {
+        background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 22px 18px 16px; box-shadow: var(--shadow);
+        text-align: center; margin-bottom: 16px;
+      }
+      .closet-stage-fig { width: 176px; margin: 0 auto; }
+      .closet-stage-fig svg { display: block; width: 100%; height: auto; }
+      .closet-stage-fig[hidden] { display: none; }
+      .closet-photo {
+        display: block; height: 440px; max-height: 62vh; width: auto; max-width: 100%;
+        margin: 0 auto; object-fit: contain; background: #fff; border-radius: 10px;
+      }
+      .closet-photo[hidden] { display: none; }
+      .closet-line { margin: 10px auto 0; max-width: 460px; color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
+      .closet-read-row { margin-top: 14px; display: flex; justify-content: center; }
+      .closet-stage-cap { margin: 14px 0 0; font-size: 1.05rem; color: var(--ink-soft); }
+      .closet-stage-cap strong { color: var(--gold); font-size: 1.15rem; }
+      .closet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .closet-chip {
+        min-height: 60px; padding: 14px 12px; border-radius: 14px;
+        border: 2px solid var(--line); background: var(--surface); color: var(--ink);
+        font: inherit; font-size: 1.05rem; font-weight: 700; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; text-align: center;
+      }
+      .closet-chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      .closet-note { margin: 14px 0 0; color: var(--ink-soft); font-size: 0.94rem; }
+      .closet-note strong { color: var(--gold); }
+
+      /* ---------- DD up top — real photo on the left, his truck on the right ---------- */
+      .dd-hero {
+        margin-top: 18px; background: var(--navy-deep); color: #f4ecd4;
+        border: 1px solid #2c4258; border-top: 5px solid var(--gold-bright);
+        border-radius: 14px; padding: 16px; box-shadow: var(--shadow);
+        display: grid; grid-template-columns: 148px 1fr; gap: 16px;
+      }
+      @media (prefers-color-scheme: dark) { .dd-hero { background: #0d1520; border-color: #26313f; } }
+      .dd-hero-photo { background: #fff; border-radius: 10px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; }
+      .dd-hero-photo img { height: 302px; width: auto; max-width: 100%; object-fit: contain; }
+      .dd-hero-kicker { margin: 2px 0 6px; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-bright); font-weight: 800; }
+      .dd-hero-title { font-family: Georgia, "Times New Roman", Times, serif; font-size: 1.52rem; line-height: 1.2; margin: 0 0 8px; color: #ffffff; }
+      .dd-hero-sub { color: #c9bfa4; font-size: 0.95rem; line-height: 1.5; margin: 0 0 12px; }
+      .dd-hero-truck { width: 100%; height: 104px; object-fit: cover; border-radius: 10px; border: 1px solid #2c4258; }
+      .dd-hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+      @media (max-width: 420px) {
+        .dd-hero { grid-template-columns: 116px 1fr; padding: 12px; gap: 12px; }
+        .dd-hero-photo img { height: 252px; }
+        .dd-hero-title { font-size: 1.3rem; }
+        .dd-hero-truck { height: 88px; }
+      }
+
+      /* ---------- bottom tab bar ---------- */
+      .tabbar {
+        position: fixed; left: 50%; transform: translateX(-50%); bottom: 0;
+        width: min(560px, 100%); z-index: 50;
+        background: var(--tab-bg); border-top: 1px solid var(--line);
+        display: grid; grid-template-columns: repeat(5, 1fr);
+        padding-bottom: env(safe-area-inset-bottom);
+        backdrop-filter: blur(8px);
+      }
+      .tabbar a {
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+        min-height: 62px; padding: 8px 2px 6px; text-decoration: none;
+        color: var(--ink-soft); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em;
+      }
+      .tabbar a svg { width: 22px; height: 22px; }
+      .tabbar a.active { color: var(--gold); }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+
+      <!-- LOGO — Philippians 4:13 stays under it -->
+      <div class="logoblock">
+        <img src="assets/app/logo.webp" alt="Dismukes Recruiting logo: white wings and gold hands holding an open book under a compass, with two pink spray guns — Destin, for the best workers. Workers apply free." />
+        <p class="logo-verse">
+          “I can do all things through Christ who strengthens me.”
+          <span class="ref">Philippians 4:13</span>
+        </p>
+      </div>
+
+      <main>
+        <!-- TODAY -->
+        <section id="today" style="padding-top: 4px;">
+          <div class="dd-hero" aria-label="DD — Destin himself, on the left, with his truck on the right">
+            <div class="dd-hero-photo">
+              <img id="heroDdImg" src="assets/app/outfit-default.webp" alt="DD — Destin Dismukes himself, full body, in his regular fit" />
+            </div>
+            <div class="dd-hero-main">
+              <p class="dd-hero-kicker">I’m DD — Destin himself. I stay right here.</p>
+              <h1 class="dd-hero-title">Painters &amp; blasters get hired here. Pay up front.</h1>
+              <p class="dd-hero-sub">That’s me on the left and my truck on the right — and I walk with you all the way down this app, down at the bottom of your screen. Tap any outfit in my closet below and I change into it right here, big and full-body, and read it out loud to you. Every “DD reads” button in this app plays a voice in my style out loud — a man’s voice, reading the words — and the words roll out on screen too, so you can follow along.</p>
+              <img class="dd-hero-truck" src="assets/app/truck.jpg" alt="DD’s white Silverado truck" />
+              <div class="dd-hero-actions">
+                <a class="btn btn-gold btn-sm" href="#closet">See DD’s closet</a>
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Call DD</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="job-alert" aria-label="Daily job alert">
+            <div class="job-alert-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span class="job-alert-kicker">Daily Job Alert</span>
+              <span class="job-alert-date" id="alertDate"></span>
+            </div>
+            <p class="job-alert-text"><strong>Dismukes job alert:</strong> Brush Crew — Painters &amp; Blasters needed in Newport News, Virginia. Pay up front: <strong>$18.00–$27.31/hr + $140/day per diem</strong> for non-local candidates, exactly as printed.</p>
+            <div class="payrow">
+              <div><span class="amt">$18.00–$27.31</span><span class="lbl">Per hour</span></div>
+              <div><span class="amt">$140</span><span class="lbl">Per diem / day</span></div>
+            </div>
+            <div class="job-alert-actions">
+              <a class="btn btn-accent btn-sm" href="tel:+12514224242">Call to apply</a>
+              <a class="btn btn-ghost btn-sm" href="#jobs">See all jobs</a>
+              <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=JOIN">Get this text daily — free</a>
+            </div>
+            <p class="job-alert-note">Fresh work, pay first — this is the top posting on the Jobs board below.</p>
+          </div>
+
+          <div class="verse-card" aria-label="Verse of the day">
+            <div class="verse-head">
+              <span class="verse-kicker">Today’s Verse</span>
+              <span class="verse-date" id="verseDate"></span>
+            </div>
+            <p class="verse-text" id="verseText"></p>
+            <p class="verse-ref" id="verseRef"></p>
+            <div class="verse-actions">
+              <button class="vbtn" type="button" id="listenBtn" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span id="listenLbl">DD reads it</span>
+              </button>
+              <button class="vbtn" type="button" id="copyVerse">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span id="copyVerseLbl">Copy</span>
+              </button>
+              <div class="verse-nav">
+                <button class="vbtn" type="button" id="prevVerse" aria-label="Previous day’s verse">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg><span>Prev</span>
+                </button>
+                <button class="vbtn" type="button" id="nextVerse" aria-label="Next day’s verse">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span>Next</span>
+                </button>
+              </div>
+            </div>
+            <p class="verse-day" id="verseDay"></p>
+          </div>
+
+          <div class="quick">
+            <a class="primary" href="tel:+12514224242">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Call Destin
+            </a>
+            <a href="sms:+12514224242?&amp;body=JOIN">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Text JOIN
+            </a>
+            <a href="#jobs">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              See Jobs
+            </a>
+          </div>
+
+          <div class="cred-row" aria-label="Destin’s credentials">
+            <span><b>13 years</b> in coatings</span>
+            <span><b>OSHA 10</b></span>
+            <span><b>C7</b> blaster</span>
+            <span><b>C12</b> spray</span>
+            <span>Own blast pot &amp; nozzles</span>
+            <span>Workers apply <b>free</b></span>
+          </div>
+
+          <figure class="photo">
+            <img src="assets/app/photo-blasting-ship.jpg" alt="A blaster in a helmet and protective gear abrasive-blasting the red hull of a ship in dry dock" loading="lazy" />
+            <figcaption>Painters &amp; blasters get hired here — and the pay is up front, before you ever pick up the phone.</figcaption>
+          </figure>
+        </section>
+
+        <!-- DAILY HOROSCOPE -->
+        <section id="horoscope">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Daily Horoscope &amp; Astrology</h2>
+          <p class="sec-sub">The astrology and stuff, right here in the app — your sign, the moon, your lucky color and number, fresh every day. Just for fun on the coffee break. Pick your sign. The verse up top is the day’s real guidance; this is the light read.</p>
+
+          <div class="sign-grid" role="group" aria-label="Pick your zodiac sign" id="signGrid"></div>
+
+          <div class="horoscope-card" aria-label="Today’s horoscope reading">
+            <div class="horoscope-head">
+              <p class="horoscope-sign" id="horoSign"></p>
+              <span class="horoscope-dates" id="horoDates"></span>
+            </div>
+            <p class="horoscope-text" id="horoText"></p>
+            <div class="horoscope-row">
+              <span>Lucky number: <b id="horoLucky"></b></span>
+              <span>Lucky color: <b id="horoColor"></b></span>
+              <span>Focus today: <b id="horoFocus"></b></span>
+              <span>Moon tonight: <b id="horoMoon"></b></span>
+              <span id="horoDate"></span>
+            </div>
+            <p class="astro-note" id="horoMoonNote"></p>
+          </div>
+        </section>
+
+        <!-- DD TELLS THE JOKES -->
+        <section id="jokes">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>DD tells the jokes</h2>
+          <p class="sec-sub">Still here, still his — DD’s joke of the day, plus as many more as you want. Tap “DD reads the joke” and he reads it out loud, same as everything else he reads in this app — his words roll out on screen too, so you can follow along.</p>
+
+          <div class="joke-card" aria-label="DD’s joke">
+            <p class="joke-kicker">DD’s Joke Corner</p>
+            <p class="joke-text" id="jokeText"></p>
+            <p class="joke-by">— DD, walking the app with you</p>
+            <div class="joke-actions">
+              <button class="vbtn" type="button" id="jokeListen" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span id="jokeListenLbl">DD reads the joke</span>
+              </button>
+              <button class="vbtn" type="button" id="jokeNext">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                <span>Another one</span>
+              </button>
+            </div>
+            <p class="joke-count" id="jokeCount" role="status"></p>
+          </div>
+        </section>
+
+        <!-- JOBS FOR CREWS -->
+        <section id="jobs">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Jobs — pay up front</h2>
+          <p class="sec-sub">Every job here shows its real pay and per diem before you travel anywhere — or says plainly when it wasn’t printed. Workers apply free — always.</p>
+
+          <div class="filters" role="group" aria-label="Filter jobs">
+            <button class="chip" type="button" data-filter="all" aria-pressed="true">All jobs</button>
+            <button class="chip" type="button" data-filter="blaster" aria-pressed="false">Blasters</button>
+            <button class="chip" type="button" data-filter="painter" aria-pressed="false">Painters</button>
+            <button class="chip" type="button" data-filter="perdiem" aria-pressed="false">Per diem printed</button>
+          </div>
+          <p class="job-count" id="jobCount" role="status"></p>
+          <div style="margin: 0 0 14px;">
+            <button class="btn btn-accent" type="button" id="readBoard" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span id="readBoardLbl">DD — read the whole board</span>
+            </button>
+          </div>
+
+          <div class="jobs" id="jobGrid">
+            <article class="job" data-trades="blaster painter" data-perdiem="1">
+              <div class="job-top">
+                <h3>Brush Crew — Painters &amp; Blasters</h3>
+                <span class="tag tag-list">Posting</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Newport News, Virginia — shipyard
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$18.00–$27.31</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">$140</span><span class="lbl">Per diem / day</span></div>
+              </div>
+              <p class="note">Coatings work — a brush crew of painters &amp; blasters, posted as an external posting through a recruiter. The $140/day per diem is for non-local candidates, exactly as printed. Start date isn’t listed on the posting — confirm before you travel.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="tel:+12514224242">Call to apply</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Brush%20Crew%20Newport%20News%20—%20applying">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-perdiem="0">
+              <div class="job-top">
+                <h3>Tidewater Staffing — Shipyard Painters / Sprayers / Blasters</h3>
+                <span class="tag tag-chase">External listing</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Hampton Roads, Virginia
+              </p>
+              <div class="payrow">
+                <div><span class="amt">On listing</span><span class="lbl">Pay — check source</span></div>
+                <div><span class="amt">On listing</span><span class="lbl">Per diem — check source</span></div>
+              </div>
+              <p class="note">Spotted on a public board — not posted through Dismukes Recruiting, and no placement is promised. Check the pay on the source listing before you apply; listings can close without notice. Source checked November 2, 2026.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="https://www.ziprecruiter.com/Jobs/Shipyard-Painter" target="_blank" rel="noopener">See it &amp; apply free on ZipRecruiter</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster" data-perdiem="0">
+              <div class="job-top">
+                <h3>C7 Blasters — Crew List</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Shipyards nationwide — travel work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Per posting</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Certified C7 abrasive blasters are the first calls yards make when a hull hits the dock. Get on the list with your certs and your travel range, and you hear about the job — with the pay — before it posts anywhere else.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=C7%20Blaster%20—%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="painter" data-perdiem="0">
+              <div class="job-top">
+                <h3>C12 Spray Painters — Crew List</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Shipyards nationwide — travel work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Per posting</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">C12 spray application is its own skill and yards pay for it. If you can run airless and plural-component rigs and hold a spec, put your name down — every call you get from us comes with the rate attached.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=C12%20Spray%20Painter%20—%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-perdiem="0">
+              <div class="job-top">
+                <h3>Coatings Crew — Morristown Area</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Morristown, Tennessee — local work
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Local</span><span class="lbl">Sleep at home</span></div>
+              </div>
+              <p class="note">Not everybody wants the road. We’re building a local list for East Tennessee industrial and plant work, so local people can take local jobs and be home at night. Same rule: the pay is on the posting before you apply.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Morristown%20local%20crew%20list">Email instead</a>
+              </div>
+            </article>
+
+            <article class="job" data-trades="blaster painter" data-perdiem="1">
+              <div class="job-top">
+                <h3>Travel Crews — Gulf Coast Yards</h3>
+                <span class="tag tag-list">Crew list</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Gulf Coast — MS / AL / LA shipyards
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Per posting</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Preferred</span><span class="lbl">Per diem on travel jobs</span></div>
+              </div>
+              <p class="note">The Gulf yards run year-round and per diem is what makes the travel worth it. On this list, travel postings lead with per diem — if a yard won’t state it, the card says “not stated” and you decide with your eyes open.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="sms:+12514224242?&body=JOIN">Join the list</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Gulf%20Coast%20travel%20crew%20list">Email instead</a>
+              </div>
+            </article>
+          </div>
+          <div class="empty-note" id="emptyNote" hidden>No postings match that filter right now. Call <a href="tel:+12514224242">(251) 422-4242</a> — new work lands by phone before it lands here.</div>
+
+          <figure class="photo">
+            <img src="assets/app/photo-spraying-ship.jpg" alt="A painter in a respirator and protective suit spray-painting the black hull of a ship inside a dry dock hall" loading="lazy" />
+            <figcaption>All fields welcome — blasters, painters, shipyard, construction, driving, warehouse, office. Tell us your trade and we match you.</figcaption>
+          </figure>
+        </section>
+
+        <!-- DD'S CLOSET — EVERY CAREER OUTFIT -->
+        <section id="closet">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>DD’s closet — every career outfit · 26 outfits</h2>
+          <p class="sec-sub">Every career, one DD — and these are real photos of him, full body, head to boots, nothing cut off. Tap any outfit below and DD changes into those clothes on the spot — right here big, up at the top, and down at the bottom too — and reads the outfit out loud to you while his words roll out on screen. Painter whites to a lawyer’s suit and everything between. His cap, sunglasses, chain, and tattoos never change. That’s still DD.</p>
+
+          <div class="closet-stage dd-stage" id="closetStage" data-outfit="default" aria-label="Big preview of DD in the outfit you pick">
+            <img class="closet-photo" id="closetPhoto" src="assets/app/outfit-default.webp" alt="DD — Destin himself, full body in the outfit you pick" />
+            <div class="closet-stage-fig" id="closetStageFig" hidden><svg viewBox="0 0 40 58" aria-hidden="true" focusable="false">
+              <g class="dd-leg dd-leg-l">
+                <rect class="dd-pants" x="14.5" y="36" width="6" height="14" rx="3" fill="#33506b"/>
+                <rect x="13.5" y="48" width="9" height="4.5" rx="2" fill="#26221c"/>
+              </g>
+              <g class="dd-leg dd-leg-r">
+                <rect class="dd-pants" x="20.5" y="36" width="6" height="14" rx="3" fill="#33506b"/>
+                <rect x="19.5" y="48" width="9" height="4.5" rx="2" fill="#26221c"/>
+              </g>
+              <g class="dd-body">
+                <rect class="dd-shirt" x="5.5" y="20" width="5.5" height="9" rx="2.5" fill="#10283f"/>
+                <rect x="5.5" y="28" width="5.5" height="9" rx="2.5" fill="#8a5a33"/>
+                <path d="M7 31c1.6 1 2.6 2.1 3 3.6" stroke="#2f4f4a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+                <rect class="dd-shirt" x="30" y="20" width="5.5" height="9" rx="2.5" fill="#10283f"/>
+                <rect x="30" y="28" width="5.5" height="9" rx="2.5" fill="#8a5a33"/>
+                <rect class="dd-shirt" x="11" y="18" width="19" height="20" rx="5" fill="#10283f"/>
+                <g class="dd-gear gear-painter">
+                  <rect x="15" y="24" width="11" height="14" rx="2" fill="#ddd6c2"/>
+                  <circle cx="18" cy="30" r="1.4" fill="#c2557a"/>
+                  <circle cx="22.5" cy="34" r="1.1" fill="#3f6d9e"/>
+                  <circle cx="23" cy="27" r="0.9" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-welder">
+                  <rect x="14" y="23" width="13" height="15" rx="2" fill="#6d4c2f"/>
+                  <rect x="17.5" y="30" width="6" height="5" rx="1" fill="#57391f"/>
+                </g>
+                <g class="dd-gear gear-blaster">
+                  <rect x="12.5" y="20.5" width="16" height="16.5" rx="4" fill="#a8894e"/>
+                  <rect x="12.5" y="28" width="16" height="3" fill="#8a6d3a"/>
+                </g>
+                <g class="dd-gear gear-sprayer">
+                  <rect x="19.6" y="19" width="1.8" height="18" fill="#9aa4ab"/>
+                  <rect x="11" y="31" width="19" height="2.6" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-hivis">
+                  <rect x="11" y="18.5" width="7.5" height="19" rx="3" fill="#d96f1e"/>
+                  <rect x="22.5" y="18.5" width="7.5" height="19" rx="3" fill="#d96f1e"/>
+                  <rect x="11" y="27" width="7.5" height="2.2" fill="#cfd4d8"/>
+                  <rect x="22.5" y="27" width="7.5" height="2.2" fill="#cfd4d8"/>
+                </g>
+                <g class="dd-gear gear-lawyer">
+                  <path d="M16.8 18.5h7.4l-3.7 7z" fill="#f4f1ea"/>
+                  <path d="M19.9 20.2h1.2l0.5 1.4-1.1 6.4-1.1-6.4z" fill="#7a1f2b"/>
+                  <path d="M16.8 18.5 20.5 25.5 13.5 20.5z" fill="#17181f"/>
+                  <path d="M24.2 18.5 20.5 25.5 27.5 20.5z" fill="#17181f"/>
+                  <rect x="25.6" y="30.5" width="2.6" height="2.2" fill="#f4f1ea"/>
+                </g>
+                <g class="dd-gear gear-doctor">
+                  <path d="M16.8 18.5h7.4l-3.7 6z" fill="#7fa8cc"/>
+                  <path d="M14.5 21c0 5 2.4 7.4 4.6 7.9" stroke="#333" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+                  <circle cx="19.8" cy="29.8" r="1.5" fill="none" stroke="#333" stroke-width="1.1"/>
+                  <rect x="24.9" y="31" width="3.6" height="1.6" fill="#b03a3a"/>
+                  <rect x="25.9" y="30" width="1.6" height="3.6" fill="#b03a3a"/>
+                </g>
+                <g class="dd-gear gear-nurse">
+                  <path d="M17 18.5h7l-3.5 5.4z" fill="#256b66"/>
+                  <rect x="24.9" y="30.4" width="3.4" height="1.5" fill="#ffffff"/>
+                  <rect x="25.85" y="29.45" width="1.5" height="3.4" fill="#ffffff"/>
+                  <rect x="12.6" y="33" width="15.8" height="1.6" fill="#256b66"/>
+                </g>
+                <g class="dd-gear gear-chef">
+                  <path d="M16.5 18.5h8l-4 3.6z" fill="#b03a3a"/>
+                  <circle cx="18" cy="26" r="0.85" fill="#8c2f2f"/>
+                  <circle cx="23" cy="26" r="0.85" fill="#8c2f2f"/>
+                  <circle cx="18" cy="30.5" r="0.85" fill="#8c2f2f"/>
+                  <circle cx="23" cy="30.5" r="0.85" fill="#8c2f2f"/>
+                  <rect x="12.6" y="34.6" width="15.8" height="2" fill="#d9d2bd"/>
+                </g>
+                <g class="dd-gear gear-construction">
+                  <rect x="11" y="18.5" width="7.5" height="19" rx="3" fill="#e8c832"/>
+                  <rect x="22.5" y="18.5" width="7.5" height="19" rx="3" fill="#e8c832"/>
+                  <rect x="11" y="26.5" width="7.5" height="2.4" fill="#cfd4d8"/>
+                  <rect x="22.5" y="26.5" width="7.5" height="2.4" fill="#cfd4d8"/>
+                  <rect x="11" y="32" width="7.5" height="2.4" fill="#cfd4d8"/>
+                  <rect x="22.5" y="32" width="7.5" height="2.4" fill="#cfd4d8"/>
+                </g>
+                <g class="dd-gear gear-electrician">
+                  <path d="M21.4 21.5 18.6 27h2.2l-1.6 4.6 4.2-6h-2.2l1.4-4.1z" fill="#f2c230"/>
+                  <rect x="12" y="33.6" width="17" height="3.4" rx="1" fill="#6d4c2f"/>
+                  <rect x="15" y="34.4" width="2.4" height="1.8" fill="#c9a227"/>
+                  <rect x="23.6" y="34.4" width="2.4" height="1.8" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-plumber">
+                  <rect x="12" y="33.6" width="17" height="3.4" rx="1" fill="#57391f"/>
+                  <rect x="13.4" y="28.4" width="1.7" height="5" rx="0.8" fill="#b03a3a"/>
+                  <circle cx="14.25" cy="27.6" r="1.5" fill="none" stroke="#b03a3a" stroke-width="1.2"/>
+                  <rect x="24.6" y="34.4" width="2.6" height="1.8" fill="#cfd4d8"/>
+                </g>
+                <g class="dd-gear gear-mechanic">
+                  <rect x="19.9" y="19" width="1.2" height="18" fill="#333f4a"/>
+                  <rect x="12.8" y="22.4" width="4.6" height="2.4" rx="0.6" fill="#d9d2bd"/>
+                  <circle cx="24.6" cy="31" r="1.7" fill="#333f4a" opacity="0.55"/>
+                  <circle cx="15.4" cy="28" r="1.1" fill="#333f4a" opacity="0.4"/>
+                </g>
+                <g class="dd-gear gear-firefighter">
+                  <rect x="11.4" y="25.6" width="18.2" height="2.6" fill="#f2c230"/>
+                  <rect x="11.4" y="26.6" width="18.2" height="0.8" fill="#cfd4d8"/>
+                  <rect x="11.4" y="32.6" width="18.2" height="2.6" fill="#f2c230"/>
+                  <rect x="11.4" y="33.6" width="18.2" height="0.8" fill="#cfd4d8"/>
+                </g>
+                <g class="dd-gear gear-police">
+                  <path d="M17.2 18.5h6.6l-3.3 5.6z" fill="#f4f1ea"/>
+                  <rect x="19.9" y="19.8" width="1.2" height="5.4" fill="#14161a"/>
+                  <path d="M25.9 25.2l0.8 1.7 1.9 0.2-1.4 1.3 0.4 1.9-1.7-1-1.7 1 0.4-1.9-1.4-1.3 1.9-0.2z" fill="#e3c65c"/>
+                  <rect x="12.2" y="33.4" width="16.6" height="1.8" fill="#14161a"/>
+                </g>
+                <g class="dd-gear gear-teacher">
+                  <rect x="13" y="26.5" width="6.4" height="8.6" rx="0.8" fill="#2e5e4e"/>
+                  <rect x="14" y="27.6" width="4.4" height="0.9" fill="#f3e5bb"/>
+                  <rect x="14" y="29.4" width="4.4" height="0.9" fill="#f3e5bb"/>
+                  <rect x="14" y="31.2" width="3" height="0.9" fill="#f3e5bb"/>
+                  <circle cx="25.6" cy="24" r="1.6" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-farmer">
+                  <rect x="15.5" y="24.5" width="10" height="12.5" rx="1" fill="#33506b"/>
+                  <rect x="15.5" y="18.8" width="2.4" height="6.4" fill="#33506b"/>
+                  <rect x="23.1" y="18.8" width="2.4" height="6.4" fill="#33506b"/>
+                  <rect x="17.6" y="28.4" width="5.8" height="3.6" fill="none" stroke="#274058" stroke-width="1"/>
+                </g>
+                <g class="dd-gear gear-pilot">
+                  <path d="M17.2 18.5h6.6l-3.3 5.6z" fill="#dfe3e6"/>
+                  <rect x="19.9" y="19.8" width="1.2" height="5.6" fill="#10283f"/>
+                  <rect x="12.2" y="19.4" width="4.4" height="1.5" fill="#23242c"/>
+                  <rect x="12.7" y="19.65" width="3.4" height="0.45" fill="#e3c65c"/>
+                  <rect x="24.4" y="19.4" width="4.4" height="1.5" fill="#23242c"/>
+                  <rect x="24.9" y="19.65" width="3.4" height="0.45" fill="#e3c65c"/>
+                  <path d="M14.5 27l3-1.4 3 1.4-3 0.9z" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-sailor">
+                  <path d="M14.5 18.5h12l-2 5h-8z" fill="#1d3557"/>
+                  <rect x="15.2" y="20.6" width="10.6" height="0.9" fill="#ffffff"/>
+                  <path d="M17.4 23.5h6.2l-3.1 3.8z" fill="#ffffff"/>
+                  <rect x="12.4" y="32.8" width="16.2" height="1.6" fill="#1d3557"/>
+                </g>
+                <g class="dd-gear gear-soldier">
+                  <circle cx="15" cy="24" r="2.2" fill="#47543a"/>
+                  <circle cx="25.5" cy="28.5" r="2.5" fill="#47543a"/>
+                  <circle cx="16.5" cy="33" r="1.8" fill="#66744e"/>
+                  <circle cx="26" cy="21.5" r="1.6" fill="#66744e"/>
+                  <circle cx="20.5" cy="31.6" r="1.3" fill="#e9e2c8"/>
+                </g>
+                <g class="dd-gear gear-ceo">
+                  <path d="M16.8 18.5h7.4l-3.7 7z" fill="#f4f1ea"/>
+                  <path d="M19.9 20.2h1.2l0.5 1.4-1.1 6.4-1.1-6.4z" fill="#c9a227"/>
+                  <path d="M16.8 18.5 20.5 25.5 13.5 20.5z" fill="#0d1f33"/>
+                  <path d="M24.2 18.5 20.5 25.5 27.5 20.5z" fill="#0d1f33"/>
+                  <rect x="25.6" y="30.5" width="2.6" height="2.2" fill="#c9a227"/>
+                </g>
+                <g class="dd-gear gear-scientist">
+                  <path d="M16.8 18.5h7.4l-3.7 6z" fill="#3f6d9e"/>
+                  <rect x="13" y="30" width="5" height="5.4" rx="0.7" fill="none" stroke="#b9beb9" stroke-width="1"/>
+                  <rect x="14.1" y="31" width="1" height="3" fill="#b03a3a"/>
+                  <rect x="15.7" y="31" width="1" height="3" fill="#2e7f7a"/>
+                  <path d="M25.4 28.6h2.4l-0.5 1.6v2.6a1.4 1.4 0 0 1-2.8 0v-2.6z" fill="#57a773"/>
+                </g>
+                <g class="dd-gear gear-delivery">
+                  <path d="M12.5 20.5 28.5 33" stroke="#3a2a18" stroke-width="2.2" stroke-linecap="round"/>
+                  <rect x="21.8" y="29.6" width="6.6" height="5.6" rx="0.8" fill="#a9743f"/>
+                  <rect x="21.8" y="32" width="6.6" height="0.9" fill="#8a5a33"/>
+                  <rect x="13" y="22.6" width="4.4" height="2.2" rx="0.6" fill="#f2c230"/>
+                </g>
+                <g class="dd-gear gear-security">
+                  <rect x="13" y="21.6" width="6.8" height="2.6" rx="0.6" fill="#f2c230"/>
+                  <path d="M24.9 26.4l0.7 1.5 1.7 0.2-1.2 1.2 0.3 1.7-1.5-0.9-1.5 0.9 0.3-1.7-1.2-1.2 1.7-0.2z" fill="#cfd4d8"/>
+                  <rect x="12.2" y="33.4" width="16.6" height="1.8" fill="#33302a"/>
+                </g>
+                <g class="dd-gear gear-inspector">
+                  <rect x="21.8" y="24.6" width="7" height="9.6" rx="0.8" fill="#8a6d3a"/>
+                  <rect x="22.7" y="23.4" width="5.2" height="2.2" rx="0.8" fill="#cfd4d8"/>
+                  <path d="M23.8 29.6l1.5 1.6 2.6-3" stroke="#2e7f3a" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="13" y="22.6" width="4.4" height="2.2" rx="0.6" fill="#c9a227"/>
+                </g>
+                <text class="dd-letters" x="20.5" y="29.5" text-anchor="middle" font-family="Georgia, serif" font-size="7.5" font-weight="700" fill="#c9a227">DD</text>
+                <path d="M15.5 19.5c1.5 3.2 8.5 3.2 10 0" stroke="#e3c65c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <circle cx="20.5" cy="22.8" r="1.5" fill="#e3c65c"/>
+                <circle cx="20.5" cy="11" r="6" fill="#8a5a33"/>
+                <rect x="14" y="9.6" width="13" height="3.6" rx="1.8" fill="#14161a"/>
+                <path d="M14.5 8.4a6 5.4 0 0 1 12 0z" fill="#c9a227"/>
+                <rect x="12.8" y="7.8" width="15.4" height="2.6" rx="1.3" fill="#a97e14"/>
+              </g>
+            </svg></div>
+            <p class="closet-stage-cap">DD right now: <strong id="closetStageName">his regular fit</strong></p>
+            <p class="closet-line" id="closetLine">That’s DD in his regular fit — cap, sunglasses, chain and tattoos, just like always.</p>
+            <div class="closet-read-row">
+              <button class="btn btn-accent" type="button" id="closetRead" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span id="closetReadLbl">DD reads this outfit</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="closet-grid" role="group" aria-label="Pick DD’s career outfit" id="closetGrid">
+            <button class="closet-chip" type="button" data-outfit="default" aria-pressed="true">Regular DD</button>
+            <button class="closet-chip" type="button" data-outfit="painter" aria-pressed="false">Painter</button>
+            <button class="closet-chip" type="button" data-outfit="welder" aria-pressed="false">Welder</button>
+            <button class="closet-chip" type="button" data-outfit="blaster" aria-pressed="false">Blaster</button>
+            <button class="closet-chip" type="button" data-outfit="sprayer" aria-pressed="false">Spray Painter</button>
+            <button class="closet-chip" type="button" data-outfit="driver" aria-pressed="false">Truck Driver — Hi-Vis</button>
+            <button class="closet-chip" type="button" data-outfit="lawyer" aria-pressed="false">Lawyer</button>
+            <button class="closet-chip" type="button" data-outfit="doctor" aria-pressed="false">Doctor</button>
+            <button class="closet-chip" type="button" data-outfit="nurse" aria-pressed="false">Nurse</button>
+            <button class="closet-chip" type="button" data-outfit="chef" aria-pressed="false">Chef</button>
+            <button class="closet-chip" type="button" data-outfit="construction" aria-pressed="false">Construction</button>
+            <button class="closet-chip" type="button" data-outfit="electrician" aria-pressed="false">Electrician</button>
+            <button class="closet-chip" type="button" data-outfit="plumber" aria-pressed="false">Plumber</button>
+            <button class="closet-chip" type="button" data-outfit="mechanic" aria-pressed="false">Mechanic</button>
+            <button class="closet-chip" type="button" data-outfit="firefighter" aria-pressed="false">Firefighter</button>
+            <button class="closet-chip" type="button" data-outfit="police" aria-pressed="false">Police Officer</button>
+            <button class="closet-chip" type="button" data-outfit="teacher" aria-pressed="false">Teacher</button>
+            <button class="closet-chip" type="button" data-outfit="farmer" aria-pressed="false">Farmer</button>
+            <button class="closet-chip" type="button" data-outfit="pilot" aria-pressed="false">Pilot</button>
+            <button class="closet-chip" type="button" data-outfit="sailor" aria-pressed="false">Sailor</button>
+            <button class="closet-chip" type="button" data-outfit="soldier" aria-pressed="false">Soldier</button>
+            <button class="closet-chip" type="button" data-outfit="ceo" aria-pressed="false">Businessman / CEO</button>
+            <button class="closet-chip" type="button" data-outfit="scientist" aria-pressed="false">Scientist</button>
+            <button class="closet-chip" type="button" data-outfit="delivery" aria-pressed="false">Delivery Driver</button>
+            <button class="closet-chip" type="button" data-outfit="security" aria-pressed="false">Security Guard</button>
+            <button class="closet-chip" type="button" data-outfit="inspector" aria-pressed="false">Inspector</button>
+          </div>
+          <p class="closet-note">Watch DD at the bottom of the screen — right now he’s wearing: <strong id="closetNow">his regular fit</strong>. Tapping a job card dresses him for that trade too, same as always.</p>
+        </section>
+
+        <!-- JOBS I'M CHASING -->
+        <section id="chasing">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Jobs I’m chasing</h2>
+          <p class="sec-sub">These two are personal. Destin is the one applying to CTS and Vigor — Dismukes Recruiting isn’t hiring for either company. Pay is shown exactly as printed on each posting.</p>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3>1st Class Painter / Blaster — CTS</h3>
+                <span class="tag tag-chase">I’m applying</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Pascagoula, Mississippi — shipyard
+              </p>
+              <div class="payrow">
+                <div><span class="amt">$34</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">$147.04</span><span class="lbl">Per diem / day</span></div>
+              </div>
+              <p class="note">First-class coatings work through Craft &amp; Tech (CTS). Destin has already sent in his own application for this one and asked CTS to confirm the $147.04/day per diem in writing. If you’re crew looking for work, the board above is the place — this card is his application, not a placement.</p>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Painter, Journey Level — Vigor Alaska</h3>
+                <span class="tag tag-chase">I’m applying</span>
+              </div>
+              <p class="where">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ketchikan, Alaska — shipyard
+              </p>
+              <div class="payrow">
+                <div><span class="amt">Not printed</span><span class="lbl">Per hour</span></div>
+                <div><span class="amt">Not stated</span><span class="lbl">Per diem</span></div>
+              </div>
+              <p class="note">Union journey-level painter role at the Ketchikan yard — the one job Destin has said he wants for himself. He hasn’t applied yet: he’s asking about per diem first, because the posting doesn’t print pay or per diem. Drug test and background check required.</p>
+            </article>
+          </div>
+
+          <div class="calc" aria-label="Weekly pay calculator">
+            <h3>Run the numbers yourself</h3>
+            <p>Filled in with the CTS Pascagoula job Destin is chasing. Change the numbers to match any posting and see the week before you pack a bag. Straight-time estimate — overtime only adds.</p>
+            <div class="calc-grid">
+              <div>
+                <label for="calcRate">Hourly pay ($)</label>
+                <input id="calcRate" type="number" inputmode="decimal" min="0" step="0.25" value="34" />
+              </div>
+              <div>
+                <label for="calcHours">Hours per week</label>
+                <input id="calcHours" type="number" inputmode="numeric" min="0" step="1" value="50" />
+              </div>
+              <div>
+                <label for="calcPerDiem">Per diem ($/day)</label>
+                <input id="calcPerDiem" type="number" inputmode="decimal" min="0" step="0.01" value="147.04" />
+              </div>
+              <div>
+                <label for="calcDays">Days per week</label>
+                <input id="calcDays" type="number" inputmode="numeric" min="0" max="7" step="1" value="6" />
+              </div>
+              <div class="calc-total">
+                <span class="t-lbl">Estimated gross for the week</span>
+                <span class="t-amt" id="calcTotal">$0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="steps" style="margin-top: 20px;">
+            <div class="step">
+              <div class="num" aria-hidden="true">1</div>
+              <div>
+                <h3>Call or email — that’s the application</h3>
+                <p>One call to <a href="tel:+12514224242">(251) 422-4242</a>. Tell Destin your trade, your certs (C7, C12, OSHA), and how far you’ll travel. No portal, no account, no password to forget.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">2</div>
+              <div>
+                <h3>You see the pay before you say yes</h3>
+                <p>Every job we bring you comes with the hourly rate and the per diem attached — or an honest “not stated” when the yard hasn’t printed one.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">3</div>
+              <div>
+                <h3>You go to work — and it costs you nothing</h3>
+                <p>Workers never pay Dismukes Recruiting a dime. Employers pay for placements. That’s the deal on day one and it doesn’t change.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BOARDS -->
+        <section id="boards">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>The boards</h2>
+          <p class="sec-sub">Free for workers, every one of them. Companies pay the printed prices — Post $25, Featured $50, $5 per qualified applicant.</p>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3>Text Club — the hot job, free every morning</h3>
+                <span class="tag tag-list">Free</span>
+              </div>
+              <p class="note">Text <strong>JOIN</strong> to <a href="sms:+12514224242?&amp;body=JOIN">(251) 422-4242</a> and we’ll text you the day’s hottest paying job. Workers always free.</p>
+              <p class="note">Companies: want your job in tomorrow’s morning text? That’s a Featured post — $50. Email <a href="mailto:dismukesreqag369@gmail.com?subject=Text%20Club%20Featured%20—%20%2450">dismukesreqag369@gmail.com</a> to book it.</p>
+              <div class="job-actions">
+                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=JOIN">Text JOIN now</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Referral Board — know a good painter or blaster?</h3>
+                <span class="tag tag-list">Free</span>
+              </div>
+              <p class="note">Send them our way. If they get hired, you helped build the crew — and the company pays us for the placement.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Referral%20—%20painter%2Fblaster">Send a referral — email us</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Destin’s Radio Minute</h3>
+                <span class="tag tag-chase">60 seconds</span>
+              </div>
+              <p class="note">Sixty seconds, in Destin’s own words, about work that pays and the road that got him here. His own recording is coming soon — for now, read the script, or tap the button and DD reads it out loud right here in the app.</p>
+              <blockquote id="radioScript" style="margin: 0; padding: 14px 16px; background: var(--surface-2); border-radius: 10px; font-family: Georgia, serif; font-size: 1.02rem; line-height: 1.6;">
+                Hi, I’m Destin Dismukes. I worked thirteen years in coatings. Blasting and painting. Traveling job to job. I lived on the street. I kept standing. Now I run Dismukes Recruiting. I help workers find real jobs. I was the crew. I know what a crew needs. I hold OSHA 10, C7, and C12. Workers always apply free. Always. Every job shows the pay up front. And the per diem up front. Before you travel anywhere. No games. Tell us your trade. We match you to the job. Employers: post it honest, pay it honest. Want the hot job every morning? Join the Text Club. Text JOIN to 251-422-4242. It’s free. Can’t dodge it, ram it — that’s what my mama tell me. So here I am. Still standing. Still working. I’m Destin Dismukes, with Dismukes Recruiting.
+              </blockquote>
+              <div class="job-actions">
+                <button class="btn btn-ghost btn-sm" type="button" id="radioListen" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                  <span id="radioListenLbl">DD reads the script</span>
+                </button>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Radio%20Minute%20sponsor%20—%20Featured%20%2450">Sponsor this minute — Featured $50</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Gear Swap — tools &amp; gear for sale or trade</h3>
+                <span class="tag tag-list">Free to post</span>
+              </div>
+              <p class="note">Got tools or gear to sell or trade? Post it here. Workers post free, buyers and sellers deal direct. When gear sells through the board, a small cut goes to Dismukes Recruiting — details by email.</p>
+              <p class="note">Companies: put your tools in the spotlight — Featured $50.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Gear%20Swap%20—%20post%20my%20gear">Post your gear — email us</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Mentor Minute</h3>
+                <span class="tag tag-list">Free to hear</span>
+              </div>
+              <p class="note">One experienced painter or inspector shares a two-minute voice tip each week. Workers get it free. First tip coming — a real mentor’s real recording only.</p>
+              <p class="note">Mentors: share your tip — $50 a week.</p>
+              <div class="job-actions">
+                <a class="btn btn-accent btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Mentor%20Minute%20—%20share%20a%20tip">Share a tip — email us</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Tool Giveaway</h3>
+                <span class="tag tag-list">Free to enter</span>
+              </div>
+              <div class="payrow">
+                <div><span class="amt">Free</span><span class="lbl">To enter — always</span></div>
+                <div><span class="amt">1 entry</span><span class="lbl">Per worker</span></div>
+              </div>
+              <p class="note"><strong>First prize:</strong> one winner takes home a <strong>cordless Milwaukee impact wrench</strong> — the pro tool picked for the first giveaway. Entry is free for workers, and it stays free. One entry per worker.</p>
+              <p class="note"><strong>How to enter:</strong> email <a href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">dismukesreqag369@gmail.com</a> with “Tool Giveaway” in the subject.</p>
+              <p class="note"><strong>The winner</strong> gets announced on the Dismukes Recruiting site and in this app — so every worker can see it and trust it. Full details are in the Tool Giveaway section below.</p>
+              <p class="note">Shops: sponsor the tool for the $50 Featured price and put your name on the giveaway.</p>
+              <div class="job-actions">
+                <a class="btn btn-gold btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway%20sponsor%20—%20Featured%20%2450">Sponsor the tool — $50</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- CREW BOARD -->
+        <section id="crew">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Crew Board — wins &amp; tips</h2>
+          <p class="sec-sub">The crew talks here. Landed a job, finished a cert, had a good week — or learned a trick on site that saved time or kept somebody safe? Share it short, and keep the crew talking.</p>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3>Post a quick win</h3>
+                <span class="tag tag-list">Free to post</span>
+              </div>
+              <p class="note">Got hired, passed a test, got the per diem right, finished a tough job standing tall — that’s a win, and the crew wants to hear it. Keep it to a line or two, and sign it with your first name and trade if you want.</p>
+              <div class="job-actions">
+                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=WIN%3A%20">Text a win</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20Board%20—%20my%20win">Email a win</a>
+              </div>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Share a job-site tip</h3>
+                <span class="tag tag-list">Free to post</span>
+              </div>
+              <p class="note">A better way to mask, mix, hang, blast, or stay safe in the heat — if it worked for you, it can work for the next hand. Short and plain beats long and fancy.</p>
+              <div class="job-actions">
+                <a class="btn btn-gold btn-sm" href="sms:+12514224242?&amp;body=TIP%3A%20">Text a tip</a>
+                <a class="btn btn-ghost btn-sm" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20Board%20—%20my%20tip">Email a tip</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="empty-note" style="margin-top: 16px;">
+            <strong style="color: var(--ink);">The board is open — first post could be yours.</strong><br />
+            Text or email your win or tip to Destin and he’ll put the good ones up right here for the whole crew to read. Keep it short, keep it clean, keep it real — no bragging you can’t back up, and no safety shortcuts.
+          </div>
+        </section>
+
+        <!-- TOOL GIVEAWAY -->
+        <section id="giveaway">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Tool Giveaway</h2>
+          <p class="sec-sub">A real working tool, given to a real worker — free to enter, no purchase, no catch. This is the first Dismukes Recruiting giveaway.</p>
+
+          <div class="prize-banner">
+            <p class="prize-kicker">First Prize</p>
+            <p class="prize-name">Cordless Milwaukee Impact Wrench</p>
+            <p class="prize-sub">One winner takes it home — the kind of tool that earns its keep on the job site and in the garage.</p>
+          </div>
+
+          <div class="giveaway-rules">
+            <div class="giveaway-rule">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <div>
+                <h3>Free to enter</h3>
+                <p>Entering costs nothing — not a dime, not now, not ever. Workers apply free here, and they enter free here too.</p>
+              </div>
+            </div>
+            <div class="giveaway-rule">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <div>
+                <h3>One entry per worker — by email</h3>
+                <p>Email <a href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">dismukesreqag369@gmail.com</a> with “Tool Giveaway” in the subject line. One entry per worker — sending more emails doesn’t add extra chances, so one honest entry is all you need.</p>
+              </div>
+            </div>
+            <div class="giveaway-rule">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              <div>
+                <h3>Winner announced on the site and in the app</h3>
+                <p>When the winner is picked, the name gets announced on the Dismukes Recruiting site and right here in this app — out in the open, where every worker who entered can see it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
+            <a class="btn btn-gold" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway">Enter free — email us</a>
+            <a class="btn btn-ghost" href="mailto:dismukesreqag369@gmail.com?subject=Tool%20Giveaway%20sponsor%20—%20Featured%20%2450">Sponsor the tool — Featured $50</a>
+          </div>
+        </section>
+
+        <!-- INCENTIVES -->
+        <section id="incentives">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Incentives — the real reasons everybody joins</h2>
+          <p class="sec-sub">The incentives that are real today are labeled REAL. The plans below them are labeled as plans — nothing is promised before it’s real and printed here.</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="num" aria-hidden="true">✓</div>
+              <div>
+                <h3>REAL — Workers apply free</h3>
+                <p>Applying never costs a worker anything. Not a dime, not a “processing fee,” not ever. Free is the incentive that never expires.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">✓</div>
+              <div>
+                <h3>REAL — Honest pay &amp; per diem up front</h3>
+                <p>Every real listing prints its pay and per diem before you travel anywhere — like the Newport News brush crew above: $18.00–$27.31/hr + $140/day per diem for non-local candidates, exactly as printed.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">✓</div>
+              <div>
+                <h3>REAL — A man who did the work walks you through it</h3>
+                <p>Destin reads every résumé like a coatings man, not a computer — and the DD reads buttons in this app read the verse, the job board, and the Radio Minute script out loud, for anybody who’d rather listen than read.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">✓</div>
+              <div>
+                <h3>REAL — All-in-one help</h3>
+                <p>Jobs, the Text Club, gear, mentors, and the DIY Survival Tips below — one app, phone-easy, nothing hidden behind a paywall for workers.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">✓</div>
+              <div>
+                <h3>REAL — Employers see printed prices</h3>
+                <p>Post $25, Featured $50, $5 per qualified applicant — printed in the open, no surprises, and workers who actually trust the board enough to apply.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">→</div>
+              <div>
+                <h3>PLAN — Referral thanks</h3>
+                <p>An incentive plan: thanking workers who bring good workers to real postings. Plan only — no referral reward exists or is promised today; if it ever launches, its terms print here first.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">→</div>
+              <div>
+                <h3>PLAN — Featured worker spotlights</h3>
+                <p>An incentive plan: spotlights celebrating real crews and first-job wins. Plan only — nobody is featured, and nothing is awarded, until it’s real and printed.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DIY & SURVIVAL -->
+        <section id="tips">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>DIY Survival Tips</h2>
+          <p class="sec-sub">Everyday job-site tips for everyday life — the same sections that live on the Dismukes Recruiting website.</p>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3>DIY — do it yourself, worker style</h3>
+              </div>
+              <p class="note" style="font-family: Georgia, serif; font-style: italic; color: var(--ink);">DD says: “Every skill in your hands is money nobody can take from you. Start small, do it safe, do it right.”</p>
+              <ul style="margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.96rem; display: grid; gap: 9px;">
+                <li><strong style="color: var(--ink);">Skills that help at work:</strong> measuring and marking twice before you cut, taping and masking for paint, sanding and surface prep, patching a small hole, hanging and leveling, basic caulking, and keeping tools clean, sharp, and oiled.</li>
+                <li><strong style="color: var(--ink);">Practice at home first:</strong> a scrap board, an old door, a spare wall corner — make your mistakes where they’re free, then bring the steady hands to the job site.</li>
+                <li><strong style="color: var(--ink);">Show your work:</strong> take before-and-after photos of your own projects. A small album of clean, finished work speaks louder than a long story.</li>
+                <li><strong style="color: var(--ink);">Safety is the skill under every skill:</strong> eye and ear protection, gloves for the task, power off and water off before you open anything up, and stop and ask when a job is over your head — that’s not weakness, that’s how pros stay working.</li>
+                <li><strong style="color: var(--ink);">Grow one rung at a time:</strong> pick one new skill a month, learn it properly, add it to the list you tell an employer. That’s how a helper becomes a hand, and a hand becomes a lead.</li>
+              </ul>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Survival thinking &amp; skills — getting through hard times</h3>
+              </div>
+              <p class="note" style="font-family: Georgia, serif; font-style: italic; color: var(--ink);">DD says: “Hard times don’t ask permission. We go one step at a time — today’s problem first. Can’t dodge it, ram it — in order.”</p>
+              <ul style="margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.96rem; display: grid; gap: 9px;">
+                <li><strong style="color: var(--ink);">Think in steps, not avalanches:</strong> write down the one most urgent thing — tonight’s sleep, tomorrow’s meal, the next call — and handle that first. A short list you finish beats a long one that freezes you.</li>
+                <li><strong style="color: var(--ink);">Keep your papers together:</strong> ID, important numbers, and any documents you’d need for work or help, in one folder or one phone note you can reach fast.</li>
+                <li><strong style="color: var(--ink);">A small go-bag:</strong> water, a snack that keeps, a change of clothes, phone charger, basic first aid, and any medicine you rely on — packed before you need it, in the truck or by the door.</li>
+                <li><strong style="color: var(--ink);">Stay connected:</strong> keep two or three people you can honestly call. Pride is expensive; a phone call is cheap. Let people help the way you’d help them.</li>
+                <li><strong style="color: var(--ink);">Protect the basics:</strong> sleep when you can, eat real food when you can, and be careful with heat, cold, and weather — check the forecast and dress for the night, not the noon.</li>
+                <li><strong style="color: var(--ink);">Money triage:</strong> food, safe sleep, fuel or fare to work, then the rest — in that order — and tell anyone you owe the truth early. Most doors stay open longer for honest people.</li>
+              </ul>
+            </article>
+          </div>
+
+          <figure class="photo">
+            <img src="assets/app/photo-pressure-washing.jpg" alt="A worker in a blast helmet and yellow protective suit pressure-washing the rusted side of a ship’s hull" loading="lazy" />
+            <figcaption>The work this company comes from: surface prep on a hull — the half of every paint job that decides whether the coating holds.</figcaption>
+          </figure>
+        </section>
+
+        <!-- DESTIN'S STORY — THE BOOK (from the website, now in the app too) -->
+        <section id="story">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>Destin’s story — the book</h2>
+          <p class="sec-sub">From the website, mixed right in here so nothing lives in only one place: Destin’s own book, in his own words.</p>
+
+          <div class="jobs">
+            <article class="job">
+              <div class="job-top">
+                <h3><em>Destin: Destined to Stand</em></h3>
+                <span class="tag tag-list">Free to read &amp; listen</span>
+              </div>
+              <p class="note">Thirteen years in coatings, nights on the street, and still standing — the road that built Dismukes Recruiting, told by the man who lived it. Free to read and listen to online, the same book that lives on the website.</p>
+              <p class="note" style="font-family: Georgia, serif; font-style: italic; color: var(--ink);">“Can’t dodge it, ram it — that’s what my mama tell me. So here I am. Still standing. Still working.”</p>
+              <div class="job-actions">
+                <a class="btn btn-gold btn-sm" href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/">Read the book — free</a>
+                <a class="btn btn-ghost btn-sm" href="https://dismukesrecruiting.com">The full website</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- MORE -->
+        <section id="more">
+          <span class="tick" aria-hidden="true"></span>
+          <h2>For employers</h2>
+          <p class="sec-sub">Need a crew that can hold a spec? Certified hands, screened by a coatings man — Destin worked the trade 13 years, so a résumé gets read by somebody who has actually held the nozzle.</p>
+
+          <div class="price-list">
+            <div class="price">
+              <div class="amt">$25<small>Post a job</small></div>
+              <div>
+                <h3>Post a job</h3>
+                <p>Your opening goes on the board with the pay and per diem printed up front — the way workers actually trust.</p>
+              </div>
+            </div>
+            <div class="price">
+              <div class="amt">$50<small>Featured</small></div>
+              <div>
+                <h3>Featured</h3>
+                <p>Top of the board, in the morning Text Club text, on the Gear Swap spotlight, or sponsoring the Radio Minute and the Tool Giveaway.</p>
+              </div>
+            </div>
+            <div class="price">
+              <div class="amt">$5<small>Per applicant</small></div>
+              <div>
+                <h3>Per qualified applicant</h3>
+                <p>You pay for qualified applicants we send you — screened by trade, certs, and travel range before they ever reach you.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;">
+            <a class="btn btn-accent" href="mailto:dismukesreqag369@gmail.com?subject=Crew%20request%20—%20Dismukes%20Recruiting">Request a crew</a>
+            <a class="btn btn-ghost" href="tel:+12514224242">Call (251) 422-4242</a>
+          </div>
+
+          <div class="chime-row">
+            <span class="lbl">Partner &amp; placement payments — Chime:</span>
+            <span class="handle" id="chimeHandle">$DDBABY12</span>
+            <button class="copy-btn" type="button" id="copyChime">Copy</button>
+          </div>
+
+          <h2 style="margin-top: 36px;">Who’s behind it</h2>
+          <p class="story-quote">Built by <b>Destin Dismukes</b>, a blaster/painter who worked 13 years in coatings, lived on the street, and kept standing — workers apply free, always.</p>
+          <p class="story-body">Destin ran blast pots and spray rigs in yards up and down the Gulf and on the road with traveling crews. He started Dismukes Recruiting out of Morristown, Tennessee, because he’d been on the wrong end of postings that hid the pay until a man was already packed. Here, the numbers come first.</p>
+          <p class="story-body">His full story is in his book, <a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/"><em>Destin: Destined to Stand</em></a> — free to read and listen to online.</p>
+
+          <figure class="photo">
+            <img src="assets/app/photo-alaska-cabin.jpg" alt="A small wooden cabin on a forested hillside above a quiet Alaska coastal inlet at golden hour" loading="lazy" />
+            <figcaption>Where this is headed: a wooded piece of the Alaska coast, a cabin, and a self-sufficient life on his own terms — built one honest posting at a time.</figcaption>
+          </figure>
+
+          <h2 style="margin-top: 36px;">Talk to Destin</h2>
+          <ul class="contact-list">
+            <li>
+              <a href="tel:+12514224242">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                (251) 422-4242 — call
+              </a>
+            </li>
+            <li>
+              <a href="sms:+12514224242">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                (251) 422-4242 — text
+              </a>
+            </li>
+            <li>
+              <a href="mailto:dismukesreqag369@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                dismukesreqag369@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://dismukesrecruiting.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Dismukes Recruiting — the full website
+              </a>
+            </li>
+            <li>
+              <a href="https://destindismukes1-crypto.github.io/destin-destined-to-stand/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Destin: Destined to Stand — the book, free
+              </a>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p class="fine">© 2026 Dismukes Recruiting. All rights reserved.<br />
+        Job details are shown as printed on the original postings — call to confirm before traveling. Workers apply free, always.</p>
+      </footer>
+
+      <div class="dd-bubble" id="ddBubble" role="status" aria-live="polite" hidden>
+        <p class="dd-bubble-head">DD — reading out loud</p>
+        <p class="dd-bubble-text" id="ddBubbleText"></p>
+      </div>
+
+      <!-- DD WALKS THE WHOLE APP — he stays with you top to bottom; his truck stays parked at the end of the road -->
+      <div class="dd-walk dd-stage" id="ddWalk" data-outfit="default" role="region" aria-label="DD — he walks with you as you scroll through the app. Tap DD reads and he reads this screen out loud.">
+        <div class="dd-walk-label">
+          <span class="dd-name">DD</span>
+          <span id="ddWalkWhere">Walking with you — Today</span>
+          <span class="dd-outfit-lbl" id="ddOutfitLbl"></span>
+        </div>
+        <div class="dd-road" id="ddRoad">
+          <div class="dd-figure" id="ddFigure">
+            <img id="ddWalkImg" src="assets/app/outfit-default.webp" alt="" />
+          </div>
+          <div class="dd-truck">
+            <img src="assets/app/truck.jpg" alt="DD's white Silverado truck" />
+          </div>
+        </div>
+        <button class="dd-read-btn" type="button" id="ddReadBtn" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span id="ddReadLbl">DD reads</span>
+        </button>
+      </div>
+
+      <!-- BOTTOM TAB BAR -->
+      <nav class="tabbar" aria-label="App sections">
+        <a href="#today" data-tab="today" class="active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Today
+        </a>
+        <a href="#jobs" data-tab="jobs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Jobs
+        </a>
+        <a href="#boards" data-tab="boards">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Boards
+        </a>
+        <a href="#tips" data-tab="tips">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          DIY &amp; Tips
+        </a>
+        <a href="#more" data-tab="more">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          More
+        </a>
+      </nav>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ============ Daily verse — Day 1 is Luke 17:21, Nov 11, 2026 ============ */
+        var VERSES = [
+          { t: "Neither shall they say, Lo here! or, lo there! for, behold, the kingdom of God is within you.", r: "Luke 17:21" },
+          { t: "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.", r: "Joshua 1:9" },
+          { t: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.", r: "Isaiah 40:31" },
+          { t: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", r: "Proverbs 3:5–6" },
+          { t: "This is the day which the LORD hath made; we will rejoice and be glad in it.", r: "Psalm 118:24" },
+          { t: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.", r: "Romans 8:28" },
+          { t: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.", r: "Jeremiah 29:11" },
+          { t: "The LORD is my shepherd; I shall not want.", r: "Psalm 23:1" },
+          { t: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", r: "Matthew 11:28" },
+          { t: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", r: "2 Timothy 1:7" },
+          { t: "God is our refuge and strength, a very present help in trouble.", r: "Psalm 46:1" },
+          { t: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", r: "Isaiah 41:10" },
+          { t: "I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life.", r: "John 8:12" },
+          { t: "Now faith is the substance of things hoped for, the evidence of things not seen.", r: "Hebrews 11:1" },
+          { t: "Delight thyself also in the LORD; and he shall give thee the desires of thine heart.", r: "Psalm 37:4" },
+          { t: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.", r: "Matthew 6:33" },
+          { t: "And let us not be weary in well doing: for in due season we shall reap, if we faint not.", r: "Galatians 6:9" },
+          { t: "I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth.", r: "Psalm 121:1–2" },
+          { t: "He hath shewed thee, O man, what is good; and what doth the LORD require of thee, but to do justly, and to love mercy, and to walk humbly with thy God?", r: "Micah 6:8" },
+          { t: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", r: "John 3:16" },
+          { t: "It is of the LORD’s mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.", r: "Lamentations 3:22–23" },
+          { t: "The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.", r: "Zephaniah 3:17" },
+          { t: "Let the words of my mouth, and the meditation of my heart, be acceptable in thy sight, O LORD, my strength, and my redeemer.", r: "Psalm 19:14" },
+          { t: "Watch ye, stand fast in the faith, quit you like men, be strong.", r: "1 Corinthians 16:13" },
+          { t: "And the LORD, he it is that doth go before thee; he will be with thee, he will not fail thee, neither forsake thee: fear not, neither be dismayed.", r: "Deuteronomy 31:8" },
+          { t: "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.", r: "John 14:27" },
+          { t: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", r: "Psalm 34:18" },
+          { t: "When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.", r: "Isaiah 43:2" },
+          { t: "With men this is impossible; but with God all things are possible.", r: "Matthew 19:26" },
+          { t: "Commit thy works unto the LORD, and thy thoughts shall be established.", r: "Proverbs 16:3" }
+        ];
+
+        var anchor = new Date(2026, 10, 11); /* Nov 11, 2026 — launch day, Day 1 */
+        function dayIndex(d) {
+          var start = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+          return Math.round((start - anchor) / 86400000);
+        }
+        var todayIdx = dayIndex(new Date());
+        if (todayIdx < 0) todayIdx = 0; /* before launch day, Day 1 still shows */
+        var viewIdx = todayIdx;
+
+        var verseText = document.getElementById("verseText");
+        var verseRef = document.getElementById("verseRef");
+        var verseDate = document.getElementById("verseDate");
+        var verseDay = document.getElementById("verseDay");
+
+        function verseFor(idx) {
+          var n = VERSES.length;
+          return VERSES[((idx % n) + n) % n];
+        }
+        function renderVerse() {
+          var v = verseFor(viewIdx);
+          verseText.textContent = "“" + v.t + "”";
+          verseRef.textContent = "— " + v.r + " (KJV)";
+          var d = new Date(anchor.getTime() + viewIdx * 86400000);
+          verseDate.textContent = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+          verseDay.textContent = viewIdx === todayIdx
+            ? "Day " + (todayIdx + 1) + " — a fresh verse every day. Use the arrows to look back or ahead."
+            : "You’re looking at Day " + (viewIdx + 1) + ". Today is Day " + (todayIdx + 1) + ".";
+        }
+        renderVerse();
+
+        /* Daily job alert shows today's date, same as the verse */
+        var alertDate = document.getElementById("alertDate");
+        if (alertDate) {
+          alertDate.textContent = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+        }
+
+        /* ============ Daily horoscope — for fun, changes every day ============ */
+        var SIGNS = [
+          { n: "Aries", d: "Mar 21 – Apr 19" },
+          { n: "Taurus", d: "Apr 20 – May 20" },
+          { n: "Gemini", d: "May 21 – Jun 20" },
+          { n: "Cancer", d: "Jun 21 – Jul 22" },
+          { n: "Leo", d: "Jul 23 – Aug 22" },
+          { n: "Virgo", d: "Aug 23 – Sep 22" },
+          { n: "Libra", d: "Sep 23 – Oct 22" },
+          { n: "Scorpio", d: "Oct 23 – Nov 21" },
+          { n: "Sagittarius", d: "Nov 22 – Dec 21" },
+          { n: "Capricorn", d: "Dec 22 – Jan 19" },
+          { n: "Aquarius", d: "Jan 20 – Feb 18" },
+          { n: "Pisces", d: "Feb 19 – Mar 20" }
+        ];
+        var READINGS = [
+          "A steady day. Work that has been waiting on somebody else finally moves — be the one ready when it does. A short call today carries more weight than a long talk, so make it early and make it plain.",
+          "Money is on your mind, and today favors the careful kind: read the numbers twice before you agree to anything. The pay you can see in writing is the pay you can trust.",
+          "Somebody on the crew has a better way to do a job you do every day. Ask before you start, not after — the tip you pick up this morning saves your back by Friday.",
+          "Travel looks favored today, but only the planned kind. Check the truck, the route, and the weather before you roll, and the road treats you right.",
+          "A door you thought was closed is not locked — it just needs a knock from you. One honest conversation today puts your name back in the right pile.",
+          "Your hands know more than your head is giving them credit for. Trust the skill you built, take the task step by step, and let the finished work speak.",
+          "Patience pays today — literally. The first offer is not always the best one. Hold steady, ask what the per diem is, and let the right job come to you.",
+          "A friend or family member needs a straight word from you today, and you are the right one to give it. Say it with respect and it lands where it should.",
+          "Energy runs high today, so spend it on the hard task first. By evening you will be glad the heavy lifting is behind you — rest is earned and it is coming.",
+          "Something small you fixed a while back gets noticed today. Good work travels further than gossip in this trade — keep your standard high when nobody is watching.",
+          "Today favors starting, not finishing. Lay out the tools, make the first mark, break ground on the thing you have been putting off — momentum does the rest.",
+          "Watch the heat, the cold, and your water today — your body is the one tool you cannot replace. Look out for the hand next to you the same way.",
+          "News comes from an unexpected direction today. Do not jump on the first word of it — check it once, then move. Steady beats fast when the stakes are yours.",
+          "A good day to learn. One new skill, one new name, one new number saved in your phone — small bricks, but they are how a working life gets built."
+        ];
+        var FOCUS = ["Steady hands", "Honest pay", "Good questions", "Safe travel", "One brave call", "Step by step", "Patience", "Straight talk", "Hard task first", "Quiet quality", "First mark", "Look out for crew"];
+        var COLORS = ["Gold", "Navy blue", "Work-boot brown", "Safety orange", "Steel gray", "Deep green", "Burgundy", "Sky blue", "Charcoal", "Cream", "Copper", "Midnight black"];
+        var dayNum = Math.floor(Date.now() / 86400000);
+        function moonPhaseName(date) {
+          var synodic = 29.53058867;
+          var known = new Date(2000, 0, 6, 18, 14).getTime();
+          var age = (((date.getTime() - known) / 86400000) % synodic + synodic) % synodic;
+          if (age < 1.8) return "New Moon";
+          if (age < 5.5) return "Waxing Crescent";
+          if (age < 9.4) return "First Quarter";
+          if (age < 13.8) return "Waxing Gibbous";
+          if (age < 16.6) return "Full Moon";
+          if (age < 20.9) return "Waning Gibbous";
+          if (age < 24.4) return "Last Quarter";
+          if (age < 27.9) return "Waning Crescent";
+          return "New Moon";
+        }
+        var signGrid = document.getElementById("signGrid");
+        var signBtns = [];
+        function renderHoro(idx) {
+          var s = SIGNS[idx];
+          var moon = moonPhaseName(new Date());
+          document.getElementById("horoSign").textContent = s.n;
+          document.getElementById("horoDates").textContent = s.d;
+          document.getElementById("horoText").textContent = READINGS[(((dayNum + idx * 3) % READINGS.length) + READINGS.length) % READINGS.length];
+          document.getElementById("horoLucky").textContent = String(((dayNum * 7 + idx * 13) % 99) + 1);
+          document.getElementById("horoColor").textContent = COLORS[(((dayNum + idx * 5) % COLORS.length) + COLORS.length) % COLORS.length];
+          document.getElementById("horoFocus").textContent = FOCUS[(((dayNum + idx) % FOCUS.length) + FOCUS.length) % FOCUS.length];
+          document.getElementById("horoMoon").textContent = moon;
+          document.getElementById("horoMoonNote").innerHTML = "";
+          var mn = document.createElement("span");
+          mn.innerHTML = "<strong>Under tonight’s sky:</strong> ";
+          var mt = document.createTextNode("the moon is in its " + moon + " phase. Old hands say a changing moon means a changing week — so keep your plans steady, your pay in writing, and your eyes on the work in front of you. For " + s.n + ", today’s word is " + FOCUS[(((dayNum + idx) % FOCUS.length) + FOCUS.length) % FOCUS.length].toLowerCase() + ".");
+          document.getElementById("horoMoonNote").appendChild(mn);
+          document.getElementById("horoMoonNote").appendChild(mt);
+          document.getElementById("horoDate").textContent = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+          signBtns.forEach(function (b, i) { b.setAttribute("aria-pressed", i === idx ? "true" : "false"); });
+        }
+        SIGNS.forEach(function (s, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "sign-chip";
+          b.textContent = s.n;
+          b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+          b.addEventListener("click", function () { renderHoro(i); });
+          signGrid.appendChild(b);
+          signBtns.push(b);
+        });
+        renderHoro(0);
+
+        /* ============ DD tells the jokes — a fresh one every day, more on tap ============ */
+        var JOKES = [
+          "Why did the painter bring a ladder to the job interview? He wanted to climb the company ladder — starting today!",
+          "Why did the welder go back to school? He wanted a brighter future — and brother, he makes his own sparks!",
+          "What did one paint can say to the other? “I’m feeling a little blue.” The other one said, “Hang on — you’ll get stirred up and be just fine!”",
+          "Why did DD bring a pencil to bed? He wanted to draw his dreams first — then get up and chase them!",
+          "What did the truck say to DD? “Man, stop walking everywhere — hop in, we got jobs to get to!” DD said, “I’m walking the whole app — the truck stays right where it is!”",
+          "Why don’t blasters ever get lost? Wherever they show up, everybody knows — boom, there he is!",
+          "Why did the painter go to the doctor? He needed more color in his life — doctor said, “Son, you picked the right trade!”",
+          "What do you call a spray painter who’s always calm? A man with a steady hand and a fine finish!",
+          "Why did the crew bring a map to lunch? They heard the special was a hero — and nobody wanted to miss the sub station!",
+          "Why did the hard hat break up with the toolbox? Too much baggage — and it just couldn’t carry the relationship!",
+          "What did the paycheck say to the per diem? “Together, we make the travel worth it!”",
+          "Why did DD tell a joke at the job site? Because the crew that laughs together, lasts together — now pass me that nozzle and let’s get paid!"
+        ];
+        var jokeIdx = ((dayNum % JOKES.length) + JOKES.length) % JOKES.length;
+        var jokeTextEl = document.getElementById("jokeText");
+        var jokeCountEl = document.getElementById("jokeCount");
+        function renderJoke() {
+          jokeTextEl.textContent = JOKES[jokeIdx];
+          jokeCountEl.textContent = "Joke " + (jokeIdx + 1) + " of " + JOKES.length + " — a new one leads off every day.";
+        }
+        renderJoke();
+        document.getElementById("jokeNext").addEventListener("click", function () {
+          stopSpeak();
+          jokeIdx = (jokeIdx + 1) % JOKES.length;
+          renderJoke();
+        });
+
+        document.getElementById("prevVerse").addEventListener("click", function () { stopSpeak(); viewIdx--; renderVerse(); });
+        document.getElementById("nextVerse").addEventListener("click", function () { stopSpeak(); viewIdx++; renderVerse(); });
+
+        /* ============ DD reads — OUT LOUD, in a man's voice ============
+           Every reading is a voice in Destin's style, baked into this app
+           under assets/audio/ — a man's voice, in his style — never the
+           phone's built-in robot voices, and never a robot lady. The
+           readings ARE the reading: tap a "DD reads" button and you hear
+           him, out loud, while his words also roll out on screen in his
+           bubble, paced to the reading, and he walks and bobs while he
+           reads. One reading at a time: starting any reading stops
+           whatever is already going,
+           and tapping the same button again stops him. */
+        var speakingBtn = null;
+        var speakSeq = 0;
+        var speakBtns = [];
+        var ddAudio = new Audio();
+        ddAudio.preload = "auto";
+        var playQueue = [];
+        var playPos = 0;
+        function pad2(n) { return (n < 10 ? "0" : "") + n; }
+        /* Play the queue of {src, text} recordings one after another.
+           The bubble shows each recording's words as it plays. */
+        function playCurrent(token, btn, lblEl, offTxt) {
+          if (token !== speakSeq) return;
+          if (playPos >= playQueue.length) {
+            speakingBtn = null;
+            setBtn(btn, false, lblEl, "Stop", offTxt);
+            bubbleFinish();
+            return;
+          }
+          var item = playQueue[playPos];
+          bubbleShow(item.text);
+          ddAudio.onloadedmetadata = function () {
+            if (token !== speakSeq) return;
+            bubblePace(ddAudio.duration);
+          };
+          ddAudio.onended = function () {
+            if (token !== speakSeq) return;
+            playPos++;
+            playCurrent(token, btn, lblEl, offTxt);
+          };
+          ddAudio.onerror = function () {
+            if (token !== speakSeq) return;
+            /* A recording that can't play still shows its words on screen,
+               then moves on — DD is never just missing. */
+            var wait = Math.max(1500, item.text.split(" ").length * 200);
+            setTimeout(function () {
+              if (token !== speakSeq) return;
+              playPos++;
+              playCurrent(token, btn, lblEl, offTxt);
+            }, wait);
+          };
+          ddAudio.src = item.src;
+          var p = ddAudio.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+        function playItems(items, btn, lblEl, offTxt) {
+          if (speakingBtn === btn) { stopSpeak(); return; }
+          stopSpeak();
+          var token = speakSeq;
+          speakingBtn = btn;
+          setBtn(btn, true, lblEl, "Stop", offTxt);
+          playQueue = items;
+          playPos = 0;
+          playCurrent(token, btn, lblEl, offTxt);
+        }
+        /* ============ DD's speech bubble — his words appear on screen word by
+           word while he reads out loud, so you can follow along as he talks. ============ */
+        var ddBubble = document.getElementById("ddBubble");
+        var ddBubbleText = document.getElementById("ddBubbleText");
+        var bubbleTimer = null;
+        var bubbleWords = [];
+        var bubbleIdx = 0;
+        function bubbleStopTimer() { if (bubbleTimer) { clearInterval(bubbleTimer); bubbleTimer = null; } }
+        function bubbleStep() {
+          if (bubbleIdx >= bubbleWords.length) { bubbleStopTimer(); return; }
+          bubbleIdx = Math.min(bubbleWords.length, bubbleIdx + 2);
+          ddBubbleText.textContent = bubbleWords.slice(0, bubbleIdx).join(" ");
+          ddBubbleText.scrollTop = ddBubbleText.scrollHeight;
+        }
+        function bubbleRun(ms) {
+          bubbleStopTimer();
+          bubbleTimer = setInterval(bubbleStep, ms);
+        }
+        function bubbleShow(text) {
+          bubbleWords = String(text || "").replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
+          bubbleIdx = 0;
+          ddBubbleText.textContent = "";
+          ddBubble.hidden = false;
+          var w = document.getElementById("ddWalk");
+          if (w) w.classList.add("talking");
+          bubbleRun(260);
+        }
+        /* Pace the on-screen words to the recording that's playing, so
+           the words land as he says them. */
+        function bubblePace(durSec) {
+          if (!durSec || !isFinite(durSec) || durSec <= 0) return;
+          var remaining = bubbleWords.length - bubbleIdx;
+          if (remaining <= 0) return;
+          var ticks = Math.ceil(remaining / 2);
+          var ms = Math.max(80, Math.min(700, (durSec * 1000) / ticks));
+          bubbleRun(ms);
+        }
+        function bubbleFinish() {
+          bubbleStopTimer();
+          ddBubbleText.textContent = bubbleWords.join(" ");
+          setTimeout(function () {
+            if (!speakingBtn) {
+              ddBubble.hidden = true;
+              var w = document.getElementById("ddWalk");
+              if (w) w.classList.remove("talking");
+            }
+          }, 1600);
+        }
+        function bubbleHide() {
+          bubbleStopTimer();
+          ddBubble.hidden = true;
+          var w = document.getElementById("ddWalk");
+          if (w) w.classList.remove("talking");
+        }
+        function setBtn(btn, on, lblEl, onTxt, offTxt) {
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+          if (lblEl) lblEl.textContent = on ? onTxt : offTxt;
+        }
+        function regBtn(btn, lblEl, offTxt) { speakBtns.push({ btn: btn, lbl: lblEl, off: offTxt }); }
+        function resetBtns() {
+          for (var i = 0; i < speakBtns.length; i++) setBtn(speakBtns[i].btn, false, speakBtns[i].lbl, "Stop", speakBtns[i].off);
+        }
+        function stopSpeak() {
+          speakSeq++;
+          speakingBtn = null;
+          playQueue = [];
+          playPos = 0;
+          ddAudio.onended = null;
+          ddAudio.onerror = null;
+          ddAudio.onloadedmetadata = null;
+          try { ddAudio.pause(); } catch (e) {}
+          resetBtns();
+          bubbleHide();
+        }
+        /* speak one recording: {src, text} — text is what shows in the bubble */
+        function speak(item, btn, lblEl, offTxt) {
+          playItems([item], btn, lblEl, offTxt);
+        }
+        var listenBtn = document.getElementById("listenBtn");
+        var radioBtn = document.getElementById("radioListen");
+        var readBoardBtn = document.getElementById("readBoard");
+        var jokeBtn = document.getElementById("jokeListen");
+        var ddReadBtn = document.getElementById("ddReadBtn");
+        regBtn(listenBtn, document.getElementById("listenLbl"), "DD reads it");
+        regBtn(radioBtn, document.getElementById("radioListenLbl"), "DD reads the script");
+        regBtn(readBoardBtn, document.getElementById("readBoardLbl"), "DD — read the whole board");
+        regBtn(jokeBtn, document.getElementById("jokeListenLbl"), "DD reads the joke");
+        regBtn(ddReadBtn, document.getElementById("ddReadLbl"), "DD reads");
+        jokeBtn.addEventListener("click", function () {
+          speak({ src: "assets/audio/joke-" + pad2(jokeIdx + 1) + ".mp3", text: "DD here with a joke. " + JOKES[jokeIdx] }, jokeBtn, document.getElementById("jokeListenLbl"), "DD reads the joke");
+        });
+        listenBtn.addEventListener("click", function () {
+          var v = verseFor(viewIdx);
+          var vi = ((viewIdx % VERSES.length) + VERSES.length) % VERSES.length;
+          speak({ src: "assets/audio/verse-" + pad2(vi + 1) + ".mp3", text: v.t + " " + v.r + "." }, listenBtn, document.getElementById("listenLbl"), "DD reads it");
+        });
+        radioBtn.addEventListener("click", function () {
+          speak({ src: "assets/audio/radio.mp3", text: document.getElementById("radioScript").textContent }, radioBtn, document.getElementById("radioListenLbl"), "DD reads the script");
+        });
+        window.addEventListener("pagehide", stopSpeak);
+
+        /* ============ DD reads the job board — jobs, pay & per diem ============ */
+        function cleanTxt(s) { return String(s || "").replace(/\s+/g, " ").trim(); }
+        function jobText(card) {
+          var parts = [];
+          var h = card.querySelector("h3");
+          if (h) parts.push(cleanTxt(h.textContent) + ".");
+          var w = card.querySelector(".where");
+          if (w) parts.push(cleanTxt(w.textContent) + ".");
+          var cells = card.querySelectorAll(".payrow > div");
+          for (var i = 0; i < cells.length; i++) {
+            var amt = cells[i].querySelector(".amt");
+            var lbl = cells[i].querySelector(".lbl");
+            if (amt && lbl) parts.push(cleanTxt(lbl.textContent) + ": " + cleanTxt(amt.textContent) + ".");
+          }
+          var note = card.querySelector(".note");
+          if (note) parts.push(cleanTxt(note.textContent));
+          return parts.join(" ");
+        }
+        var boardCards = Array.prototype.slice.call(document.querySelectorAll("#jobGrid .job"));
+        var allJobCards = Array.prototype.slice.call(document.querySelectorAll("#jobGrid .job, #chasing .job"));
+        allJobCards.forEach(function (card) {
+            var actions = card.querySelector(".job-actions");
+            if (!actions) {
+              actions = document.createElement("div");
+              actions.className = "job-actions";
+              card.appendChild(actions);
+            }
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "btn btn-ghost btn-sm";
+            b.setAttribute("aria-pressed", "false");
+            b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>DD reads this job</span>';
+            var lbl = b.querySelector("span");
+            regBtn(b, lbl, "DD reads this job");
+            var bIdx = boardCards.indexOf(card);
+            var cIdx = Array.prototype.indexOf.call(document.querySelectorAll("#chasing .job"), card);
+            var jobFile = bIdx >= 0 ? "job-board-" + (bIdx + 1) : "job-chase-" + (cIdx + 1);
+            b.addEventListener("click", function () { speak({ src: "assets/audio/" + jobFile + ".mp3", text: jobText(card) }, b, lbl, "DD reads this job"); });
+            actions.appendChild(b);
+          });
+        /* The whole board, out loud: intro, every visible job's own
+           recording in board order, then the outro. */
+        function boardItems() {
+          var items = [{ src: "assets/audio/board-intro.mp3", text: "DD here, reading the job board." }];
+          boardCards.forEach(function (card, i) {
+            if (!card.hidden) items.push({ src: "assets/audio/job-board-" + (i + 1) + ".mp3", text: jobText(card) });
+          });
+          items.push({ src: "assets/audio/board-outro.mp3", text: "That's the whole board. Workers apply free — call (251) 422-4242 to apply." });
+          return items;
+        }
+        readBoardBtn.addEventListener("click", function () {
+          var lbl = document.getElementById("readBoardLbl");
+          var anyVisible = boardCards.some(function (card) { return !card.hidden; });
+          if (!anyVisible) {
+            speak({ src: "assets/audio/board-empty.mp3", text: "No postings match that filter right now. Call (251) 422-4242 — new work lands by phone before it lands here." }, readBoardBtn, lbl, "DD — read the whole board");
+            return;
+          }
+          playItems(boardItems(), readBoardBtn, lbl, "DD — read the whole board");
+        });
+
+        /* ============ DD walks the whole way through the app ============ */
+        var ddWalk = document.getElementById("ddWalk");
+        var ddFigure = document.getElementById("ddFigure");
+        var ddRoad = document.getElementById("ddRoad");
+        var ddWhere = document.getElementById("ddWalkWhere");
+        var ddOutfitLbl = document.getElementById("ddOutfitLbl");
+        var ddCurrentId = "today";
+        var DD_STOPS = [
+          ["today", "Today"], ["horoscope", "Horoscope & Astrology"], ["jokes", "DD tells the jokes"], ["jobs", "Jobs — pay up front"],
+          ["closet", "DD’s closet — every career"], ["chasing", "Jobs I’m chasing"], ["boards", "The boards"], ["crew", "Crew Board"],
+          ["giveaway", "Tool Giveaway"], ["incentives", "Incentives"], ["tips", "DIY Survival Tips"],
+          ["story", "Destin’s story — the book"], ["more", "Talk to Destin"]
+        ];
+        var walkTimer = null;
+        var walkRaf = 0;
+        var lastScrollY = 0;
+        function scrollPos() {
+          var de = document.documentElement;
+          var body = document.body;
+          return Math.max(window.scrollY || 0, de ? de.scrollTop || 0 : 0, body ? body.scrollTop || 0 : 0);
+        }
+        function ddUpdate() {
+          var de = document.documentElement;
+          var docH = Math.max(de ? de.scrollHeight : 0, document.body ? document.body.scrollHeight : 0);
+          var max = docH - window.innerHeight;
+          var y = scrollPos();
+          var p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+          /* DD walks nearly the whole road — from the start of his road to
+             his truck — so his steps show up big on every scroll, not just
+             a few pixels. The old math saved room for a wide truck and left
+             him only a few pixels of road, which is why he looked parked. */
+          var travel = Math.max(0, ddRoad.clientWidth - 118);
+          ddFigure.style.transform = "translateX(" + (p * travel).toFixed(1) + "px)";
+          if (y > lastScrollY + 2) ddFigure.classList.remove("face-back");
+          else if (y < lastScrollY - 2) ddFigure.classList.add("face-back");
+          lastScrollY = y;
+          var label = "Today";
+          for (var i = 0; i < DD_STOPS.length; i++) {
+            var el = document.getElementById(DD_STOPS[i][0]);
+            if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.45) { label = DD_STOPS[i][1]; ddCurrentId = DD_STOPS[i][0]; }
+          }
+          ddWhere.textContent = p >= 0.985 ? "Made it — the truck’s right here" : "Walking with you — " + label;
+        }
+        function onScroll() {
+          /* His legs keep stepping the whole time the page is moving, and
+             for a beat after it stops — not just a flicker per scroll tick. */
+          ddWalk.classList.add("walking");
+          if (walkTimer) clearTimeout(walkTimer);
+          walkTimer = setTimeout(function () { ddWalk.classList.remove("walking"); }, 500);
+          if (!walkRaf) {
+            walkRaf = requestAnimationFrame(function () { walkRaf = 0; ddUpdate(); });
+          }
+        }
+        /* Listen everywhere a scroll can come from: the window, the document
+           (some phone webviews scroll the document, not the window), and
+           capture phase so a scroll inside the app view still reaches him. */
+        window.addEventListener("scroll", onScroll, { passive: true });
+        document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+        window.addEventListener("resize", ddUpdate);
+        window.addEventListener("orientationchange", ddUpdate);
+        ddUpdate();
+        setTimeout(ddUpdate, 350);
+
+        /* ============ DD stays with you — and reads wherever you are ============
+           His bar never leaves the screen, and its button reads the section
+           you're looking at out loud, right here in the app. */
+        function sectionText(id) {
+          var el = document.getElementById(id);
+          if (!el) return "";
+          var parts = [];
+          var h = el.querySelector("h2");
+          if (h) parts.push(cleanTxt(h.textContent) + ".");
+          var sub = el.querySelector(".sec-sub");
+          if (sub) parts.push(cleanTxt(sub.textContent));
+          var cards = el.querySelectorAll(".job");
+          if (cards.length) {
+            var shown = 0;
+            for (var i = 0; i < cards.length && shown < 3; i++) {
+              if (!cards[i].hidden) { parts.push(jobText(cards[i])); shown++; }
+            }
+          } else {
+            var ps = el.querySelectorAll("p");
+            for (var j = 0; j < ps.length && parts.join(" ").length < 900; j++) {
+              var t = cleanTxt(ps[j].textContent);
+              if (t) parts.push(t);
+            }
+          }
+          var out = parts.join(" ");
+          return out.length > 1600 ? out.slice(0, 1600) : out;
+        }
+        /* Each section has its own recording; jobs and jokes reuse theirs. */
+        var SECTION_AUDIO = {
+          today: "sec-today", horoscope: "sec-horoscope", closet: "sec-closet",
+          boards: "sec-boards", crew: "sec-crew", giveaway: "sec-giveaway",
+          incentives: "sec-incentives", tips: "sec-tips", story: "sec-story", more: "sec-more"
+        };
+        ddReadBtn.addEventListener("click", function () {
+          var lbl = document.getElementById("ddReadLbl");
+          if (speakingBtn === ddReadBtn) { stopSpeak(); return; }
+          if (ddCurrentId === "jokes") {
+            speak({ src: "assets/audio/joke-" + pad2(jokeIdx + 1) + ".mp3", text: "DD here with a joke. " + JOKES[jokeIdx] }, ddReadBtn, lbl, "DD reads");
+            return;
+          }
+          if (ddCurrentId === "jobs") { playItems(boardItems(), ddReadBtn, lbl, "DD reads"); return; }
+          if (ddCurrentId === "chasing") {
+            var chase = Array.prototype.slice.call(document.querySelectorAll("#chasing .job"));
+            var items = chase.map(function (card, i) { return { src: "assets/audio/job-chase-" + (i + 1) + ".mp3", text: jobText(card) }; });
+            playItems(items, ddReadBtn, lbl, "DD reads");
+            return;
+          }
+          var f = SECTION_AUDIO[ddCurrentId];
+          if (f) {
+            var txt = sectionText(ddCurrentId);
+            speak({ src: "assets/audio/" + f + ".mp3", text: txt || "DD here — right here with you." }, ddReadBtn, lbl, "DD reads");
+          }
+        });
+
+        /* ============ DD's quick-change closet — tap a job, his work clothes match the trade ============
+           His cap, sunglasses, chain and tattoos never change. Only the work clothes do. */
+        var OUTFIT_LBL = {
+          painter: "· painter clothes on", welder: "· welder gear on", blaster: "· blaster suit on",
+          sprayer: "· spray suit on", driver: "· hi-vis on",
+          lawyer: "· lawyer suit on", doctor: "· doctor coat on", nurse: "· nurse scrubs on",
+          chef: "· chef whites on", construction: "· construction vest on", electrician: "· electrician gear on",
+          plumber: "· plumber gear on", mechanic: "· mechanic coveralls on", firefighter: "· firefighter turnout on",
+          police: "· police uniform on", teacher: "· teacher fit on", farmer: "· farmer overalls on",
+          pilot: "· pilot uniform on", sailor: "· sailor uniform on", soldier: "· soldier camo on",
+          ceo: "· CEO suit on", scientist: "· lab coat on", delivery: "· delivery gear on",
+          security: "· security uniform on", inspector: "· inspector gear on", "default": ""
+        };
+        var OUTFIT_NAME = {
+          painter: "painter clothes", welder: "welder gear", blaster: "the blaster suit",
+          sprayer: "the spray suit", driver: "the hi-vis driver fit",
+          lawyer: "the lawyer suit", doctor: "the doctor coat", nurse: "nurse scrubs",
+          chef: "chef whites", construction: "the construction vest", electrician: "electrician gear",
+          plumber: "plumber gear", mechanic: "mechanic coveralls", firefighter: "the firefighter turnout",
+          police: "the police uniform", teacher: "the teacher fit", farmer: "farmer overalls",
+          pilot: "the pilot uniform", sailor: "the sailor uniform", soldier: "soldier camo",
+          ceo: "the CEO suit", scientist: "the lab coat", delivery: "delivery gear",
+          security: "the security uniform", inspector: "inspector gear", "default": "his regular fit"
+        };
+        var closetNow = document.getElementById("closetNow");
+        var closetStage = document.getElementById("closetStage");
+        var closetStageFig = document.getElementById("closetStageFig");
+        var closetStageName = document.getElementById("closetStageName");
+        /* DD's real photos — the same DD from the orange-and-blue site,
+           one full-body photo per career outfit. Outfits without a photo
+           yet keep the drawn figure in the closet; everywhere else DD's
+           regular photo stays up so he is never missing from the app. */
+        var OUTFIT_PHOTO = {
+          "default": "assets/app/outfit-default.webp",
+          painter: "assets/app/outfit-painter.webp",
+          welder: "assets/app/outfit-welder.webp",
+          blaster: "assets/app/outfit-blaster.webp",
+          lawyer: "assets/app/outfit-lawyer.webp",
+          doctor: "assets/app/outfit-doctor.webp",
+          chef: "assets/app/outfit-chef.webp",
+          construction: "assets/app/outfit-construction.webp",
+          electrician: "assets/app/outfit-electrician.webp",
+          plumber: "assets/app/outfit-plumber.webp",
+          mechanic: "assets/app/outfit-mechanic.webp",
+          firefighter: "assets/app/outfit-firefighter.webp",
+          police: "assets/app/outfit-police.webp",
+          teacher: "assets/app/outfit-teacher.webp",
+          pilot: "assets/app/outfit-pilot.webp",
+          inspector: "assets/app/outfit-inspector.webp",
+          sprayer: "assets/app/outfit-painter.webp",
+          driver: "assets/app/outfit-construction.webp",
+          nurse: "assets/app/outfit-doctor.webp",
+          farmer: "assets/app/outfit-default.webp",
+          sailor: "assets/app/outfit-pilot.webp",
+          soldier: "assets/app/outfit-police.webp",
+          ceo: "assets/app/outfit-lawyer.webp",
+          scientist: "assets/app/outfit-doctor.webp",
+          delivery: "assets/app/outfit-construction.webp",
+          security: "assets/app/outfit-police.webp"
+        };
+        /* The line DD reads out loud for each outfit — one recording per
+           outfit in assets/audio/, with the same words rolling out in his
+           bubble while he reads. */
+        var OUTFIT_LINE = {
+          "default": "That’s DD in his regular fit — cap, sunglasses, chain and tattoos, just like always.",
+          painter: "Painter clothes — white coveralls with the paint on them, respirator around his neck, spray gun in hand and ready.",
+          welder: "Welder gear — welding jacket, leather gloves, helmet flipped up and ready.",
+          blaster: "The blaster suit — blast hood on, heavy suit and gloves, ready to run the pot.",
+          sprayer: "The spray suit — clean whites, respirator on, and a steady hand on the gun.",
+          driver: "The hi-vis driver fit — orange vest on, ready to roll the truck.",
+          lawyer: "The lawyer suit — sharp suit and tie, briefcase ready, headed for the courtroom.",
+          doctor: "The doctor coat — white coat on, stethoscope around his neck, ready for rounds.",
+          nurse: "Nurse scrubs — clean scrubs on, ready for the ward.",
+          chef: "Chef whites — chef coat and apron on, ready for the kitchen.",
+          construction: "The construction fit — hard hat, orange hi-vis vest and tool belt on, ready to build.",
+          electrician: "Electrician gear — tool belt loaded with wire tools, ready to run wire.",
+          plumber: "Plumber gear — tool belt on, red pipe wrench in hand, ready to fix the leak.",
+          mechanic: "Mechanic coveralls — gray coveralls on, wrench in hand, ready to turn bolts.",
+          firefighter: "The firefighter turnout — heavy gear with the reflective stripes, ready for the call.",
+          police: "The police uniform — badge on, duty belt on, ready for the beat.",
+          teacher: "The teacher fit — book in hand, ready for the classroom.",
+          farmer: "Farmer overalls — denim overalls on, ready for the field.",
+          pilot: "The pilot uniform — wings on his chest, ready for the runway.",
+          sailor: "The sailor uniform — whites on, ready to ship out.",
+          soldier: "Soldier camo — camo on, boots laced, ready to stand a post.",
+          ceo: "The CEO suit — boss suit on, ready for business.",
+          scientist: "The lab coat — white coat on, ready for the lab.",
+          delivery: "Delivery gear — package in hand, ready for the route.",
+          security: "The security uniform — badge on, ready for the door.",
+          inspector: "Inspector gear — white hard hat, vest and clipboard in hand, ready to check the work."
+        };
+        var closetPhoto = document.getElementById("closetPhoto");
+        var closetLine = document.getElementById("closetLine");
+        var heroDdImg = document.getElementById("heroDdImg");
+        var ddWalkImg = document.getElementById("ddWalkImg");
+        var currentOutfit = "default";
+        var closetChips = Array.prototype.slice.call(document.querySelectorAll(".closet-chip"));
+        function setOutfit(outfit) {
+          /* One outfit state drives EVERY DD on the page from the same
+             tap: the big closet photo, the hero photo up top, and the DD
+             walking at the bottom all change together — none of them can
+             be left behind or go missing. */
+          currentOutfit = outfit;
+          var stages = document.querySelectorAll(".dd-stage");
+          for (var s = 0; s < stages.length; s++) stages[s].setAttribute("data-outfit", outfit);
+          if (closetStageName) closetStageName.textContent = OUTFIT_NAME[outfit] || "his regular fit";
+          if (ddOutfitLbl) ddOutfitLbl.textContent = OUTFIT_LBL[outfit] || "";
+          if (closetNow) closetNow.textContent = OUTFIT_NAME[outfit] || "his regular fit";
+          if (closetLine) closetLine.textContent = OUTFIT_LINE[outfit] || OUTFIT_LINE["default"];
+          var photo = OUTFIT_PHOTO[outfit];
+          if (closetPhoto && closetStageFig) {
+            if (photo) {
+              closetPhoto.src = photo;
+              closetPhoto.hidden = false;
+              closetStageFig.hidden = true;
+            } else {
+              closetPhoto.hidden = true;
+              closetStageFig.hidden = false;
+            }
+          }
+          var walkPhoto = photo || OUTFIT_PHOTO["default"];
+          if (heroDdImg) heroDdImg.src = walkPhoto;
+          if (ddWalkImg) ddWalkImg.src = walkPhoto;
+          closetChips.forEach(function (chip) {
+            chip.setAttribute("aria-pressed", chip.getAttribute("data-outfit") === outfit ? "true" : "false");
+          });
+        }
+        var closetReadBtn = document.getElementById("closetRead");
+        var closetReadLbl = document.getElementById("closetReadLbl");
+        if (closetReadBtn) {
+          regBtn(closetReadBtn, closetReadLbl, "DD reads this outfit");
+          closetReadBtn.addEventListener("click", function () {
+            speak({ src: "assets/audio/outfit-" + currentOutfit + ".mp3", text: "DD here. " + (OUTFIT_LINE[currentOutfit] || OUTFIT_LINE["default"]) }, closetReadBtn, closetReadLbl, "DD reads this outfit");
+          });
+        }
+        closetChips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            var outfit = chip.getAttribute("data-outfit") || "default";
+            setOutfit(outfit);
+            /* Tapping an outfit is DD reading it: out loud, with his
+               words rolling out in his on-screen bubble as he goes. */
+            if (closetReadBtn) {
+              stopSpeak();
+              speak({ src: "assets/audio/outfit-" + outfit + ".mp3", text: "DD here. " + (OUTFIT_LINE[outfit] || OUTFIT_LINE["default"]) }, closetReadBtn, closetReadLbl, "DD reads this outfit");
+            }
+          });
+        });
+        function outfitFor(card) {
+          var h = card.querySelector("h3");
+          var title = h ? h.textContent.toLowerCase() : "";
+          var trades = card.getAttribute("data-trades") || "";
+          if (/lawyer|attorney|legal/.test(title)) return "lawyer";
+          if (/doctor|physician|surgeon/.test(title)) return "doctor";
+          if (/nurse|nursing/.test(title)) return "nurse";
+          if (/chef|cook|kitchen/.test(title)) return "chef";
+          if (/firefight|fire crew|fireman/.test(title)) return "firefighter";
+          if (/police|officer|sheriff|trooper/.test(title)) return "police";
+          if (/secur/.test(title)) return "security";
+          if (/inspect|quality|qa\b/.test(title)) return "inspector";
+          if (/scient|lab|chemist/.test(title)) return "scientist";
+          if (/pilot|flight|aviation/.test(title)) return "pilot";
+          if (/sailor|sail|navy|marine crew/.test(title)) return "sailor";
+          if (/soldier|military|army/.test(title)) return "soldier";
+          if (/teach|school|tutor/.test(title)) return "teacher";
+          if (/farm|ranch|agricult/.test(title)) return "farmer";
+          if (/electric/.test(title)) return "electrician";
+          if (/plumb|pipefit/.test(title)) return "plumber";
+          if (/mechanic|diesel|auto tech/.test(title)) return "mechanic";
+          if (/construct|carpent|framer/.test(title)) return "construction";
+          if (/deliver|courier|mail/.test(title)) return "delivery";
+          if (/ceo|business|manager|executive|office/.test(title)) return "ceo";
+          if (/weld/.test(title)) return "welder";
+          if (/spray/.test(title)) return "sprayer";
+          if (/paint/.test(title)) return "painter";
+          if (/blast/.test(title)) return "blaster";
+          if (/driv|truck|warehouse/.test(title)) return "driver";
+          if (trades.indexOf("painter") !== -1) return "painter";
+          if (trades.indexOf("blaster") !== -1) return "blaster";
+          return "default";
+        }
+        allJobCards.forEach(function (card) {
+          card.addEventListener("click", function () { setOutfit(outfitFor(card)); });
+        });
+
+        /* ============ Copy helpers ============ */
+        function copyText(text, btn, doneTxt) {
+          var old = btn.textContent;
+          function done() {
+            btn.textContent = doneTxt;
+            setTimeout(function () { btn.textContent = old; }, 1800);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, done);
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            done();
+          }
+        }
+        var copyVerseBtn = document.getElementById("copyVerse");
+        copyVerseBtn.addEventListener("click", function () {
+          var v = verseFor(viewIdx);
+          copyText("“" + v.t + "” — " + v.r, document.getElementById("copyVerseLbl"), "Copied");
+        });
+        var copyChimeBtn = document.getElementById("copyChime");
+        copyChimeBtn.addEventListener("click", function () {
+          copyText(document.getElementById("chimeHandle").textContent.trim(), copyChimeBtn, "Copied");
+        });
+
+        /* ============ Job filters ============ */
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+        var cards = Array.prototype.slice.call(document.querySelectorAll("#jobGrid .job"));
+        var count = document.getElementById("jobCount");
+        var empty = document.getElementById("emptyNote");
+        function matches(card, filter) {
+          if (filter === "all") return true;
+          if (filter === "perdiem") return card.getAttribute("data-perdiem") === "1";
+          return (card.getAttribute("data-trades") || "").split(" ").indexOf(filter) !== -1;
+        }
+        function applyFilter(filter) {
+          var shown = 0;
+          cards.forEach(function (card) {
+            var ok = matches(card, filter);
+            card.hidden = !ok;
+            if (ok) shown++;
+          });
+          count.textContent = shown === cards.length
+            ? "Showing all " + shown + " postings and crew lists."
+            : "Showing " + shown + " of " + cards.length + " postings and crew lists.";
+          empty.hidden = shown !== 0;
+        }
+        chips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+            chip.setAttribute("aria-pressed", "true");
+            applyFilter(chip.getAttribute("data-filter"));
+          });
+        });
+        applyFilter("all");
+
+        /* ============ Weekly pay calculator ============ */
+        var rate = document.getElementById("calcRate");
+        var hours = document.getElementById("calcHours");
+        var perdiem = document.getElementById("calcPerDiem");
+        var days = document.getElementById("calcDays");
+        var total = document.getElementById("calcTotal");
+        function num(el) {
+          var v = parseFloat(el.value);
+          return isNaN(v) || v < 0 ? 0 : v;
+        }
+        function calc() {
+          var sum = num(rate) * num(hours) + num(perdiem) * num(days);
+          total.textContent = "$" + sum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        [rate, hours, perdiem, days].forEach(function (el) { el.addEventListener("input", calc); });
+        calc();
+
+        /* ============ Tab bar active state ============ */
+        var tabLinks = Array.prototype.slice.call(document.querySelectorAll(".tabbar a"));
+        var tabMap = { today: "today", horoscope: "today", jokes: "today", jobs: "jobs", closet: "jobs", chasing: "jobs", boards: "boards", crew: "boards", giveaway: "boards", incentives: "boards", tips: "tips", story: "more", more: "more" };
+        function setActive(id) {
+          var tab = tabMap[id] || "today";
+          tabLinks.forEach(function (a) {
+            a.classList.toggle("active", a.getAttribute("data-tab") === tab);
+          });
+        }
+        if ("IntersectionObserver" in window) {
+          var seen = {};
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) { seen[en.target.id] = en.intersectionRatio; });
+            var best = null, bestRatio = 0;
+            Object.keys(seen).forEach(function (id) {
+              if (seen[id] > bestRatio) { bestRatio = seen[id]; best = id; }
+            });
+            if (best) setActive(best);
+          }, { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] });
+          ["today", "horoscope", "jokes", "jobs", "closet", "chasing", "boards", "crew", "giveaway", "incentives", "tips", "story", "more"].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) io.observe(el);
+          });
+        }
+        tabLinks.forEach(function (a) {
+          a.addEventListener("click", function () { setActive(a.getAttribute("href").slice(1)); });
+        });
+      })();
+    </script>
+  </body>
+</html>
