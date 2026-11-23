@@ -191,6 +191,12 @@
       .crew-form textarea{min-height:96px;resize:vertical}
       .crew-form button.send{font:inherit}
       .ask-note{font-size:15px;margin:12px 0 0}
+      .pricing{margin:26px 0 6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+      .pricing h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.01em;font-size:2rem;line-height:1.05;margin:0 0 8px}
+      .pricing h2 .accent{color:var(--accent)}
+      .pricing p{margin:0 0 6px;color:var(--ink-soft)}
+      .pricing p:last-child{margin-bottom:0}
+      .pricing strong{color:var(--ink)}
     </style>
   </head>
   <body>
@@ -261,6 +267,12 @@
             </span>
           </li>
         </ol>
+
+        <section class="pricing" aria-label="Prices">
+          <h2>Our <span class="accent">prices</span></h2>
+          <p><strong>$5 per qualified applicant</strong>, OR a <strong>placement fee</strong> agreed when a worker starts.</p>
+          <p>Job board: <strong>$25</strong> per job post, <strong>$50</strong> featured post, <strong>$99/month</strong> unlimited posts.</p>
+        </section>
 
         <!-- CREW REQUEST FORM — mailto, swapped in 2026-11-20. Was a Google Form link; the form now opens the boss's email app addressed to destindismukes1@gmail.com, so the request reaches Destin directly. Nothing is sent until the boss taps Send in their email app. -->
         <form class="crew-form" id="crewForm">
