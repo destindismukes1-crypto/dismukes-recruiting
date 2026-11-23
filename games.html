@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Take a Break — Little Games — Dismukes Recruiting</title>
+    <meta name="description" content="Three little games from Dismukes Recruiting: Spin the Trade Wheel, Guess the Pay, and Memory Match. Free to play." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f4f1;
+        --panel: #ffffff;
+        --ink: #17181a;
+        --ink-soft: #45484d;
+        --line: #d9d9d2;
+        --accent: #e85a08;
+        --accent-ink: #ffffff;
+        --accent-soft: #fdeee2;
+        --stripe-a: #17181a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #101114;
+          --panel: #1a1b1f;
+          --ink: #f2f1ec;
+          --ink-soft: #b9bbb9;
+          --line: #33353b;
+          --accent: #ff7a29;
+          --accent-ink: #1a1206;
+          --accent-soft: #3a2412;
+          --stripe-a: #f2f1ec;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 28px 18px 40px;
+      }
+      .stripe {
+        height: 10px;
+        border-radius: 2px;
+        background: repeating-linear-gradient(
+          -45deg,
+          var(--accent) 0 14px,
+          var(--stripe-a) 14px 28px
+        );
+      }
+      h1 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(2.3rem, 8.5vw, 3.4rem);
+        line-height: 1.02;
+        margin: 22px 0 10px;
+      }
+      h1 .accent { color: var(--accent); }
+      .sub {
+        font-size: 1.13rem;
+        color: var(--ink-soft);
+        margin: 0 0 6px;
+        max-width: 34em;
+      }
+      .sub strong { color: var(--ink); }
+
+      .ask-intro {
+        font-weight: 700;
+        font-size: 1.22rem;
+        margin: 26px 0 4px;
+      }
+      .ask-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .ask-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .ask-list li:last-child { border-bottom: 0; }
+      .qnum {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--accent);
+        min-width: 1.2em;
+        flex: none;
+      }
+      .qlabel {
+        font-weight: 700;
+        font-size: 1.22rem;
+        line-height: 1.25;
+        display: block;
+      }
+      .opt {
+        font-weight: 500;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+      .ask-detail {
+        display: block;
+        color: var(--ink-soft);
+        font-size: 1rem;
+        margin-top: 2px;
+      }
+      .hint {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 4px 0 0;
+      }
+
+      .send {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 72px;
+        margin-top: 26px;
+        padding: 14px 18px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 700;
+        font-size: 1.35rem;
+        line-height: 1.2;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .send:active { transform: translateY(1px); }
+      .send:focus-visible {
+        outline: 3px solid var(--ink);
+        outline-offset: 2px;
+      }
+      a { color: var(--accent); }
+      .taplink {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 4px 2px;
+      }
+
+      footer {
+        margin-top: 38px;
+      }
+      .contact {
+        margin-top: 20px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .contact .biz {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        letter-spacing: 0.02em;
+        margin: 0 0 6px;
+      }
+      .contact p { margin: 0; }
+      .contact a {
+        color: var(--ink);
+        font-weight: 600;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+      .crew-form{text-align:left;max-width:560px;margin:20px auto 0}
+      .crew-form label{display:block;font-weight:700;margin:0 0 4px}
+      .crew-form input,.crew-form textarea{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:11px 12px;border:2px solid var(--ink);border-radius:8px;background:#fff;color:#111;margin:0 0 12px}
+      .crew-form textarea{min-height:96px;resize:vertical}
+      .crew-form button.send{font:inherit}
+      .ask-note{font-size:15px;margin:12px 0 0}
+    
+      h2 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(1.7rem, 6vw, 2.3rem);
+        line-height: 1.05;
+        margin: 34px 0 8px;
+      }
+      h2 .accent { color: var(--accent); }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        margin: 16px 0 6px;
+        padding: 0;
+        list-style: none;
+      }
+      .cards li {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .price-list { list-style: none; margin: 10px 0; padding: 0; }
+      .price-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 1.08rem;
+      }
+      .price-list li:last-child { border-bottom: 0; }
+      .price-list strong { color: var(--accent); }
+      .steps { list-style: none; margin: 10px 0; padding: 0; counter-reset: step; }
+      .steps li {
+        display: flex; align-items: baseline; gap: 10px;
+        padding: 12px 0; border-bottom: 1px solid var(--line);
+        font-size: 1.1rem;
+      }
+      .steps li:last-child { border-bottom: 0; }
+      .game {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 18px 0;
+      }
+      .game h2 { margin-top: 0; }
+      .big-pick {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: clamp(2rem, 9vw, 3rem);
+        line-height: 1.05;
+        color: var(--accent);
+        min-height: 1.1em;
+        margin: 12px 0 4px;
+      }
+      .game-msg { font-size: 1.1rem; min-height: 1.5em; margin: 8px 0; }
+      .game input[type="number"] {
+        font: inherit; font-size: 1.2rem; padding: 10px 12px;
+        border: 2px solid var(--ink); border-radius: 8px;
+        background: var(--panel); color: var(--ink); width: 130px;
+      }
+      .game .send { margin-top: 14px; }
+      .game .send.small { min-height: 54px; font-size: 1.1rem; width: auto; padding: 10px 22px; display: inline-flex; }
+      .mem-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0;
+      }
+      .mem-card {
+        font: inherit; font-weight: 700; font-size: 0.95rem;
+        min-height: 64px; padding: 8px 4px;
+        border: 2px solid var(--line); border-radius: 10px;
+        background: var(--accent-soft); color: var(--ink);
+        cursor: pointer; word-break: break-word;
+      }
+      .mem-card.face { background: var(--panel); border-color: var(--accent); }
+      .mem-card.done { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); cursor: default; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="stripe" aria-hidden="true"></div>
+
+      <h1>Take a <span class="accent">break</span></h1>
+      <p class="sub">Three little games. No sign-up, no cost — just a break. When you are ready to work, <strong>applying is free</strong>.</p>
+
+      <section class="game" aria-label="Spin the Trade Wheel">
+        <h2>Spin the <span class="accent">Trade Wheel</span></h2>
+        <p class="sub">Tap the button and the wheel picks a trade from the catalog.</p>
+        <p class="big-pick" id="wheelPick" aria-live="polite">?</p>
+        <p class="game-msg" id="wheelMsg"></p>
+        <button class="send" type="button" id="wheelBtn">Spin the wheel</button>
+      </section>
+
+      <section class="game" aria-label="Guess the Pay">
+        <h2>Guess the <span class="accent">Pay</span></h2>
+        <p class="sub">We picked a trade and a secret pay number between <strong>$18 and $35</strong> an hour. You get 6 tries.</p>
+        <p class="big-pick" id="payTrade" aria-live="polite"></p>
+        <p class="game-msg" id="payMsg" aria-live="polite">Press New game to start.</p>
+        <label for="payGuess"><strong>Your guess ($ per hour)</strong></label><br />
+        <input type="number" id="payGuess" min="18" max="35" inputmode="numeric" />
+        <button class="send small" type="button" id="payBtn">Guess</button>
+        <button class="send small" type="button" id="payNew">New game</button>
+        <p class="game-msg" id="payTries"></p>
+      </section>
+
+      <section class="game" aria-label="Memory Match">
+        <h2>Memory <span class="accent">Match</span></h2>
+        <p class="sub">12 cards, 6 pairs of trades. Flip two cards — match all 6 pairs.</p>
+        <div class="mem-grid" id="memGrid"></div>
+        <p class="game-msg" id="memMsg" aria-live="polite"></p>
+        <p class="game-msg">Moves: <strong id="memMoves">0</strong></p>
+        <button class="send small" type="button" id="memNew">Shuffle &amp; restart</button>
+      </section>
+
+      <script>
+      (function () {
+        "use strict";
+        var TRADES = ["Painters","Blasters","Welders","Plumbers","HVAC Techs","Carpenters","CDL Drivers","Equipment Operators","Pipefitters","Ironworkers","Roofers","Diesel Mechanics","General Labor"];
+
+        /* Spin the Trade Wheel */
+        var wheelBtn = document.getElementById('wheelBtn'),
+            wheelPick = document.getElementById('wheelPick'),
+            wheelMsg = document.getElementById('wheelMsg'),
+            wheelTimer = null;
+        wheelBtn.addEventListener('click', function () {
+          var finalTrade = TRADES[Math.floor(Math.random() * TRADES.length)], ticks = 0;
+          wheelMsg.textContent = '';
+          if (wheelTimer) { clearInterval(wheelTimer); }
+          wheelTimer = setInterval(function () {
+            wheelPick.textContent = TRADES[Math.floor(Math.random() * TRADES.length)];
+            ticks++;
+            if (ticks > 12) {
+              clearInterval(wheelTimer); wheelTimer = null;
+              wheelPick.textContent = finalTrade;
+              wheelMsg.innerHTML = finalTrade + ' are on the board — <a href="apply.html">apply free</a>.';
+            }
+          }, 70);
+        });
+
+        /* Guess the Pay */
+        var secret = 0, triesLeft = 0, payOver = true;
+        var payTrade = document.getElementById('payTrade'),
+            payMsg = document.getElementById('payMsg'),
+            payTries = document.getElementById('payTries'),
+            payGuess = document.getElementById('payGuess');
+        function newPayGame() {
+          secret = 18 + Math.floor(Math.random() * 18);
+          triesLeft = 6; payOver = false;
+          payTrade.textContent = TRADES[Math.floor(Math.random() * TRADES.length)];
+          payMsg.textContent = 'What is the pay for this one? Guess a number from 18 to 35.';
+          payTries.textContent = 'Tries left: 6';
+          payGuess.value = '';
+          payGuess.focus();
+        }
+        document.getElementById('payNew').addEventListener('click', newPayGame);
+        document.getElementById('payBtn').addEventListener('click', function () {
+          if (payOver) { payMsg.textContent = 'Press New game to play again.'; return; }
+          var g = parseInt(payGuess.value, 10);
+          if (isNaN(g) || g < 18 || g > 35) { payMsg.textContent = 'Type a number from 18 to 35.'; return; }
+          triesLeft--;
+          if (g === secret) {
+            payOver = true;
+            payMsg.textContent = 'You got it! The pay was $' + secret + '/hr. Nice guessing.';
+            payTries.textContent = 'You win! Press New game to play again.';
+          } else if (triesLeft <= 0) {
+            payOver = true;
+            payMsg.textContent = (g < secret ? 'Higher. ' : 'Lower. ') + 'Out of tries — the pay was $' + secret + '/hr.';
+            payTries.textContent = 'Game over. Press New game to try again.';
+          } else {
+            payMsg.textContent = g < secret ? 'Higher — guess again.' : 'Lower — guess again.';
+            payTries.textContent = 'Tries left: ' + triesLeft;
+          }
+        });
+        newPayGame();
+
+        /* Memory Match */
+        var WORDS = ["Painter","Blaster","Welder","Plumber","Roofer","CDL"];
+        var memGrid = document.getElementById('memGrid'),
+            memMsg = document.getElementById('memMsg'),
+            memMoves = document.getElementById('memMoves'),
+            first = null, lock = false, moves = 0, matched = 0;
+        function shuffle(a) {
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+          }
+          return a;
+        }
+        function newMemGame() {
+          var deck = shuffle(WORDS.concat(WORDS));
+          first = null; lock = false; moves = 0; matched = 0;
+          memMoves.textContent = '0';
+          memMsg.textContent = 'Flip a card to start.';
+          memGrid.innerHTML = '';
+          deck.forEach(function (word) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'mem-card'; b.textContent = '?';
+            b.setAttribute('aria-label', 'Hidden card');
+            b.dataset.word = word;
+            b.addEventListener('click', function () {
+              if (lock || b.classList.contains('face') || b.classList.contains('done')) { return; }
+              b.classList.add('face'); b.textContent = word;
+              if (!first) { first = b; return; }
+              moves++; memMoves.textContent = String(moves);
+              if (first.dataset.word === word) {
+                first.classList.add('done'); b.classList.add('done');
+                first = null; matched++;
+                if (matched === WORDS.length) {
+                  memMsg.textContent = 'You matched all 6 pairs in ' + moves + ' moves. You win!';
+                } else {
+                  memMsg.textContent = 'Match! ' + matched + ' of 6 pairs found.';
+                }
+              } else {
+                lock = true;
+                var a = first; first = null;
+                memMsg.textContent = 'Not a match — try again.';
+                setTimeout(function () {
+                  a.classList.remove('face'); a.textContent = '?';
+                  b.classList.remove('face'); b.textContent = '?';
+                  lock = false;
+                }, 800);
+              }
+            });
+            memGrid.appendChild(b);
+          });
+        }
+        document.getElementById('memNew').addEventListener('click', newMemGame);
+        newMemGame();
+      })();
+      </script>
+
+      <footer>
+        <div class="stripe" aria-hidden="true"></div>
+        <div class="contact">
+          <p class="biz">Dismukes Recruiting</p>
+          <p><a class="taplink" href="tel:+14235230228">(423) 523-0228</a></p>
+          <p><a class="taplink" href="mailto:destindismukes1@gmail.com">destindismukes1@gmail.com</a></p>
+          <p><a class="taplink" href="mailto:destindismukes2@gmail.com">destindismukes2@gmail.com</a></p>
+          <p><a class="taplink" href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a></p>
+        </div>
+      </footer>
+    </div>
+  <script data-goatcounter="https://dismukesrecruiting.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

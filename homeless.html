@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>No Address? You Can Still Work. — Dismukes Recruiting</title>
+    <meta name="description" content="No home address needed to apply at Dismukes Recruiting. A phone number or email is enough to start. Second-chance friendly. Workers apply free." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f4f1;
+        --panel: #ffffff;
+        --ink: #17181a;
+        --ink-soft: #45484d;
+        --line: #d9d9d2;
+        --accent: #e85a08;
+        --accent-ink: #ffffff;
+        --accent-soft: #fdeee2;
+        --stripe-a: #17181a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #101114;
+          --panel: #1a1b1f;
+          --ink: #f2f1ec;
+          --ink-soft: #b9bbb9;
+          --line: #33353b;
+          --accent: #ff7a29;
+          --accent-ink: #1a1206;
+          --accent-soft: #3a2412;
+          --stripe-a: #f2f1ec;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 28px 18px 40px;
+      }
+      .stripe {
+        height: 10px;
+        border-radius: 2px;
+        background: repeating-linear-gradient(
+          -45deg,
+          var(--accent) 0 14px,
+          var(--stripe-a) 14px 28px
+        );
+      }
+      h1 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(2.3rem, 8.5vw, 3.4rem);
+        line-height: 1.02;
+        margin: 22px 0 10px;
+      }
+      h1 .accent { color: var(--accent); }
+      .sub {
+        font-size: 1.13rem;
+        color: var(--ink-soft);
+        margin: 0 0 6px;
+        max-width: 34em;
+      }
+      .sub strong { color: var(--ink); }
+
+      .ask-intro {
+        font-weight: 700;
+        font-size: 1.22rem;
+        margin: 26px 0 4px;
+      }
+      .ask-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .ask-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .ask-list li:last-child { border-bottom: 0; }
+      .qnum {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--accent);
+        min-width: 1.2em;
+        flex: none;
+      }
+      .qlabel {
+        font-weight: 700;
+        font-size: 1.22rem;
+        line-height: 1.25;
+        display: block;
+      }
+      .opt {
+        font-weight: 500;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+      .ask-detail {
+        display: block;
+        color: var(--ink-soft);
+        font-size: 1rem;
+        margin-top: 2px;
+      }
+      .hint {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 4px 0 0;
+      }
+
+      .send {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 72px;
+        margin-top: 26px;
+        padding: 14px 18px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 700;
+        font-size: 1.35rem;
+        line-height: 1.2;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .send:active { transform: translateY(1px); }
+      .send:focus-visible {
+        outline: 3px solid var(--ink);
+        outline-offset: 2px;
+      }
+      a { color: var(--accent); }
+      .taplink {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 4px 2px;
+      }
+
+      footer {
+        margin-top: 38px;
+      }
+      .contact {
+        margin-top: 20px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .contact .biz {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        letter-spacing: 0.02em;
+        margin: 0 0 6px;
+      }
+      .contact p { margin: 0; }
+      .contact a {
+        color: var(--ink);
+        font-weight: 600;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+      .crew-form{text-align:left;max-width:560px;margin:20px auto 0}
+      .crew-form label{display:block;font-weight:700;margin:0 0 4px}
+      .crew-form input,.crew-form textarea{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:11px 12px;border:2px solid var(--ink);border-radius:8px;background:#fff;color:#111;margin:0 0 12px}
+      .crew-form textarea{min-height:96px;resize:vertical}
+      .crew-form button.send{font:inherit}
+      .ask-note{font-size:15px;margin:12px 0 0}
+    
+      h2 {
+        font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(1.7rem, 6vw, 2.3rem);
+        line-height: 1.05;
+        margin: 34px 0 8px;
+      }
+      h2 .accent { color: var(--accent); }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        margin: 16px 0 6px;
+        padding: 0;
+        list-style: none;
+      }
+      .cards li {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .price-list { list-style: none; margin: 10px 0; padding: 0; }
+      .price-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 1.08rem;
+      }
+      .price-list li:last-child { border-bottom: 0; }
+      .price-list strong { color: var(--accent); }
+      .steps { list-style: none; margin: 10px 0; padding: 0; counter-reset: step; }
+      .steps li {
+        display: flex; align-items: baseline; gap: 10px;
+        padding: 12px 0; border-bottom: 1px solid var(--line);
+        font-size: 1.1rem;
+      }
+      .steps li:last-child { border-bottom: 0; }
+      .game {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 18px 0;
+      }
+      .game h2 { margin-top: 0; }
+      .big-pick {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: clamp(2rem, 9vw, 3rem);
+        line-height: 1.05;
+        color: var(--accent);
+        min-height: 1.1em;
+        margin: 12px 0 4px;
+      }
+      .game-msg { font-size: 1.1rem; min-height: 1.5em; margin: 8px 0; }
+      .game input[type="number"] {
+        font: inherit; font-size: 1.2rem; padding: 10px 12px;
+        border: 2px solid var(--ink); border-radius: 8px;
+        background: var(--panel); color: var(--ink); width: 130px;
+      }
+      .game .send { margin-top: 14px; }
+      .game .send.small { min-height: 54px; font-size: 1.1rem; width: auto; padding: 10px 22px; display: inline-flex; }
+      .mem-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0;
+      }
+      .mem-card {
+        font: inherit; font-weight: 700; font-size: 0.95rem;
+        min-height: 64px; padding: 8px 4px;
+        border: 2px solid var(--line); border-radius: 10px;
+        background: var(--accent-soft); color: var(--ink);
+        cursor: pointer; word-break: break-word;
+      }
+      .mem-card.face { background: var(--panel); border-color: var(--accent); }
+      .mem-card.done { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); cursor: default; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="stripe" aria-hidden="true"></div>
+
+      <h1>No address?<br />You can still <span class="accent">work</span>.</h1>
+      <p class="sub">No home address? That does not shut the door here. If you can work, we want to hear from you.</p>
+
+      <section aria-label="How it works without a home address">
+        <ul class="price-list">
+          <li><strong>No home address needed to apply.</strong> A phone number or an email is enough to start.</li>
+          <li><strong>Second-chance friendly.</strong> A record does not shut the door here.</li>
+          <li><strong>Traveling crew work exists.</strong> Some traveling jobs pay per diem.</li>
+        </ul>
+
+        <h2>Three <span class="accent">steps</span></h2>
+        <ol class="steps">
+          <li><span class="qnum">1</span><span><span class="qlabel">Apply free</span><span class="ask-detail">Fill out the short worker application — it costs nothing, ever.</span></span></li>
+          <li><span class="qnum">2</span><span><span class="qlabel">We call or email you back</span><span class="ask-detail">We reach you at the phone number or email you gave us.</span></span></li>
+          <li><span class="qnum">3</span><span><span class="qlabel">We match you to work that fits</span><span class="ask-detail">Work that fits your trade, your tools, and where you can get to.</span></span></li>
+        </ol>
+
+        <a class="send" href="apply.html">Apply free</a>
+        <a class="send" href="tel:+14235230228">Call (423) 523-0228</a>
+      </section>
+
+      <footer>
+        <div class="stripe" aria-hidden="true"></div>
+        <div class="contact">
+          <p class="biz">Dismukes Recruiting</p>
+          <p><a class="taplink" href="tel:+14235230228">(423) 523-0228</a></p>
+          <p><a class="taplink" href="mailto:destindismukes1@gmail.com">destindismukes1@gmail.com</a></p>
+          <p><a class="taplink" href="mailto:destindismukes2@gmail.com">destindismukes2@gmail.com</a></p>
+          <p><a class="taplink" href="https://dismukesrecruiting.com" target="_blank" rel="noopener">dismukesrecruiting.com</a></p>
+        </div>
+      </footer>
+    </div>
+  <script data-goatcounter="https://dismukesrecruiting.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
