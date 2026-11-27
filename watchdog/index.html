@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b3d2e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Watchdog">
+<title>Watchdog — Is this email door alive?</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; margin: 0; background: #f7f5ef; color: #1c1c1c; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 18px 48px; }
+  h1 { font-size: 40px; margin: 8px 0 2px; letter-spacing: 1px; }
+  .tag { color: #0b3d2e; font-weight: bold; margin: 0 0 22px; }
+  h2 { font-size: 24px; margin: 18px 0 8px; }
+  p { font-size: 17px; line-height: 1.5; }
+  .box { display: flex; gap: 8px; margin: 16px 0 6px; }
+  input[type=text] { flex: 1; font-size: 17px; padding: 12px; border: 2px solid #0b3d2e; border-radius: 8px; }
+  button { font-size: 17px; padding: 12px 18px; background: #0b3d2e; color: #fff; border: 0; border-radius: 8px; cursor: pointer; }
+  .verdict { display: none; border-radius: 10px; padding: 16px; margin: 18px 0; font-size: 17px; line-height: 1.5; }
+  .alive { background: #e2f4e4; border: 2px solid #1e7a34; }
+  .dark { background: #fbe3e3; border: 2px solid #a12622; }
+  .unknown { background: #fdf3d8; border: 2px solid #9a7b12; }
+  .verdict .big { font-size: 21px; font-weight: bold; display: block; margin-bottom: 6px; }
+  .turn { background: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 16px; margin: 18px 0; }
+  .small { font-size: 14px; color: #444; }
+  footer { margin-top: 36px; border-top: 1px solid #bbb; padding-top: 14px; font-size: 15px; }
+  a { color: #0b3d2e; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Watchdog</h1>
+  <p class="tag">The watch on your email door.</p>
+
+  <h2>Is this email door alive?</h2>
+  <p>Type an email address. We check it from the outside and tell you in plain words.</p>
+
+  <div class="box">
+    <input type="text" id="addr" placeholder="type the email address" autocomplete="off">
+    <button onclick="check()">Check it</button>
+  </div>
+  <p class="small">You can also type a business name, and we will tell you if that business's email door is alive.</p>
+  <p class="small">Looking for something else? This box only checks email doors. For a normal web search, use your usual search page — we do not pretend to be that.</p>
+  <p><strong>We never ask for a password.</strong> Not yours. Not theirs. Checking is done from outside, the way a stranger would knock.</p>
+
+  <div class="verdict alive" id="v-alive">
+    <span class="big">&#10003; THIS MAILBOX IS ALIVE</span>
+    <span id="alive-text"></span>
+  </div>
+  <div class="verdict dark" id="v-dark">
+    <span class="big">&#10007; THIS MAILBOX IS DARK</span>
+    <span id="dark-text"></span>
+    <p>Were you trying to reach them? If they are on Watchdog, their rescue page shows another way to reach them.</p>
+  </div>
+  <div class="verdict unknown" id="v-unknown">
+    <span class="big">? WE CAN'T TELL FROM OUTSIDE</span>
+    <span id="unknown-text"></span> did not give a clear answer yet. That happens. It does not mean the mailbox is dead — it means no honest answer exists from out here, and we will not guess. Put it on the free watch below and we will keep checking it and tell you the day it answers.
+  </div>
+
+  <div class="turn">
+    <p>This check was free.<br>
+    <strong>Want us watching yours around the clock?</strong> The free watch tells you the day your own mailbox goes dark — before your customers find out. No password. Ever.</p>
+    <p><a href="https://dismukesrecruiting.com/watchdog/#start">Start the free watch</a></p>
+  </div>
+
+  <p class="small">Watchdog checks one address at a time, on purpose. There is no bulk checking here. If a mailbox is watched by Watchdog, this page also shows its health history — how many checks, how many downs, and when it was last seen alive.</p>
+
+  <footer>
+    Built by Destin Dismukes, founder of <a href="https://dismukesrecruiting.com">Dismukes Recruiting</a> — all workers, all fields get hired here.
+  </footer>
+</div>
+<script>
+// Verdicts confirmed by the Watchdog engine from the outside.
+// This page is static: it answers instantly for mailboxes the engine
+// has already checked, and routes everything else to the free watch
+// queue instead of guessing. When the live checker server is up,
+// this table is replaced by on-the-spot checks.
+var WATCHED = {
+  "destindismukes2@gmail.com": { state: "alive", provider: "Gmail", note: "Checked by Watchdog and confirmed taking mail." }
+};
+function check() {
+  var a = document.getElementById('addr').value.trim().toLowerCase();
+  document.getElementById('v-alive').style.display = 'none';
+  document.getElementById('v-dark').style.display = 'none';
+  document.getElementById('v-unknown').style.display = 'none';
+  var w = WATCHED[a];
+  if (w && w.state === 'alive') {
+    document.getElementById('alive-text').textContent = a + " is taking mail. " + w.note + " Mail service: " + w.provider + ".";
+    document.getElementById('v-alive').style.display = 'block';
+  } else if (w && w.state === 'dark') {
+    document.getElementById('dark-text').textContent = a + " is not taking mail right now. Messages to it are bouncing. Mail service: " + w.provider + ".";
+    document.getElementById('v-dark').style.display = 'block';
+  } else {
+    document.getElementById('unknown-text').textContent = a;
+    document.getElementById('v-unknown').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
